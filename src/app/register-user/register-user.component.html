@@ -1,0 +1,57 @@
+<div>
+  <h1>ConnectingMinds</h1>
+
+  <form (ngSubmit)="userRegister()">
+    <h2>Registration Form</h2>
+    <br /><br />
+
+    <label for="firstName">First Name:</label>
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      [(ngModel)]="user.firstName"
+    /><br /><br />
+
+    <label for="lastName">Last Name:</label>
+    <input
+      type="text"
+      id="lastName"
+      name="lastName"
+      [(ngModel)]="user.lastName"
+    /><br /><br />
+
+    <label for="username"> Username:</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      [(ngModel)]="user.username"
+    /><br /><br />
+
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+    /><br /><br />
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      name="confirmPassword"
+      [(ngModel)]="confirmp"
+    /><br /><br />
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    <br />
+    <br />
+
+    <div class="signin-here">
+      <span>Already have an account? </span>
+      <a routerLink="/login" class="btn btn-secondary">Sign in here</a>
+    </div>
+  </form>
+</div>
