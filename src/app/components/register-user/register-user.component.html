@@ -1,0 +1,82 @@
+<div>
+  <h1>ConnectingMinds</h1>
+
+  <form (ngSubmit)="userRegister()">
+    <h2>Registration Form</h2>
+    <br /><br />
+
+    <label for="firstName">First Name:</label>
+    <input
+      type="text"
+      id="firstName"
+      name="firstName"
+      [(ngModel)]="user.firstName"
+    /><br /><br />
+
+    <label for="lastName">Last Name:</label>
+    <input
+      type="text"
+      id="lastName"
+      name="lastName"
+      [(ngModel)]="user.lastName"
+    /><br /><br />
+
+    <label for="Email"> Email:</label>
+    <input
+      type="text"
+      id="Email"
+      name="Email"
+      [(ngModel)]="user.email"
+    /><br /><br />
+
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+    /><br /><br />
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      name="confirmPassword"
+      [(ngModel)]="confirmp"
+    /><br /><br />
+
+    <!-- Added form inputs -->
+    <label for="phone">Phone:</label>
+    <input
+      type="text"
+      id="phone"
+      name="phone"
+      [(ngModel)]="user.phone"
+    /><br /><br />
+
+    <label for="address">Address:</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      [(ngModel)]="user.address"
+    /><br /><br />
+
+    <label for="birthdate">Birthdate:</label>
+    <input
+      type="date"
+      id="birthdate"
+      name="birthdate"
+      [(ngModel)]="user.birthdate"
+    /><br /><br />
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    <br />
+    <br />
+
+    <div class="signin-here">
+      <span>Already have an account? </span>
+      <a routerLink="/login" class="btn btn-secondary">Sign in here</a>
+    </div>
+  </form>
+</div>

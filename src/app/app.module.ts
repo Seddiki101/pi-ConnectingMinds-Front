@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserLoginComponent } from './login-user/user-login.component';
+import { UserLoginComponent } from './components/login-user/user-login.component';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
-import { RegisterUserComponent } from './register-user/register-user.component';
-import { HomeComponent } from './home/home.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { HomeComponent } from './components/home/home.component';
+import { DashComponent } from './components/dash/dash.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     UserLoginComponent,
     
     RegisterUserComponent,
-         HomeComponent
+         HomeComponent,
+         DashComponent
   ],
   imports: [
     BrowserModule,
