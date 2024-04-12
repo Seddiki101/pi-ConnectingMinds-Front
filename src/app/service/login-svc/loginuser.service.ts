@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../requestTypes/user';
-import { LoginResponse } from '../../responses/LoginResponse'; // Make sure the path is correct
+import { LoginResponse } from '../responses/LoginResponse'; // Make sure the path is correct
 
 @Injectable({
   providedIn: 'root'

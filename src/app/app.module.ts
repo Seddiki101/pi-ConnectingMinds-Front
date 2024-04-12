@@ -10,6 +10,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashComponent } from './components/dash/dash.component';
+import { ForgottenComponent } from './components/forgotten/forgotten.component';
+import { ResetpassComponent } from './components/resetpass/resetpass.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DashComponent } from './components/dash/dash.component';
     
     RegisterUserComponent,
          HomeComponent,
-         DashComponent
+         DashComponent,
+         ForgottenComponent,
+         ResetpassComponent
   ],
   imports: [
     BrowserModule,

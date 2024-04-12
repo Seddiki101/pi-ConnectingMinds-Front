@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../service/requestTypes/user';
 import { LoginuserService } from '../../service/login-svc/loginuser.service';
-import { LoginResponse } from '../../responses/LoginResponse';
+import { LoginResponse } from '../../service/responses/LoginResponse';
 
 @Component({
   selector: 'app-user-login',
