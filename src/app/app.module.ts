@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DashComponent } from './components/dash/dash.component';
 import { ForgottenComponent } from './components/forgotten/forgotten.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ResetpassComponent } from './components/resetpass/resetpass.component';
          HomeComponent,
          DashComponent,
          ForgottenComponent,
-         ResetpassComponent
+         ResetpassComponent,
+         ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,11 @@ export class UserLoginComponent {
         console.log("\n");
         localStorage.setItem('auth_token', data.token);
 
+        //console.log("\n");
+        //console.log("uzer  \n");
+        //console.log(data.message1 );
+       
+
 
         alert('login successful');
         this.router.navigate(['/home']);
