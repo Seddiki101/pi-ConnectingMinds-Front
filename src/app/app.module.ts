@@ -1,3 +1,5 @@
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BannerComponent } from './components/banner/banner.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { BannerComponent } from './components/banner/banner.component';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    BannerComponent
+    BannerComponent,
+    SideBarComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
