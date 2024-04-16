@@ -26,11 +26,12 @@ export class ForgottenComponent {
         console.log(res);
         this.success = "If the email is registered, you will receive reset instructions.";
         // Optionally navigate to another route
-        // this.router.navigate(['/login']);
+         this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error(err);
         this.error = " processing your request ";
+        this.router.navigate(['/login']);
       }
     });
   }

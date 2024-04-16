@@ -1,7 +1,7 @@
 export class UserRegister{
   email: string;
   password: string;
-  username: string;
+//  username: string;
   firstName: string;
   lastName: string;
   phone: string; 

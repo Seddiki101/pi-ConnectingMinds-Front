@@ -49,6 +49,8 @@ export class ResetpassComponent {
         this.router.navigate(['/login']);
       },
       error: (err) => {
+        //here it shows error but goes through 
+        this.router.navigate(['/login']);
         console.error(err);
         this.error = 'Failed to reset password. Please try again.';
       }
