@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  constructor(private authenticService: AuthenticService) {}
+
+
+  logout() {
+    this.authenticService.endSession();
+  }
 
 }

@@ -8,6 +8,8 @@ import { ResetpassComponent } from "./components/usersmanagement/resetpass/reset
 import { ProfileComponent } from "./components/usersmanagement/profile/profile.component";
 import { ListUserComponent } from "./components/usersmanagement/list-user/list-user.component";
 import { Error404Component } from "./components/error404/error404.component";
+import { authGuard } from "./service/usermanagement/guard/auth.guard.ts.service";
+import { DashComponent } from "./pages/dash/dash.component";
 
 const routes: Routes = [
   {
@@ -22,7 +24,8 @@ const routes: Routes = [
     component: RegisterUserComponent,
     data: { title: "Sign-up" },
   },
-  { path: "home", component: HomeComponent, data: { title: "Home" } },
+  { path: "home", component: HomeComponent, data: { title: "Home" } , canActivate: [authGuard] },
+  { path: "dashboard", component: DashComponent, data: { title: "Dashboard" } , canActivate: [authGuard] },
   {
     path: "forgot-password",
     component: ForgottenComponent,
@@ -33,11 +36,12 @@ const routes: Routes = [
     component: ResetpassComponent,
     data: { title: "Reset Password" },
   },
-  { path: "profile", component: ProfileComponent, data: { title: "Profile" } },
+  { path: "profile", component: ProfileComponent, data: { title: "Profile" },canActivate: [authGuard] },
   {
     path: "listUser",
     component: ListUserComponent,
     data: { title: "User List" },
+    canActivate: [authGuard]
   },
   { path: "**", component: Error404Component, data: { title: "Error" } }, // note : don't change the order of this line , this route needs to be always in the bottom
 ];

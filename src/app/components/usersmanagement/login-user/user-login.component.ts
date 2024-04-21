@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { userLogin } from '../../../service/usermanagement/requestTypes/userLogin';
 import { LoginuserService } from '../../../service/usermanagement/login-svc/loginuser.service';
 import { LoginResponse } from '../../../service/usermanagement/responses/LoginResponse';
+import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 @Component({
   selector: 'app-user-login',
@@ -14,6 +15,7 @@ export class UserLoginComponent {
 
   constructor(
     private loginuserservice: LoginuserService,
+    private tokenService: TokenService,
     private router: Router
   ) {}
 
@@ -29,7 +31,8 @@ export class UserLoginComponent {
         console.log("token \n");
         console.log(data.token);  
         console.log("\n");
-        localStorage.setItem('auth_token', data.token);
+        this.tokenService.token = data.token as string;
+        //localStorage.setItem('auth_token', data.token);
 
         //console.log("\n");
         //console.log("uzer  \n");

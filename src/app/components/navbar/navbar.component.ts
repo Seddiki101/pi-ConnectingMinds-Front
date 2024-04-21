@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  constructor(private authenticService: AuthenticService) {}
+
+
+  logout() {
+    this.authenticService.endSession();
+  }
+  
 
 }
