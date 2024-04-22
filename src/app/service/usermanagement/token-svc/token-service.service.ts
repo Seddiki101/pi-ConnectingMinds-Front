@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
@@ -68,6 +69,35 @@ getTokenDetails() {
     console.log('No token found');
     return null;
   }
+}
+
+
+getName(): string | null {
+  const token = this.token;
+  if (token) {
+    const jwtHelper = new JwtHelperService();
+    const decodedToken = jwtHelper.decodeToken(token);
+    return decodedToken.firstname; // Make sure the claim name matches the one in your token
+  }
+  return null;
+}
+
+
+getEmail(): string | null {
+  const token = this.token;
+  if (token) {
+    const jwtHelper = new JwtHelperService();
+    const decodedToken = jwtHelper.decodeToken(token);
+    return decodedToken.sub; 
+  }
+  return null;
+}
+
+
+
+private getHeaders(): HttpHeaders {
+  const token = this.token;
+  return new HttpHeaders().set('Authorization', `Bearer ${token}`);
 }
 
 
