@@ -1,5 +1,5 @@
 export class userAdvanced{
-    id: number;
+    //id: number;
     email: string;
     password: string;
     firstName: string;

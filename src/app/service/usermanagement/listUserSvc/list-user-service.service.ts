@@ -29,6 +29,16 @@ export class ListUserService {
   }
 
 
+
+  blockUserById2(email: string): Observable<any> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { email: email };
+
+    return this.httpClient.post(`${this.baseUrl}/BlockUser`, body, { headers: headers, responseType: 'text' });
+  }
+
+
   searchUsers(keyword: string): Observable<userAdvanced[]> {
     const token = this.tokenService.token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

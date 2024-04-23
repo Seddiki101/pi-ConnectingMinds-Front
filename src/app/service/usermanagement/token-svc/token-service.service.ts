@@ -94,6 +94,18 @@ getEmail(): string | null {
 }
 
 
+getPic():string | null {
+  const token = this.token;
+  if (token) {
+  const name =  this.getName();
+  if (name) {
+    const firstLetter = name[0].toUpperCase(); 
+    return `assets/profl/${firstLetter}.png`;
+  }
+}
+return null;
+}
+
 
 private getHeaders(): HttpHeaders {
   const token = this.token;

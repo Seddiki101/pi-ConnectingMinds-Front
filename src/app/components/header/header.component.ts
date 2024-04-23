@@ -10,28 +10,30 @@ import { TokenService } from 'src/app/service/usermanagement/token-svc/token-ser
 export class HeaderComponent implements OnInit {
   username: string | null = null; 
   email: string | null = null;
-  userImage: string = 'assets/images/avatar/avatar-1.jpg'; 
+  userImage: string | null = 'assets/images/avatar/avatar-1.jpg';
+
 
   constructor(private authenticService: AuthenticService, private tokenService: TokenService) {}
 
   ngOnInit() {
     this.username = this.tokenService.getName(); // Fetch the username on component initialization
     this.email =  this.tokenService.getEmail();
-    this.updateUserImage();
+    this.userImage = this.tokenService.getPic();
+  //  this.updateUserImage();
   }
 
   logout() {
     this.authenticService.endSession();
   }
 
-
+/*
   updateUserImage() {
     if (this.username) {
       const firstLetter = this.username[0].toUpperCase(); // Get first letter and make it uppercase
       this.userImage = `assets/profl/${firstLetter}.png`; // Construct the image path
     }
   }
-
+*/
 
 
 }

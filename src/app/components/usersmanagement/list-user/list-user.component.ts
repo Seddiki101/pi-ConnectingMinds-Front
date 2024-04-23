@@ -36,6 +36,20 @@ export class ListUserComponent implements OnInit {
   }
 
   blockUser(user: userAdvanced): void {
+    this.listUserService.blockUserById2(user.email).subscribe({
+      next: (response) => {
+        console.log(response); 
+        alert('User has been blocked successfully');
+        user.locked = true;
+      },
+      error: (err) => this.errorHandling(err, 'Error blocking user')
+    });
+  }
+
+
+
+/*
+  blockUser(user: userAdvanced): void {
     this.listUserService.blockUserById(user.id).subscribe({
       next: (response) => {
         console.log(response); 
@@ -45,6 +59,7 @@ export class ListUserComponent implements OnInit {
       error: (err) => this.errorHandling(err, 'Error blocking user')
     });
   }
+  */
 
   private errorHandling(err: any, message: string): void {
     console.error(err);
