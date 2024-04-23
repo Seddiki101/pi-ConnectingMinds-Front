@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-<head>
-  <meta charset="utf-8">
-  <title>MyApp</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <head>
+    <meta charset="utf-8" />
+    <title>MyApp</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-  <!-- New Template Styles -->
-  <link href="assets/fonts/feather/feather.css" rel="stylesheet" />
-  <link href="assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-  <link href="assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/theme.min.css" />
-  <link href="assets/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet" />
-
-  <script>
-    if (localStorage.theme) {
-      document.documentElement.setAttribute("data-theme", localStorage.theme);
-    }
-  </script>
-</head>
-<body>
-  <app-root></app-root>
-  
-  <!-- Scripts for New Template -->
-  <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/libs/simplebar/dist/simplebar.min.js"></script>
-  <script src="assets/js/theme.min.js"></script>
-  <script src="assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
-  <script src="assets/libs/@popperjs/core/dist/umd/popper.min.js"></script>
-  <script src="assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
-  <script src="assets/js/vendors/tnsSlider.js"></script>
-  <script src="assets/js/vendors/tooltip.js"></script>
-  <script src="../../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="../../assets/js/vendors/chart.js"></script>
-  <script src="../../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
-  <script src="../../assets/js/vendors/flatpickr.js"></script>
-
-  <script>
-    document.body.addEventListener("click", function (event) {
-      if (event.target.matches('.theme-switch input[type="checkbox"]')) {
-        const isChecked = event.target.checked;
-        document.documentElement.setAttribute(
-          "data-theme",
-          isChecked ? "dark" : "light"
-        );
-        localStorage.setItem("theme", isChecked ? "dark" : "light");
+    <!-- New Template Styles -->
+    <link href="assets/fonts/feather/feather.css" rel="stylesheet" />
+    <link
+      href="assets/libs/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/libs/@mdi/font/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/libs/simplebar/dist/simplebar.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/theme.min.css" />
+    <link
+      href="assets/libs/tiny-slider/dist/tiny-slider.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/libs/dropzone/dist/dropzone.css"
+      rel="stylesheet"
+    />
+    <script>
+      if (localStorage.theme) {
+        document.documentElement.setAttribute("data-theme", localStorage.theme);
       }
-    });
-  </script>
-</body>
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+
+    <!-- Scripts for New Template -->
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/dist/simplebar.min.js"></script>
+    <script src="assets/js/theme.min.js"></script>
+    <script src="assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
+    <script src="assets/libs/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+    <script src="assets/js/vendors/tnsSlider.js"></script>
+    <script src="assets/js/vendors/tooltip.js"></script>
+    <script src="../../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="../../assets/js/vendors/chart.js"></script>
+    <script src="../../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="../../assets/js/vendors/flatpickr.js"></script>
+    <script src="../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../../assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+    <script src="../../assets/js/vendors/tooltip.js"></script>
+    <script>
+      document.body.addEventListener("click", function (event) {
+        if (event.target.matches('.theme-switch input[type="checkbox"]')) {
+          const isChecked = event.target.checked;
+          document.documentElement.setAttribute(
+            "data-theme",
+            isChecked ? "dark" : "light"
+          );
+          localStorage.setItem("theme", isChecked ? "dark" : "light");
+        }
+      });
+    </script>
+  </body>
 </html>

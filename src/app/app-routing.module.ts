@@ -39,6 +39,10 @@ const routes: Routes = [
     component: ListUserComponent,
     data: { title: "User List" },
   },
+  {
+    path: "project-management",
+    loadChildren: () => import('./modules/kanban-management/kanban-management.module').then(m => m.KanbanManagementModule)
+  },
   { path: "**", component: Error404Component, data: { title: "Error" } }, // note : don't change the order of this line , this route needs to be always in the bottom
 ];
 

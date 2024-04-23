@@ -15,8 +15,6 @@ import { ResetpassComponent } from "./components/usersmanagement/resetpass/reset
 import { ProfileComponent } from "./components/usersmanagement/profile/profile.component";
 import { ListUserComponent } from "./components/usersmanagement/list-user/list-user.component";
 import { Error404Component } from "./components/error404/error404.component";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { HeaderComponent } from "./components/header/header.component";
 
@@ -34,8 +32,6 @@ import { HeaderComponent } from "./components/header/header.component";
     Error404Component,
     HeaderComponent,
     FooterComponent,
-    SidenavComponent,
-    NavbarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
