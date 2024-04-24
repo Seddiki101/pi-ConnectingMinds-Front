@@ -1,0 +1,69 @@
+<section class="workshop-form-area section-gap">
+    <div class="container">
+        <h1 class="text-center mb-10">Add New Workshop</h1>
+        <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" [(ngModel)]="workshops.title" #title="ngModel" required>
+                <div *ngIf="title.invalid && title.touched" class="alert alert-danger">
+                    Title is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" [(ngModel)]="workshops.description" #description="ngModel" required></textarea>
+                <div *ngIf="description.invalid && description.touched" class="alert alert-danger">
+                    Description is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateDeb">Start Date:</label>
+                <input type="date" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" #dateDeb="ngModel" required>
+                <div *ngIf="dateDeb.invalid && dateDeb.touched" class="alert alert-danger">
+                    Start date is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateFin">End Date:</label>
+                <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" #dateFin="ngModel" required>
+                <div *ngIf="dateFin.invalid && dateFin.touched" class="alert alert-danger">
+                    End date is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prix">Price:</label>
+                <input type="number" class="form-control" id="prix" name="prix" [(ngModel)]="workshops.prix" #prix="ngModel" min="0" required>
+                <div *ngIf="prix.invalid && prix.touched" class="alert alert-danger">
+                    A valid price is required (greater than zero).
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="maxCapacity">Maximum Capacity:</label>
+                <input type="number" class="form-control" id="maxCapacity" name="maxCapacity" [(ngModel)]="workshops.maxCapacity" #maxCapacity="ngModel" min="1" required>
+                <div *ngIf="maxCapacity.invalid && maxCapacity.touched" class="alert alert-danger">
+                    Maximum capacity must be at least 1.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="currentCapacity">Current Capacity:</label>
+                <input type="number" class="form-control" id="currentCapacity" name="currentCapacity" [(ngModel)]="workshops.currentCapacity" #currentCapacity="ngModel" min="0" required>
+                <div *ngIf="currentCapacity.invalid && currentCapacity.touched" class="alert alert-danger">
+                    Current capacity cannot be negative.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="localisation">Localisation:</label>
+                <input type="text" class="form-control" id="localisation" name="localisation" [(ngModel)]="workshops.localisation" #localisation="ngModel" required>
+                <div *ngIf="localisation.invalid && localisation.touched" class="alert alert-danger">
+                    Localisation is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)" accept="image/*" required>
+                <!-- Validation feedback for image can be handled separately if needed -->
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add</button>
+        </form>
+    </div>
+</section>

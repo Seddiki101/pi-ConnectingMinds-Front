@@ -1,0 +1,49 @@
+<section class="workshop-form-area section-gap">
+  <div class="container">
+    <h1 class="text-center mb-10">Update the Workshop</h1>
+    <form (ngSubmit)="updateWorkshop()" #form="ngForm">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="workshops.title" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="workshops.description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="dateDeb">Start Date:</label>
+        <input type="date" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" required>
+      </div>
+      <div class="form-group">
+        <label for="dateFin">End Date:</label>
+        <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" required>
+      </div>
+
+      <div class="form-group">
+        <label for="prix">Price:</label>
+        <input type="number" class="form-control" id="prix" name="prix" [(ngModel)]="workshops.prix" min="0" required>
+      </div>
+      <div class="form-group">
+        <label for="maxCapacity">Maximum Capacity:</label>
+        <input type="number" class="form-control" id="maxCapacity" name="maxCapacity" [(ngModel)]="workshops.maxCapacity" min="0" required>
+      </div>
+      <div class="form-group">
+        <label for="currentCapacity">Current Capacity:</label>
+        <input type="number" class="form-control" id="currentCapacity" name="currentCapacity" [(ngModel)]="workshops.currentCapacity" min="0" required>
+      </div>
+      <div class="form-group">
+        <label for="localisation">Localisation:</label>
+        <input type="text" class="form-control" id="localisation" name="localisation" [(ngModel)]="workshops.localisation" required>
+      </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)" accept="image/*" required>
+            <!-- Validation feedback for image can be handled separately if needed -->
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+    </form>
+  </div>
+</section>

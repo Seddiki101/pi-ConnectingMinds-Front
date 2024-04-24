@@ -1,0 +1,55 @@
+/* Adjusting image container to push icons up */
+.thumb img {
+  max-height: 200px;      /* Limits the height of the images */
+  width: auto;            /* Adjusts width automatically */
+  object-fit: contain;    /* Maintains the image aspect ratio */
+  margin: 0 auto 25px;    /* Increases margin below images to push icons up */
+  display: block;         /* Enables margin auto to function by making the image a block element */
+}
+
+/* Styling details container for overall layout adjustment */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures space distribution between content */
+  align-items: flex-start; /* Aligns children to the start (left side) */
+  padding: 15px 0; /* Adds padding to the top and bottom for spacing */
+}
+
+/* Icon container to fine-tune icon positioning */
+.icon-container {
+  align-self: flex-end; /* Aligns icons to the right */
+  margin-top: 10px; /* Reduces space above icons to lift them up */
+}
+
+/* Styling icon buttons for better appearance */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex; /* Using flex for centering content */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon images within buttons */
+.icon-button img {
+  width: 24px;  /* Fixed width for clarity */
+  height: auto; /* Height adjusts to maintain aspect ratio */
+}
+
+/* Hover effect for icons */
+.icon-button:hover img {
+  opacity: 0.7;  /* Dim the icon slightly on hover for visual feedback */
+}
+
+/* Focus and hover states for accessibility */
+.icon-button:focus, .icon-button:hover {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Blue outline on focus or hover */
+}
+
+
+
+

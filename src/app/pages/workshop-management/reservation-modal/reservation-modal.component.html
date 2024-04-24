@@ -1,0 +1,16 @@
+<!-- reservation-modal.component.html -->
+<h2 mat-dialog-title>Confirmer votre réservation</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="nomParticipant">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input matInput [(ngModel)]="prenomParticipant">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onReserve()">Réserver</button>
+    <button mat-button mat-dialog-close>Annuler</button>
+</mat-dialog-actions>
