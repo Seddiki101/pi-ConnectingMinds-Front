@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { Component } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
+import { filter, map, mergeMap } from "rxjs/operators";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = 'client_app';
+  title = "my-app";
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -23,9 +23,9 @@ export class AppComponent {
           while (route.firstChild) route = route.firstChild;
           return route;
         }),
-        filter((route) => route.outlet === 'primary'),
+        filter((route) => route.outlet === "primary"),
         mergeMap((route) => route.data)
       )
-      .subscribe((event) => this.titleService.setTitle(event['title']));
+      .subscribe((event) => this.titleService.setTitle(event["title"]));
   }
 }
