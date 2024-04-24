@@ -59,8 +59,13 @@ export class MainChatComponent implements OnInit {
     }
     const topic = `/topic/chat${chatId}`;
     this.currentSubscription = this.stompService.subscribe(topic, (message: any) => {
+      console.log("Received message:", message);
       const newMessage = JSON.parse(message.body);
-      this.chatData.messages.push(newMessage);
+      if (newMessage.content) {  // Ensuring no empty message is pushed
+        this.chatData.messages.push(newMessage);
+      } else {
+        console.warn("Received empty message:", message);
+      }
     });
   }
 
