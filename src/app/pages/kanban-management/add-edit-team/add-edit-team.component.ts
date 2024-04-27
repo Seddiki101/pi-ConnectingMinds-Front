@@ -46,7 +46,9 @@ export class AddEditTeamComponent {
         this.imageSrc = this.team.imageUrl;
       }
     }
-    this.projectId = this.data.projectId;
+    if(this.data.projectId){
+      this.projectId = this.data.projectId;
+    }
     this.sharedUserService.getAllUsers().subscribe((users) => {
       this.cachedUserData = users;
     });

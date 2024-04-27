@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { Project } from "src/app/models/project/project.model";
 import { Team } from "src/app/models/team/team.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
-import { ProjectSharedDataService } from "src/app/service/kanban-management/shared-data/project-shared-data.service";
 import { TeamSharedService } from "src/app/service/kanban-management/shared-data/team-shared.service";
 import { TeamService } from "src/app/service/kanban-management/team/team.service";
 import { MatDialog } from "@angular/material/dialog";
@@ -27,7 +26,6 @@ export class TeamComponent implements OnInit {
     private projectService: ProjectService,
     private teamService: TeamService,
     private router: Router,
-    private projectSharedData: ProjectSharedDataService,
     private teamSharedData: TeamSharedService,
     private dialog: MatDialog,
     private sharedUser: SharedUserService,
@@ -57,7 +55,7 @@ export class TeamComponent implements OnInit {
   openAddEditTeamForm(team?: Team, projectId?: number): void {
     if (team) {
       const dialogRef = this.dialog.open(AddEditTeamComponent, {
-        data: { team, projectId }, // Pass the team data if editing
+        data: { team }, // Pass the team data if editing
       });
 
       dialogRef.afterClosed().subscribe((result) => {
@@ -103,8 +101,7 @@ export class TeamComponent implements OnInit {
     this.applyFilters();
   }
   onSelectProject(project: Project): void {
-    this.projectSharedData.setSelectedProject(project);
-    this.router.navigate(["/project-management/project-page"]);
+
   }
   onSelectTeam(team: Team, projectName:string): void {
     this.teamSharedData.setSelectedTeam(team);

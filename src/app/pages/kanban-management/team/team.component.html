@@ -54,7 +54,11 @@
         <div class="team-image-container">
           <a
             *ngIf="team.imageUrl && project.name"
-            (click)="onSelectTeam(team, project.name)"
+            [routerLink]="['/project-management/team-details']"
+            [queryParams]="{
+              projectId: project.projectId,
+              teamId: team.teamId
+            }"
             class="text-inherit"
             style="cursor: pointer"
           >
@@ -109,7 +113,11 @@
             <h4 class="mb-0">
               <a
                 *ngIf="project.name"
-                (click)="onSelectTeam(team, project.name)"
+                [routerLink]="['/project-management/team-details']"
+                [queryParams]="{
+                  projectId: project.projectId,
+                  teamId: team.teamId
+                }"
                 class="text-inherit"
                 style="cursor: pointer"
                 ><i class="mdi mdi-cube-outline me-2"> </i> {{ team.name }}</a

@@ -1,7 +1,9 @@
 <!-- Container fluid -->
 <section class="container-fluid p-4">
   <div>
-    <a routerLink="/project-management/team"><button type="button" class="btn btn-xs btn-secondary">Back</button></a>
+    <a routerLink="/project-management/team"
+      ><button type="button" class="btn btn-xs btn-secondary">Back</button></a
+    >
   </div>
   <br />
   <div class="row">
@@ -9,7 +11,7 @@
       <!-- Page header -->
       <div class="d-lg-flex align-items-center justify-content-between">
         <div class="mb-2 mb-lg-0">
-          <h2 >Project : {{porjectName}}</h2>
+          <h2>Project : {{ porjectName }}</h2>
         </div>
 
         <!-- avatar group -->
@@ -17,7 +19,8 @@
           <div class="avatar-group"></div>
           <!-- icon  -->
           <a
-            href="#"
+            *ngIf="team"
+            (click)="openAddEditTeamForm(team)"
             class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2"
           >
             <i class="fe fe-edit dropdown-item-icon"></i>
@@ -31,7 +34,7 @@
       <!-- Page header -->
       <div class="d-lg-flex align-items-center justify-content-between">
         <div class="mb-2 mb-lg-0">
-          <h1 class="mb-0 h2 fw-bold">• Team : {{team?.name}}</h1>
+          <h1 class="mb-0 h2 fw-bold">• Team : {{ team?.name }}</h1>
         </div>
       </div>
     </div>
@@ -40,15 +43,19 @@
   <div class="row">
     <!-- search  -->
     <div class="col-xxl-2 col-lg-3 col-md-12 col-12 mb-4">
-      <form>
-        <input type="search" class="form-control" placeholder="Search member" />
-      </form>
+      <input
+        type="search"
+        class="form-control"
+        placeholder="Search member"
+        [(ngModel)]="searchQuery"
+        (input)="searchMembers()"
+      />
     </div>
   </div>
   <div class="row">
     <div
       class="col-xl-3 col-lg-6 col-12"
-      *ngIf="scrumMaster"
+      *ngFor="let member of filteredMembers"
     >
       <!-- card  -->
       <div class="card mb-4">
@@ -64,69 +71,16 @@
             </div>
             <div class="ms-3">
               <h4 class="mb-0">
-                <p  class="text-inherit"
-                  >{{ scrumMaster.firstName }} {{ scrumMaster.lastName }}</p
-                ><p class="mb-0 text-muted">Scrum master</p>
-              </h4>
-            </div>
-          </div>
-          <div class="mt-4 lh-1 d-flex align-items-center">
-            <p class="mb-0 text-muted">
-              <i class="fe fe-mail fs-4"></i> {{ scrumMaster.email }}
-            </p>
-          </div>
-          <div class="mt-4 lh-1 d-flex align-items-center">
-            <p class="mb-0 text-muted">
-                <i class="fe fe-phone-call fs-4"></i> {{ scrumMaster.phone }}
-            </p>
-          </div>
-          <div class="mt-4 lh-1 d-flex align-items-center">
-            <span class="dropdown">
-              <a
-                class="btn-icon btn btn-ghost btn-sm rounded-circle"
-                href="#"
-                role="button"
-                id="DropdownOne"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fe fe-more-horizontal fs-4"></i>
-              </a>
-              <span class="dropdown-menu" aria-labelledby="DropdownOne">
-                <span class="dropdown-header">Settings</span>
-                <a class="dropdown-item" href="#"
-                  ><i class="fe fe-trash-2 dropdown-item-icon"></i>Remove</a
+                <p class="text-inherit">
+                  {{ member.firstName }} {{ member.lastName }}
+                </p>
+                <p
+                  *ngIf="member.id === team?.scrumMaster"
+                  class="mb-0 text-muted"
                 >
-              </span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div
-      class="col-xl-3 col-lg-6 col-12"
-      *ngFor="let member of cachedMembersData"
-    >
-      <!-- card  -->
-      <div class="card mb-4">
-        <!-- card body  -->
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="avatar avatar-lg">
-              <img
-                src="../../assets/images/avatar/avatar-1.jpg"
-                alt=""
-                class="rounded-circle"
-              />
-            </div>
-            <div class="ms-3">
-              <h4 class="mb-0">
-                <p  class="text-inherit"
-                  >{{ member.firstName }} {{ member.lastName }}</p
-                >
+                  <span class="fe fe-award text-warning me-1"></span>
+                  Scrum master
+                </p>
               </h4>
             </div>
           </div>
@@ -137,29 +91,8 @@
           </div>
           <div class="mt-4 lh-1 d-flex align-items-center">
             <p class="mb-0 text-muted">
-                <i class="fe fe-phone-call fs-4"></i> {{ member.phone }}
+              <i class="fe fe-phone-call fs-4"></i> {{ member.phone }}
             </p>
-          </div>
-          <div class="mt-4 lh-1 d-flex align-items-center">
-            <span class="dropdown">
-              <a
-                class="btn-icon btn btn-ghost btn-sm rounded-circle"
-                href="#"
-                role="button"
-                id="DropdownOne"
-                data-bs-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fe fe-more-horizontal fs-4"></i>
-              </a>
-              <span class="dropdown-menu" aria-labelledby="DropdownOne">
-                <span class="dropdown-header">Settings</span>
-                <a class="dropdown-item" href="#"
-                  ><i class="fe fe-trash-2 dropdown-item-icon"></i>Remove</a
-                >
-              </span>
-            </span>
           </div>
         </div>
       </div>
