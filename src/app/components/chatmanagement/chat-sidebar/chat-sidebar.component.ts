@@ -18,9 +18,7 @@ export class ChatSidebarComponent {
   constructor(private chatListService: ChatListService,private chatStateService: ChatStateService) {}
 
   ngOnInit(): void {
-    const userId = 2;
-    const token = localStorage.getItem('auth_token');
-    console.log(token) // Assuming the userId is obtained somehow (e.g., from a login session)
+    const userId = 1;
     this.chatListService.getChatsForUser(userId).subscribe({
       next: (chats) => {
         console.log("hi")
@@ -32,32 +30,7 @@ export class ChatSidebarComponent {
     });
   }
 
-  private chatsSubscription: Subscription = new Subscription();
-
-  // constructor(private dialogRef: MatDialog,
-  //   private modalService: ModalService
-  //   //  private chatService: ChatService
-  //   ) {
-  // }
-  
-  // ngOnInit(): void {
-  //   this.chatsSubscription = this.loadChats();
-  // }
-
-  // ngOnDestroy(): void {
-  //   this.chatsSubscription.unsubscribe();
-  // }
-
-  // loadChats(): Subscription {
-  //   return this.chatService.findAll().subscribe((chats) => {
-  //     this.chats = chats;
-  //   });
-  // }
-
-  // openNewConversationModal(): void {
-  //   this.modalService.openModal();
-  // }
-
+ 
   selectChat(chatId: number): void {
     this.chatStateService.changeChatId(chatId);
   }

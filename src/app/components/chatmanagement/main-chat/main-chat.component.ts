@@ -22,8 +22,6 @@ export class MainChatComponent implements OnInit {
     private chatStateService: ChatStateService,
     private stompService: StompService,
     private sendMessageService: SendMessageService,
-    private profileService: ProfileService
-    // private webSocketService: WebSocketService // Injected WebSocketService
   ) {}
 
   ngOnDestroy(): void {
@@ -53,28 +51,36 @@ export class MainChatComponent implements OnInit {
   }
 
   private subscribeToChatUpdates(chatId: number): void {
-    // Unsubscribe previous subscription if it exists
     if (this.currentSubscription) {
-      this.currentSubscription.unsubscribe();
+      this.stompService.unsubscribe(this.currentSubscription);
+      this.currentSubscription = null;
     }
     const topic = `/topic/chat${chatId}`;
-    this.currentSubscription = this.stompService.subscribe(topic, (message: any) => {
+    const subscription = this.stompService.subscribe(topic, (message: any) => {
       console.log("Received message:", message);
       const newMessage = JSON.parse(message.body);
-      if (newMessage.content) {  // Ensuring no empty message is pushed
+      if (newMessage.content) {
         this.chatData.messages.push(newMessage);
       } else {
         console.warn("Received empty message:", message);
       }
     });
+  
+    if (subscription) {
+      this.currentSubscription = subscription;
+    } else {
+      console.warn('Subscription could not be established immediately.');
+    }
   }
+  
 
   sendMessage(): void {
     if (this.newMessage.trim() !== '') {
-      const message: IMessageCreate = { // Make sure this conforms to the IMessageCreate interface
+      const message: IMessageCreate = {
         content: this.newMessage,
         chatId: this.chatData.chatId,
-        userId: this.thisUserId
+        userId: this.thisUserId,
+        timestamp: new Date()  // Set the current date and time as the timestamp
       };
   
       // Send the message using the SendMessageService
@@ -82,7 +88,7 @@ export class MainChatComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log('Message sent successfully', response);
-            // The WebSocket subscription will update the chat with the new message
+            // Remove local addition here, WebSocket will handle the update
           },
           error: (error) => {
             console.error('Error sending message', error);
@@ -93,5 +99,6 @@ export class MainChatComponent implements OnInit {
       this.newMessage = '';
     }
   }
+
   
 }

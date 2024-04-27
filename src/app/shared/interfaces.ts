@@ -34,6 +34,7 @@ export interface IMessageCreate {
   content: string;
   userId: number;
   chatId: number;
+   timestamp: Date;
 }
 
 
