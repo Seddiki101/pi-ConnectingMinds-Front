@@ -75,30 +75,30 @@ export class MainChatComponent implements OnInit {
   
 
   sendMessage(): void {
-    if (this.newMessage.trim() !== '') {
-      const message: IMessageCreate = {
-        content: this.newMessage,
-        chatId: this.chatData.chatId,
-        userId: this.thisUserId,
-        timestamp: new Date()  // Set the current date and time as the timestamp
-      };
-  
-      // Send the message using the SendMessageService
-      this.sendMessageService.sendMessage(message.content, message.chatId, message.userId)
-        .subscribe({
-          next: (response) => {
-            console.log('Message sent successfully', response);
-            // Remove local addition here, WebSocket will handle the update
-          },
-          error: (error) => {
-            console.error('Error sending message', error);
-          }
-        });
-  
-      // Clear the input field after sending the message
-      this.newMessage = '';
-    }
+  if (this.newMessage.trim() !== '') {
+    const message: IMessageCreate = {
+      content: this.newMessage,
+      chatId: this.chatData.chatId,
+      userId: this.thisUserId,
+      timestamp: new Date()  // Set the current date and time as the timestamp
+    };
+
+    // Send the message using the SendMessageService
+    this.sendMessageService.sendMessage(message.content, message.chatId, message.userId)
+      .subscribe({
+        next: (response) => {
+          console.log('Message sent successfully', response);
+          // Remove local addition here, WebSocket will handle the update
+        },
+        error: (error) => {
+          console.error('Error sending message', error);
+        }
+      });
+
+    // Clear the input field after sending the message
+    this.newMessage = '';
   }
+}
 
   
 }
