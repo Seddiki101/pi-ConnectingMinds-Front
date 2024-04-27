@@ -3,6 +3,7 @@ import { Project } from "src/app/models/project/project.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { DatePipe } from "@angular/common";
+import { CoreService } from "src/app/service/notificationDialog/core.service";
 
 @Component({
   selector: "app-edit-project",
@@ -28,7 +29,8 @@ export class EditProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private _coreService: CoreService
   ) {}
 
   ngOnInit(): void {
@@ -107,7 +109,11 @@ export class EditProjectComponent implements OnInit {
       .updateProject(this.project, this.selectedFile)
       .subscribe(
         (updatedProject: Project) => {
-          console.log("Project updated successfully:", updatedProject);
+          this._coreService.openSnackBar(
+            "Project updated successfully!",
+            "done",
+            2000
+          );
           this.router.navigate(["/project-management"]);
         },
         (error) => {

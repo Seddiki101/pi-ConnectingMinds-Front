@@ -138,6 +138,7 @@
                     data-width="100%"
                     [ngModelOptions]="{ standalone: true }"
                     [(ngModel)]="project.projectStatus"
+                    name="projectStatus"
                     required
                   >
                     <option value="" disabled selected>Select Status</option>
@@ -171,7 +172,7 @@
                   <div *ngIf="imageSrc" class="mt-3">
                     <img
                       [src]="imageSrc"
-                      class="img-fluid"
+                      class="img-fluid rounded-image"
                       alt="Selected Image"
                     />
                   </div>

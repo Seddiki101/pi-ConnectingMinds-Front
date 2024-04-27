@@ -13,4 +13,5 @@ export class Project {
   resources?: string;
   teams?: Team[];
   imageUrl?: string;
+  imageName?: string;
 }

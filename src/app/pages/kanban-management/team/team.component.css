@@ -1,0 +1,16 @@
+.team-image-container {
+  height: 130px; /* Adjust as needed */
+  overflow: hidden;
+}
+
+.team-image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.description-text {
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

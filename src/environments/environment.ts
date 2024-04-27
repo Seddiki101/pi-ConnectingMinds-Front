@@ -1,1 +1,4 @@
-export const environment = {};
+export const environment = {
+    production: true,
+    kanban: "http://localhost:8081/api/",
+};

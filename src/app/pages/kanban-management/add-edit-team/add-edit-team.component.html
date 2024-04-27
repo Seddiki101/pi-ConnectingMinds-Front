@@ -1,0 +1,188 @@
+<div class="card">
+  <div class="card-body">
+    <div mat-dialog-title>
+      <h2>{{ data.team ? "Update Team" : "Add Team" }}</h2>
+    </div>
+    <div class="scrollable-dialog-content">
+      <!-- form -->
+      <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <div class="row gx-3">
+          <!-- form group -->
+          <div class="mb-3 col-6">
+            <label class="form-label"
+              >Name <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter project title"
+              id="name"
+              name="name"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="team.name"
+              required
+            />
+          </div>
+          <!-- form group -->
+          <div class="mb-3 col-6">
+            <label class="form-label"
+              >Description <span class="text-danger">*</span></label
+            >
+            <textarea
+              class="form-control"
+              placeholder="Enter a brief Scope about your project..."
+              rows="3"
+              id="scope"
+              name="scope"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="team.description"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3 col-6">
+            <label>Select Team Members:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search users"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="searchQuery"
+              (input)="searchUsers()"
+            />
+            <!-- Search Results -->
+            <div class="search-results">
+              <ul *ngIf="searchResults.length > 0">
+                <li *ngFor="let user of searchResults.slice(0, 7)">
+                  <button
+                    type="button"
+                    class="btn btn-link"
+                    (click)="selectMember(user)"
+                  >
+                    {{ user.firstName }} {{ user.lastName }}
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Selected Members -->
+          <div
+            *ngIf="team.members && team.members.length > 0"
+            class="mb-3 col-6"
+          >
+            <h5>Members:</h5>
+            <ul>
+              <li class="text-inherit" *ngFor="let memberId of team.members">
+                {{ getUserFullNameById(memberId) }}
+                <i
+                  class="mdi mdi-delete me-2"
+                  style="cursor: pointer"
+                  (click)="removeMember(memberId)"
+                ></i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mb-3 col-6">
+            <label>Set a Scrum Master:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search users"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="searchQueryScrum"
+              (input)="searchScrumMaster()"
+            />
+            <!-- Search Results -->
+            <div class="search-results">
+              <ul *ngIf="searchResultsScrumMaster.length > 0">
+                <li *ngFor="let user of searchResultsScrumMaster.slice(0, 7)">
+                  <button
+                    type="button"
+                    class="btn btn-link"
+                    (click)="selectScrumMaster(user)"
+                  >
+                    {{ user.firstName }} {{ user.lastName }}
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Selected Scrum Master -->
+          <div *ngIf="team.scrumMaster" class="mb-3 col-6">
+            <h5>Scrum Master:</h5>
+            <ul>
+              <li class="text-inherit">
+                {{ getUserFullNameById(team.scrumMaster) }}
+                <i
+                  class="mdi mdi-delete me-2"
+                  style="cursor: pointer"
+                  (click)="removeScrumMaster()"
+                ></i>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-8 col-6 mb-4">
+            <div>
+              <!-- logo -->
+              <h5 class="mb-3">Upload Cover Image</h5>
+              <div class="icon-shape icon-xxl border rounded position-relative">
+                <span class="position-absolute">
+                  <i class="bi bi-image fs-3 text-muted"></i
+                ></span>
+                <input
+                  #fileInput
+                  class="form-control border-0 opacity-0"
+                  type="file"
+                  accept="image/*"
+                  (change)="onFileSelected($event)"
+                />
+              </div>
+            </div>
+            <!-- Preview Image -->
+            <div *ngIf="imageSrc" class="mt-3">
+              <img
+                [src]="imageSrc"
+                class="img-fluid rounded-image"
+                alt="Selected Image"
+              />
+            </div>
+            <!-- Error Message -->
+            <div *ngIf="!imageSrc && fileError" class="text-danger mt-2">
+              {{ fileError }}
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div *ngIf="fieldsError" class="text-danger">
+              {{ fieldsError }}
+            </div>
+            <div *ngIf="nameError" class="text-danger">
+              {{ nameError }}
+            </div>
+            <div *ngIf="memberListError" class="text-danger">
+              {{ memberListError }}
+            </div>
+          </div>
+          <!-- button -->
+          <div class="col-6">
+            <div mat-dialog-actions class="action">
+              <button class="btn btn-primary" type="submit">
+                {{ data.team ? "Update" : "Add" }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary ms-2"
+                [mat-dialog-close]="false"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

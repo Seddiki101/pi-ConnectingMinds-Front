@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Project } from "src/app/models/project/project.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { jwtDecode } from "jwt-decode";
+import { CoreService } from "src/app/service/notificationDialog/core.service";
 
 @Component({
   selector: "app-create-project",
@@ -17,18 +18,20 @@ export class CreateProjectComponent implements OnInit {
   scopeError: string = ""; // Error message for scope validation
   resourcesError: string = ""; // Error message for resources validation
   endDateError: string = ""; // Error message for end date validation
-
   ownerName: string = "John Doe"; //---
   ownerId: number = 1; //---- to change when i decode the token info
 
   private from: string;
   project: Project = new Project();
   selectedFile: File | null = null;
+  
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _coreService: CoreService,
   ) {}
+
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.from = params["from"];
@@ -46,14 +49,14 @@ export class CreateProjectComponent implements OnInit {
     this.scopeError = "";
     this.resourcesError = "";
     this.endDateError = "";
-
     // Check if the required fields are filled
     if (
       !this.project.name ||
       !this.project.scope ||
       !this.project.resources ||
       !this.project.startDate ||
-      !this.project.endDate
+      !this.project.endDate ||
+      !this.project.projectStatus
     ) {
       // Inform the user that all fields are required
       this.fieldsError = "All fields are required.";
@@ -86,7 +89,11 @@ export class CreateProjectComponent implements OnInit {
       .createProject(this.project, this.selectedFile)
       .subscribe(
         (response) => {
-          console.log("Project created successfully:", response);
+          this._coreService.openSnackBar(
+            "Project created successfully!",
+            "done",
+            2000
+          );
           this.router.navigate(["/project-management"]);
           // handle successful creation here
         },

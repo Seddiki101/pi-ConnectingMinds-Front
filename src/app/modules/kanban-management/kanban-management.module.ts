@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 import { KanbanMainpageComponent } from "src/app/pages/kanban-management/kanban-mainpage/kanban-mainpage.component";
 import { SidenavComponent } from "src/app/components/sidenav/sidenav.component";
-import { NavbarComponent } from "src/app/components/navbar/navbar.component";
 import { ProjectGridComponent } from "src/app/pages/kanban-management/project-grid/project-grid.component";
 import { ProjectListComponent } from "src/app/pages/kanban-management/project-list/project-list.component";
 import { CreateProjectComponent } from "src/app/pages/kanban-management/create-project/create-project.component";
@@ -14,10 +13,16 @@ import { ProjectOverviewComponent } from "src/app/pages/kanban-management/projec
 import { ProjectSummaryComponent } from "src/app/pages/kanban-management/project-details/project-summary/project-summary.component";
 import { ProjectTaskComponent } from "src/app/pages/kanban-management/project-details/project-task/project-task.component";
 import { ProjectTeamComponent } from "src/app/pages/kanban-management/project-details/project-team/project-team.component";
-import { TeamComponent } from "src/app/pages/kanban-management/team/team.component";
 import { EventComponent } from "src/app/pages/kanban-management/event/event.component";
 import { CalendarComponent } from "src/app/pages/kanban-management/calendar/calendar.component";
 import { TaskComponent } from "src/app/pages/kanban-management/task/task.component";
+import { SharedModule } from "../shared/shared.module";
+import { TeamComponent } from "src/app/pages/kanban-management/team/team.component";
+import { AddEditTeamComponent } from "src/app/pages/kanban-management/add-edit-team/add-edit-team.component";
+import { MatDialogModule } from "@angular/material/dialog";
+import { TeamDetailsComponent } from "src/app/pages/kanban-management/team-details/team-details.component";
+
+
 const routes: Routes = [
   {
     path: "",
@@ -77,14 +82,19 @@ const routes: Routes = [
         data: { title: "Project List" },
       },
       {
+        path: "task",
+        component: TaskComponent,
+        data: { title: "Task" },
+      },
+      {
         path: "team",
         component: TeamComponent,
         data: { title: "Team" },
       },
-      {
-        path: "task",
-        component: TaskComponent,
-        data: { title: "Task" },
+      { 
+        path:"team-details",
+        component: TeamDetailsComponent,
+        data:{title:"Team Details"}
       },
       {
         path: "event",
@@ -106,7 +116,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     SidenavComponent,
-    NavbarComponent,
     KanbanMainpageComponent,
     ProjectGridComponent,
     ProjectListComponent,
@@ -117,12 +126,21 @@ const routes: Routes = [
     ProjectSummaryComponent,
     ProjectTaskComponent,
     ProjectTeamComponent,
-    TeamComponent,
     CalendarComponent,
     EventComponent,
     TaskComponent,
+    TeamComponent,
+    AddEditTeamComponent,
+    TeamDetailsComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule,
+    SharedModule,
+    MatDialogModule,
+ 
+  ],
   providers: [DatePipe],
 })
 export class KanbanManagementModule {}

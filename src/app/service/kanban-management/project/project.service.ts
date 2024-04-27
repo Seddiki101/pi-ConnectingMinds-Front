@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { API_ENDPOINTS } from "src/app/config/endpoints";
 import { Project } from "src/app/models/project/project.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProjectService {
-  private baseUrl = API_ENDPOINTS.kanban + "project";
+  private baseUrl = environment.kanban + "project";
   constructor(private http: HttpClient) {}
 
   getAllProjects(): Observable<Project[]> {

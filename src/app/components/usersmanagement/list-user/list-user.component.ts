@@ -14,28 +14,40 @@ export class ListUserComponent implements OnInit {
   constructor(private listUserService: ListUserService) { }
 
   ngOnInit() {
+    this.loadAllUsers();
+  }
+
+  loadAllUsers(): void {
     this.listUserService.getAllUsers().subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-      error: (err) => {
-        console.error(err);
-        this.error = 'Failed to retrieve users. Please try again.';
-      }
+      next: (data) => this.users = data,
+      error: (err) => this.errorHandling(err, 'Failed to retrieve users. Please try again.')
+    });
+  }
+
+  searchUsers(keyword: string): void {
+    if (!keyword) {
+      this.loadAllUsers();
+      return;
+    }
+    this.listUserService.searchUsers(keyword).subscribe({
+      next: (data) => this.users = data,
+      error: (err) => this.errorHandling(err, 'Failed to search users.')
     });
   }
 
   blockUser(user: userAdvanced): void {
     this.listUserService.blockUserById(user.id).subscribe({
       next: (response) => {
-        console.log(response); // Log the server response
+        console.log(response); 
         alert('User has been blocked successfully');
-        user.locked = true; // Assuming the 'locked' field exists and is to be updated
+        user.locked = true;
       },
-      error: (err) => {
-        console.error('Failed to block the user:', err);
-        alert('Error blocking user');
-      }
+      error: (err) => this.errorHandling(err, 'Error blocking user')
     });
+  }
+
+  private errorHandling(err: any, message: string): void {
+    console.error(err);
+    this.error = message;
   }
 }

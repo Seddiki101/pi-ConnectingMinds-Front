@@ -12,4 +12,6 @@ export class Team {
   notifications?: Notification[];
   events?: Event[];
   tasks?: Task[];
+  imageUrl?: string;
+  imageName?: string;
 }
