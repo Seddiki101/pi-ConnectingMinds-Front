@@ -13,6 +13,28 @@ export class StompService {
   constructor() {
     // Configure the STOMP client here if necessary, e.g., logging, etc.
     this.stompClient.debug = (msg: string) => console.log(msg);
+    this.stompClient.reconnect_delay = 5000;
+  }
+
+  private manageConnection(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
+    let subscription: StompSubscription | undefined = undefined;
+  
+    if (this.stompClient.connected) {
+      subscription = this.subscribeToTopic(topic, callback);
+    } else {
+      this.stompClient.connect({}, () => {
+        // Ensure subscription is only made if not already subscribed during connection process
+        if (!this.subscriptions[topic]) {
+          this.subscriptions[topic] = this.subscribeToTopic(topic, callback);
+        }
+        subscription = this.subscriptions[topic];
+      }, (error: any) => {
+        console.error('Connection error:', error);
+        subscription = undefined;
+      });
+    }
+  
+    return subscription;
   }
 
   subscribe(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
@@ -21,21 +43,7 @@ export class StompService {
       return this.subscriptions[topic];
     }
     
-    if (this.stompClient.connected) {
-      // If already connected, subscribe immediately
-      return this.subscribeToTopic(topic, callback);
-    } else {
-      // Connect first and then subscribe
-      this.stompClient.connect({}, () => {
-        if (!this.subscriptions[topic]) { // Ensure no subscription was created during the connection process
-          this.subscriptions[topic] = this.subscribeToTopic(topic, callback);
-        }
-      }, (error: any) => {
-        console.error('Connection error:', error);
-        return undefined;
-      });
-      return undefined; // Return undefined while the connection is being established
-    }
+    return this.manageConnection(topic, callback);
   }
 
   private subscribeToTopic(topic: string, callback: (message: IMessage) => void): StompSubscription {

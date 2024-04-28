@@ -21,7 +21,6 @@ export class ChatSidebarComponent {
     const userId = 1;
     this.chatListService.getChatsForUser(userId).subscribe({
       next: (chats) => {
-        console.log("hi")
         this.chats = chats;
       },
       error: (error) => {
