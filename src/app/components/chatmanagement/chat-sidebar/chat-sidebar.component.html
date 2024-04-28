@@ -1,0 +1,218 @@
+<div class="bg-white border-end border-top vh-100">
+  <!-- chat list -->
+  <div class="chat-window">
+    <div class="chat-sticky-header sticky-top bg-white">
+      <div class="px-4 pt-3 pb-4">
+        <!-- heading -->
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="mb-0 fw-bold h2">
+              Chat
+            </h1>
+          </div>
+          <!-- new chat dropdown -->
+          <div>
+            <a href="#" class="btn btn-primary rounded-circle btn-icon texttooltip" data-template="newchat"
+              data-bs-toggle="modal" data-bs-target="#newchatModal">
+              <i class="fe fe-edit"></i>
+              <div id="newchat" class="d-none">
+                <span>New Chat</span>
+              </div>
+            </a>
+            <span class="dropdown">
+              <a href="#" class="btn btn-light btn-icon rounded-circle" id="settingLink" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fe fe-settings"></i></a>
+              <span class="dropdown-menu" aria-labelledby="settingLink">
+                <a class="dropdown-item" href="#">Setting</a>
+                <a class="dropdown-item" href="#">Help and
+                  Feedback</a>
+              </span>
+            </span>
+          </div>
+        </div>
+        <!-- search -->
+        <div class="mt-4 mb-4">
+          <input type="search" class="form-control form-control-sm" placeholder="Search people, group and messages" />
+        </div>
+        <!-- User chat -->
+
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- media -->
+          <a href="#" class="text-link">
+            <div class="d-flex">
+              <div class="avatar avatar-md avatar-indicators avatar-online">
+                <img src="../../../../assets/images/avatar/avatar-1.jpg" alt="" class="rounded-circle" />
+              </div>
+              <!-- media body -->
+              <div class="ms-2">
+                <h5 class="mb-0">
+                  Jitu Chauhan
+                </h5>
+                <p class="mb-0 text-muted">
+                  Online
+                </p>
+              </div>
+            </div>
+          </a>
+          <!-- dropdown -->
+          <div class="dropdown dropstart">
+            <a href="#" class="text-link" id="userSetting" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"><i class="fe fe-more-horizontal fs-3"></i></a>
+            <ul class="dropdown-menu" aria-labelledby="userSetting">
+              <li class="dropdown-animation dropdown-submenu dropdown-toggle-none">
+                <a class="dropdown-item dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false"
+                  data-bs-toggle="dropdown">
+                  <i class="fe fe-circle dropdown-item-icon"></i>Status
+                </a>
+                <ul class="dropdown-menu dropdown-menu-xs">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span class="badge-dot bg-success me-2"></span>Online
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span class="badge-dot bg-secondary me-2"></span>Offline
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span class="badge-dot bg-warning me-2"></span>Away
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <span class="badge-dot bg-danger me-2"></span>Busy
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="fe fe-settings dropdown-item-icon"></i>Setting</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="fe fe-user dropdown-item-icon"></i>Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="fe fe-power dropdown-item-icon"></i>Sign Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- nav tabs-->
+
+      
+    </div>
+    <div data-simplebar style="height: 100vh; overflow: auto">
+      <!-- tab content -->
+      <div class="tab-content" id="tabContent">
+        <!-- tab pane -->
+        <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
+          <!-- contact list -->
+          <ul class="list-unstyled contacts-list">
+            <!-- contact item -->
+            <li class="py-3 px-4 chat-item contacts-item">
+              <!-- contact link -->
+
+              <div class="d-flex justify-content-between align-items-center">
+                <!-- media -->
+                <a href="#" class="text-link contacts-link">
+                  <div class="d-flex">
+                    <div class="avatar avatar-md avatar-indicators avatar-online">
+                      <img src="../../../../assets/images/avatar/avatar-2.jpg" alt="" class="rounded-circle" />
+                    </div>
+                    <!-- media body -->
+                    <div class="ms-2">
+                      <h5 class="mb-0 fw-bold">
+                        Olivia
+                        Cooper
+                      </h5>
+                      <p class="mb-0 text-muted text-truncate">
+                        I m
+                        for
+                        unread
+                        message
+                        components...
+                      </p>
+                    </div>
+                  </div>
+                </a>
+                <div>
+                  <!-- icon -->
+                  <small class="text-muted">8:48AM</small>
+                  <div class="text-end">
+                    <span class="icon-shape icon-xs text-white bg-danger rounded-circle fw-bold fs-6">1</span>
+                  </div>
+                </div>
+              </div>
+              <!-- chat action -->
+              <div class="chat-actions">
+                <!-- dropdown -->
+                <div class="dropdown dropstart">
+                  <a href="#" class="btn btn-white btn-icon btn-sm rounded-circle primary-hover"
+                    id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fe fe-more-horizontal fs-3"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item" href="#"><i class="bi-pin-angle dropdown-item-icon"></i>Pin</a>
+                    <a class="dropdown-item" href="#"><i class="bi-person-x dropdown-item-icon"></i>Mute</a>
+                    <a class="dropdown-item" href="#"><i class="bi-eye-slash dropdown-item-icon"></i>Hide</a>
+                    <a class="dropdown-item" href="#"><i class="bi-person-plus dropdown-item-icon"></i>Add to
+                      Favorite</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+
+            <!-- chat item -->
+            <li *ngFor="let chat of chats" class="py-3 px-4 chat-item contacts-item" (click)="selectChat(chat.chatId)">
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="" class="text-link contacts-link" (click)="$event.preventDefault()">
+
+                  <!-- media -->
+                  <div class="d-flex">
+                    <div class="avatar avatar-md avatar-indicators avatar-online">
+                      <img src="../../../../assets/images/avatar/avatar-15.jpg" alt="" class="rounded-circle" />
+                    </div>
+                    <!-- media body -->
+                    <div class="ms-2">
+                      <h5 class="mb-0">
+                        {{chat.name}}
+                      </h5>
+                      <p class="mb-0 text-muted">
+                        {{chat.lastMessage}}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+                <div>
+                  <small class="text-muted">{{calculateTimeAgo(chat.lastMessageTimestamp)}}</small>
+                </div>
+              </div>
+              <!-- chat actions -->
+              <div class="chat-actions">
+                <!--  dropdown -->
+                <div class="dropdown dropstart">
+                  <a href="#" class="btn btn-white btn-icon btn-sm rounded-circle primary-hover"
+                    id="dropdownMenuButton11" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fe fe-more-horizontal fs-3"></i>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton11">
+                    <a class="dropdown-item" href="#"><i class="bi-pin-angle dropdown-item-icon"></i>Pin</a>
+                    <a class="dropdown-item" href="#"><i class="bi-person-x dropdown-item-icon"></i>Mute</a>
+                    <a class="dropdown-item" href="#"><i class="bi-eye-slash dropdown-item-icon"></i>Hide</a>
+                    <a class="dropdown-item" href="#"><i class="bi-person-plus dropdown-item-icon"></i>Add to
+                      Favorite</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

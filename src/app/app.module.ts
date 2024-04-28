@@ -19,6 +19,13 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { HeaderComponent } from "./components/header/header.component";
+import { ChatAppComponent } from './components/chatmanagement/chat-app/chat-app.component';
+import { ChatSidebarComponent } from './components/chatmanagement/chat-sidebar/chat-sidebar.component';
+import { MainChatComponent } from "./components/chatmanagement/main-chat/main-chat.component";
+import { SendMessageModalComponent } from "./components/chatmanagement/send-message-modal/send-message-modal.component";
+import { UserDetailsComponent } from './components/chatmanagement/user-details/user-details.component';
+import { StompService } from "./service/chatmanagement/stomp-service/stomp-service.service";
+
 
 @NgModule({
   declarations: [
@@ -36,9 +43,14 @@ import { HeaderComponent } from "./components/header/header.component";
     FooterComponent,
     SidenavComponent,
     NavbarComponent,
+    ChatAppComponent,
+    ChatSidebarComponent,
+    MainChatComponent,
+    SendMessageModalComponent,
+    UserDetailsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [StompService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
