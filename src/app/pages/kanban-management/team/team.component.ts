@@ -26,7 +26,6 @@ export class TeamComponent implements OnInit {
     private projectService: ProjectService,
     private teamService: TeamService,
     private router: Router,
-    private teamSharedData: TeamSharedService,
     private dialog: MatDialog,
     private sharedUser: SharedUserService,
     private _coreService: CoreService
@@ -100,14 +99,7 @@ export class TeamComponent implements OnInit {
     this.searchInput = "";
     this.applyFilters();
   }
-  onSelectProject(project: Project): void {
 
-  }
-  onSelectTeam(team: Team, projectName:string): void {
-    this.teamSharedData.setSelectedTeam(team);
-    this.teamSharedData.setProjectName(projectName)
-    this.router.navigate(["/project-management/team-details"]);
-  }
   deleteTeam(teamId: number): void {
     if (confirm("Are you sure you want to delete this team?")) {
       this.teamService.deleteTeam(teamId).subscribe(

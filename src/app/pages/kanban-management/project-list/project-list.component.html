@@ -56,7 +56,7 @@
     <div class="col-xl-3 col-lg-4 col-md-6 col-12">
       <!-- Custom select -->
       <select
-        class="selectpicker btn btn-secondary"
+      class="form-select"
         data-width="100%"
         [(ngModel)]="selectedStatus"
         (ngModelChange)="applyFilters()"
@@ -98,7 +98,14 @@
                     </div>
                     <div class="ms-3">
                       <h4 class="mb-0">
-                        <a href="#" class="text-inherit">{{ project.name }}</a>
+                        <a
+                          [routerLink]="['/project-management/project-page']"
+                          [queryParams]="{
+                            projectId: project.projectId
+                          }"
+                          class="text-inherit"
+                          >{{ project.name }}</a
+                        >
                       </h4>
                     </div>
                   </div>

@@ -5,21 +5,20 @@ import { Team } from "src/app/models/team/team.model";
   providedIn: "root",
 })
 export class TeamSharedService {
-  private selectedTeam: Team | null = null;
-  private projectName: string;
+  private localStorageKey = "selectedTeam";
 
   setSelectedTeam(Team: Team) {
-    this.selectedTeam = Team;
+    // Save Team data to localStorage
+    localStorage.setItem(this.localStorageKey, JSON.stringify(Team));
   }
 
-  getSelectedTeam() {
-    return this.selectedTeam;
-  }
-  setProjectName(projectName: string) {
-    this.projectName = projectName;
-  }
-
-  getProjectName() {
-    return this.projectName;
+  getSelectedTeam(): Team | null {
+    // Retrieve Team data from localStorage
+    const TeamData = localStorage.getItem(this.localStorageKey);
+    if (TeamData) {
+      return JSON.parse(TeamData);
+    } else {
+      return null;
+    }
   }
 }

@@ -5,13 +5,20 @@ import { Project } from "src/app/models/project/project.model";
   providedIn: "root",
 })
 export class ProjectSharedDataService {
-  private selectedProject: Project | null = null;
+  private localStorageKey = "selectedProject";
 
   setSelectedProject(project: Project) {
-    this.selectedProject = project;
+    // Save project data to localStorage
+    localStorage.setItem(this.localStorageKey, JSON.stringify(project));
   }
 
-  getSelectedProject() {
-    return this.selectedProject;
+  getSelectedProject(): Project | null {
+    // Retrieve project data from localStorage
+    const projectData = localStorage.getItem(this.localStorageKey);
+    if (projectData) {
+      return JSON.parse(projectData);
+    } else {
+      return null;
+    }
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Project } from "src/app/models/project/project.model";
+import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { ProjectSharedDataService } from "src/app/service/kanban-management/shared-data/project-shared-data.service";
 import { TaskService } from "src/app/service/kanban-management/task/task.service";
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
@@ -10,17 +12,34 @@ import { SharedUserService } from "src/app/service/usermanagement/shared/shared-
   styleUrls: ["./project-overview.component.css"],
 })
 export class ProjectOverviewComponent implements OnInit {
-  project: Project | null;
   estimatedTime: number | null;
   upcomingTasks: any[] = [];
+  project: Project | null;
+  projectId: number;
 
   constructor(
     private projectSharedData: ProjectSharedDataService,
     private taskService: TaskService,
-    private sharedUserService: SharedUserService
+    private sharedUserService: SharedUserService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute
   ) {}
   ngOnInit() {
-    this.project = this.projectSharedData.getSelectedProject();
+    this.route.queryParams.subscribe((params) => {
+      this.projectId = +params["projectId"];
+    });
+    if (this.projectId) {
+      this.projectService
+        .getProjectById(this.projectId)
+        .subscribe((project) => {
+          if (project) {
+            this.project = project;
+            this.projectSharedData.setSelectedProject(project);
+          }
+        });
+    } else {
+      this.project = this.projectSharedData.getSelectedProject();
+    }
     this.calculateEstimatedTime();
     if (this.project) {
       this.taskService

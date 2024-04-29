@@ -19,6 +19,7 @@ import { HeaderComponent } from "./components/header/header.component";
 import { SharedModule } from "./modules/shared/shared.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { AddEditTaskComponent } from './pages/kanban-management/add-edit-task/add-edit-task.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     Error404Component,
     HeaderComponent,
     FooterComponent,
+    AddEditTaskComponent,
   
   
   ],

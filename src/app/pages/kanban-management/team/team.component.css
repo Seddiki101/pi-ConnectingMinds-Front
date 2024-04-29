@@ -14,3 +14,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.btn-primary {
+  position: relative;
+  bottom: 20px; /* Adjust as needed */
+}

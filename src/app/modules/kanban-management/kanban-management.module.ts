@@ -21,7 +21,7 @@ import { TeamComponent } from "src/app/pages/kanban-management/team/team.compone
 import { AddEditTeamComponent } from "src/app/pages/kanban-management/add-edit-team/add-edit-team.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { TeamDetailsComponent } from "src/app/pages/kanban-management/team-details/team-details.component";
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
   {
@@ -139,7 +139,7 @@ const routes: Routes = [
     FormsModule,
     SharedModule,
     MatDialogModule,
- 
+    DragDropModule
   ],
   providers: [DatePipe],
 })
