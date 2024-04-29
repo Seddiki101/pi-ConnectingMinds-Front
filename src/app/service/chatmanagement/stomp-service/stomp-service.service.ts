@@ -1,64 +1,73 @@
 import { Injectable } from '@angular/core';
-import { IMessage, Stomp, StompSubscription } from '@stomp/stompjs';
+import { IMessage, Stomp, StompSubscription, StompHeaders } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StompService {
-  private socket = new SockJS('http://localhost:8083/ws-chat');
-  private stompClient = Stomp.over(this.socket);
-  private subscriptions: { [key: string]: StompSubscription } = {};
+  private socket: any;
+  private stompClient: any;
+  private subscriptions: { [key: string]: { subscription: StompSubscription, callback: (message: IMessage) => void } } = {};
+  private connected: boolean = false;
 
   constructor() {
-    // Configure the STOMP client here if necessary, e.g., logging, etc.
-    this.stompClient.debug = (msg: string) => console.log(msg);
+    this.initializeWebSocketConnection();
+  }
+
+  private initializeWebSocketConnection(): void {
+    this.socket = new SockJS('http://localhost:8083/ws-chat');
+    this.stompClient = Stomp.over(this.socket);
+    this.stompClient.debug = (str: string) => console.log(str);
     this.stompClient.reconnect_delay = 5000;
+
+    this.stompClient.connect({}, (frame: any) => {
+      this.connected = true;
+      console.log('Connected: ' + frame);
+      this.reconnectAllSubscriptions();
+    }, this.onError);
   }
 
-  private manageConnection(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
-    let subscription: StompSubscription | undefined = undefined;
-  
-    if (this.stompClient.connected) {
-      subscription = this.subscribeToTopic(topic, callback);
-    } else {
-      this.stompClient.connect({}, () => {
-        // Ensure subscription is only made if not already subscribed during connection process
-        if (!this.subscriptions[topic]) {
-          this.subscriptions[topic] = this.subscribeToTopic(topic, callback);
-        }
-        subscription = this.subscriptions[topic];
-      }, (error: any) => {
-        console.error('Connection error:', error);
-        subscription = undefined;
-      });
+  private onError = (error: string | Event) => {
+    console.error('STOMP error:', error);
+    this.connected = false;
+    setTimeout(() => {
+      this.initializeWebSocketConnection();
+    }, 5000);  // Attempt to reconnect every 5 seconds
+  };
+
+  private reconnectAllSubscriptions(): void {
+    Object.keys(this.subscriptions).forEach(topic => {
+      const { callback } = this.subscriptions[topic];
+      this.subscribe(topic, callback);
+    });
+  }
+
+  public subscribe(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
+    if (!this.connected) {
+      console.log('Attempted to subscribe without a connection; retrying...');
+      setTimeout(() => this.subscribe(topic, callback), 1000);
+      return;
     }
-  
-    return subscription;
-  }
 
-  subscribe(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
     if (this.subscriptions[topic]) {
-      // Return existing subscription if it already exists
-      return this.subscriptions[topic];
+      console.log(`Already subscribed to ${topic}`);
+      return this.subscriptions[topic].subscription;
     }
-    
-    return this.manageConnection(topic, callback);
-  }
 
-  private subscribeToTopic(topic: string, callback: (message: IMessage) => void): StompSubscription {
     const subscription = this.stompClient.subscribe(topic, (message: IMessage) => {
       callback(message);
     });
-    this.subscriptions[topic] = subscription; // Store the subscription
+    this.subscriptions[topic] = { subscription, callback };
+    console.log(`Subscribed to ${topic}`);
     return subscription;
   }
 
-  unsubscribe(topic: string): void {
-    const subscription = this.subscriptions[topic];
-    if (subscription) {
-      subscription.unsubscribe();
-      delete this.subscriptions[topic]; // Remove the subscription reference
+  public unsubscribe(topic: string): void {
+    if (this.subscriptions[topic]) {
+      this.subscriptions[topic].subscription.unsubscribe();
+      console.log(`Unsubscribed from ${topic}`);
+      delete this.subscriptions[topic];
     }
   }
 }

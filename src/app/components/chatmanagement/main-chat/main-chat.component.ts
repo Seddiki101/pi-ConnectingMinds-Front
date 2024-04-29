@@ -1,5 +1,5 @@
 import { SendMessageService } from './../../../service/chatmanagement/send-message/send-message.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FetchChatService } from 'src/app/service/chatmanagement/fetch-chat/fetch-chat.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
 import { IMessageCreate } from 'src/app/shared/interfaces';
@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/service/usermanagement/profile-svc/profi
   templateUrl: './main-chat.component.html',
   styleUrls: ['./main-chat.component.css'],
 })
-export class MainChatComponent implements OnInit {
+export class MainChatComponent implements OnInit, OnDestroy {
   chatData: any;
   thisUserId = 1;
   newMessage: string = '';
@@ -57,10 +57,11 @@ export class MainChatComponent implements OnInit {
     }
     const topic = `/topic/chat${chatId}`;
     const subscription = this.stompService.subscribe(topic, (message: any) => {
-      console.log("Received message:", message);
+      // console.log("Received message:", message);
       const newMessage = JSON.parse(message.body);
       if (newMessage.content) {
         this.chatData.messages.push(newMessage);
+        // console.log('New message received===========================:', newMessage);
       } else {
         console.warn("Received empty message:", message);
       }
