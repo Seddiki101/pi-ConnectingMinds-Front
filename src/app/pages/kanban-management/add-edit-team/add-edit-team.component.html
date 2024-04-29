@@ -2,7 +2,14 @@
   <div class="card-body">
     <div mat-dialog-title>
       <h2>{{ data.team ? "Update Team" : "Add Team" }}</h2>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        [mat-dialog-close]="false"
+      ></button>
     </div>
+
     <div class="scrollable-dialog-content">
       <!-- form -->
       <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
@@ -167,7 +174,7 @@
             </div>
           </div>
           <!-- button -->
-          <div class="col-6">
+          <div class="col-6 d-flex">
             <div mat-dialog-actions class="action">
               <button class="btn btn-primary" type="submit">
                 {{ data.team ? "Update" : "Add" }}

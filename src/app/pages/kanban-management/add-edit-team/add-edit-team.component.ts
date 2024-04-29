@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Team } from "src/app/models/team/team.model";
@@ -12,16 +12,16 @@ import { SharedUserService } from "src/app/service/usermanagement/shared/shared-
   templateUrl: "./add-edit-team.component.html",
   styleUrls: ["./add-edit-team.component.css"],
 })
-export class AddEditTeamComponent {
+export class AddEditTeamComponent implements OnInit {
   fileError: string | null = null; // Error message for file validation
   imageSrc: string | ArrayBuffer | null = null; // Selected image preview
   fieldsError: string = ""; //Error message for fields
   memberListError: string = ""; //Error message for team members
 
   nameError: string = ""; // Error message for name validation
-  descriptionError: string = ""; // Error message for scope validation
-  ownerName: string = "John Doe"; //---
-  projectId: number; //---- to change when i decode the token info
+  descriptionError: string = ""; // Error message for description validation
+  ownerName: string = "John Doe"; //---- to change when i decode the token info
+  projectId: number;
   searchResults: userAdvanced[] = [];
   searchResultsScrumMaster: userAdvanced[] = [];
   searchQuery: string = "";
@@ -46,7 +46,7 @@ export class AddEditTeamComponent {
         this.imageSrc = this.team.imageUrl;
       }
     }
-    if(this.data.projectId){
+    if (this.data.projectId) {
       this.projectId = this.data.projectId;
     }
     this.sharedUserService.getAllUsers().subscribe((users) => {

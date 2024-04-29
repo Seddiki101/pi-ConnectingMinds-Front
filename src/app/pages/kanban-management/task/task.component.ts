@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { Status } from "src/app/models/enums/status";
 import { Project } from "src/app/models/project/project.model";
 import { Task } from "src/app/models/task/task.model";
@@ -6,8 +7,10 @@ import { Team } from "src/app/models/team/team.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { TaskService } from "src/app/service/kanban-management/task/task.service";
 import { TeamService } from "src/app/service/kanban-management/team/team.service";
+import { CoreService } from "src/app/service/notificationDialog/core.service";
 import { userAdvanced } from "src/app/service/usermanagement/requestTypes/userAdvanced";
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
+import { AddEditTaskComponent } from "../add-edit-task/add-edit-task.component";
 
 @Component({
   selector: "app-task",
@@ -32,7 +35,8 @@ export class TaskComponent implements OnInit {
     private teamService: TeamService,
     private taskService: TaskService,
     private sharedUser: SharedUserService,
-
+    private _coreService: CoreService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -50,31 +54,42 @@ export class TaskComponent implements OnInit {
   }
 
   loadSelectedValues() {
-    const selectedProjectId = localStorage.getItem("selectedProjectId");
-    const selectedTeamId = localStorage.getItem("selectedTeamId");
-    if (selectedProjectId && selectedTeamId) {
-      this.showKanbanBoard = true;
-      this.projectService
-        .getProjectById(parseInt(selectedProjectId))
-        .subscribe((project) => {
-          this.selectedProject = project;
-          if (selectedProjectId) {
-            this.teamService
-              .getTeamById(parseInt(selectedTeamId))
-              .subscribe((team) => {
-                this.selectedTeam = team;
-                if (this.selectedTeam?.tasks) {
-                  this.tasks = this.selectedTeam.tasks;
-                  this.updateTaskLists();
-                  this.checkShowKanbanBoard();
-                }
-              });
-          }
-        });
+    if (this.selectedProject && this.selectedTeam) {
+      if (this.selectedProject.projectId && this.selectedTeam.teamId) {
+        this.teamService
+          .getTeamById(this.selectedTeam.teamId)
+          .subscribe((team) => {
+            if (team.tasks) {
+              this.tasks = team.tasks;
+              this.updateTaskLists();
+              this.checkShowKanbanBoard();
+            }
+          });
+      }
+    } else {
+      const selectedProjectId = localStorage.getItem("selectedProjectId");
+      const selectedTeamId = localStorage.getItem("selectedTeamId");
+      if (selectedProjectId && selectedTeamId) {
+        this.showKanbanBoard = true;
+        this.projectService
+          .getProjectById(parseInt(selectedProjectId))
+          .subscribe((project) => {
+            this.selectedProject = project;
+            if (selectedProjectId) {
+              this.teamService
+                .getTeamById(parseInt(selectedTeamId))
+                .subscribe((team) => {
+                  if (team.tasks) {
+                    this.tasks = team.tasks;
+                    this.selectedTeam = team;
+                    this.updateTaskLists();
+                    this.checkShowKanbanBoard();
+                  }
+                });
+            }
+          });
+      }
     }
-    this.sharedUser.getAllUsers().subscribe((users) => {
-      this.cachedUserData = users;
-    });
   }
 
   onProjectChange() {
@@ -83,28 +98,32 @@ export class TaskComponent implements OnInit {
         "selectedProjectId",
         this.selectedProject.projectId.toString()
       );
-      localStorage.removeItem("selectedTeamId");
-      this.selectedTeam = null;
-      this.tasks = [];
-      this.backlog = [];
-      this.todo = [];
-      this.doing = [];
-      this.done = [];
-      this.checkShowKanbanBoard();
+      this.resetKanBan();
+    } else {
+      this.resetKanBan();
     }
   }
-
+  resetKanBan() {
+    localStorage.removeItem("selectedTeamId");
+    this.selectedTeam = null;
+    this.tasks = [];
+    this.backlog = [];
+    this.todo = [];
+    this.doing = [];
+    this.done = [];
+    this.checkShowKanbanBoard();
+  }
   onTeamChange() {
     if (this.selectedTeam && this.selectedTeam.teamId) {
       localStorage.setItem(
         "selectedTeamId",
         this.selectedTeam.teamId?.toString()
       );
-      if (this.selectedTeam.tasks) {
+      if (this.selectedTeam && this.selectedTeam.tasks) {
         this.tasks = this.selectedTeam.tasks;
+        this.loadSelectedValues();
+        this.checkShowKanbanBoard();
       }
-      this.updateTaskLists();
-      this.checkShowKanbanBoard();
     }
   }
 
@@ -148,8 +167,35 @@ export class TaskComponent implements OnInit {
   public get Status(): typeof Status {
     return Status;
   }
+  
   getUserFullNameById(userId: number): string {
     const user = this.cachedUserData.find((u) => u.id === userId);
     return user ? `${user.firstName} ${user.lastName}` : "";
+  }
+
+  openAddEditTaskForm(task?: Task, teamId?: number, status?: Status): void {
+    if (task) {
+      const dialogRef = this.dialog.open(AddEditTaskComponent, {
+        data: { task }, // Pass the team data if editing
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Handle any necessary actions after the modal closes
+          // Example: Refresh the task list
+          this.loadSelectedValues();
+        }
+      });
+    } else {
+      const dialogRef = this.dialog.open(AddEditTaskComponent, {
+        data: { teamId, status }, // Pass the team data if editing
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Handle any necessary actions after the modal closes
+          // Example: Refresh the task list
+          this.loadSelectedValues();
+        }
+      });
+    }
   }
 }

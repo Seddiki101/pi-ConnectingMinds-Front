@@ -1,1 +1,83 @@
-<p>add-edit-task works!</p>
+<div
+  class="modal fade"
+  id="taskModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="taskModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="taskModalLabel">Create New Task</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="row">
+          <div class="mb-2 col-12">
+            <label for="taskTitle" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="taskTitle"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="col-6">
+            <label for="priority" class="form-label">Priority</label>
+            <select class="selectpicker" data-width="100%" id="priority">
+              <option selected>Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="mb-2 col-6">
+            <label for="date" class="form-label">Due Date</label>
+            <input
+              class="form-control flatpickr"
+              type="text"
+              placeholder="Select Date"
+              id="date"
+              required
+            />
+          </div>
+          <div class="mb-2 col-12">
+            <label for="descriptions" class="form-label">Descriptions</label>
+            <textarea
+              class="form-control"
+              id="descriptions"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="col-12 mb-3">
+            <label for="assignTo" class="form-label">Assign To</label>
+            <select class="selectpicker" id="assignTo" data-width="100%">
+              <option selected>Codescandy</option>
+              <option value="John Deo">John Deo</option>
+              <option value="Misty">Misty</option>
+              <option value="Simon Ray">Simon Ray</option>
+            </select>
+          </div>
+
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-2"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Create Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
