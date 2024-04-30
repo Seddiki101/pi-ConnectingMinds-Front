@@ -11,6 +11,7 @@ import { CoreService } from "src/app/service/notificationDialog/core.service";
 import { userAdvanced } from "src/app/service/usermanagement/requestTypes/userAdvanced";
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
 import { AddEditTaskComponent } from "../add-edit-task/add-edit-task.component";
+import { TaskDetailsComponent } from "../task-details/task-details.component";
 
 @Component({
   selector: "app-task",
@@ -228,5 +229,21 @@ export class TaskComponent implements OnInit {
         this._coreService.openSnackBar("Error occurs", "error", 2000);
       }
     });
+  }
+  onViewDetails(task: Task) {
+    if (task) {
+      const dialogRef = this.dialog.open(TaskDetailsComponent, {
+        data: { task }, // Pass the team data if editing
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Handle any necessary actions after the modal closes
+          // Example: Refresh the task list
+          this.loadSelectedValues();
+        }
+      });
+    } else {
+      this._coreService.openSnackBar("Error occurs", "error", 2000);
+    }
   }
 }

@@ -27,51 +27,23 @@ export class ProjectOverviewComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.projectId = +params["projectId"];
+      if (!isNaN(this.projectId)) {
+        this.projectService
+          .getProjectById(this.projectId)
+          .subscribe((project) => {
+            if (project) {
+              this.project = project;
+              this.projectSharedData.setSelectedProject(project);
+              this.loadLatestTasks();
+              this.calculateEstimatedTime();
+            }
+          });
+      } else {
+        this.project = this.projectSharedData.getSelectedProject();
+        this.loadLatestTasks();
+        this.calculateEstimatedTime();
+      }
     });
-    if (this.projectId) {
-      this.projectService
-        .getProjectById(this.projectId)
-        .subscribe((project) => {
-          if (project) {
-            this.project = project;
-            this.projectSharedData.setSelectedProject(project);
-          }
-        });
-    } else {
-      this.project = this.projectSharedData.getSelectedProject();
-    }
-    this.calculateEstimatedTime();
-    if (this.project) {
-      this.taskService
-        .getUpcomingTasksByProjectId(this.project.projectId)
-        .subscribe(
-          (tasks: any[]) => {
-            // For each task, retrieve the associated user information
-            tasks.forEach((task) => {
-              this.sharedUserService.getUserById(task.memberId).subscribe(
-                (user: any) => {
-                  // Construct the task object with user information
-                  const upcomingTask = {
-                    memberId: task.memberId,
-                    memberName: user.firstName + " " + user.lastName,
-                    //memberAvatarUrl: user.avatarUrl,
-                    name: task.name,
-                    deadline: task.deadline,
-                  };
-                  // Add the task to the list of upcoming tasks
-                  this.upcomingTasks.push(upcomingTask);
-                },
-                (error) => {
-                  console.error("Error fetching user:", error);
-                }
-              );
-            });
-          },
-          (error) => {
-            console.error("Error fetching tasks:", error);
-          }
-        );
-    }
   }
   calculateEstimatedTime(): void {
     if (this.project && this.project.startDate && this.project.endDate) {
@@ -102,5 +74,39 @@ export class ProjectOverviewComponent implements OnInit {
       differenceInDays = differenceInMilliseconds / oneDay;
     }
     return Math.round(differenceInDays);
+  }
+
+  loadLatestTasks() {
+    if (this.project) {
+      this.taskService
+        .getUpcomingTasksByProjectId(this.project.projectId)
+        .subscribe(
+          (tasks: any[]) => {
+            // For each task, retrieve the associated user information
+            tasks.forEach((task) => {
+              this.sharedUserService.getUserById(task.memberId).subscribe(
+                (user: any) => {
+                  // Construct the task object with user information
+                  const upcomingTask = {
+                    memberId: task.memberId,
+                    memberName: user.firstName + " " + user.lastName,
+                    //memberAvatarUrl: user.avatarUrl,
+                    name: task.name,
+                    deadline: new Date(task.deadLine),
+                  };
+                  // Add the task to the list of upcoming tasks
+                  this.upcomingTasks.push(upcomingTask);
+                },
+                (error) => {
+                  console.error("Error fetching user:", error);
+                }
+              );
+            });
+          },
+          (error) => {
+            console.error("Error fetching tasks:", error);
+          }
+        );
+    }
   }
 }

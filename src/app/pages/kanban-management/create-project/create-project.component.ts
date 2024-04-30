@@ -24,12 +24,12 @@ export class CreateProjectComponent implements OnInit {
   private from: string;
   project: Project = new Project();
   selectedFile: File | null = null;
-  
+
   constructor(
     private projectService: ProjectService,
     private router: Router,
     private route: ActivatedRoute,
-    private _coreService: CoreService,
+    private _coreService: CoreService
   ) {}
 
   ngOnInit(): void {
@@ -76,7 +76,16 @@ export class CreateProjectComponent implements OnInit {
       this.endDateError = "End date must be greater than start date.";
       return; // Stop further execution
     }
-
+    if (this.project.scope.length < 10) {
+      // Set error message for Scope validation
+      this.fieldsError = "Scope must have at least 10 characters.";
+      return; // Stop further execution
+    }
+    if (this.project.resources.length < 10) {
+      // Set error message for Resources validation
+      this.fieldsError = "Resources must have at least 10 characters.";
+      return; // Stop further execution
+    }
     // Check if the end date is in the future
     if (new Date(this.project.endDate) <= new Date()) {
       // Set error message for end date validation
@@ -94,11 +103,17 @@ export class CreateProjectComponent implements OnInit {
             "done",
             2000
           );
+
           this.router.navigate(["/project-management"]);
           // handle successful creation here
         },
         (error) => {
-          console.error("Error creating project:", error);
+          this._coreService.openSnackBar(
+            "Error creating project!",
+            "done",
+            2000
+          );
+
           // handle error here
         }
       );

@@ -1,1 +1,116 @@
-<p>task-details works!</p>
+<div class="modal fade show modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="taskModalLabel">
+        {{ data.task ? "Task Details" : "Error occurs reading this task" }}
+      </h5>
+      <br />
+      <span class="text-inherit fw-bold">
+        {{ data.task ? "Created at : " : "" }} {{ task.createdAt | date }}
+      </span>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        [mat-dialog-close]="false"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="mb-2 col-12">
+          <label for="taskTitle" class="form-label">Title </label>
+          <input
+            type="text"
+            class="form-control"
+            id="taskTitle"
+            name="taskTitle"
+            placeholder="Title"
+            [(ngModel)]="task.name"
+            readonly
+            required
+          />
+        </div>
+        <div class="col-6">
+          <label for="priority" class="form-label">Priority </label>
+          <select
+            class="form-select"
+            id="priority"
+            name="taskPriority"
+            [(ngModel)]="task.priority"
+            readonly
+          >
+            <option [value]="undefined" [selected]="!task.priority">
+              Select a priority
+            </option>
+            <option
+              [value]="Priority.LOW"
+              [selected]="Priority.LOW === task.priority"
+            >
+              Low
+            </option>
+            <option
+              [value]="Priority.MEDIUM"
+              [selected]="Priority.MEDIUM === task.priority"
+            >
+              Medium
+            </option>
+            <option
+              [value]="Priority.HIGH"
+              [selected]="Priority.HIGH === task.priority"
+            >
+              High
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-2 col-6">
+          <label for="date" class="form-label">Due Date </label>
+          <input
+            class="form-control"
+            type="date"
+            id="dueDate"
+            name="dueDate"
+            [(ngModel)]="deadLineString"
+            readonly
+            required
+          />
+        </div>
+        <div class="mb-2 col-12">
+          <label for="descriptions" class="form-label">Descriptions </label>
+          <textarea
+            class="form-control"
+            id="descriptions"
+            rows="3"
+            name="descriptions"
+            [(ngModel)]="task.description"
+            readonly
+            required
+          ></textarea>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="assignTo" class="form-label">Assign To </label>
+          <input
+          *ngIf="task.memberId === scrumMaster.id"
+          type="text"
+            class="form-select"
+            id="assignTo"
+            name="assignTo"
+            [value]="scrumMaster.firstName"
+            readonly
+          />    
+        </div>
+        <div mat-dialog-actions class="action">
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-2"
+              [mat-dialog-close]="false"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

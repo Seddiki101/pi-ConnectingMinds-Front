@@ -23,6 +23,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { TeamDetailsComponent } from "src/app/pages/kanban-management/team-details/team-details.component";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddEditTaskComponent } from "src/app/pages/kanban-management/add-edit-task/add-edit-task.component";
+import { TaskDetailsComponent } from "src/app/pages/kanban-management/task-details/task-details.component";
 
 const routes: Routes = [
   {
@@ -134,6 +135,7 @@ const routes: Routes = [
     AddEditTeamComponent,
     TeamDetailsComponent,
     AddEditTaskComponent,
+    TaskDetailsComponent,
   ],
   imports: [
     CommonModule,

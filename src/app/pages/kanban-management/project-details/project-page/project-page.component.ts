@@ -20,11 +20,15 @@ export class ProjectPageComponent {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.projectId = +params["projectId"];
-    });
-    this.projectService.getProjectById(this.projectId).subscribe((project) => {
-      if (project) {
-        this.project = project;
-        this.projectSharedData.setSelectedProject(project);
+      if (!isNaN(this.projectId)) {
+        this.projectService
+          .getProjectById(this.projectId)
+          .subscribe((project) => {
+            if (project) {
+              this.project = project;
+              this.projectSharedData.setSelectedProject(project);
+            }
+          });
       }
     });
   }

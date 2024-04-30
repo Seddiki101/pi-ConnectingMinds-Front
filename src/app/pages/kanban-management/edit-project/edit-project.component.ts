@@ -98,14 +98,22 @@ export class EditProjectComponent implements OnInit {
       this.endDateError = "End date must be greater than start date.";
       return; // Stop further execution
     }
-
+    if (this.project.scope.length < 10) {
+      // Set error message for Scope  validation
+      this.fieldsError = "Scope must have at least 10 characters.";
+      return; // Stop further execution
+    }
+    if (this.project.resources.length < 10) {
+      // Set error message for Resources  validation
+      this.fieldsError = "Resources must have at least 10 characters.";
+      return; // Stop further execution
+    }
     // Check if the end date is in the future
     if (new Date(this.project.endDate) <= new Date()) {
       // Set error message for end date validation
       this.endDateError = "End date must be in the future.";
       return; // Stop further execution
     }
-
     this.projectService
       .updateProject(this.project, this.selectedFile)
       .subscribe(
@@ -118,7 +126,11 @@ export class EditProjectComponent implements OnInit {
           this.router.navigate(["/project-management"]);
         },
         (error) => {
-          console.error("Error updating project:", error);
+          this._coreService.openSnackBar(
+            "Error updating project!",
+            "done",
+            2000
+          );
         }
       );
   }

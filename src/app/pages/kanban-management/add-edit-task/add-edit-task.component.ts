@@ -77,6 +77,7 @@ export class AddEditTaskComponent implements OnInit {
       ? new Date(this.deadLineString)
       : undefined;
     if (
+      !this.task.priority ||
       !this.task.name ||
       !this.task.description ||
       !this.task.deadLine ||

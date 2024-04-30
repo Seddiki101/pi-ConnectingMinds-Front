@@ -18,6 +18,11 @@ export class TeamService {
   getTeamById(id: number): Observable<Team> {
     return this.http.get<Team>(`${this.baseUrl}/${id}`);
   }
+  
+  getTeamByName(name: String): Observable<Team> {
+    return this.http.get<Team>(`${this.baseUrl}/unique-names/${name}`);
+  }
+
   createTeam(
     projectId: number,
     team: Team,

@@ -42,23 +42,7 @@ export class TeamDetailsComponent implements OnInit {
     if (this.projectId && this.teamId) {
       this.teamService.getTeamById(this.teamId).subscribe((team) => {
         this.team = team;
-        if (this.team?.members && this.team.scrumMaster) {
-          this.sharedUser
-            .getUsersByIds(this.team?.members)
-            .subscribe((users) => {
-              this.cachedMembersData = users;
-              this.searchMembers();
-            });
-          this.sharedUser
-            .getUserById(this.team.scrumMaster)
-            .subscribe((user) => {
-              this.scrumMaster = user;
-              if (this.scrumMaster) {
-                this.cachedMembersData.unshift(this.scrumMaster);
-                this.searchMembers();
-              }
-            });
-        }
+        this.loadMemberData();
       });
       this.projectService
         .getProjectById(this.projectId)
@@ -81,7 +65,7 @@ export class TeamDetailsComponent implements OnInit {
           this.teamService.getTeamById(this.team.teamId).subscribe((team) => {
             if (team) {
               this.team = team;
-              this.updateCachedMembersData(team);
+              this.loadMemberData();
             }
           });
         } else {
@@ -90,36 +74,38 @@ export class TeamDetailsComponent implements OnInit {
       });
     }
   }
-  updateCachedMembersData(team: Team): void {
-    if (team.members && team.scrumMaster) {
-      this.sharedUser.getUsersByIds(team.members).subscribe((users) => {
-        this.cachedMembersData = [...users]; // Use spread operator to create a new array
-        // Find the Scrum Master in the cached members data
-        const scrumMasterIndex = this.cachedMembersData.findIndex(
-          (user) => user.id === team.scrumMaster
-        );
-        if (scrumMasterIndex !== -1) {
-          const scrumMaster = this.cachedMembersData.splice(
-            scrumMasterIndex,
-            1
-          )[0];
-          this.cachedMembersData.unshift(scrumMaster); // Move the Scrum Master to the first index
+
+  loadMemberData() {
+    if (this.team?.members && this.team.scrumMaster) {
+      this.sharedUser.getUsersByIds(this.team?.members).subscribe((users) => {
+        this.cachedMembersData = users;
+        this.searchMembers();
+        if (this.team && this.team.scrumMaster) {
+          this.sharedUser
+            .getUserById(this.team.scrumMaster)
+            .subscribe((user) => {
+              this.scrumMaster = user;
+              if (this.scrumMaster) {
+                this.cachedMembersData.unshift(this.scrumMaster);
+                this.searchMembers();
+              }
+            });
         }
       });
     }
   }
-
   searchMembers(): void {
-    this.filteredMembers = this.cachedMembersData.filter(
-      (member) =>
-        member.firstName
-          .toLowerCase()
-          .includes(this.searchQuery.toLowerCase()) ||
-        member.lastName
-          .toLowerCase()
-          .includes(this.searchQuery.toLowerCase()) ||
-        member.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        member.phone.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    const searchTerms = this.searchQuery.trim().toLowerCase().split(/\s+/);
+    this.filteredMembers = this.cachedMembersData.filter((member) => {
+      const fullName = `${member.firstName} ${member.lastName}`.toLowerCase();
+      const email = member.email.toLowerCase();
+      const phone = member.phone.toLowerCase();
+      return searchTerms.every(
+        (term) =>
+          fullName.includes(term) ||
+          email.includes(term) ||
+          phone.includes(term)
+      );
+    });
   }
 }

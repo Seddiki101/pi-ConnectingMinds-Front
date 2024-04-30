@@ -22,6 +22,9 @@ export class ProjectService {
   getProjectById(id: number): Observable<Project> {
     return this.http.get<Project>(`${this.baseUrl}/${id}`);
   }
+  getProjectByName(name: String): Observable<Project> {
+    return this.http.get<Project>(`${this.baseUrl}/unique-names/${name}`);
+  }
 
   createProject(project: Project, file: File | null): Observable<Project> {
     const formData: FormData = new FormData();

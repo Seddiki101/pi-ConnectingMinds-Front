@@ -77,6 +77,16 @@ export class AddEditTeamComponent implements OnInit {
       this.descriptionError = "description must have at least 10 characters.";
       return; // Stop further execution
     }
+    const isScrumMasterIncluded = this.team.members.includes(
+      this.team.scrumMaster
+    );
+    if (isScrumMasterIncluded) {
+      // Display error message indicating that the scrum master should be removed from the team members
+      this.fieldsError =
+        "Scrum master cannot be included as a team member. Please remove the scrum master from the team members list.";
+      return; // Stop further execution
+    }
+
     if (!this.data?.team) {
       this.team.projectId = this.projectId;
       this.teamService

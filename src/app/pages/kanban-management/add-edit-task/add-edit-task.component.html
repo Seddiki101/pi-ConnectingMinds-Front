@@ -117,18 +117,18 @@
           </select>
         </div>
         <div class="col-md-8">
-          <div *ngIf="fieldsError" class="text-danger">
+          <p *ngIf="fieldsError" class="text-danger">
             {{ fieldsError }}
-          </div>
-          <div *ngIf="nameError" class="text-danger">
+          </p>
+          <p *ngIf="nameError" class="text-danger">
             {{ nameError }}
-          </div>
-          <div *ngIf="descriptionError" class="text-danger">
+          </p>
+          <p *ngIf="descriptionError" class="text-danger">
             {{ descriptionError }}
-          </div>
-          <div *ngIf="dueDateError" class="text-danger">
+          </p>
+          <p *ngIf="dueDateError" class="text-danger">
             {{ dueDateError }}
-          </div>
+          </p>
         </div>
         <div mat-dialog-actions class="action">
           <div class="col-12 d-flex justify-content-end">

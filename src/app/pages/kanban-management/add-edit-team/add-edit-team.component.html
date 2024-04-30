@@ -163,15 +163,18 @@
           </div>
 
           <div class="col-md-8">
-            <div *ngIf="fieldsError" class="text-danger">
+            <p *ngIf="fieldsError" class="text-danger">
               {{ fieldsError }}
-            </div>
-            <div *ngIf="nameError" class="text-danger">
+            </p>
+            <p *ngIf="nameError" class="text-danger">
               {{ nameError }}
-            </div>
-            <div *ngIf="memberListError" class="text-danger">
+            </p>
+            <p *ngIf="memberListError" class="text-danger">
               {{ memberListError }}
-            </div>
+            </p>
+            <p *ngIf="descriptionError" class="text-danger">
+              {{ descriptionError }}
+            </p>
           </div>
           <!-- button -->
           <div class="col-6 d-flex">
