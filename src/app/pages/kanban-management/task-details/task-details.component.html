@@ -4,10 +4,6 @@
       <h5 class="modal-title" id="taskModalLabel">
         {{ data.task ? "Task Details" : "Error occurs reading this task" }}
       </h5>
-      <br />
-      <span class="text-inherit fw-bold">
-        {{ data.task ? "Created at : " : "" }} {{ task.createdAt | date }}
-      </span>
       <button
         type="button"
         class="btn-close"
@@ -20,47 +16,26 @@
         <div class="mb-2 col-12">
           <label for="taskTitle" class="form-label">Title </label>
           <input
+            *ngIf="task"
             type="text"
             class="form-control"
             id="taskTitle"
             name="taskTitle"
-            placeholder="Title"
-            [(ngModel)]="task.name"
+            [value]="task.name"
             readonly
-            required
           />
         </div>
         <div class="col-6">
           <label for="priority" class="form-label">Priority </label>
-          <select
-            class="form-select"
+          <input
+            *ngIf="task && task.priority"
+            type="text"
+            class="form-control"
             id="priority"
             name="taskPriority"
-            [(ngModel)]="task.priority"
+            [value]="getPriorityLabel(task.priority)"
             readonly
-          >
-            <option [value]="undefined" [selected]="!task.priority">
-              Select a priority
-            </option>
-            <option
-              [value]="Priority.LOW"
-              [selected]="Priority.LOW === task.priority"
-            >
-              Low
-            </option>
-            <option
-              [value]="Priority.MEDIUM"
-              [selected]="Priority.MEDIUM === task.priority"
-            >
-              Medium
-            </option>
-            <option
-              [value]="Priority.HIGH"
-              [selected]="Priority.HIGH === task.priority"
-            >
-              High
-            </option>
-          </select>
+          />
         </div>
 
         <div class="mb-2 col-6">
@@ -70,34 +45,60 @@
             type="date"
             id="dueDate"
             name="dueDate"
-            [(ngModel)]="deadLineString"
+            [value]="deadLineString"
             readonly
-            required
           />
         </div>
         <div class="mb-2 col-12">
           <label for="descriptions" class="form-label">Descriptions </label>
           <textarea
+            *ngIf="task"
             class="form-control"
             id="descriptions"
             rows="3"
             name="descriptions"
-            [(ngModel)]="task.description"
+            [value]="task.description"
             readonly
-            required
           ></textarea>
         </div>
         <div class="col-12 mb-3">
           <label for="assignTo" class="form-label">Assign To </label>
           <input
-          *ngIf="task.memberId === scrumMaster.id"
-          type="text"
-            class="form-select"
+            *ngIf="task && scrumMaster && task.memberId === scrumMaster.id"
+            type="text"
+            class="form-control"
             id="assignTo"
             name="assignTo"
-            [value]="scrumMaster.firstName"
+            [value]="scrumMaster.firstName + ' ' + scrumMaster.lastName"
             readonly
-          />    
+          />
+          <input
+            *ngIf="
+              task &&
+              scrumMaster &&
+              task.memberId &&
+              task.memberId !== scrumMaster.id &&
+              team.members?.includes(task.memberId)
+            "
+            type="text"
+            class="form-control"
+            id="assignTo"
+            name="assignTo"
+            [value]="getUserFullNameById(task.memberId)"
+            readonly
+          />
+        </div>
+        <div class="mb-2 col-12">
+          <label for="taskTitle" class="form-label">Created At </label>
+          <input
+            *ngIf="task"
+            type="text"
+            class="form-control"
+            id="creationDate"
+            name="creationDate"
+            [value]="task.createdAt | date"
+            readonly
+          />
         </div>
         <div mat-dialog-actions class="action">
           <div class="col-12 d-flex justify-content-end">

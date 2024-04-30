@@ -108,4 +108,5 @@ export class TeamDetailsComponent implements OnInit {
       );
     });
   }
+
 }
