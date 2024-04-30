@@ -19,8 +19,7 @@ import { HeaderComponent } from "./components/header/header.component";
 import { SharedModule } from "./modules/shared/shared.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { AddEditTaskComponent } from './pages/kanban-management/add-edit-task/add-edit-task.component';
-
+import { TaskDetailsComponent } from './pages/kanban-management/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +35,7 @@ import { AddEditTaskComponent } from './pages/kanban-management/add-edit-task/ad
     Error404Component,
     HeaderComponent,
     FooterComponent,
-    AddEditTaskComponent,
-  
-  
+    TaskDetailsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,SharedModule, BrowserAnimationsModule,   MatSnackBarModule,],
   providers: [],

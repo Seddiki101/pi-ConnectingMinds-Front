@@ -1,83 +1,150 @@
-<div
-  class="modal fade"
-  id="taskModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="taskModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="taskModalLabel">Create New Task</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form class="row">
-          <div class="mb-2 col-12">
-            <label for="taskTitle" class="form-label">Title</label>
-            <input
-              type="text"
-              class="form-control"
-              id="taskTitle"
-              placeholder="Title"
-              required
-            />
+<div class="modal fade show modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="taskModalLabel">
+        {{ data.task ? "Update Task" : "Create New Task" }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        [mat-dialog-close]="false"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit()" class="row">
+        <div class="mb-2 col-12">
+          <label for="taskTitle" class="form-label"
+            >Title <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="taskTitle"
+            name="taskTitle"
+            placeholder="Title"
+            [(ngModel)]="task.name"
+            required
+          />
+        </div>
+        <div class="col-6">
+          <label for="priority" class="form-label"
+            >Priority <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            id="priority"
+            name="taskPriority"
+            [(ngModel)]="task.priority"
+          >
+            <option [value]="undefined" [selected]="!task.priority">
+              Select a priority
+            </option>
+            <option
+              [value]="Priority.LOW"
+              [selected]="Priority.LOW === task.priority"
+            >
+              Low
+            </option>
+            <option
+              [value]="Priority.MEDIUM"
+              [selected]="Priority.MEDIUM === task.priority"
+            >
+              Medium
+            </option>
+            <option
+              [value]="Priority.HIGH"
+              [selected]="Priority.HIGH === task.priority"
+            >
+              High
+            </option>
+          </select>
+        </div>
+        <div class="mb-2 col-6">
+          <label for="date" class="form-label"
+            >Due Date <span class="text-danger">*</span></label
+          >
+          <input
+            class="form-control flatpickr flatpickr-input"
+            type="date"
+            placeholder="Select Date"
+            name="dueDate"
+            id="dueDate"
+            [(ngModel)]="deadLineString"
+            required
+          />
+        </div>
+        <div class="mb-2 col-12">
+          <label for="descriptions" class="form-label"
+            >Descriptions <span class="text-danger">*</span></label
+          >
+          <textarea
+            class="form-control"
+            id="descriptions"
+            rows="3"
+            name="descriptions"
+            [(ngModel)]="task.description"
+            required
+          ></textarea>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="assignTo" class="form-label"
+            >Assign To <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            id="assignTo"
+            name="assignTo"
+            [(ngModel)]="task.memberId"
+          >
+            <option [value]="undefined" [selected]="!task.memberId">
+              Select a team member
+            </option>
+            <option
+              *ngIf="scrumMaster"
+              [ngValue]="scrumMaster.id"
+              [selected]="scrumMaster.id === task.memberId"
+            >
+              *{{ scrumMaster.firstName }} {{ scrumMaster.lastName }}
+            </option>
+            <option
+              *ngFor="let member of teamMembers"
+              [ngValue]="member.id"
+              [selected]="member.id === task.memberId"
+            >
+              {{ member.firstName }} {{ member.lastName }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-8">
+          <div *ngIf="fieldsError" class="text-danger">
+            {{ fieldsError }}
           </div>
-          <div class="col-6">
-            <label for="priority" class="form-label">Priority</label>
-            <select class="selectpicker" data-width="100%" id="priority">
-              <option selected>Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
+          <div *ngIf="nameError" class="text-danger">
+            {{ nameError }}
           </div>
-          <div class="mb-2 col-6">
-            <label for="date" class="form-label">Due Date</label>
-            <input
-              class="form-control flatpickr"
-              type="text"
-              placeholder="Select Date"
-              id="date"
-              required
-            />
+          <div *ngIf="descriptionError" class="text-danger">
+            {{ descriptionError }}
           </div>
-          <div class="mb-2 col-12">
-            <label for="descriptions" class="form-label">Descriptions</label>
-            <textarea
-              class="form-control"
-              id="descriptions"
-              rows="3"
-              required
-            ></textarea>
+          <div *ngIf="dueDateError" class="text-danger">
+            {{ dueDateError }}
           </div>
-          <div class="col-12 mb-3">
-            <label for="assignTo" class="form-label">Assign To</label>
-            <select class="selectpicker" id="assignTo" data-width="100%">
-              <option selected>Codescandy</option>
-              <option value="John Deo">John Deo</option>
-              <option value="Misty">Misty</option>
-              <option value="Simon Ray">Simon Ray</option>
-            </select>
-          </div>
-
+        </div>
+        <div mat-dialog-actions class="action">
           <div class="col-12 d-flex justify-content-end">
             <button
               type="button"
               class="btn btn-outline-secondary me-2"
-              data-bs-dismiss="modal"
+              [mat-dialog-close]="false"
             >
               Cancel
             </button>
-            <button type="submit" class="btn btn-primary">Create Task</button>
+            <button type="submit" class="btn btn-primary">
+              {{ data.task ? "Update Task" : "Create Task" }}
+            </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -20,7 +20,9 @@ export class TaskService {
     return this.http.get<Task>(`${this.baseUrl}/${id}`);
   }
 
-  getUpcomingTasksByProjectId(projectId: number |  undefined ): Observable<Task[]> {
+  getUpcomingTasksByProjectId(
+    projectId: number | undefined
+  ): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}`);
   }
 
@@ -32,7 +34,7 @@ export class TaskService {
     return this.http.put<Task>(this.baseUrl, task);
   }
 
-  deleteTask(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/${id}`);
+  deleteTask(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: "text" });
   }
 }

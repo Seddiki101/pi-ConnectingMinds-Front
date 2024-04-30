@@ -167,7 +167,7 @@ export class TaskComponent implements OnInit {
   public get Status(): typeof Status {
     return Status;
   }
-  
+
   getUserFullNameById(userId: number): string {
     const user = this.cachedUserData.find((u) => u.id === userId);
     return user ? `${user.firstName} ${user.lastName}` : "";
@@ -178,6 +178,7 @@ export class TaskComponent implements OnInit {
       const dialogRef = this.dialog.open(AddEditTaskComponent, {
         data: { task }, // Pass the team data if editing
       });
+
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           // Handle any necessary actions after the modal closes
@@ -189,13 +190,43 @@ export class TaskComponent implements OnInit {
       const dialogRef = this.dialog.open(AddEditTaskComponent, {
         data: { teamId, status }, // Pass the team data if editing
       });
+
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           // Handle any necessary actions after the modal closes
           // Example: Refresh the task list
+
           this.loadSelectedValues();
         }
       });
     }
+  }
+
+  onDeleteTask(taskId: number) {
+    if (confirm("Are you sure you want to delete this task?")) {
+      this.taskService.deleteTask(taskId).subscribe((response) => {
+        if (response) {
+          this._coreService.openSnackBar(
+            "Task deleted successfully!",
+            "done",
+            2000
+          );
+          this.loadSelectedValues();
+        } else {
+          this._coreService.openSnackBar("error deleting task!", "Error", 2000);
+        }
+      });
+    }
+  }
+  onMarkDone(task: Task) {
+    task.status = Status.DONE;
+    this.taskService.updateTask(task).subscribe((Response) => {
+      if (Response) {
+        this._coreService.openSnackBar("Good Job !", "done", 2000);
+        this.loadSelectedValues();
+      } else {
+        this._coreService.openSnackBar("Error occurs", "error", 2000);
+      }
+    });
   }
 }

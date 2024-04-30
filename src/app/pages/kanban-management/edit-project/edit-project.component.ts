@@ -66,6 +66,12 @@ export class EditProjectComponent implements OnInit {
     this.resourcesError = "";
     this.endDateError = "";
 
+    this.project.startDate = this.startDateString
+      ? new Date(this.startDateString)
+      : undefined;
+    this.project.endDate = this.endDateString
+      ? new Date(this.endDateString)
+      : undefined;
     // Check if the required fields are filled
     if (
       !this.project.name ||
@@ -99,12 +105,7 @@ export class EditProjectComponent implements OnInit {
       this.endDateError = "End date must be in the future.";
       return; // Stop further execution
     }
-    this.project.startDate = this.startDateString
-      ? new Date(this.startDateString)
-      : undefined;
-    this.project.endDate = this.endDateString
-      ? new Date(this.endDateString)
-      : undefined;
+
     this.projectService
       .updateProject(this.project, this.selectedFile)
       .subscribe(

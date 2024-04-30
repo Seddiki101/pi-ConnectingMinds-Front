@@ -176,14 +176,22 @@
                               >
                                 <a
                                   class="dropdown-item d-flex align-items-center"
-                                  href="#"
+                                  (click)="
+                                    openAddEditTaskForm(
+                                      task,
+                                      undefined,
+                                      undefined
+                                    )
+                                  "
+                                  style="cursor: pointer"
                                 >
                                   <i class="dropdown-item-icon fe fe-edit-2"></i
                                   >Edit this task
                                 </a>
                                 <a
                                   class="dropdown-item d-flex align-items-center"
-                                  href="#"
+                                  (click)="onMarkDone(task)"
+                                  style="cursor: pointer"
                                 >
                                   <i
                                     class="dropdown-item-icon fe fe-check-square"
@@ -199,7 +207,9 @@
                                 </a>
                                 <a
                                   class="dropdown-item d-flex align-items-center"
-                                  href="#"
+                                  *ngIf="task.taskId"
+                                  (click)="onDeleteTask(task.taskId)"
+                                  style="cursor: pointer"
                                 >
                                   <i
                                     class="dropdown-item-icon fe fe-trash-2"
@@ -253,7 +263,13 @@
                     <button
                       type="button"
                       class="btn btn-outline-secondary btn-sm"
-                    (click)="openAddEditTaskForm()"
+                      (click)="
+                        openAddEditTaskForm(
+                          undefined,
+                          selectedTeam?.teamId,
+                          Status.BACKLOG
+                        )
+                      "
                     >
                       <i class="fe fe-plus-circle me-1"></i>Add Task
                     </button>
@@ -332,14 +348,22 @@
                             >
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                (click)="
+                                  openAddEditTaskForm(
+                                    task,
+                                    undefined,
+                                    undefined
+                                  )
+                                "
+                                style="cursor: pointer"
                               >
                                 <i class="dropdown-item-icon fe fe-edit-2"></i
                                 >Edit this task
                               </a>
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                (click)="onMarkDone(task)"
+                                style="cursor: pointer"
                               >
                                 <i
                                   class="dropdown-item-icon fe fe-check-square"
@@ -355,7 +379,9 @@
                               </a>
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                *ngIf="task.taskId"
+                                (click)="onDeleteTask(task.taskId)"
+                                style="cursor: pointer"
                               >
                                 <i class="dropdown-item-icon fe fe-trash-2"></i
                                 >Delete task
@@ -407,8 +433,13 @@
                       <button
                         type="button"
                         class="btn btn-outline-secondary btn-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#taskModal"
+                        (click)="
+                          openAddEditTaskForm(
+                            undefined,
+                            selectedTeam?.teamId,
+                            Status.TODO
+                          )
+                        "
                       >
                         <i class="fe fe-plus-circle me-1"></i>Add Task
                       </button>
@@ -487,14 +518,22 @@
                             >
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                (click)="
+                                  openAddEditTaskForm(
+                                    task,
+                                    undefined,
+                                    undefined
+                                  )
+                                "
+                                style="cursor: pointer"
                               >
                                 <i class="dropdown-item-icon fe fe-edit-2"></i
                                 >Edit this task
                               </a>
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                (click)="onMarkDone(task)"
+                                style="cursor: pointer"
                               >
                                 <i
                                   class="dropdown-item-icon fe fe-check-square"
@@ -510,7 +549,9 @@
                               </a>
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                *ngIf="task.taskId"
+                                (click)="onDeleteTask(task.taskId)"
+                                style="cursor: pointer"
                               >
                                 <i class="dropdown-item-icon fe fe-trash-2"></i
                                 >Delete task
@@ -561,8 +602,13 @@
                     <button
                       type="button"
                       class="btn btn-outline-secondary btn-sm"
-                      data-bs-toggle="modal"
-                      data-bs-target="#taskModal"
+                      (click)="
+                        openAddEditTaskForm(
+                          undefined,
+                          selectedTeam?.teamId,
+                          Status.DOING
+                        )
+                      "
                     >
                       <i class="fe fe-plus-circle me-1"></i>Add Task
                     </button>
@@ -641,20 +687,18 @@
                             >
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                (click)="
+                                  openAddEditTaskForm(
+                                    task,
+                                    undefined,
+                                    undefined
+                                  )
+                                "
+                                style="cursor: pointer"
                               >
                                 <i class="dropdown-item-icon fe fe-edit-2"></i
                                 >Edit this task
                               </a>
-                              <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="#"
-                              >
-                                <i
-                                  class="dropdown-item-icon fe fe-check-square"
-                                ></i
-                                >Mark Complete</a
-                              >
                               <a
                                 class="dropdown-item d-flex align-items-center"
                                 href="#"
@@ -664,7 +708,9 @@
                               </a>
                               <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="#"
+                                *ngIf="task.taskId"
+                                (click)="onDeleteTask(task.taskId)"
+                                style="cursor: pointer"
                               >
                                 <i class="dropdown-item-icon fe fe-trash-2"></i
                                 >Delete task
@@ -715,8 +761,13 @@
                     <button
                       type="button"
                       class="btn btn-outline-secondary btn-sm"
-                      data-bs-toggle="modal"
-                      data-bs-target="#taskModal"
+                      (click)="
+                        openAddEditTaskForm(
+                          undefined,
+                          selectedTeam?.teamId,
+                          Status.DONE
+                        )
+                      "
                     >
                       <i class="fe fe-plus-circle me-1"></i>Add Task
                     </button>

@@ -32,8 +32,6 @@ export class AddEditTeamComponent implements OnInit {
   selectedFile: File | null = null;
   constructor(
     private teamService: TeamService,
-    private router: Router,
-    private route: ActivatedRoute,
     private _coreService: CoreService,
     private _dialogRef: MatDialogRef<AddEditTeamComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -52,11 +50,6 @@ export class AddEditTeamComponent implements OnInit {
     this.sharedUserService.getAllUsers().subscribe((users) => {
       this.cachedUserData = users;
     });
-    /* const token = localStorage.getItem("auth_token");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
-    }*/
   }
   onSubmit() {
     // Reset error messages
@@ -77,6 +70,11 @@ export class AddEditTeamComponent implements OnInit {
     if (this.team.name.length < 3) {
       // Set error message for name validation
       this.nameError = "Name must have at least 3 characters.";
+      return; // Stop further execution
+    }
+    if (this.team.description.length < 10) {
+      // Set error message for description validation
+      this.descriptionError = "description must have at least 10 characters.";
       return; // Stop further execution
     }
     if (!this.data?.team) {
