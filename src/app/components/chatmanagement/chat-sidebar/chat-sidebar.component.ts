@@ -4,6 +4,7 @@ import { StompSubscription } from '@stomp/stompjs';
 import { Subscription } from 'rxjs';
 import { ChatListService } from 'src/app/service/chatmanagement/chat-list/chat-list.service';
 import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
+import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
 import { IChatPreview } from 'src/app/shared/interfaces';
 
@@ -13,48 +14,70 @@ import { IChatPreview } from 'src/app/shared/interfaces';
   styleUrls: ['./chat-sidebar.component.css']
 })
 export class ChatSidebarComponent implements OnInit, OnDestroy {
-  userId = 1;
+  userId: number | null = null;  // It's initially null
   chats: IChatPreview[] = [];
   private chatUpdatesSubscription: StompSubscription | undefined;
+  private userSubscription: Subscription | undefined;
 
-  constructor(private chatListService: ChatListService, private chatStateService: ChatStateService, private stompService: StompService) { }
+  constructor(
+    private userService: UserServiceService,
+    private chatListService: ChatListService,
+    private chatStateService: ChatStateService,
+    private stompService: StompService
+  ) {}
 
   ngOnInit(): void {
-    this.fetchInitialChatList(this.userId);
-    this.subscribeToChatUpdates(this.userId);
+    this.userSubscription = this.userService.getUserProfile().subscribe({
+      next: (userData) => {
+        if (userData && userData.userId) {
+          this.userId = userData.userId;
+          if (this.userId) {  // Ensuring userId is not null
+            this.fetchInitialChatList(this.userId);
+            this.subscribeToChatUpdates(this.userId);
+          }
+        } else {
+          console.error('User data is undefined or does not have userId');
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    });
   }
+
   ngOnDestroy(): void {
-    if (this.chatUpdatesSubscription) {
+    this.userSubscription?.unsubscribe();
+    if (this.userId && this.chatUpdatesSubscription) {
       this.stompService.unsubscribe(`/topic/user${this.userId}`);
     }
   }
 
   private fetchInitialChatList(userId: number): void {
-    this.chatListService.getChatsForUser(userId).subscribe({
-      next: (chats) => {
-        this.chats = chats;
-      },
-      error: (error) => {
-        console.error('Error fetching chats:', error);
-      }
-    });
+    if (userId != null) {  // Checking null before calling the service
+      this.chatListService.getChatsForUser(userId).subscribe({
+        next: (chats) => {
+          this.chats = chats;
+        },
+        error: (error) => {
+          console.error('Error fetching chats:', error);
+        }
+      });
+    }
+  }
+
+  private subscribeToChatUpdates(userId: number): void {
+    if (userId != null) {  // Checking null before subscribing
+      const topic = `/topic/user${userId}`;
+      this.chatUpdatesSubscription = this.stompService.subscribe(topic, (message) => {
+        console.log("Update notification received, refetching chats.");
+        this.fetchInitialChatList(userId);
+      });
+    }
   }
 
   selectChat(chatId: number): void {
     this.chatStateService.changeChatId(chatId);
   }
-  private subscribeToChatUpdates(userId: number): void {
-    const topic = `/topic/user${userId}`;  // This should match the server-side format now
-    console.log(`Subscribing to ${topic}`);  // Debug log to confirm subscription topic
-
-    this.chatUpdatesSubscription = this.stompService.subscribe(topic, (message) => {
-      console.log("Update notification received, refetching chats.");
-      console.log(message);
-
-      this.fetchInitialChatList(userId);  // Refresh the entire list upon receiving an update notification
-    });
-  }
-
   calculateTimeAgo = (dateStr: Date): string => {
     const dateCreated = new Date(dateStr);
     const dateNow = new Date();

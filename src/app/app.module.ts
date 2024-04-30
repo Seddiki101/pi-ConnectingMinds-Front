@@ -25,6 +25,7 @@ import { MainChatComponent } from "./components/chatmanagement/main-chat/main-ch
 import { SendMessageModalComponent } from "./components/chatmanagement/send-message-modal/send-message-modal.component";
 import { UserDetailsComponent } from './components/chatmanagement/user-details/user-details.component';
 import { StompService } from "./service/chatmanagement/stomp-service/stomp-service.service";
+import { ChatFooterComponent } from './components/chatmanagement/chat-footer/chat-footer.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
     ChatSidebarComponent,
     MainChatComponent,
     SendMessageModalComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ChatFooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [StompService],
