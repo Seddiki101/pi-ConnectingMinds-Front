@@ -80,12 +80,14 @@
             <h5>Members:</h5>
             <ul>
               <li class="text-inherit" *ngFor="let memberId of team.members">
-                {{ getUserFullNameById(memberId) }}
-                <i
-                  class="mdi mdi-delete me-2"
-                  style="cursor: pointer"
-                  (click)="removeMember(memberId)"
-                ></i>
+                <p>
+                  {{ getUserFullNameById(memberId) }}
+                  <i
+                    class="mdi mdi-delete me-2"
+                    style="cursor: pointer"
+                    (click)="removeMember(memberId)"
+                  ></i>
+                </p>
               </li>
             </ul>
           </div>
@@ -121,12 +123,14 @@
             <h5>Scrum Master:</h5>
             <ul>
               <li class="text-inherit">
-                {{ getUserFullNameById(team.scrumMaster) }}
-                <i
-                  class="mdi mdi-delete me-2"
-                  style="cursor: pointer"
-                  (click)="removeScrumMaster()"
-                ></i>
+                <p>
+                  {{ getUserFullNameById(team.scrumMaster) }}
+                  <i
+                    class="mdi mdi-delete me-2"
+                    style="cursor: pointer"
+                    (click)="removeScrumMaster()"
+                  ></i>
+                </p>
               </li>
             </ul>
           </div>

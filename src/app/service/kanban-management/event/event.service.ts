@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class EventService {
-  private baseUrl = environment.kanban + "event";
+  private baseUrl = environment.kanban + "/api/event";
 
   constructor(private http: HttpClient) {}
 

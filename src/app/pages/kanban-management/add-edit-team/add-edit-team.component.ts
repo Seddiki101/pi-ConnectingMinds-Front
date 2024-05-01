@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Team } from "src/app/models/team/team.model";
 import { TeamService } from "src/app/service/kanban-management/team/team.service";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
+import { ListUserService } from "src/app/service/usermanagement/listUserSvc/list-user-service.service";
 import { userAdvanced } from "src/app/service/usermanagement/requestTypes/userAdvanced";
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
 
@@ -35,7 +36,8 @@ export class AddEditTeamComponent implements OnInit {
     private _coreService: CoreService,
     private _dialogRef: MatDialogRef<AddEditTeamComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private sharedUserService: SharedUserService
+    private sharedUserService: SharedUserService,
+    private listUserService: ListUserService
   ) {}
   ngOnInit(): void {
     if (this.data?.team) {
@@ -154,30 +156,30 @@ export class AddEditTeamComponent implements OnInit {
       this.searchResults = [];
       return;
     }
-
-    this.searchResults = this.cachedUserData.filter(
-      (user) =>
-        user.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        user.email.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    this.listUserService.searchUsers(this.searchQuery).subscribe((users) => {
+      if (users) {
+        this.searchResults = users;
+      } else {
+        this.searchResults = [];
+        return;
+      }
+    });
   }
   searchScrumMaster(): void {
     if (this.searchQueryScrum.trim() === "") {
       this.searchResultsScrumMaster = [];
       return;
     }
-
-    this.searchResultsScrumMaster = this.cachedUserData.filter(
-      (user) =>
-        user.firstName
-          .toLowerCase()
-          .includes(this.searchQueryScrum.toLowerCase()) ||
-        user.lastName
-          .toLowerCase()
-          .includes(this.searchQueryScrum.toLowerCase()) ||
-        user.email.toLowerCase().includes(this.searchQueryScrum.toLowerCase())
-    );
+    this.listUserService
+      .searchUsers(this.searchQueryScrum)
+      .subscribe((users) => {
+        if (users) {
+          this.searchResultsScrumMaster = users;
+        } else {
+          this.searchResultsScrumMaster = [];
+          return;
+        }
+      });
   }
 
   selectMember(user: userAdvanced): void {

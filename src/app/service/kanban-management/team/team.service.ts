@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class TeamService {
-  private baseUrl = environment.kanban + "team";
+  private baseUrl = environment.kanban + "/api/team";
 
   constructor(private http: HttpClient) {}
   getAllTeams(): Observable<Team[]> {

@@ -10,6 +10,7 @@ import { AddEditTeamComponent } from "../add-edit-team/add-edit-team.component";
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
 import { userAdvanced } from "src/app/service/usermanagement/requestTypes/userAdvanced";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
+import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
 
 @Component({
   selector: "app-team",
@@ -22,15 +23,18 @@ export class TeamComponent implements OnInit {
   projects?: Project[];
   teams?: Team[];
   cachedUserData: userAdvanced[] = [];
+  tokenDetails:any;
   constructor(
     private projectService: ProjectService,
     private teamService: TeamService,
     private router: Router,
     private dialog: MatDialog,
     private sharedUser: SharedUserService,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private tokenService: TokenService
   ) {}
   ngOnInit(): void {
+    this.tokenDetails = this.tokenService.getTokenDetails();
     this.loadProjects();
     this.sharedUser.getAllUsers().subscribe((users) => {
       this.cachedUserData = users;

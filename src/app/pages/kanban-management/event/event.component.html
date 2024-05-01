@@ -1,1 +1,57 @@
-<p>event works!</p>
+<section class="container-fluid p-4">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-12">
+      <!-- Page header -->
+      <div>
+        <div class="border-bottom pb-3 mb-3">
+          <h2 class="mb-0 fw-bold">Events</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Select Project Dropdown -->
+  <div class="form-control">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <!-- Select Project Dropdown -->
+        <label for="projectSelect" class="form-label">Project:</label>
+        <select
+          id="projectSelect"
+          class="form-select text-inherit fw-bold"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="selectedProject"
+          (change)="onProjectChange()"
+        >
+          <option class="text-primary" [value]="null">Select Project</option>
+          <option
+            *ngFor="let project of projects"
+            [ngValue]="project"
+            [selected]="project.projectId === selectedProject?.projectId"
+            class="text-primary"
+          >
+            {{ project.name }}
+          </option>
+        </select>
+
+      
+      </div>
+    </div>
+  </div>
+  <br />
+  <div *ngIf="!showEvents">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-center">
+        <h2 class="form-label">
+          Select a project or ask to join a team to get started.
+        </h2>
+
+        <img
+          src="../assets/images/background/comingsoon.svg"
+          alt="maintenance"
+          class="w-100"
+        />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showEvents"></div>
+</section>

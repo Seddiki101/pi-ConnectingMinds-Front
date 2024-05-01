@@ -4,6 +4,8 @@ import { ProjectService } from "src/app/service/kanban-management/project/projec
 import { ProjectSharedDataService } from "src/app/service/kanban-management/shared-data/project-shared-data.service";
 import { Router } from "@angular/router";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
+import { jwtDecode } from "jwt-decode";
+import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
 @Component({
   selector: "app-project-grid",
   templateUrl: "./project-grid.component.html",
@@ -14,14 +16,20 @@ export class ProjectGridComponent implements OnInit {
   filteredProjects: undefined | Project[] = [];
   searchInput: string = "";
   selectedStatus: string = "";
+  ownerId: number;
+  tokenDetails: any;
+
   constructor(
     private projectService: ProjectService,
     private projectSharedData: ProjectSharedDataService,
     private router: Router,
     private _coreService: CoreService,
+    private tokenService: TokenService
   ) {}
   ngOnInit(): void {
+    this.tokenDetails = this.tokenService.getTokenDetails();
     this.loadProjects();
+    console.log(this.tokenDetails);
   }
   loadProjects(): void {
     this.projectService.getProjectByOwnerId(1).subscribe(
@@ -81,7 +89,7 @@ export class ProjectGridComponent implements OnInit {
     }
 
     const progressPercentage = (completedTasks / totalTasks) * 100;
-    return Number(progressPercentage.toFixed(2)); 
+    return Number(progressPercentage.toFixed(0));
   }
   applyFilters() {
     // Apply search filter

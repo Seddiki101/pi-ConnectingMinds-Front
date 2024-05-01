@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class ProjectService {
-  private baseUrl = environment.kanban + "project";
+  private baseUrl = environment.kanban + "/api/project";
   constructor(private http: HttpClient) {}
 
   getAllProjects(): Observable<Project[]> {
@@ -18,7 +18,10 @@ export class ProjectService {
   getProjectByOwnerId(id: number): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.baseUrl}/owner/${id}`);
   }
-
+  getProjectsByUserId(userId: number): Observable<Project[]> {
+    const url = `${this.baseUrl}/user/${userId}`;
+    return this.http.get<Project[]>(url);
+  }
   getProjectById(id: number): Observable<Project> {
     return this.http.get<Project>(`${this.baseUrl}/${id}`);
   }

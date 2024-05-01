@@ -12,6 +12,7 @@ import { userAdvanced } from "src/app/service/usermanagement/requestTypes/userAd
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
 import { AddEditTaskComponent } from "../add-edit-task/add-edit-task.component";
 import { TaskDetailsComponent } from "../task-details/task-details.component";
+import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
 
 @Component({
   selector: "app-task",
@@ -19,6 +20,7 @@ import { TaskDetailsComponent } from "../task-details/task-details.component";
   styleUrls: ["./task.component.css"],
 })
 export class TaskComponent implements OnInit {
+  tokenDetails:any;
   projects: Project[] = [];
   selectedProject: Project | null = null;
   selectedTeam: Team | null = null;
@@ -37,10 +39,12 @@ export class TaskComponent implements OnInit {
     private taskService: TaskService,
     private sharedUser: SharedUserService,
     private _coreService: CoreService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
+    this.tokenDetails = this.tokenService.getTokenDetails();
     this.loadProjects();
     this.loadSelectedValues();
     this.sharedUser.getAllUsers().subscribe((users) => {

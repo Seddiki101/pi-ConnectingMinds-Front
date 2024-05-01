@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Project } from "src/app/models/project/project.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
+import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
 
 @Component({
   selector: "app-project-list",
@@ -13,12 +14,14 @@ export class ProjectListComponent {
   filteredProjects: undefined | Project[] = [];
   searchInput: string = "";
   selectedStatus: string = "";
-
+  tokenDetails: any;
   constructor(
     private projectService: ProjectService,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private tokenService: TokenService
   ) {}
   ngOnInit(): void {
+    this.tokenDetails = this.tokenService.getTokenDetails();
     this.loadProjects();
   }
   loadProjects(): void {
@@ -76,7 +79,7 @@ export class ProjectListComponent {
     }
 
     const progressPercentage = (completedTasks / totalTasks) * 100;
-    return Number(progressPercentage.toFixed(2));
+    return Number(progressPercentage.toFixed(0));
   }
 
   applyFilters() {

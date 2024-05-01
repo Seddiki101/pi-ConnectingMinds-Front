@@ -27,6 +27,35 @@
             required
           />
         </div>
+        <div class="col-12 mb-3">
+          <label for="assignTo" class="form-label"
+            >Assign To <span class="text-danger">*</span></label
+          >
+          <select
+            class="form-select"
+            id="assignTo"
+            name="assignTo"
+            [(ngModel)]="task.memberId"
+          >
+            <option [value]="undefined" [selected]="!task.memberId">
+              Select a team member
+            </option>
+            <option
+              *ngIf="scrumMaster"
+              [ngValue]="scrumMaster.id"
+              [selected]="scrumMaster.id === task.memberId"
+            >
+              *{{ scrumMaster.firstName }} {{ scrumMaster.lastName }}
+            </option>
+            <option
+              *ngFor="let member of teamMembers"
+              [ngValue]="member.id"
+              [selected]="member.id === task.memberId"
+            >
+              {{ member.firstName }} {{ member.lastName }}
+            </option>
+          </select>
+        </div>
         <div class="col-6">
           <label for="priority" class="form-label"
             >Priority <span class="text-danger">*</span></label
@@ -87,35 +116,7 @@
             required
           ></textarea>
         </div>
-        <div class="col-12 mb-3">
-          <label for="assignTo" class="form-label"
-            >Assign To <span class="text-danger">*</span></label
-          >
-          <select
-            class="form-select"
-            id="assignTo"
-            name="assignTo"
-            [(ngModel)]="task.memberId"
-          >
-            <option [value]="undefined" [selected]="!task.memberId">
-              Select a team member
-            </option>
-            <option
-              *ngIf="scrumMaster"
-              [ngValue]="scrumMaster.id"
-              [selected]="scrumMaster.id === task.memberId"
-            >
-              *{{ scrumMaster.firstName }} {{ scrumMaster.lastName }}
-            </option>
-            <option
-              *ngFor="let member of teamMembers"
-              [ngValue]="member.id"
-              [selected]="member.id === task.memberId"
-            >
-              {{ member.firstName }} {{ member.lastName }}
-            </option>
-          </select>
-        </div>
+
         <div class="col-md-8">
           <p *ngIf="fieldsError" class="text-danger">
             {{ fieldsError }}

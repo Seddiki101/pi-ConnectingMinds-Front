@@ -3,12 +3,13 @@ import { Injectable } from "@angular/core";
 import { TokenService } from "../token-svc/token-service.service";
 import { userAdvanced } from "../requestTypes/userAdvanced";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class SharedUserService {
-  private baseUrl = "http://localhost:8082/back/user";
+  private baseUrl = environment.user + "/back/user";
 
   constructor(
     private httpClient: HttpClient,

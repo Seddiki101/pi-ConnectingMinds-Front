@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class TaskService {
-  private baseUrl = environment.kanban + "task";
+  private baseUrl = environment.kanban + "/api/task";
 
   constructor(private http: HttpClient) {}
 

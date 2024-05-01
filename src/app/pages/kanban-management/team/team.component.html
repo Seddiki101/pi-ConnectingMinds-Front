@@ -1,19 +1,18 @@
 <!-- Container fluid -->
 <section class="container-fluid p-4">
-  <br /><br />
-  <div
-    class="d-flex justify-content-center align-items-center h-100"
-    *ngIf="projects?.length === 0"
-  >
-    <div class="text-center">
-      <a routerLink="/project-management" class="btn btn-primary mb-3"
-        >Create a Project first</a
-      >
-      <img
-        src="../assets/images/background/maintenance-mode.svg"
-        alt="maintenance"
-        class="w-100"
-      />
+  <div *ngIf="projects?.length === 0">
+    <br /><br />
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-center">
+        <a routerLink="/project-management" class="btn btn-primary mb-3"
+          >Create a Project first</a
+        >
+        <img
+          src="../assets/images/background/maintenance-mode.svg"
+          alt="maintenance"
+          class="w-100"
+        />
+      </div>
     </div>
   </div>
   <div *ngIf="projects?.length !== 0">
@@ -150,15 +149,15 @@
 
             <!-- progress -->
             <div
-            class="d-flex justify-content-between align-items-lg-start mt-4"
-          >
-            <div class="form-control">
-              <!-- task description -->
-              <p class="team-description">
-                {{ team.description }}
-              </p>
+              class="d-flex justify-content-between align-items-lg-start mt-4"
+            >
+              <div class="form-control">
+                <!-- task description -->
+                <p class="team-description">
+                  {{ team.description }}
+                </p>
+              </div>
             </div>
-          </div>
             <div></div>
           </div>
         </div>
