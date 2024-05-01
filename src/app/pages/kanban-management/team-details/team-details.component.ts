@@ -9,6 +9,8 @@ import { SharedUserService } from "src/app/service/usermanagement/shared/shared-
 import { AddEditTeamComponent } from "../add-edit-team/add-edit-team.component";
 import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
+import { Project } from "src/app/models/project/project.model";
+import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
 
 @Component({
   selector: "app-team-details",
@@ -22,56 +24,74 @@ export class TeamDetailsComponent implements OnInit {
   porjectName: string = "";
   teamId: number;
   projectId: number;
+  ownerId: number;
   filteredMembers: userAdvanced[] = [];
   searchQuery: string = "";
-
+  project: Project;
   constructor(
     private teamService: TeamService,
     private projectService: ProjectService,
     private dialog: MatDialog,
     private sharedUser: SharedUserService,
     private _coreService: CoreService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authenticService: AuthenticService
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.projectId = +params["projectId"];
       this.teamId = +params["teamId"];
-    });
-    if (this.projectId && this.teamId) {
-      this.teamService.getTeamById(this.teamId).subscribe((team) => {
-        this.team = team;
-        this.loadMemberData();
-      });
-      this.projectService
-        .getProjectById(this.projectId)
-        .subscribe((project) => {
-          if (project.name) {
-            this.porjectName = project.name;
-          }
+      if (this.projectId && this.teamId) {
+        this.teamService.getTeamById(this.teamId).subscribe((team) => {
+          this.team = team;
+          this.loadMemberData();
         });
-    }
+        this.projectService
+          .getProjectById(this.projectId)
+          .subscribe((project) => {
+            if (project.name) {
+              this.porjectName = project.name;
+              this.project = project;
+            }
+          });
+        this.authenticService.getId().subscribe((id) => {
+          this.ownerId = id;
+        });
+      }
+    });
   }
 
   openAddEditTeamForm(team?: Team): void {
-    if (team) {
-      const dialogRef = this.dialog.open(AddEditTeamComponent, {
-        data: { team }, // Pass the team data if editing
-      });
+    if (this.project.ownerId === this.ownerId) {
+      if (team) {
+        const dialogRef = this.dialog.open(AddEditTeamComponent, {
+          data: { team }, // Pass the team data if editing
+        });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        if (this.team?.teamId) {
-          this.teamService.getTeamById(this.team.teamId).subscribe((team) => {
-            if (team) {
-              this.team = team;
-              this.loadMemberData();
-            }
-          });
-        } else {
-          console.log("Error: Missing team ID");
-        }
-      });
+        dialogRef.afterClosed().subscribe((result) => {
+          if (this.team?.teamId) {
+            this.teamService.getTeamById(this.team.teamId).subscribe((team) => {
+              if (team) {
+                this.team = team;
+                this.loadMemberData();
+              }
+            });
+          } else {
+            this._coreService.openSnackBar(
+              "Error: Missing team ID!",
+              "cancel",
+              2000
+            );
+          }
+        });
+      }
+    } else {
+      this._coreService.openSnackBar(
+        "Sorry you can't do that you are not the owner!",
+        "cancel",
+        3000
+      );
     }
   }
 
@@ -108,5 +128,4 @@ export class TeamDetailsComponent implements OnInit {
       );
     });
   }
-
 }

@@ -1,14 +1,13 @@
-export class userAdvanced{
-    id: number;
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    phone: string; 
-    address: string; 
-    birthdate: Date;
-    createdAt:Date;
-    role:string;
-    enabled:Boolean;
-    locked:Boolean;
-  }
+export class userAdvanced {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  address: string;
+  pic: string;
+  birthdate: Date;
+  createdAt: Date;
+  enabled: Boolean;
+  locked: Boolean;
+}

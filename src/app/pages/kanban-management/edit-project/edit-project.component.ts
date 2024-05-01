@@ -53,7 +53,11 @@ export class EditProjectComponent implements OnInit {
           }
         },
         (error) => {
-          console.error("Error fetching project:", error);
+          this._coreService.openSnackBar(
+            "Error fetching project!",
+            "error",
+            2000
+          );
         }
       );
     });

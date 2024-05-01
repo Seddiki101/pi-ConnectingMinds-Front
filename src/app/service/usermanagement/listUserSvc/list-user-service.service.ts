@@ -13,11 +13,18 @@ export class ListUserService {
   constructor(private httpClient: HttpClient, private tokenService: TokenService) { }
 
   getAllUsers(): Observable<userAdvanced[]> {
-    //const token = localStorage.getItem('auth_token');
     const token = this.tokenService.token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
     return this.httpClient.get<userAdvanced[]>(`${this.baseUrl}/getAllUsers`, { headers: headers });
+  }
+
+
+  getAllAdmins(): Observable<userAdvanced[]> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    return this.httpClient.get<userAdvanced[]>(`${this.baseUrl}/getAllAdmins`, { headers: headers });
   }
 
   blockUserById(id: number): Observable<any> {
@@ -29,12 +36,46 @@ export class ListUserService {
   }
 
 
+
+  blockUserById2(email: string): Observable<any> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { email: email };
+
+    return this.httpClient.post(`${this.baseUrl}/BlockUser`, body, { headers: headers, responseType: 'text' });
+  }
+
+
+  revoke(email: string): Observable<any> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { email: email };
+
+    return this.httpClient.post(`${this.baseUrl}/RevokeUser`, body, { headers: headers, responseType: 'text' });
+  }
+
+  giveAccess(email: string): Observable<any> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { email: email };
+
+    return this.httpClient.post(`${this.baseUrl}/giveAccess`, body, { headers: headers, responseType: 'text' });
+  }
+
+
   searchUsers(keyword: string): Observable<userAdvanced[]> {
     const token = this.tokenService.token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.httpClient.post<userAdvanced[]>(`${this.baseUrl}/searchUsers`, { keyword }, { headers });
+    return this.httpClient.post<userAdvanced[]>(`${this.baseUrl}/searchUsers1`, { keyword }, { headers });
   }
 
+
+  
+  searchUsers2(keyword: string): Observable<userAdvanced[]> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.httpClient.post<userAdvanced[]>(`${this.baseUrl}/searchUser`, { keyword }, { headers });
+  }
 
 
 }

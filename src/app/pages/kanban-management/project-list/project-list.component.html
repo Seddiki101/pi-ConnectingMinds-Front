@@ -171,29 +171,29 @@
                     >
                       <i class="fe fe-more-vertical"></i>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="Dropdown1">
+                    <div class="dropdown-menu" aria-labelledby="dropdownProjectTen">
                       <span class="dropdown-header">Settings</span>
                       <a
+                        *ngIf="project.ownerId === ownerId"                
                         class="dropdown-item"
                         [routerLink]="[
                           '/project-management/edit-project',
                           project.projectId
                         ]"
-                        [queryParams]="{ from: 'list' }"
+                        [queryParams]="{ from: 'grid' }"
                         class="dropdown-item"
                       >
-                        <i class="fe fe-edit dropdown-item-icon"></i>Edit
-                        Details
+                        <i class="fe fe-edit dropdown-item-icon"></i>Edit Details
                       </a>
-                      <a
+                      <a           
                         class="dropdown-item"
-                        *ngIf="project.projectId"
+                        *ngIf="project.projectId && project.ownerId === ownerId"
                         (click)="deleteProject(project.projectId)"
                         style="cursor: pointer"
                       >
-                        <i class="fe fe-trash dropdown-item-icon"></i>Delete
-                        Project
+                        <i class="fe fe-trash dropdown-item-icon"></i>Delete Project
                       </a>
+                      <a *ngIf="project.ownerId !== ownerId" class="dropdown-item">Only Owner</a>
                     </div>
                   </div>
                 </td>

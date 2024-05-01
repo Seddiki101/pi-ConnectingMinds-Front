@@ -102,7 +102,7 @@
                 <span class="dropdown-header">Settings</span>
                 <a
                   class="dropdown-item"
-                  (click)="openAddEditTeamForm(team, project.projectId)"
+                  (click)="openAddEditTeamForm(team, project)"
                   style="cursor: pointer"
                   class="dropdown-item"
                 >
@@ -111,7 +111,7 @@
                 <a
                   class="dropdown-item"
                   *ngIf="team.teamId"
-                  (click)="deleteTeam(team.teamId)"
+                  (click)="deleteTeam(team.teamId,project)"
                   style="cursor: pointer"
                 >
                   <i class="fe fe-trash dropdown-item-icon"></i>Delete Team
@@ -164,7 +164,7 @@
       </div>
       <div class="col-xxl-3 col-xl-4 col-lg-6 col-12 mb-4">
         <a
-          (click)="openAddEditTeamForm(undefined, project.projectId)"
+          (click)="openAddEditTeamForm(undefined, project)"
           style="cursor: pointer"
         >
           <div

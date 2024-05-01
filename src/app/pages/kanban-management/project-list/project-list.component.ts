@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Project } from "src/app/models/project/project.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
+import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
 import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
 
 @Component({
@@ -15,23 +16,32 @@ export class ProjectListComponent {
   searchInput: string = "";
   selectedStatus: string = "";
   tokenDetails: any;
+  ownerId: number;
   constructor(
     private projectService: ProjectService,
     private _coreService: CoreService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authenticService: AuthenticService
   ) {}
   ngOnInit(): void {
-    this.tokenDetails = this.tokenService.getTokenDetails();
-    this.loadProjects();
+    this.authenticService.getId().subscribe((id) => {
+      this.ownerId = id;
+      this.tokenDetails = this.tokenService.getTokenDetails();
+      this.loadProjects();
+    });
   }
   loadProjects(): void {
-    this.projectService.getProjectByOwnerId(1).subscribe(
+    this.projectService.getProjectsByUserId(this.ownerId).subscribe(
       (projects: Project[]) => {
         this.projects = projects;
         this.applyFilters();
       },
       (error) => {
-        console.error("Error loading projects:", error);
+        this._coreService.openSnackBar(
+          "Error loading projects!",
+          "error",
+          2000
+        );
       }
     );
   }

@@ -4,6 +4,7 @@ import { Project } from "src/app/models/project/project.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { ProjectSharedDataService } from "src/app/service/kanban-management/shared-data/project-shared-data.service";
 import { TaskService } from "src/app/service/kanban-management/task/task.service";
+import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
 import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
 
 @Component({
@@ -16,17 +17,21 @@ export class ProjectOverviewComponent implements OnInit {
   upcomingTasks: any[] = [];
   project: Project | null;
   projectId: number;
-
+  ownerId:number;
   constructor(
     private projectSharedData: ProjectSharedDataService,
     private taskService: TaskService,
     private sharedUserService: SharedUserService,
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authenticService: AuthenticService
   ) {}
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.projectId = +params["projectId"];
+      this.authenticService.getId().subscribe((id) => {
+        this.ownerId = id;
+      });
       if (!isNaN(this.projectId)) {
         this.projectService
           .getProjectById(this.projectId)

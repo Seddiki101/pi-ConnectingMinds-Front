@@ -25,12 +25,19 @@
                   <span class="dropdown-menu" aria-labelledby="DropdownTen">
                     <span class="dropdown-header">Settings</span>
                     <a
+                      *ngIf="project?.ownerId === ownerId"
                       class="dropdown-item"
                       [routerLink]="[
                         '/project-management/edit-project',
                         project?.projectId
                       ]"
                       >Edit Details</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      *ngIf="project?.ownerId !== ownerId"
+                    >
+                      Only owner</a
                     >
                   </span>
                 </span>

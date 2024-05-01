@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { Project } from "src/app/models/project/project.model";
 import { Team } from "src/app/models/team/team.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
-import { TeamSharedService } from "src/app/service/kanban-management/shared-data/team-shared.service";
 import { TeamService } from "src/app/service/kanban-management/team/team.service";
 import { MatDialog } from "@angular/material/dialog";
 import { AddEditTeamComponent } from "../add-edit-team/add-edit-team.component";
@@ -11,6 +10,7 @@ import { SharedUserService } from "src/app/service/usermanagement/shared/shared-
 import { userAdvanced } from "src/app/service/usermanagement/requestTypes/userAdvanced";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
 import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
+import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
 
 @Component({
   selector: "app-team",
@@ -23,7 +23,9 @@ export class TeamComponent implements OnInit {
   projects?: Project[];
   teams?: Team[];
   cachedUserData: userAdvanced[] = [];
-  tokenDetails:any;
+  tokenDetails: any;
+  ownerId: number;
+
   constructor(
     private projectService: ProjectService,
     private teamService: TeamService,
@@ -31,17 +33,21 @@ export class TeamComponent implements OnInit {
     private dialog: MatDialog,
     private sharedUser: SharedUserService,
     private _coreService: CoreService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authenticService: AuthenticService
   ) {}
   ngOnInit(): void {
-    this.tokenDetails = this.tokenService.getTokenDetails();
-    this.loadProjects();
-    this.sharedUser.getAllUsers().subscribe((users) => {
-      this.cachedUserData = users;
+    this.authenticService.getId().subscribe((id) => {
+      this.ownerId = id;
+      this.tokenDetails = this.tokenService.getTokenDetails();
+      this.loadProjects();
+      this.sharedUser.getAllUsers().subscribe((users) => {
+        this.cachedUserData = users;
+      });
     });
   }
   loadProjects(): void {
-    this.projectService.getProjectByOwnerId(1).subscribe(
+    this.projectService.getProjectsByUserId(this.ownerId).subscribe(
       (projects: Project[]) => {
         this.projects = projects;
         this.applyFilters();
@@ -55,20 +61,29 @@ export class TeamComponent implements OnInit {
       }
     );
   }
-  openAddEditTeamForm(team?: Team, projectId?: number): void {
+  openAddEditTeamForm(team?: Team, project?: Project): void {
     if (team) {
-      const dialogRef = this.dialog.open(AddEditTeamComponent, {
-        data: { team }, // Pass the team data if editing
-      });
+      if (project?.ownerId === this.ownerId) {
+        const dialogRef = this.dialog.open(AddEditTeamComponent, {
+          data: { team }, // Pass the team data if editing
+        });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          // Handle any necessary actions after the modal closes
-          // Example: Refresh the team list
-          this.loadProjects();
-        }
-      });
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            // Handle any necessary actions after the modal closes
+            // Example: Refresh the team list
+            this.loadProjects();
+          }
+        });
+      } else {
+        this._coreService.openSnackBar(
+          "Sorry you can't do that you are not the owner!",
+          "cancel",
+          3000
+        );
+      }
     } else {
+      const projectId = project?.projectId;
       const dialogRef = this.dialog.open(AddEditTeamComponent, {
         data: { projectId }, // Pass the team data if editing
       });
@@ -104,21 +119,33 @@ export class TeamComponent implements OnInit {
     this.applyFilters();
   }
 
-  deleteTeam(teamId: number): void {
-    if (confirm("Are you sure you want to delete this team?")) {
-      this.teamService.deleteTeam(teamId).subscribe(
-        () => {
-          this._coreService.openSnackBar(
-            "Team deleted successfully!",
-            "done",
-            2000
-          );
-          // Reload the list of projects after deletion
-          this.loadProjects();
-        },
-        (error) => {
-          this._coreService.openSnackBar("Error deleting team!", "Error", 2000);
-        }
+  deleteTeam(teamId: number, project: Project): void {
+    if (project.ownerId === this.ownerId) {
+      if (confirm("Are you sure you want to delete this team?")) {
+        this.teamService.deleteTeam(teamId).subscribe(
+          () => {
+            this._coreService.openSnackBar(
+              "Team deleted successfully!",
+              "done",
+              2000
+            );
+            // Reload the list of projects after deletion
+            this.loadProjects();
+          },
+          (error) => {
+            this._coreService.openSnackBar(
+              "Error deleting team!",
+              "Error",
+              2000
+            );
+          }
+        );
+      }
+    } else {
+      this._coreService.openSnackBar(
+        "Sorry you can't do that you are not the owner!",
+        "cancel",
+        3000
       );
     }
   }

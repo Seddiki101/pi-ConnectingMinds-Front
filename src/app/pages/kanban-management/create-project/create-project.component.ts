@@ -4,6 +4,8 @@ import { Project } from "src/app/models/project/project.model";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
 import { jwtDecode } from "jwt-decode";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
+import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
+import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
 
 @Component({
   selector: "app-create-project",
@@ -18,9 +20,9 @@ export class CreateProjectComponent implements OnInit {
   scopeError: string = ""; // Error message for scope validation
   resourcesError: string = ""; // Error message for resources validation
   endDateError: string = ""; // Error message for end date validation
-  ownerName: string = "John Doe"; //---
-  ownerId: number = 1; //---- to change when i decode the token info
-
+  ownerName: string = ""; //---
+  ownerId: number; //---- to change when i decode the token info
+  tokenDetails: any;
   private from: string;
   project: Project = new Project();
   selectedFile: File | null = null;
@@ -29,18 +31,21 @@ export class CreateProjectComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router,
     private route: ActivatedRoute,
-    private _coreService: CoreService
+    private _coreService: CoreService,
+    private authenticService: AuthenticService,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.from = params["from"];
     });
-    /* const token = localStorage.getItem("auth_token");
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
-    }*/
+    this.authenticService.getId().subscribe((id) => {
+      this.ownerId = id;
+      this.tokenDetails = this.tokenService.getTokenDetails();
+      this.ownerName =
+        this.tokenDetails.firstname + " " + this.tokenDetails.lastname;
+    });
   }
   onSubmit() {
     // Reset error messages

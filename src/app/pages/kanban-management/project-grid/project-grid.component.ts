@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
 import { jwtDecode } from "jwt-decode";
 import { TokenService } from "src/app/service/usermanagement/token-svc/token-service.service";
+import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
 @Component({
   selector: "app-project-grid",
   templateUrl: "./project-grid.component.html",
@@ -24,21 +25,28 @@ export class ProjectGridComponent implements OnInit {
     private projectSharedData: ProjectSharedDataService,
     private router: Router,
     private _coreService: CoreService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authenticService: AuthenticService
   ) {}
   ngOnInit(): void {
-    this.tokenDetails = this.tokenService.getTokenDetails();
-    this.loadProjects();
-    console.log(this.tokenDetails);
+    this.authenticService.getId().subscribe((id) => {
+      this.ownerId = id;
+      this.tokenDetails = this.tokenService.getTokenDetails();
+      this.loadProjects();
+    });
   }
   loadProjects(): void {
-    this.projectService.getProjectByOwnerId(1).subscribe(
+    this.projectService.getProjectsByUserId(this.ownerId).subscribe(
       (projects: Project[]) => {
         this.projects = projects;
         this.applyFilters();
       },
       (error) => {
-        console.error("Error loading projects:", error);
+        this._coreService.openSnackBar(
+          "Error loading projects!",
+          "error",
+          2000
+        );
       }
     );
   }
