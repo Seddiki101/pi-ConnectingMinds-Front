@@ -9,11 +9,13 @@
   object-fit: cover;
 }
 
-.description-text {
-  max-height: 3em;
+.team-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
+
 .btn-primary {
   position: relative;
   bottom: 20px; /* Adjust as needed */

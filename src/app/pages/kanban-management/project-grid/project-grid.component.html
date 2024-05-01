@@ -142,17 +142,17 @@
                 [queryParams]="{
                   projectId: project.projectId
                 }"
-                class="text-inherit"
+                class="text-inherit fw-bold h3"
                 style="cursor: pointer"
                 >{{ project.name }}</a
               >
             </h4>
-            <span class="text-muted fs-6">{{ project.owner }}</span>
+            <span class="text-inherit fw-bold text-primary h6"><span class="fe fe-award me-1"></span>{{ project.owner }}</span>
           </div>
 
           <!-- progress -->
           <div class="d-flex justify-content-between align-items-center mb-5">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center fw-bold text-inherit">
               <i class="mdi mdi-account-multiple me-2"> </i
               ><span>Teams : {{ project.teams?.length }}</span>
             </div>

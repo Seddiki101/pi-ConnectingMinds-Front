@@ -18,16 +18,17 @@
         <label for="projectSelect" class="form-label">Project:</label>
         <select
           id="projectSelect"
-          class="form-select"
+          class="form-select text-inherit fw-bold"
           [ngModelOptions]="{ standalone: true }"
           [(ngModel)]="selectedProject"
           (change)="onProjectChange()"
         >
-          <option [value]="null">Select Project</option>
+          <option class="text-primary" [value]="null">Select Project</option>
           <option
             *ngFor="let project of projects"
             [ngValue]="project"
             [selected]="project.projectId === selectedProject?.projectId"
+            class="text-primary"
           >
             {{ project.name }}
           </option>
@@ -38,17 +39,18 @@
         <label for="teamSelect" class="form-label">Team:</label>
         <select
           id="teamSelect"
-          class="form-select"
+          class="form-select text-inherit fw-bold"
           [ngModelOptions]="{ standalone: true }"
           [(ngModel)]="selectedTeam"
           (change)="onTeamChange()"
           *ngIf="selectedProject"
         >
-          <option [value]="null">Select Team</option>
+          <option class="text-primary" [value]="null">Select Team</option>
           <option
             *ngFor="let team of selectedProject.teams"
             [ngValue]="team"
             [selected]="team.teamId === selectedTeam?.teamId"
+            class="text-primary"
           >
             {{ team.name }}
           </option>
@@ -79,20 +81,20 @@
         class="col-xxl-12 col-xl-10 col-lg-12 col-md-12 col-12 mb-3 mb-lg-0 d-flex"
       >
         <!-- heading -->
-        <div style="flex: 1">
-          <label class="text-inherit fw-bold mb-1">
+        <div class="form-control" style="flex: 1">
+          <label class="text-inherit fw-bold mb-0 h4">
             <i class="mdi mdi-console fs-3"></i>
             {{ this.selectedProject?.name }}
           </label>
           <br />
-          <label class="text-inherit fw-bold mb-1">
+          <label class="text-inherit fw-bold mb-1 h4">
             <i class="mdi mdi-account-multiple fs-3"></i>
             {{ this.selectedTeam?.name }}
           </label>
         </div>
         <!-- select -->
         <div class="ms-3">
-          <select class="form-select">
+          <select class="form-select text-inherit fw-bold">
             <option selected>Filter</option>
             <option value="Just my task">Just my task</option>
             <option value="Due this week">Due this week</option>
@@ -121,7 +123,7 @@
                 >
                   <div>
                     <!-- task list -->
-                    <h4 class="mb-0">Backlog</h4>
+                    <h4 class="fw-bold mb-0">Backlog</h4>
                   </div>
                 </div>
                 <!-- task kanban -->
@@ -295,7 +297,7 @@
                 >
                   <div>
                     <!-- heading -->
-                    <h4 class="mb-0">To do</h4>
+                    <h4 class="fw-bold mb-0">To do</h4>
                   </div>
                 </div>
                 <!-- task kanban -->
@@ -466,11 +468,11 @@
                 >
                   <div>
                     <!-- task list -->
-                    <h4 class="mb-0">Doing</h4>
+                    <h4 class="fw-bold mb-0">Doing</h4>
                   </div>
                 </div>
                 <!-- task kanban -->
-                <div class="task-kanban" id="backlog">
+                <div class="task-kanban" id="doing">
                   <!-- card -->
                   <div
                     class="card"
@@ -635,11 +637,11 @@
                 >
                   <div>
                     <!-- task list -->
-                    <h4 class="mb-0">Done</h4>
+                    <h4 class="fw-bold mb-0">Done</h4>
                   </div>
                 </div>
                 <!-- task kanban -->
-                <div class="task-kanban" id="backlog">
+                <div class="task-kanban" id="done">
                   <!-- card -->
                   <div
                     class="card"

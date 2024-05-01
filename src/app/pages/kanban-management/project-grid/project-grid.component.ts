@@ -80,7 +80,8 @@ export class ProjectGridComponent implements OnInit {
       return 0; // Return 0 if there are no tasks
     }
 
-    return (completedTasks / totalTasks) * 100;
+    const progressPercentage = (completedTasks / totalTasks) * 100;
+    return Number(progressPercentage.toFixed(2)); 
   }
   applyFilters() {
     // Apply search filter

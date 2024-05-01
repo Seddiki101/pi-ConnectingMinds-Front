@@ -135,13 +135,13 @@
                     projectId: project.projectId,
                     teamId: team.teamId
                   }"
-                  class="text-inherit"
+                  class="text-inherit h3"
                   style="cursor: pointer"
                   ><i class="mdi mdi-cube-outline me-2"> </i> {{ team.name }}</a
                 >
               </h4>
-              <span class="fs-6 text-inherit">
-                Scrum Master :
+              <span class="text-inherit fw-bold text-warning">
+                <span class="fe fe-award me-1"></span>
                 <ng-container *ngIf="team.scrumMaster !== undefined">
                   {{ getUserFullNameById(team.scrumMaster) }}
                 </ng-container>
@@ -149,14 +149,16 @@
             </div>
 
             <!-- progress -->
-            <div class="d-flex justify-content-between align-items-center mb-5">
-              <div class="d-flex align-items-center">
-                <p class="description-text">
-                  <span class="text-inherit">Description : </span>
-                  <span>{{ team.description }}</span>
-                </p>
-              </div>
+            <div
+            class="d-flex justify-content-between align-items-lg-start mt-4"
+          >
+            <div class="form-control">
+              <!-- task description -->
+              <p class="team-description">
+                {{ team.description }}
+              </p>
             </div>
+          </div>
             <div></div>
           </div>
         </div>
