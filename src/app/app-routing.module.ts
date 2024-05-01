@@ -9,22 +9,27 @@ import { ProfileComponent } from "./components/usersmanagement/profile/profile.c
 import { ListUserComponent } from "./components/usersmanagement/list-user/list-user.component";
 import { Error404Component } from "./components/error404/error404.component";
 import { ChatAppComponent } from "./components/chatmanagement/chat-app/chat-app.component";
+import { authGuard } from "./service/usermanagement/guard/auth.guard.ts.service";
+import { RoleGuard } from "./service/usermanagement/guard/role.guard.ts.service";
+import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
+import { AccessComponent } from "./components/usersmanagement/access/access.component";
+import { DashComponent } from "./components/dash/dash.component";
 
 const routes: Routes = [
-  { path: "chat", component: ChatAppComponent, data: { title: "Chat" } },
+  { path: "chat", component: ChatAppComponent, canActivate: [authGuard], data: { title: "Chat" } },
   {
     path: "",
     redirectTo: "/login",
     pathMatch: "full",
-    data: { title: "Sing-in" },
+    data: { title: "Sign-in" },
   },
-  { path: "login", component: UserLoginComponent, data: { title: "Sing-in" } },
+  { path: "login", component: UserLoginComponent, data: { title: "Sign-in" } },
   {
     path: "register",
     component: RegisterUserComponent,
     data: { title: "Sign-up" },
   },
-  { path: "home", component: HomeComponent, data: { title: "Home" } },
+  { path: "home", component: HomeComponent, canActivate: [authGuard,RoleGuard], data: { title: "Home", role: "USER" } },
   {
     path: "forgot-password",
     component: ForgottenComponent,
@@ -35,13 +40,32 @@ const routes: Routes = [
     component: ResetpassComponent,
     data: { title: "Reset Password" },
   },
-  { path: "profile", component: ProfileComponent, data: { title: "Profile" } },
+  { path: "profile", component: ProfileComponent, canActivate: [authGuard], data: { title: "Profile" } },
   {
+    path: "dashboard",
+    component: DashComponent,
+    canActivate: [authGuard,RoleGuard],
+    data: { title: "User List" , role: "ADMIN" },
+  },{
     path: "listUser",
     component: ListUserComponent,
-    data: { title: "User List" },
+    canActivate: [authGuard,RoleGuard],
+    data: { title: "User List" , role: "ADMIN" },
   },
-  { path: "**", component: Error404Component, data: { title: "Error" } }, // note : don't change the order of this line , this route needs to be always in the bottom
+  {
+    path: "listAdmins",
+    component: ListUser2Component,
+    canActivate: [authGuard,RoleGuard],
+    data: { title: "User List" , role: "ADMIN" },
+  },
+  {
+    path: "Access",
+    component: AccessComponent,
+    canActivate: [authGuard,RoleGuard],
+    data: { title: "User List" , role: "ADMIN" },
+  },
+  { path: "error", component: Error404Component, data: { title: "Error" } },
+  { path: "**", component: Error404Component, data: { title: "Error" } }, //this needs to be last component
 ];
 
 @NgModule({

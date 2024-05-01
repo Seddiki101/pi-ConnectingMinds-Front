@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserRegister } from '../../../service/usermanagement/requestTypes/userRegister';
 import { RegisterService } from '../../../service/usermanagement/register-svc/register.service';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 @Component({
   selector: 'app-register-user',
@@ -14,13 +15,17 @@ export class RegisterUserComponent {
 
   constructor(
     private registerService: RegisterService,
+    private tokenService: TokenService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.tokenService.clearToken();
+  }
 
   userRegister() {
-    console.log(this.user);
+    //console.log(this.user);
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const phoneRegex = /^\d+$/;

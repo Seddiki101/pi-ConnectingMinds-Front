@@ -50,7 +50,9 @@
             <td><span class="badge" [ngClass]="user.locked ? 'bg-danger' : 'bg-success'">{{ user.locked ? 'Yes' : 'No' }}</span></td>
             <td>
               <!-- Action Buttons -->
-              <button (click)="blockUser(user)" class="btn btn-warning">Block</button>
+              <button (click)="blockUser(user)" class="btn btn-warning me-2" >Block</button>
+              
+              <button (click)="revokeUser(user)" class="btn btn-danger">Revoke Access</button>
             </td>
           </tr>
         </tbody>

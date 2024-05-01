@@ -14,7 +14,7 @@ export class ProfileService {
   constructor(private httpClient: HttpClient, private tokenService: TokenService) { }
 
   getProfile(): Observable<UserRegister> {
-   // const token = localStorage.getItem('auth_token');
+
     const token = this.tokenService.token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     console.log("This is a log message of token "+this.tokenService.token);

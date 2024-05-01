@@ -12,13 +12,10 @@ export class AuthenticService {
   endSession() {
 
     localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
     this.http.post('http://localhost:8082/logout', {});
-  
-
-  
-
-    
+   
   }
 
 }

@@ -9,7 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { RegisterUserComponent } from "./components/usersmanagement/register-user/register-user.component";
 import { HomeComponent } from "./pages/home/home.component";
-import { DashComponent } from "./pages/dash/dash.component";
+import { DashComponent } from "./components/dash/dash.component";
 import { ForgottenComponent } from "./components/usersmanagement/forgotten/forgotten.component";
 import { ResetpassComponent } from "./components/usersmanagement/resetpass/resetpass.component";
 import { ProfileComponent } from "./components/usersmanagement/profile/profile.component";
@@ -25,6 +25,8 @@ import { MainChatComponent } from "./components/chatmanagement/main-chat/main-ch
 import { SendMessageModalComponent } from "./components/chatmanagement/send-message-modal/send-message-modal.component";
 import { UserDetailsComponent } from './components/chatmanagement/user-details/user-details.component';
 import { StompService } from "./service/chatmanagement/stomp-service/stomp-service.service";
+import { AccessComponent } from './components/usersmanagement/access/access.component';
+import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
     ResetpassComponent,
     ProfileComponent,
     ListUserComponent,
+    ListUser2Component,
+    AccessComponent,
     Error404Component,
     HeaderComponent,
     FooterComponent,
@@ -47,7 +51,8 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
     ChatSidebarComponent,
     MainChatComponent,
     SendMessageModalComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    AccessComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [StompService],
