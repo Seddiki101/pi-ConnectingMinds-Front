@@ -104,6 +104,15 @@ getName(): string | null {
   return null;
 }
 
+getLastName(): string | null {
+  const token = this.token;
+  if (token) {
+    const jwtHelper = new JwtHelperService();
+    const decodedToken = jwtHelper.decodeToken(token);
+    return decodedToken.lastname; 
+  }
+  return null;
+}
 
 getEmail(): string | null {
   const token = this.token;
