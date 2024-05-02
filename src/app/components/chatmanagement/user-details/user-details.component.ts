@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { chatUserDetails } from 'src/app/service/chatmanagement/request-types/chatUserDetails';
 import { ProfileService } from 'src/app/service/usermanagement/profile-svc/profile.service';
+import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
+import { ChatStateService } from 'src/app/shared/chat-state.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -9,18 +12,39 @@ import { ProfileService } from 'src/app/service/usermanagement/profile-svc/profi
 export class UserDetailsComponent implements OnInit {
   firstname: string | undefined;
   lastname: string | undefined;
+  pic: string | undefined;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(
+    private userService: UserServiceService,
+    private chatStateService: ChatStateService
+  ) {}
 
   ngOnInit(): void {
-    this.profileService.getProfile().subscribe({
-      next: (data) => {     // Assuming 'userId' is the correct property in your UserRegister
-        this.firstname = data.firstName; // Assuming 'firstname' is the correct property in your UserRegister
-        this.lastname = data.lastName;   // Assuming 'lastname' is the correct property in your UserRegister
-      },
-      error: (error) => {
-        console.error('Error retrieving profile:', error);
+    combineLatest([
+      this.chatStateService.currentChatId,
+      this.chatStateService.otherUserId
+    ]).subscribe(([chatId, otherUserId]) => {
+      if (otherUserId && chatId) {
+        console.log(`Active Chat ID: ${chatId}, Other User ID: ${otherUserId}`);
+        this.userService.getUserDetails(otherUserId).subscribe({
+          next: (data) => {
+            console.log("other usere data 99999999999999999999");
+            
+            console.log(data);
+            
+            this.firstname = data.firstName;
+            this.lastname = data.lastName;
+            const firstLetter = data.firstName[0].toUpperCase(); 
+          this.pic = `assets/profl/${firstLetter}.png`;
+          console.log("pictuuuuure");
+          },
+          error: (error) => console.error('Error retrieving profile:', error)
+        });
+      } else {
+        console.log(`Waiting for valid chatId and otherUserId, got: ${chatId}, ${otherUserId}`);
       }
     });
   }
+
+  
 }

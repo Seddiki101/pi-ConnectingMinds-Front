@@ -28,7 +28,6 @@ export class MainChatComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    // Unsubscribe to avoid memory leaks
     if (this.currentSubscription) {
       this.currentSubscription.unsubscribe();
     }
@@ -45,8 +44,8 @@ export class MainChatComponent implements OnInit, OnDestroy {
             this.loadChatData(chatId);
             this.subscribeToChatUpdates(chatId);
             console.log("main-chat component ===========")
-            console.log(chatId)
-            console.log(this.thisUserId)
+            console.log("chat id "+ chatId)
+            console.log("user id "+this.thisUserId)
           });
         } else {
           console.error('User data is undefined or does not have userId');
