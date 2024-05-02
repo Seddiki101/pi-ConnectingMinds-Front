@@ -57,6 +57,8 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
       this.chatListService.getChatsForUser(userId).subscribe({
         next: (chats) => {
           this.chats = chats;
+          console.log("chats --------------------------")
+          console.log(chats)
         },
         error: (error) => {
           console.error('Error fetching chats:', error);
@@ -75,9 +77,17 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectChat(chatId: number): void {
+  selectChat(chatId: number, otherUserId: number): void {
+    console.log(`Selecting chat - Chat ID: ${chatId}, Other User ID: ${otherUserId}`);
     this.chatStateService.changeChatId(chatId);
+    this.chatStateService.changeOtherUserId(otherUserId);
   }
+  
+
+  trackByChatId(index: number, chat: IChatPreview): number {
+    return chat.chatId; // Use chatId for unique identification
+  }
+
   calculateTimeAgo = (dateStr: Date): string => {
     const dateCreated = new Date(dateStr);
     const dateNow = new Date();

@@ -70,4 +70,14 @@ export class StompService {
       delete this.subscriptions[topic];
     }
   }
+  public sendTypingStatus(topic: string, userId: number, isTyping: boolean): void {
+    if (this.connected) {
+        this.stompClient.send(`/app/${topic}`, {}, JSON.stringify({ userId, isTyping }));
+        console.log("TypingSTatus===========================")
+        console.log(JSON.stringify({ userId, isTyping }))
+    } else {
+        console.error("Cannot send typing status: WebSocket connection is not established.");
+    }
+}
+
 }

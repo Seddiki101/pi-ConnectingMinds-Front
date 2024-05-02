@@ -3,8 +3,6 @@
       <form #messageForm (ngSubmit)="sendMessage()">
           <div class="position-relative">
             <textarea class="form-control border-0 form-control-simple no-resize" placeholder="Type a New Message" rows="1" name="newMessage" [(ngModel)]="newMessage"></textarea>
-
-
           </div>
           <div class="position-absolute end-0 mt-n7 me-4">
               <button type="submit" class="fs-3 btn text-primary btn-focus-none">
