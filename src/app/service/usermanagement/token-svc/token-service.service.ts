@@ -107,7 +107,7 @@ return null;
 }
 
 
-private getHeaders(): HttpHeaders {
+public getHeaders(): HttpHeaders {
   const token = this.token;
   return new HttpHeaders().set('Authorization', `Bearer ${token}`);
 }

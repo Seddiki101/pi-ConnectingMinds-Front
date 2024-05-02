@@ -42,12 +42,12 @@
           <a href="#" class="text-link">
             <div class="d-flex">
               <div class="avatar avatar-md avatar-indicators avatar-online">
-                <img src="../../../../assets/images/avatar/avatar-1.jpg" alt="" class="rounded-circle" />
+                <img [src]="userImage" alt="" class="rounded-circle" />
               </div>
               <!-- media body -->
               <div class="ms-2">
                 <h5 class="mb-0">
-                  Jitu Chauhan
+                  {{firstName}} {{lastName}}
                 </h5>
                 <p class="mb-0 text-muted">
                   Online
@@ -168,7 +168,7 @@
 
 
             <!-- chat item -->
-            <li *ngFor="let chat of chats; trackBy: trackByChatId" class="py-3 px-4 chat-item contacts-item" (click)="selectChat(chat.chatId, chat.otherMember)">
+            <li *ngFor="let chat of chats; trackBy: trackByChatId" class="py-3 px-4 chat-item contacts-item" (click)="selectChat(chat.chatId, chat.otherMember.userId)">
               <div class="d-flex justify-content-between align-items-center">
                 <a href="" class="text-link contacts-link" (click)="$event.preventDefault()">
 

@@ -2,7 +2,7 @@
 export interface IChatPreview {
   chatId: number;
   name: string;
-  otherMember: number,
+  otherMember: IUser,
   lastMessage: string;
   lastMessageTimestamp: Date;
 }
@@ -13,12 +13,12 @@ export interface IChatPreview {
 //   messages: IMessage[];
 // }
 
-// export interface IUser {
-//   userId: number;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-// }
+export interface IUser {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 
 // export interface IMessage {
 //   messageId: number;
