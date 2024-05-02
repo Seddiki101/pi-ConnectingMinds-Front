@@ -28,7 +28,7 @@ export class EventService {
     return this.http.put<Event>(`${this.baseUrl}`, event);
   }
 
-  deleteEvent(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/${id}`);
+  deleteEvent(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: "text" });
   }
 }

@@ -66,7 +66,7 @@ export class ListUserService {
   searchUsers(keyword: string): Observable<userAdvanced[]> {
     const token = this.tokenService.token;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.httpClient.post<userAdvanced[]>(`${this.baseUrl}/searchUsers1`, { keyword }, { headers });
+    return this.httpClient.post<userAdvanced[]>(`${this.baseUrl}/searchUsers`, { keyword }, { headers });
   }
 
 

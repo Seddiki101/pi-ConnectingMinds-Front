@@ -1,0 +1,93 @@
+<div class="modal fade show modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="taskModalLabel">
+        {{ data.event ? "Update Event" : "Create New Event" }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        [mat-dialog-close]="true"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit()" class="row">
+        <div class="mb-2 col-12">
+          <label for="taskTitle" class="form-label"
+            >Title <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="taskTitle"
+            name="taskTitle"
+            placeholder="Title"
+            [(ngModel)]="event.name"
+            required
+          />
+        </div>
+        <div class="mb-2 col-6">
+          <label for="date" class="form-label"
+            >Start Date <span class="text-danger">*</span></label
+          >
+          <input
+            class="form-control flatpickr flatpickr-input"
+            type="datetime-local"
+            name="startDate"
+            id="startDate"
+            [(ngModel)]="startDateString"
+            required
+          />
+        </div>
+        <div class="mb-2 col-6">
+          <label for="date" class="form-label"
+            >End Date <span class="text-danger">*</span></label
+          >
+          <input
+            class="form-control flatpickr flatpickr-input"
+            type="datetime-local"
+            name="endDate"
+            id="endDate"
+            [(ngModel)]="endDateString"
+            required
+          />
+        </div>
+
+        <div class="mb-2 col-12">
+          <label for="descriptions" class="form-label"
+            >Descriptions <span class="text-danger">*</span></label
+          >
+          <textarea
+            class="form-control"
+            id="descriptions"
+            rows="3"
+            name="descriptions"
+            [(ngModel)]="event.description"
+            required
+          ></textarea>
+        </div>
+
+        <div class="col-md-8">
+          <p *ngIf="fieldsError" class="text-danger">
+            {{ fieldsError }}
+          </p>
+        </div>
+        <div mat-dialog-actions class="action">
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-2"
+              [mat-dialog-close]="true"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              {{ data.event ? "Update Event" : "Create Event" }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

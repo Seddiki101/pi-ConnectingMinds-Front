@@ -62,10 +62,27 @@ export class TeamComponent implements OnInit {
     );
   }
   openAddEditTeamForm(team?: Team, project?: Project): void {
-    if (team) {
-      if (project?.ownerId === this.ownerId) {
+    if (project?.ownerId === this.ownerId) {
+      if (team) {
+        {
+          const dialogRef = this.dialog.open(AddEditTeamComponent, {
+            data: { team }, // Pass the team data if editing
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              // Handle any necessary actions after the modal closes
+              // Example: Refresh the team list
+              this.loadProjects();
+            }else{
+              this.loadProjects();
+            }
+          });
+        }
+      } else {
+        const projectId = project?.projectId;
         const dialogRef = this.dialog.open(AddEditTeamComponent, {
-          data: { team }, // Pass the team data if editing
+          data: { projectId }, // Pass the team data if editing
         });
 
         dialogRef.afterClosed().subscribe((result) => {
@@ -73,28 +90,17 @@ export class TeamComponent implements OnInit {
             // Handle any necessary actions after the modal closes
             // Example: Refresh the team list
             this.loadProjects();
+          }else{
+            this.loadProjects();
           }
         });
-      } else {
-        this._coreService.openSnackBar(
-          "Sorry you can't do that you are not the owner!",
-          "cancel",
-          3000
-        );
       }
     } else {
-      const projectId = project?.projectId;
-      const dialogRef = this.dialog.open(AddEditTeamComponent, {
-        data: { projectId }, // Pass the team data if editing
-      });
-
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          // Handle any necessary actions after the modal closes
-          // Example: Refresh the team list
-          this.loadProjects();
-        }
-      });
+      this._coreService.openSnackBar(
+        "Sorry you can't do that you are not the owner!",
+        "cancel",
+        3000
+      );
     }
   }
   applyFilters() {

@@ -8,7 +8,7 @@
         type="button"
         class="btn-close"
         aria-label="Close"
-        [mat-dialog-close]="false"
+        [mat-dialog-close]="true"
       ></button>
     </div>
     <div class="modal-body">
@@ -96,7 +96,6 @@
           <input
             class="form-control flatpickr flatpickr-input"
             type="date"
-            placeholder="Select Date"
             name="dueDate"
             id="dueDate"
             [(ngModel)]="deadLineString"
@@ -136,7 +135,7 @@
             <button
               type="button"
               class="btn btn-outline-secondary me-2"
-              [mat-dialog-close]="false"
+              [mat-dialog-close]="true"
             >
               Cancel
             </button>

@@ -24,6 +24,8 @@ import { TeamDetailsComponent } from "src/app/pages/kanban-management/team-detai
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddEditTaskComponent } from "src/app/pages/kanban-management/add-edit-task/add-edit-task.component";
 import { TaskDetailsComponent } from "src/app/pages/kanban-management/task-details/task-details.component";
+import { EventDetailsComponent } from "src/app/pages/kanban-management/event-details/event-details.component";
+import { AddEditEventComponent } from "src/app/pages/kanban-management/add-edit-event/add-edit-event.component";
 
 const routes: Routes = [
   {
@@ -136,6 +138,8 @@ const routes: Routes = [
     TeamDetailsComponent,
     AddEditTaskComponent,
     TaskDetailsComponent,
+    AddEditEventComponent,
+    EventDetailsComponent,
   ],
   imports: [
     CommonModule,

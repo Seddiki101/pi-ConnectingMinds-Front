@@ -20,7 +20,6 @@ import { TokenService } from "src/app/service/usermanagement/token-svc/token-ser
   styleUrls: ["./task.component.css"],
 })
 export class TaskComponent implements OnInit {
-  tokenDetails:any;
   projects: Project[] = [];
   selectedProject: Project | null = null;
   selectedTeam: Team | null = null;
@@ -44,7 +43,6 @@ export class TaskComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tokenDetails = this.tokenService.getTokenDetails();
     this.loadProjects();
     this.loadSelectedValues();
     this.sharedUser.getAllUsers().subscribe((users) => {
@@ -189,6 +187,8 @@ export class TaskComponent implements OnInit {
           // Handle any necessary actions after the modal closes
           // Example: Refresh the task list
           this.loadSelectedValues();
+        } else {
+          this.loadSelectedValues();
         }
       });
     } else {
@@ -201,6 +201,8 @@ export class TaskComponent implements OnInit {
           // Handle any necessary actions after the modal closes
           // Example: Refresh the task list
 
+          this.loadSelectedValues();
+        } else {
           this.loadSelectedValues();
         }
       });
