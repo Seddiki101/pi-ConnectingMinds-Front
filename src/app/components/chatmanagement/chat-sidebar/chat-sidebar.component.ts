@@ -1,3 +1,4 @@
+import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StompSubscription } from '@stomp/stompjs';
@@ -15,6 +16,9 @@ import { IChatPreview } from 'src/app/shared/interfaces';
 })
 export class ChatSidebarComponent implements OnInit, OnDestroy {
   userId: number | null = null;  // It's initially null
+  firstName: string | null = null;
+  lastName: string | null = null;
+  userImage: string | null = null;
   chats: IChatPreview[] = [];
   private chatUpdatesSubscription: StompSubscription | undefined;
   private userSubscription: Subscription | undefined;
@@ -23,15 +27,18 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
     private userService: UserServiceService,
     private chatListService: ChatListService,
     private chatStateService: ChatStateService,
-    private stompService: StompService
+    private stompService: StompService,
+    private TokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.userSubscription = this.userService.getUserProfile().subscribe({
       next: (userData) => {
         if (userData && userData.userId) {
-          this.userId = userData.userId;
-          if (this.userId) {  // Ensuring userId is not null
+          this.firstName = userData.firstName
+          this.lastName = userData.lastName
+          this.userId = userData.userId
+          if (this.userId) {
             this.fetchInitialChatList(this.userId);
             this.subscribeToChatUpdates(this.userId);
           }
@@ -43,6 +50,7 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
         console.error('Error fetching user data:', error);
       }
     });
+    this.userImage = this.TokenService.getPic();
   }
 
   ngOnDestroy(): void {
@@ -57,8 +65,6 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
       this.chatListService.getChatsForUser(userId).subscribe({
         next: (chats) => {
           this.chats = chats;
-          console.log("chats --------------------------")
-          console.log(chats)
         },
         error: (error) => {
           console.error('Error fetching chats:', error);
