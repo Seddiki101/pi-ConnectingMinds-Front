@@ -42,12 +42,12 @@
           <a href="#" class="text-link">
             <div class="d-flex">
               <div class="avatar avatar-md avatar-indicators avatar-online">
-                <img [src]="userImage" alt="" class="rounded-circle" />
+                <img [src]="user?.pic" alt="" class="rounded-circle" />
               </div>
               <!-- media body -->
               <div class="ms-2">
                 <h5 class="mb-0">
-                  {{firstName}} {{lastName}}
+                  {{user?.firstName}} {{user?.lastName}}
                 </h5>
                 <p class="mb-0 text-muted">
                   Online
@@ -112,70 +112,18 @@
         <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
           <!-- contact list -->
           <ul class="list-unstyled contacts-list">
-            <!-- contact item -->
-            <li class="py-3 px-4 chat-item contacts-item">
-              <!-- contact link -->
-
-              <div class="d-flex justify-content-between align-items-center">
-                <!-- media -->
-                <a href="#" class="text-link contacts-link">
-                  <div class="d-flex">
-                    <div class="avatar avatar-md avatar-indicators avatar-online">
-                      <img src="../../../../assets/images/avatar/avatar-2.jpg" alt="" class="rounded-circle" />
-                    </div>
-                    <!-- media body -->
-                    <div class="ms-2">
-                      <h5 class="mb-0 fw-bold">
-                        Olivia
-                        Cooper
-                      </h5>
-                      <p class="mb-0 text-muted text-truncate">
-                        I m
-                        for
-                        unread
-                        message
-                        components...
-                      </p>
-                    </div>
-                  </div>
-                </a>
-                <div>
-                  <!-- icon -->
-                  <small class="text-muted">8:48AM</small>
-                  <div class="text-end">
-                    <span class="icon-shape icon-xs text-white bg-danger rounded-circle fw-bold fs-6">1</span>
-                  </div>
-                </div>
-              </div>
-              <!-- chat action -->
-              <div class="chat-actions">
-                <!-- dropdown -->
-                <div class="dropdown dropstart">
-                  <a href="#" class="btn btn-white btn-icon btn-sm rounded-circle primary-hover"
-                    id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fe fe-more-horizontal fs-3"></i>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <a class="dropdown-item" href="#"><i class="bi-pin-angle dropdown-item-icon"></i>Pin</a>
-                    <a class="dropdown-item" href="#"><i class="bi-person-x dropdown-item-icon"></i>Mute</a>
-                    <a class="dropdown-item" href="#"><i class="bi-eye-slash dropdown-item-icon"></i>Hide</a>
-                    <a class="dropdown-item" href="#"><i class="bi-person-plus dropdown-item-icon"></i>Add to
-                      Favorite</a>
-                  </div>
-                </div>
-              </div>
-            </li>
 
 
             <!-- chat item -->
-            <li *ngFor="let chat of chats; trackBy: trackByChatId" class="py-3 px-4 chat-item contacts-item" (click)="selectChat(chat.chatId, chat.otherMember.userId)">
+            <li *ngFor="let chat of chats; trackBy: trackByChatId" class="py-3 px-4 chat-item contacts-item" (click)="user && selectChat(chat.chatId, chat.otherMember.userId)">
+
               <div class="d-flex justify-content-between align-items-center">
                 <a href="" class="text-link contacts-link" (click)="$event.preventDefault()">
 
                   <!-- media -->
                   <div class="d-flex">
                     <div class="avatar avatar-md avatar-indicators avatar-online">
-                      <img src="../../../../assets/images/avatar/avatar-15.jpg" alt="" class="rounded-circle" />
+                      <img [src]="chat.otherMember.pic" alt="" class="rounded-circle" />
                     </div>
                     <!-- media body -->
                     <div class="ms-2">

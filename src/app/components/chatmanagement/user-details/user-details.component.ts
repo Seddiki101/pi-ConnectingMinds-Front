@@ -22,11 +22,11 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     combineLatest([
       this.chatStateService.currentChatId,
-      this.chatStateService.otherUserId
-    ]).subscribe(([chatId, otherUserId]) => {
-      if (otherUserId && chatId) {
-        console.log(`Active Chat ID: ${chatId}, Other User ID: ${otherUserId}`);
-        this.userService.getUserDetails(otherUserId).subscribe({
+      this.chatStateService.otherUser
+    ]).subscribe(([chatId, otherUser]) => {
+      if (otherUser && chatId) {
+        console.log(`Active Chat ID: ${chatId}, Other User ID: ${otherUser?.userId}`);
+        this.userService.getUserDetails(otherUser?.userId).subscribe({
           next: (data) => {
             console.log("other usere data 99999999999999999999");
             
@@ -41,7 +41,7 @@ export class UserDetailsComponent implements OnInit {
           error: (error) => console.error('Error retrieving profile:', error)
         });
       } else {
-        console.log(`Waiting for valid chatId and otherUserId, got: ${chatId}, ${otherUserId}`);
+        console.log(`Waiting for valid chatId and otherUserId, got: ${chatId}, ${otherUser?.userId}`);
       }
     });
   }

@@ -7,7 +7,7 @@ import { ChatListService } from 'src/app/service/chatmanagement/chat-list/chat-l
 import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
-import { IChatPreview } from 'src/app/shared/interfaces';
+import { IChatPreview, IUser } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -15,10 +15,7 @@ import { IChatPreview } from 'src/app/shared/interfaces';
   styleUrls: ['./chat-sidebar.component.css']
 })
 export class ChatSidebarComponent implements OnInit, OnDestroy {
-  userId: number | null = null;  // It's initially null
-  firstName: string | null = null;
-  lastName: string | null = null;
-  userImage: string | null = null;
+  user: IUser | null = null;
   chats: IChatPreview[] = [];
   private chatUpdatesSubscription: StompSubscription | undefined;
   private userSubscription: Subscription | undefined;
@@ -28,19 +25,19 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
     private chatListService: ChatListService,
     private chatStateService: ChatStateService,
     private stompService: StompService,
-    private TokenService: TokenService
   ) {}
 
   ngOnInit(): void {
     this.userSubscription = this.userService.getUserProfile().subscribe({
-      next: (userData) => {
+      next: (userData: IUser) => {
         if (userData && userData.userId) {
-          this.firstName = userData.firstName
-          this.lastName = userData.lastName
-          this.userId = userData.userId
-          if (this.userId) {
-            this.fetchInitialChatList(this.userId);
-            this.subscribeToChatUpdates(this.userId);
+          console.log("userData ================================");
+          console.log(userData);
+          
+          this.user = userData;
+          if (this.user && this.user.userId) {
+            this.fetchInitialChatList(this.user.userId);
+            this.subscribeToChatUpdates(this.user.userId);
           }
         } else {
           console.error('User data is undefined or does not have userId');
@@ -50,13 +47,12 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
         console.error('Error fetching user data:', error);
       }
     });
-    this.userImage = this.TokenService.getPic();
   }
 
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
-    if (this.userId && this.chatUpdatesSubscription) {
-      this.stompService.unsubscribe(`/topic/user${this.userId}`);
+    if (this.user && this.user.userId && this.chatUpdatesSubscription) {
+      this.stompService.unsubscribe(`/topic/user${this.user.userId}`);
     }
   }
 
@@ -65,6 +61,10 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
       this.chatListService.getChatsForUser(userId).subscribe({
         next: (chats) => {
           this.chats = chats;
+          console.log("chaaaaaaaaaaaaaaaaaaats");
+          
+          console.log(chats);
+          
         },
         error: (error) => {
           console.error('Error fetching chats:', error);

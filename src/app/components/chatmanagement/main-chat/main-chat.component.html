@@ -4,7 +4,7 @@
     <div class="px-4 py-4 vh-100 overflow-hidden">
         <!-- media, ngFor to loop through messages -->
         <ng-container *ngFor="let message of chatData?.messages">
-            <div *ngIf="message.userId === thisUserId; else otherUserMessage" class="d-flex justify-content-end mb-4">
+            <div *ngIf="message.userId === user?.userId; else otherUserMessage" class="d-flex justify-content-end mb-4">
                 <!-- Right-aligned message for thisUserId -->
                 <div class="d-flex w-lg-40">
                     <div class="me-3 text-end">
@@ -34,13 +34,14 @@
                         </div>
                     </div>
                     <!-- img -->
-                    <img src="../../../../assets/images/avatar/avatar-1.jpg" alt="" class="rounded-circle avatar-md" />
+                    <img [src]="user?.pic" alt="" class="rounded-circle avatar-md" />
                 </div>
             </div>
             <!-- Other users' messages -->
             <ng-template #otherUserMessage>
                 <div class="d-flex w-lg-40 mb-4">
-                    <img src="../../../../assets/images/avatar/avatar-4.jpg" alt="" class="rounded-circle avatar-md" />
+                    <img [src]="otherUser?.pic" alt="Other User Avatar" class="rounded-circle avatar-md" />
+
                     <div class="ms-3">
                         <small>{{ message.timestamp | date:'shortTime' }}</small>
                         <div class="d-flex">

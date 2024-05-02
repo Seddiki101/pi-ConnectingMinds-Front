@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FetchChatService } from 'src/app/service/chatmanagement/fetch-chat/fetch-chat.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
-import { IMessageCreate } from 'src/app/shared/interfaces';
+import { IMessageCreate, IUser } from 'src/app/shared/interfaces';
 import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
 import { SendMessageService } from 'src/app/service/chatmanagement/send-message/send-message.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
@@ -14,7 +14,8 @@ import { UserServiceService } from 'src/app/service/chatmanagement/user-service/
 })
 export class MainChatComponent implements OnInit, OnDestroy {
   chatData: any;
-  thisUserId: number | null = null; // Initially null
+  user: IUser | null = null;
+  otherUser: IUser | null = null; // Add otherUser property
   newMessage: string = '';
   currentSubscription: any;
   private userSubscription: Subscription | undefined;
@@ -36,22 +37,21 @@ export class MainChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userSubscription = this.userService.getUserProfile().subscribe({
-      next: (userData: unknown) => {  // Change type to unknown
-        const user = userData as { userId: number };  // Type assertion
-        if (user && user.userId) {
-          this.thisUserId = user.userId;
+      next: (userData: IUser) => {  
+        this.user = userData;
+        if (this.user && this.user.userId) {
           this.chatStateService.currentChatId.subscribe(chatId => {
             this.loadChatData(chatId);
             this.subscribeToChatUpdates(chatId);
-            console.log("main-chat component ===========")
-            console.log("chat id "+ chatId)
-            console.log("user id "+this.thisUserId)
+          });
+          this.chatStateService.otherUser.subscribe((user: IUser | null) => {
+            this.otherUser = user;
           });
         } else {
           console.error('User data is undefined or does not have userId');
         }
       },
-      error: (error: unknown) => {  // Change type to unknown
+      error: (error: unknown) => {
         console.error('Error fetching user data:', error);
       }
     });
@@ -91,15 +91,14 @@ export class MainChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(): void {
-    if (this.newMessage.trim() !== '' && this.thisUserId) {
+    if (this.newMessage.trim() !== '' && this.user && this.user.userId) {
       const message: IMessageCreate = {
         content: this.newMessage,
         chatId: this.chatData.chatId,
-        userId: this.thisUserId,
+        userId: this.user.userId,
         timestamp: new Date()  // Set the current date and time as the timestamp
       };
 
-      // Send the message using the SendMessageService
       this.sendMessageService.sendMessage(message.content, message.chatId, message.userId)
         .subscribe({
           next: (response) => {
@@ -110,7 +109,6 @@ export class MainChatComponent implements OnInit, OnDestroy {
           }
         });
 
-      // Clear the input field after sending the message
       this.newMessage = '';
     }
   }
