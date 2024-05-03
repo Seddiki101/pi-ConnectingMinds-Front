@@ -28,6 +28,11 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
 import { AccessComponent } from './components/usersmanagement/access/access.component';
 import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
 import { ProfileBackComponent } from './components/usersmanagement/profile-back/profile-back.component';
+import { ListResourcesComponent } from "./components/resources/list-resources/list-resources.component";
+import { AjoutResourceComponent } from "./components/resources/ajout-resource/ajout-resource.component";
+import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
+import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
+import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
 
 
 @NgModule({
@@ -51,10 +56,39 @@ import { ProfileBackComponent } from './components/usersmanagement/profile-back/
     ChatAppComponent,
     ChatSidebarComponent,
     MainChatComponent,
-    SendMessageModalComponent,
     UserDetailsComponent,
     AccessComponent,
-    ProfileBackComponent
+    ProfileBackComponent,
+    HomeComponent,
+    DashComponent,
+    ForgottenComponent,
+    ResetpassComponent,
+    ProfileComponent,
+    ListUserComponent,
+    Error404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    NavbarComponent,
+    SendMessageModalComponent,
+    UserDetailsComponent,
+    ListResourcesComponent,
+    AjoutResourceComponent,
+    ShowResourceComponent,
+    MyResourcesComponent,
+    AppComponent,
+    UserLoginComponent,
+    RegisterUserComponent,ListUserComponent,
+    Error404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    NavbarComponent,
+    ChatAppComponent,
+    ChatSidebarComponent,
+    MainChatComponent,
+    SendMessageModalComponent,
+    ChatFooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [StompService],
