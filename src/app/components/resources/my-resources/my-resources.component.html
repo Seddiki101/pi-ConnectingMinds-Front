@@ -89,7 +89,7 @@
 												<span class="dropdown-menu" aria-labelledby="courseDropdown3">
 													<span class="dropdown-header">Setting </span>
 													<a class="dropdown-item" (click)="update(item.resourceId)" ><i class="fe fe-edit dropdown-item-icon"></i>Edit</a>
-													<a class="dropdown-item" (click)="delete(item.resourceId)" ><i class="fe fe-trash dropdown-item-icon"></i>Remove</a>
+													<a class="dropdown-item" (click)="showDeletepopUp(item.resourceId)" ><i class="fe fe-trash dropdown-item-icon"></i>Remove</a>
 												</span>
 											</span>
 										</td>
@@ -124,7 +124,32 @@
                
                     <div>
                         <a (click)="saveUpdate()"  type="submit" class="btn btn-primary">Save</a> &nbsp;
-                        <button (click)="close()" type="submit" class="btn btn-danger">Close</button>
+                        <button (click)="close1()" type="submit" class="btn btn-danger">Close</button>
+                        
+                    </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="showDelete" class="modal fade show" id="newCatgory" tabindex="-1" aria-labelledby="newCatgoryLabel" style="display: block;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+         
+            <div class="modal-body">
+             
+                  
+                  
+                    <div class="mb-3 mb-3">
+                        <h2 style="color: brown;" >The reviews of This Resource will be deleted !!</h2>
+						<h3>Are you sure about removing  ?</h3>
+
+
+                   </div>
+               
+                    <div>
+                        <a (click)="delete()"  type="submit" class="btn btn-primary">Remove</a> &nbsp;
+                        <button (click)="close2()" type="submit" class="btn btn-danger">Cancel</button>
                         
                     </div>
               

@@ -13,6 +13,8 @@ import { ListResourcesComponent } from './components/resources/list-resources/li
 import { ShowResourceComponent } from './components/resources/show-resource/show-resource.component';
 import { AjoutResourceComponent } from './components/resources/ajout-resource/ajout-resource.component';
 import { MyResourcesComponent } from './components/resources/my-resources/my-resources.component';
+import { ReviewsMyResourcesComponent } from "./components/resources/reviews-my-resources/reviews-my-resources.component";
+import { DashMyResourcesComponent } from "./components/resources/dash-my-resources/dash-my-resources.component";
 
 
 const routes: Routes = [
@@ -53,6 +55,8 @@ const routes: Routes = [
 { path: 'add-resource' , component: AjoutResourceComponent},
 { path: 'my-resources/:id' , component: MyResourcesComponent},
 { path: 'show-resource/:id' , component: ShowResourceComponent },
+{ path: 'reviews-resources' , component: ReviewsMyResourcesComponent },
+{ path: 'dash-resources' , component: DashMyResourcesComponent },
 
 
   { path: "**", component: Error404Component, data: { title: "Error" } }, // note : don't change the order of this line , this route needs to be always in the bottom

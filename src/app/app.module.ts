@@ -29,6 +29,10 @@ import { ListResourcesComponent } from './components/resources/list-resources/li
 import { AjoutResourceComponent } from './components/resources/ajout-resource/ajout-resource.component';
 import { ShowResourceComponent } from './components/resources/show-resource/show-resource.component';
 import { MyResourcesComponent } from './components/resources/my-resources/my-resources.component';
+import { NavMyResourcesComponent } from './components/resources/nav-my-resources/nav-my-resources.component';
+import { BannerMyResourcesComponent } from './components/resources/banner-my-resources/banner-my-resources.component';
+import { DashMyResourcesComponent } from './components/resources/dash-my-resources/dash-my-resources.component';
+import { ReviewsMyResourcesComponent } from './components/resources/reviews-my-resources/reviews-my-resources.component';
 
 
 
@@ -57,6 +61,10 @@ import { MyResourcesComponent } from './components/resources/my-resources/my-res
     AjoutResourceComponent,
     ShowResourceComponent,
     MyResourcesComponent,
+    NavMyResourcesComponent,
+    BannerMyResourcesComponent,
+    DashMyResourcesComponent,
+    ReviewsMyResourcesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [StompService],
