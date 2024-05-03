@@ -1,0 +1,15 @@
+/* Styles for form inputs and text areas */
+.form-group {
+    margin-bottom: 15px; /* Adds space below each form group */
+}
+
+/* Specific style for the button or button wrapper */
+.button-wrapper, .update-button {
+    margin-top: 20px; /* Additional space above the button */
+}
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    margin-top: 20px; /* Adds space above the button */
+}
+

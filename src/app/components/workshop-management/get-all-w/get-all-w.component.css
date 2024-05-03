@@ -1,0 +1,80 @@
+/* Adjusting image container to push icons up */
+.thumb img {
+  max-height: 200px;      /* Limits the height of the images */
+  width: auto;            /* Adjusts width automatically */
+  object-fit: contain;    /* Maintains the image aspect ratio */
+  margin: 0 auto 25px;    /* Increases margin below images to push icons up */
+  display: block;         /* Enables margin auto to function by making the image a block element */
+}
+
+/* Styling details container for overall layout adjustment */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures space distribution between content */
+  align-items: flex-start; /* Aligns children to the start (left side) */
+  padding: 15px 0; /* Adds padding to the top and bottom for spacing */
+}
+
+/* Icon container to fine-tune icon positioning */
+.icon-container {
+  align-self: flex-end; /* Aligns icons to the right */
+  margin-top: 10px; /* Reduces space above icons to lift them up */
+}
+
+/* Styling icon buttons for better appearance */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex; /* Using flex for centering content */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon images within buttons */
+.icon-button img {
+  width: 24px;  /* Fixed width for clarity */
+  height: auto; /* Height adjusts to maintain aspect ratio */
+}
+
+/* Hover effect for icons */
+.icon-button:hover img {
+  opacity: 0.7;  /* Dim the icon slightly on hover for visual feedback */
+}
+
+/* Focus and hover states for accessibility */
+.icon-button:focus, .icon-button:hover {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Blue outline on focus or hover */
+}
+.search-input {
+  width: 100%; /* Full-width */
+  padding: 10px 20px; /* Comfortable padding */
+  font-size: 16px; /* Legible text size */
+  border: none;  /* No border */
+  border-radius: 25px; /* Fully rounded corners */
+  background-color: #ffffff; /* Slightly off-white background, change as needed */
+  color: #5a5a5a; /* Medium contrast text color */
+}
+
+.search-input:focus {
+  outline: 0.5px; /* Remove focus outline */
+  box-shadow: 0 0 5px rgba(0, 103, 165, 0.5); /* Subtle focus shadow */
+}
+.search-icon {
+  position: absolute;
+  right: 10px; /* Position the icon inside the right edge of the input */
+  width: 24px; /* Set the size of the icon */
+  cursor: pointer; /* Changes the cursor when hovering over the icon */
+}
+.search-container {
+  position: right;
+  display: flex;
+  align-items: center;
+}
+
+
+
+
