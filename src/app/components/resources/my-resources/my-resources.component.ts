@@ -11,6 +11,7 @@ export class MyResourcesComponent {
   id : any ;
   searchedResources :any ;
   resources :any ;
+  initialResources :any ;
   showUpdate=false ;
   toUpdateResource:any ;
   UpdatedResource :any ={
@@ -27,6 +28,7 @@ export class MyResourcesComponent {
         console.log(res);
       
         this.resources = res;
+        this.initialResources = res;
         //this.base64Data = this.resources.content.picByte;
         //this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data
       },
@@ -109,21 +111,22 @@ export class MyResourcesComponent {
       }
     );
   }
-
-  searchResources(event: any) {
-    const searchTerm = (event.target as HTMLInputElement).value; 
-
-    if (searchTerm) {
-      this._service.SearchResources(searchTerm).subscribe((data: any) => {
-        this.searchedResources = data; // Mettez à jour les ressources recherchées avec les données de votre service
-      });
-    
-    } 
-    else {
-      this.searchedResources = null; // Réinitialisez les ressources recherchées si le terme de recherche est vide
+  performSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value.trim(); // Cast and safely access the value
+    if (!value) {
+      this.searchedResources = [];
+      this.resources=this.initialResources;
+      console.log("if");
+    } else {
+        this.searchedResources = this.resources.filter((r:any)=>
+            r.name.toLowerCase().includes(value.toLowerCase()) ||
+            r.description.toLowerCase().includes(value.toLowerCase())
+        );
+        this.resources=this.searchedResources;
+        console.log(this.searchedResources);
+        console.log("else");
     }
- 
-  }
+}
 
 
 }

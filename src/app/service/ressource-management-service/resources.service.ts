@@ -79,12 +79,7 @@ export class ResourcesService {
     return this.http.delete(this.url+'deleteResource/'+id);
   }
 
-  SearchResources(description :any){
-    
-    return this.http.get(this.url + 'search' , description);
-
-
-  }
+ 
 
   ////////////////////reviews////////////////////////////////////
 
