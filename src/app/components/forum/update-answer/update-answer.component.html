@@ -1,0 +1,64 @@
+<app-header></app-header>
+<div class="container">
+    <header>
+        <br>
+    </header>
+    <div class="col-lg-12 col-md-12 col-12">
+        <div class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
+            <div class="mb-3 mb-md-0">
+                <h1 class="mb-1 h2 fw-bold">Update Comment</h1>
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="list">All posts</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Mes posts</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Update Comment
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div>
+                <a href="chatbot" class="btn btn-outline-secondary">Chatbot</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+            <!-- Card -->
+            <div class="card border-0 mb-4">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h4 class="mb-0">Update comemnt</h4>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                    <div class="mb-3 col-md-9">
+                        <!-- Title -->
+                        <label class="form-label">Commentaire</label>
+                        <input type="text" [(ngModel)]="reponse.contenu" class="form-control text-dark" placeholder="Contenu reponse">
+                    </div>
+                    <form action="#" class="dropzone mt-4 border-dashed rounded-2 min-h-0 dz-clickable">
+                        <!-- Form -->
+                        <div class="row">
+                            <!-- Question -->
+                            <div class="mb-3 col-md-4">
+                                <a href="list" (click)="UpdateAnswer()" class="add-question-btn">Update Question</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+
+
+
+

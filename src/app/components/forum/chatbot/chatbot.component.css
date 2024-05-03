@@ -1,0 +1,100 @@
+.chatbot {
+    /* Style the overall chatbot container */
+    display: flex;
+    flex-direction: column;
+    width: 600px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the chatbot */
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+
+.chat-history {
+    /* Style the chat history list */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message-container {
+    /* Style individual chat messages */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-sender,
+.message-content {
+    /* Style sender and content within messages */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.message-sender {
+    font-weight: bold;
+    /* Style for user messages (optional) */
+    background-color: #ddd;
+}
+
+.message-content {
+    /* Style for bot responses (optional) */
+    background-color: #eee;
+}
+
+.user-input {
+    /* Style the user input section */
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-group {
+    /* Style the input group */
+    display: flex;
+    width: 100%;
+}
+
+.icon-button {
+    /* Style the icon buttons */
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.material-icons {
+    /* Replace with your chosen icon library styles */
+    font-size: 20px;
+}
+
+.input-options {
+    /* Style the dropdown menu for optional inputs */
+    position: absolute;
+}
+.user-input {
+    /* ... existing styles ... */
+    display: flex; /* Allow buttons side-by-side */
+}
+
+.large-input {
+    flex: 1; /* Make input take most available space */
+    padding: 10px;
+    font-size: 16px; /* Adjust font size as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.send-button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; /* Add space between input and button */
+}
+
+.input-options {
+    /* ... existing styles ... */
+}

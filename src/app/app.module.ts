@@ -52,6 +52,18 @@ import { AjoutResourceComponent } from "./components/resources/ajout-resource/aj
 import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
 import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
 import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
+import { ListComponent } from './components/forum/list/list.component';
+import { AjoutPostComponent } from './components/forum/ajout-post/ajout-post.component';
+import { UpdateComponent } from './components/forum/update/update.component';
+import { ListReponsesComponent } from './components/forum/list-reponses/list-reponses.component';
+import { AddAnswerComponent } from './components/forum/add-answer/add-answer.component';
+import { UpdateAnswerComponent } from './components/forum/update-answer/update-answer.component';
+import { ChatbotComponent } from './components/forum/chatbot/chatbot.component';
+import { ChatbotResponseComponent } from './components/forum/chatbot-response/chatbot-response.component';
+import { AjoutPost2Component } from './components/forum/ajout-post2/ajout-post2.component';
+import { RecherchePComponent } from './components/forum/recherche-p/recherche-p.component';
+import { DashboardPostComponent } from './components/dashboardP/dashboard-post/dashboard-post.component';
+import { DashAnswersComponent } from './components/dashboardP/dash-answers/dash-answers.component';
 
 
 
@@ -122,6 +134,18 @@ import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/cha
     MainChatComponent,
     SendMessageModalComponent,
     ChatFooterComponent,
+    ListComponent,
+    AjoutPostComponent,
+    UpdateComponent,
+    ListReponsesComponent,
+    AddAnswerComponent,
+    UpdateAnswerComponent,
+    ChatbotComponent,
+    ChatbotResponseComponent,
+    AjoutPost2Component,
+    RecherchePComponent,
+    DashboardPostComponent,
+    DashAnswersComponent,
 
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, 
