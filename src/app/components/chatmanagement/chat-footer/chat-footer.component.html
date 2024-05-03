@@ -1,0 +1,32 @@
+<div class="bg-light px-4 py-3 chat-footer mt-auto">
+  <div class="bg-white p-2 rounded-3 shadow-sm">
+      <form #messageForm (ngSubmit)="sendMessage()">
+          <div class="position-relative">
+            <textarea class="form-control border-0 form-control-simple no-resize" placeholder="Type a New Message" rows="1" name="newMessage" [(ngModel)]="newMessage"></textarea>
+          </div>
+          <div class="position-absolute end-0 mt-n7 me-4">
+              <button type="submit" class="fs-3 btn text-primary btn-focus-none">
+                  <i class="fe fe-send"></i>
+              </button>
+          </div>
+      </form>
+  </div>
+  <div class="mt-3 d-flex">
+      <div>
+          <a href="#" class="text-link me-2 fs-4"><i class="bi-emoji-smile"></i></a>
+          <a href="#" class="text-link me-2 fs-4"><i class="bi-paperclip"></i></a>
+          <a href="#" class="text-link me-3 fs-4"><i class="bi-mic"></i></a>
+      </div>
+      <div class="dropdown">
+          <a href="#" class="text-link fs-4" id="moreAction" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <i class="fe fe-more-horizontal"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="moreAction">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+      </div>
+  </div>
+</div>

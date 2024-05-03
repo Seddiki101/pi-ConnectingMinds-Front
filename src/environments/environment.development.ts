@@ -1,4 +1,8 @@
 export const environment = {
     userApiUrl :"http://localhost:8082/api/v2/user",
-        workshop:"http://localhost:8089"
+
+        workshop:"http://localhost:8089",
+
+    resource:"http://localhost:8081/"
+
 };

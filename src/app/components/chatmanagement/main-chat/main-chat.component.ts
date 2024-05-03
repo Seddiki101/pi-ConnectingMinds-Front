@@ -1,42 +1,64 @@
-import { SendMessageService } from './../../../service/chatmanagement/send-message/send-message.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FetchChatService } from 'src/app/service/chatmanagement/fetch-chat/fetch-chat.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
-import { IMessageCreate } from 'src/app/shared/interfaces';
+import { IMessageCreate, IUser } from 'src/app/shared/interfaces';
 import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
-import { ProfileService } from 'src/app/service/usermanagement/profile-svc/profile.service';
+import { SendMessageService } from 'src/app/service/chatmanagement/send-message/send-message.service';
+import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-chat',
   templateUrl: './main-chat.component.html',
   styleUrls: ['./main-chat.component.css'],
 })
-export class MainChatComponent implements OnInit {
+export class MainChatComponent implements OnInit, OnDestroy {
   chatData: any;
-  thisUserId = 1;
+  user: IUser | null = null;
+  otherUser: IUser | null = null;
   newMessage: string = '';
   currentSubscription: any;
+  private userSubscription: Subscription | undefined;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private chatService: FetchChatService,
     private chatStateService: ChatStateService,
     private stompService: StompService,
     private sendMessageService: SendMessageService,
+    private userService: UserServiceService 
   ) {}
 
-  ngOnDestroy(): void {
-    // Unsubscribe to avoid memory leaks
-    if (this.currentSubscription) {
-      this.currentSubscription.unsubscribe();
-    }
-  }
+  
+ngOnDestroy(): void {
+  this.destroy$.next();
+  this.destroy$.complete();
+}
 
   ngOnInit(): void {
-    this.chatStateService.currentChatId.subscribe(chatId => {
-      this.loadChatData(chatId);
-      this.subscribeToChatUpdates(chatId);
+    this.userService.getUserProfile().pipe(
+      takeUntil(this.destroy$)
+    ).subscribe({
+      next: (userData: IUser) => {  
+        this.user = userData;
+        if (this.user && this.user.userId) {
+          this.chatStateService.currentChatId.subscribe(chatId => {
+            this.loadChatData(chatId);
+            this.subscribeToChatUpdates(chatId);
+          });
+          this.chatStateService.otherUser.subscribe((user: IUser | null) => {
+            this.otherUser = user;
+          });
+        } else {
+          console.error('User data is undefined or does not have userId');
+        }
+      },
+      error: (error: unknown) => {
+        console.error('Error fetching user data:', error);
+      }
     });
-    
   }
 
   loadChatData(chatId: number): void {
@@ -57,7 +79,6 @@ export class MainChatComponent implements OnInit {
     }
     const topic = `/topic/chat${chatId}`;
     const subscription = this.stompService.subscribe(topic, (message: any) => {
-      console.log("Received message:", message);
       const newMessage = JSON.parse(message.body);
       if (newMessage.content) {
         this.chatData.messages.push(newMessage);
@@ -65,40 +86,38 @@ export class MainChatComponent implements OnInit {
         console.warn("Received empty message:", message);
       }
     });
-  
+
     if (subscription) {
       this.currentSubscription = subscription;
     } else {
       console.warn('Subscription could not be established immediately.');
     }
   }
-  
 
   sendMessage(): void {
-  if (this.newMessage.trim() !== '') {
-    const message: IMessageCreate = {
-      content: this.newMessage,
-      chatId: this.chatData.chatId,
-      userId: this.thisUserId,
-      timestamp: new Date()  // Set the current date and time as the timestamp
-    };
+    if (this.newMessage.trim() !== '' && this.user && this.user.userId) {
+      const message: IMessageCreate = {
+        content: this.newMessage,
+        chatId: this.chatData.chatId,
+        userId: this.user.userId,
+        timestamp: new Date()  // Set the current date and time as the timestamp
+      };
 
-    // Send the message using the SendMessageService
-    this.sendMessageService.sendMessage(message.content, message.chatId, message.userId)
-      .subscribe({
-        next: (response) => {
-          console.log('Message sent successfully', response);
-          // Remove local addition here, WebSocket will handle the update
-        },
-        error: (error) => {
-          console.error('Error sending message', error);
-        }
-      });
+      this.sendMessageService.sendMessage(message.content, message.chatId, message.userId)
+        .subscribe({
+          next: (response) => {
+            console.log('Message sent successfully', response);
+          },
+          error: (error) => {
+            console.error('Error sending message', error);
+          }
+        });
 
-    // Clear the input field after sending the message
-    this.newMessage = '';
+      this.newMessage = '';
+    }
   }
-}
 
-  
+  trackByMessageId(index: number, message: any): number {
+    return message.id;
+  }
 }

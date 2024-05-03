@@ -1,0 +1,160 @@
+import { Component } from '@angular/core';
+import { ResourcesService } from '../../../service/ressource-management-service/resources.service';
+
+@Component({
+  selector: 'app-ajout-resource',
+  templateUrl: './ajout-resource.component.html',
+  styleUrls: ['./ajout-resource.component.css']
+})
+export class AjoutResourceComponent {
+  
+
+ 
+  resources: any;
+  categories: any ;
+  Id =1 ; //user connecté
+
+
+  selectedCategory: any;
+  resource : any ={
+    name:'',
+    description:'',
+    url:'',
+    userId :this.Id 
+
+   
+   
+
+
+  };
+  selectedFile : any;
+  selectedFileUrl: string | null = null;
+  showLinkInput = false;
+  showVideoInput = false;
+  showFileInput = false;
+  showPhotoInput = false;
+
+  
+  uploadProgress: number=0;
+  
+
+  constructor( public _service : ResourcesService  ) { }
+  
+ 
+
+  onFileSelected(event: any): void {
+    const fileList: FileList = event.target.files;
+    if (fileList && fileList.length > 0) {
+      this.selectedFile = fileList[0];
+      this.selectedFileUrl = URL.createObjectURL(this.selectedFile);
+    }
+  }
+  
+
+  ngOnInit(): void {
+
+    this._service.getAllResources().subscribe(
+      res=>{
+        console.log(res);
+        this.resources = res;
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+
+    this._service.getAllCategories().subscribe(
+      res=>{
+        console.log(res);
+        this.categories = res;
+      },
+      err=>{
+        console.log(err);
+        
+      }
+    );
+
+
+
+
+  }
+  onSelected(event:any): void {
+    
+		this.selectedCategory = event;
+    console.log(this.selectedCategory);
+    
+	}
+
+  
+
+
+  ajout(){
+
+    this._service.createNewResource(this.selectedFile)
+      .subscribe(
+        res=>{
+          console.log(res);
+        
+     
+          
+        },
+        err=>{
+          console.log(err);
+          
+        }
+      );
+      this._service.createNewResource2(this.resource)
+      .subscribe(
+        res=>{
+          console.log(res);
+          console.log(this.resource.userId);
+          console.log(this.Id);
+          this.resource ={ 
+          name:'',
+          description:'',
+          url:'',
+          userId :this.Id
+         }
+     
+          
+        },
+        err=>{
+          console.log(err);
+          console.log(this.resource.userId);
+          console.log(this.Id);
+          
+        }
+      );
+
+    
+  }
+
+  toggleFileInput() {
+    this.showFileInput = !this.showFileInput;
+    this.showLinkInput = false; // Réinitialiser le style de l'autre bouton
+    this.showPhotoInput =false ;
+    this.showVideoInput =false ;
+  }
+
+  toggleLinkInput() {
+    this.showLinkInput = !this.showLinkInput;
+    this.showFileInput = false; // Réinitialiser le style de l'autre bouton
+    this.showPhotoInput =false ;
+    this.showVideoInput =false ;
+  }
+  togglePhotoInput() {
+    this.showPhotoInput = !this.showPhotoInput;
+    this.showFileInput = false; // Réinitialiser le style de l'autre bouton
+    this.showLinkInput =false ;
+    this.showVideoInput =false ;
+  }
+  toggleVideoInput() {
+    this.showVideoInput = !this.showVideoInput;
+    this.showFileInput = false; // Réinitialiser le style de l'autre bouton
+    this.showLinkInput =false ;
+    this.showPhotoInput =false ;
+  }
+
+
+}

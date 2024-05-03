@@ -28,6 +28,7 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
 import { AccessComponent } from './components/usersmanagement/access/access.component';
 import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
 import { ProfileBackComponent } from './components/usersmanagement/profile-back/profile-back.component';
+
 import {AjoutWComponent} from "./components/workshop-management/ajout-w/ajout-w.component";
 import {UpdateWComponent} from "./components/workshop-management/update-w/update-w.component";
 import {GetAllWComponent} from "./components/workshop-management/get-all-w/get-all-w.component";
@@ -44,6 +45,13 @@ import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajou
 import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
 import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
 
+
+
+import { ListResourcesComponent } from "./components/resources/list-resources/list-resources.component";
+import { AjoutResourceComponent } from "./components/resources/ajout-resource/ajout-resource.component";
+import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
+import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
+import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
 
 
 
@@ -68,10 +76,10 @@ import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w
     ChatAppComponent,
     ChatSidebarComponent,
     MainChatComponent,
-    SendMessageModalComponent,
     UserDetailsComponent,
     AccessComponent,
     ProfileBackComponent,
+
         AjoutWComponent,
     GetAllWComponent,
     UpdateWComponent,
@@ -83,6 +91,38 @@ import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w
     DAjoutWComponent,
     DUpdateWComponent,
     DGetByIdWComponent,
+
+    HomeComponent,
+    DashComponent,
+    ForgottenComponent,
+    ResetpassComponent,
+    ProfileComponent,
+    ListUserComponent,
+    Error404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    NavbarComponent,
+    SendMessageModalComponent,
+    UserDetailsComponent,
+    ListResourcesComponent,
+    AjoutResourceComponent,
+    ShowResourceComponent,
+    MyResourcesComponent,
+    AppComponent,
+    UserLoginComponent,
+    RegisterUserComponent,ListUserComponent,
+    Error404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    NavbarComponent,
+    ChatAppComponent,
+    ChatSidebarComponent,
+    MainChatComponent,
+    SendMessageModalComponent,
+    ChatFooterComponent,
+
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, 
     MatInputModule,ToastrModule.forRoot()],

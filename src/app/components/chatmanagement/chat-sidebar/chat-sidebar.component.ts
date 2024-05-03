@@ -1,39 +1,99 @@
+import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { StompSubscription } from '@stomp/stompjs';
 import { Subscription } from 'rxjs';
 import { ChatListService } from 'src/app/service/chatmanagement/chat-list/chat-list.service';
+import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
+import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
-import { IChatPreview } from 'src/app/shared/interfaces';
+import { IChatPreview, IUser } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-chat-sidebar',
   templateUrl: './chat-sidebar.component.html',
   styleUrls: ['./chat-sidebar.component.css']
 })
-export class ChatSidebarComponent {
+export class ChatSidebarComponent implements OnInit, OnDestroy {
+  user: IUser | null = null;
+  chats: IChatPreview[] = [];
+  private chatUpdatesSubscription: StompSubscription | undefined;
+  private userSubscription: Subscription | undefined;
 
-  
-  chats: IChatPreview[] = [ ];
-
-  constructor(private chatListService: ChatListService,private chatStateService: ChatStateService) {}
+  constructor(
+    private userService: UserServiceService,
+    private chatListService: ChatListService,
+    private chatStateService: ChatStateService,
+    private stompService: StompService,
+  ) {}
 
   ngOnInit(): void {
-    const userId = 1;
-    this.chatListService.getChatsForUser(userId).subscribe({
-      next: (chats) => {
-        console.log("hi")
-        this.chats = chats;
+    this.userSubscription = this.userService.getUserProfile().subscribe({
+      next: (userData: IUser) => {
+        if (userData && userData.userId) {
+          console.log("userData ================================");
+          console.log(userData);
+          
+          this.user = userData;
+          if (this.user && this.user.userId) {
+            this.fetchInitialChatList(this.user.userId);
+            this.subscribeToChatUpdates(this.user.userId);
+          }
+        } else {
+          console.error('User data is undefined or does not have userId');
+        }
       },
       error: (error) => {
-        console.error('Error fetching chats:', error);
+        console.error('Error fetching user data:', error);
       }
     });
   }
 
- 
-  selectChat(chatId: number): void {
-    this.chatStateService.changeChatId(chatId);
+  ngOnDestroy(): void {
+    this.userSubscription?.unsubscribe();
+    if (this.user && this.user.userId && this.chatUpdatesSubscription) {
+      this.stompService.unsubscribe(`/topic/user${this.user.userId}`);
+    }
   }
+
+  private fetchInitialChatList(userId: number): void {
+    if (userId != null) {  // Checking null before calling the service
+      this.chatListService.getChatsForUser(userId).subscribe({
+        next: (chats) => {
+          this.chats = chats;
+          console.log("chaaaaaaaaaaaaaaaaaaats");
+          
+          console.log(chats);
+          
+        },
+        error: (error) => {
+          console.error('Error fetching chats:', error);
+        }
+      });
+    }
+  }
+
+  private subscribeToChatUpdates(userId: number): void {
+    if (userId != null) {  // Checking null before subscribing
+      const topic = `/topic/user${userId}`;
+      this.chatUpdatesSubscription = this.stompService.subscribe(topic, (message) => {
+        console.log("Update notification received, refetching chats.");
+        this.fetchInitialChatList(userId);
+      });
+    }
+  }
+
+  selectChat(chatId: number, otherUserId: number): void {
+    console.log(`Selecting chat - Chat ID: ${chatId}, Other User ID: ${otherUserId}`);
+    this.chatStateService.changeChatId(chatId);
+    this.chatStateService.changeOtherUserId(otherUserId);
+  }
+  
+
+  trackByChatId(index: number, chat: IChatPreview): number {
+    return chat.chatId; // Use chatId for unique identification
+  }
+
   calculateTimeAgo = (dateStr: Date): string => {
     const dateCreated = new Date(dateStr);
     const dateNow = new Date();
@@ -46,25 +106,27 @@ export class ChatSidebarComponent {
     const millisecondsInMonth = millisecondsInDay * 30;
     const millisecondsInYear = millisecondsInDay * 365;
 
-    if (timeDiff < millisecondsInHour) {
-        const diffInMinutes = Math.floor(timeDiff / millisecondsInMinute);
-        return `${diffInMinutes} minute${diffInMinutes === 1 ? "" : "s"} ago`;
-    } else if (timeDiff < millisecondsInDay) {
-        const diffInHours = Math.floor(timeDiff / millisecondsInHour);
-        return `${diffInHours} hour${diffInHours === 1 ? "" : "s"} ago`;
+    if (timeDiff < millisecondsInMinute) {
+      return `a few seconds ago`;
+    }else if (timeDiff < millisecondsInHour) {
+      const diffInMinutes = Math.floor(timeDiff / millisecondsInMinute);
+      return `${diffInMinutes} minute${diffInMinutes === 1 ? "" : "s"} ago`;
+    }else if (timeDiff < millisecondsInDay) {
+      const diffInHours = Math.floor(timeDiff / millisecondsInHour);
+      return `${diffInHours} hour${diffInHours === 1 ? "" : "s"} ago`;
     } else if (timeDiff < millisecondsInWeek) {
-        const diffInDays = Math.floor(timeDiff / millisecondsInDay);
-        return `${diffInDays} day${diffInDays === 1 ? "" : "s"} ago`;
+      const diffInDays = Math.floor(timeDiff / millisecondsInDay);
+      return `${diffInDays} day${diffInDays === 1 ? "" : "s"} ago`;
     } else if (timeDiff < millisecondsInMonth) {
-        const diffInWeeks = Math.floor(timeDiff / millisecondsInWeek);
-        return `${diffInWeeks} week${diffInWeeks === 1 ? "" : "s"} ago`;
+      const diffInWeeks = Math.floor(timeDiff / millisecondsInWeek);
+      return `${diffInWeeks} week${diffInWeeks === 1 ? "" : "s"} ago`;
     } else if (timeDiff < millisecondsInYear) {
-        const diffInMonths = Math.floor(timeDiff / millisecondsInMonth);
-        return `${diffInMonths} month${diffInMonths === 1 ? "" : "s"} ago`;
+      const diffInMonths = Math.floor(timeDiff / millisecondsInMonth);
+      return `${diffInMonths} month${diffInMonths === 1 ? "" : "s"} ago`;
     } else {
-        const diffInYears = Math.floor(timeDiff / millisecondsInYear);
-        return `${diffInYears} year${diffInYears === 1 ? "" : "s"} ago`;
+      const diffInYears = Math.floor(timeDiff / millisecondsInYear);
+      return `${diffInYears} year${diffInYears === 1 ? "" : "s"} ago`;
     }
-};
+  };
 
 }
