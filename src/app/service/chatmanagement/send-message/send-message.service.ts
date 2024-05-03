@@ -20,4 +20,14 @@ export class SendMessageService {
 
     return this.http.post(this.apiUrl, messageBody);
   }
+
+  newMessage(content: string, senderId: number, recieverId: number): Observable<any> {
+    const messageBody = {
+      content: content,
+      senderId: senderId,
+      recieverId: recieverId
+    };
+    const url = `${this.apiUrl}/new`
+    return this.http.post(url, messageBody);
+  }
 }
