@@ -28,4 +28,13 @@ export class UserServiceService {
     const url = `${this.apiUrl}/${userId}`
     return this.http.get<any>(url, {headers});
   }
+
+  getAllUsers(): Observable<any[]> {
+    const token = this.tokenService.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    if(this.tokenService.isTokenValid() ) {  console.log("This is a log message : valid token"); }
+    console.log("This is a log message of decoded token  "+this.tokenService.getTokenDetails() );
+    const url = `${this.apiUrl}/all`
+    return this.http.get<any>(url, {headers});
+  }
 }

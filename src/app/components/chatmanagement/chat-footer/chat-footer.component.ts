@@ -20,12 +20,10 @@ export class ChatFooterComponent implements OnInit, OnDestroy {
   private userId: number | null = null;
   private currentChatId: number | null = null;
   private userSubscription: Subscription;
-  private typingSubscription: Subscription;
 
 
   constructor(
     private sendMessageService: SendMessageService,
-    private stompService: StompService,
     private userService: UserServiceService,
     private chatStateService: ChatStateService
   ) {}
@@ -38,9 +36,6 @@ export class ChatFooterComponent implements OnInit, OnDestroy {
           this.chatStateService.currentChatId.subscribe(chatId => {
             this.currentChatId = chatId;
           })
-          console.log("footer =============")
-          console.log(this.userId);
-          console.log(this.currentChatId);
         }
       },
       error: (error) => {
@@ -61,7 +56,7 @@ export class ChatFooterComponent implements OnInit, OnDestroy {
     if (this.newMessage.trim() !== '' && this.userId && this.currentChatId !== null) {
       const message: IMessageCreate = {
         content: this.newMessage,
-        chatId: this.currentChatId, // Now guaranteed to be non-null
+        chatId: this.currentChatId,
         userId: this.userId,
         timestamp: new Date()
       };
