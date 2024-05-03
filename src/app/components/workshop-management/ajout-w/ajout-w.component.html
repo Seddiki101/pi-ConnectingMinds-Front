@@ -1,0 +1,110 @@
+<app-header></app-header>
+
+<main>
+
+    <section class="py-4 py-lg-6 bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
+                    <div class="d-lg-flex align-items-center justify-content-between">
+                        <!-- Content -->
+                        <div class="mb-4 mb-lg-0">
+                            <h1 class="text-white mb-1">Ajouter un nouveau atelier</h1>
+                            <p class="mb-0 text-white lead">
+                                Veuillez remplir le formulaire pour ajouter un nouveau atelier
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Content -->
+    <section class="pb-12">
+        <div class="container">
+            <div id="courseForm" class="bs-stepper">
+                <div class="row">
+                    <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
+                        <!-- Stepper Button -->
+                        <div class="bs-stepper-header shadow-sm" role="tablist">
+                            <div class="step active" data-target="#test-l-1">
+                                <button type="button" class="step-trigger" role="tab" id="courseFormtrigger1" aria-controls="test-l-1" aria-selected="true">
+                                    <span class="bs-stepper-circle">1</span>
+                                    <span class="bs-stepper-label">Informations basiques</span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <!-- Stepper content -->
+                        <div class="bs-stepper-content mt-5">
+                            <form (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
+                                <!-- Content one -->
+                                <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade dstepper-block active" aria-labelledby="courseFormtrigger1">
+                                    <!-- Card -->
+                                    <div class="card mb-3 ">
+                                        <div class="card-header border-bottom px-4 py-3">
+                                            <h4 class="mb-0">Information de l'atelier</h4>
+                                        </div>
+                                        <!-- Card body -->
+                                        <div class="card-body">
+                                            <div class="mb-3">
+                                                <label for="title" class="form-label">Titre</label>
+                                                <input type="text" class="form-control" id="title" name="title" [(ngModel)]="workshops.title" #title="ngModel" required>
+                                                <small>Ecriver jusqu'à 60 caractères</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="description" class="form-label">Description</label>
+                                                <textarea class="form-control" id="description" name="description" [(ngModel)]="workshops.description" #description="ngModel" required></textarea>
+                                                <small>Ecrivez une petite description de votre atelier</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="prix" class="form-label">Prix</label>
+                                                <input type="number" class="form-control" id="prix" name="prix" [(ngModel)]="workshops.prix" #prix="ngModel" min="0" required>
+                                                <small>Ecrivez le prix de votre atelier</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="maxCapacity" class="form-label">Capacité maximale</label>
+                                                <input type="number" class="form-control" id="maxCapacity" name="maxCapacity" [(ngModel)]="workshops.maxCapacity" #maxCapacity="ngModel" min="1" required>
+                                                <small>Ecrivez la capacité maximale de votre atelier</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="localisation" class="form-label">Localisation</label>
+                                                <input type="text" class="form-control" id="localisation" name="localisation" [(ngModel)]="workshops.localisation" #localisation="ngModel" required>
+                                                <small>Ecrivez la localisation de votre atelier</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="dateDeb" class="form-label" >Date de début de l'atelier</label>
+                                                <input type="date" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" #dateDeb="ngModel" required>
+                                                <small>Ecrivez la date de début de votre atelier</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="dateFin" class="form-label">Date de fin de l'atelier</label>
+                                                <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" #dateFin="ngModel" required>
+                                                <small>Ecrivez la date de fin de votre atelier</small>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="image" class="form-label">Image</label>
+                                                <input type="file" class="form-control" id="image" name="image" (change)="onFileSelected($event)" accept="image/*" required>
+                                                <small>Ajoutez l'image de couverture de votre atelier</small>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <!-- Button -->
+                                    <button class="btn btn-primary" [disabled]="form.invalid">
+                                        Ajouter
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>

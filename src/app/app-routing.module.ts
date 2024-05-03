@@ -15,6 +15,16 @@ import { ListUser2Component } from "./components/usersmanagement/list-user2/list
 import { AccessComponent } from "./components/usersmanagement/access/access.component";
 import { DashComponent } from "./components/dash/dash.component";
 import { ProfileBackComponent } from "./components/usersmanagement/profile-back/profile-back.component";
+import {GetAllWComponent} from "./components/workshop-management/get-all-w/get-all-w.component";
+import {AjoutWComponent} from "./components/workshop-management/ajout-w/ajout-w.component";
+import {UpdateWComponent} from "./components/workshop-management/update-w/update-w.component";
+import {ListReservationComponent} from "./components/reservation-management/list-reservation/list-reservation.component";
+import {GetByIdWorkshopComponent} from "./components/workshop-management/get-by-id-workshop/get-by-id-workshop.component";
+import { ListWComponent } from './components/dashboard-Workshop/list-w/list-w.component';
+import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajout-w.component";
+import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
+import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
+
 
 const routes: Routes = [
   { path: "chat", component: ChatAppComponent, canActivate: [authGuard], data: { title: "Chat" } },
@@ -66,7 +76,17 @@ const routes: Routes = [
     canActivate: [authGuard,RoleGuard],
     data: { title: "User List" , role: "ADMIN" },
   },
-  { path: "error", component: Error404Component, data: { title: "Error" } },
+
+    {path: 'listRes', component: ListReservationComponent},
+  {path: 'list', component: GetAllWComponent},
+  {path: 'list/:id', component: GetByIdWorkshopComponent},
+  {path: 'add', component: AjoutWComponent},
+  { path: 'update/:id', component: UpdateWComponent },
+    { path: 'DlistW', component: ListWComponent},
+  { path: 'DAjoutW', component: DAjoutWComponent},
+  { path: 'DUpdate/:id', component: DUpdateWComponent},
+  { path: 'Dlist/:id', component: DGetByIdWComponent},
+    { path: "error", component: Error404Component, data: { title: "Error" } },
   { path: "**", component: Error404Component, data: { title: "Error" } }, //this needs to be last component
 ];
 

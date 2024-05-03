@@ -28,11 +28,31 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
 import { AccessComponent } from './components/usersmanagement/access/access.component';
 import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
 import { ProfileBackComponent } from './components/usersmanagement/profile-back/profile-back.component';
+
+import {AjoutWComponent} from "./components/workshop-management/ajout-w/ajout-w.component";
+import {UpdateWComponent} from "./components/workshop-management/update-w/update-w.component";
+import {GetAllWComponent} from "./components/workshop-management/get-all-w/get-all-w.component";
+import { ReservationModalComponent } from './components/workshop-management/reservation-modal/reservation-modal.component';
+import {AddReservationComponent} from "./components/reservation-management/add-reservation/add-reservation.component";
+import { GetByIdWorkshopComponent } from './components/workshop-management/get-by-id-workshop/get-by-id-workshop.component';
+import { ListReservationComponent } from './components/reservation-management/list-reservation/list-reservation.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {ToastrModule} from "ngx-toastr";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListWComponent } from './components/dashboard-Workshop/list-w/list-w.component';
+import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajout-w.component";
+import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
+import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
+
+
+
 import { ListResourcesComponent } from "./components/resources/list-resources/list-resources.component";
 import { AjoutResourceComponent } from "./components/resources/ajout-resource/ajout-resource.component";
 import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
 import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
 import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
+
 
 
 @NgModule({
@@ -59,6 +79,19 @@ import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/cha
     UserDetailsComponent,
     AccessComponent,
     ProfileBackComponent,
+
+        AjoutWComponent,
+    GetAllWComponent,
+    UpdateWComponent,
+    AddReservationComponent,
+    ListReservationComponent,
+    ReservationModalComponent,
+    GetByIdWorkshopComponent,
+        ListWComponent,
+    DAjoutWComponent,
+    DUpdateWComponent,
+    DGetByIdWComponent,
+
     HomeComponent,
     DashComponent,
     ForgottenComponent,
@@ -89,8 +122,10 @@ import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/cha
     MainChatComponent,
     SendMessageModalComponent,
     ChatFooterComponent,
+
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, 
+    MatInputModule,ToastrModule.forRoot()],
   providers: [StompService],
   bootstrap: [AppComponent],
 })

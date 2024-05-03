@@ -1,0 +1,29 @@
+<!-- Supposons que ce code est dans un fichier component.html d'un composant Angular -->
+<div class="reservation-list-container">
+    <h2>Liste des Réservations</h2>
+    <table class="reservations-table">
+        <thead>
+        <tr>
+            <th>Nom du Participant</th>
+            <th>Prénom du Participant</th>
+            <th>Atelier</th>
+            <th>Date de Réservation</th>
+            <th>Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Utiliser la directive *ngFor pour itérer sur la liste des réservations -->
+        <tr *ngFor="let reservation of reservations">
+            <td>{{ reservation.nomParticipant }}</td>
+            <td>{{ reservation.prenomParticipant }}</td>
+            <td>{{ reservation.workshop.title }}</td>
+            <td>{{ reservation.date | date: 'mediumDate' }}</td>
+            <td>
+                <img src="assets/images/workshop/effacer.png" alt="Effacer" (click)="onDeleteWorkshop(reservation.idReservation)">
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
