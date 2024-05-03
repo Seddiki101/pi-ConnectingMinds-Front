@@ -13,7 +13,7 @@ import { ListResourcesComponent } from './components/resources/list-resources/li
 import { ShowResourceComponent } from './components/resources/show-resource/show-resource.component';
 import { AjoutResourceComponent } from './components/resources/ajout-resource/ajout-resource.component';
 import { MyResourcesComponent } from './components/resources/my-resources/my-resources.component';
-import { ListCategoriesComponent } from './components/resources/list-categories/list-categories.component';
+
 
 const routes: Routes = [
   { path: "chat", component: ChatAppComponent, data: { title: "Chat" } },
@@ -48,7 +48,7 @@ const routes: Routes = [
   },
 
 
-  { path: 'list-categories' , component: ListCategoriesComponent },
+
 { path: 'list-resources' , component: ListResourcesComponent },
 { path: 'add-resource' , component: AjoutResourceComponent},
 { path: 'my-resources/:id' , component: MyResourcesComponent},

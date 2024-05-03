@@ -26,10 +26,7 @@ import { SendMessageModalComponent } from "./components/chatmanagement/send-mess
 import { UserDetailsComponent } from './components/chatmanagement/user-details/user-details.component';
 import { StompService } from "./service/chatmanagement/stomp-service/stomp-service.service";
 import { ListResourcesComponent } from './components/resources/list-resources/list-resources.component';
-import { ListPopularResourcesComponent } from './components/resources/list-popular-resources/list-popular-resources.component';
-import { ListCategoriesComponent } from './components/resources/list-categories/list-categories.component';
 import { AjoutResourceComponent } from './components/resources/ajout-resource/ajout-resource.component';
-import { DetailResourceComponent } from './components/resources/detail-resource/detail-resource.component';
 import { ShowResourceComponent } from './components/resources/show-resource/show-resource.component';
 import { MyResourcesComponent } from './components/resources/my-resources/my-resources.component';
 
@@ -57,10 +54,7 @@ import { MyResourcesComponent } from './components/resources/my-resources/my-res
     SendMessageModalComponent,
     UserDetailsComponent,
     ListResourcesComponent,
-    ListPopularResourcesComponent,
-    ListCategoriesComponent,
     AjoutResourceComponent,
-    DetailResourceComponent,
     ShowResourceComponent,
     MyResourcesComponent,
   ],

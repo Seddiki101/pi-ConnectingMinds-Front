@@ -8,6 +8,7 @@ import { ResourcesService } from '../../../service/ressource-management-service/
   styleUrls: ['./list-resources.component.css']
 })
 export class ListResourcesComponent {
+  Id=1; // id du user connecté 
   resources: any;
   popular_resources : any ;
   categories: any ;

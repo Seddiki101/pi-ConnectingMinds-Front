@@ -1,3 +1,4 @@
+<app-header></app-header>
 <main>
   <!-- Page header -->
   <section class="pt-lg-8 pb-lg-16 pt-7 pb-12 bg-primary">
@@ -14,17 +15,17 @@
                           coding in JavaScript.
                       </p>
                       <div class="d-flex align-items-center">
-                          <a href="#" class="bookmark text-white text-decoration-none">
+                          <a  class="bookmark text-white text-decoration-none">
                               <i class="fe fe-bookmark  me-2"></i>Bookmark
                           </a>
                           &nbsp;
 
-                          <a *ngIf="!liked" (click)="like(resource.resourceId)" href="#" class="bookmark text-white text-decoration-none">
+                          <a *ngIf="!liked" (click)="like(resource.resourceId)"  class="bookmark text-white text-decoration-none">
                             <i class="fe fe-heart  me-2"></i>{{likes}}
                         </a>
                         &nbsp;
 
-                        <a *ngIf="liked" href="#" class="bookmark text-white text-decoration-none">
+                        <a *ngIf="liked"  class="bookmark text-white text-decoration-none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 20c-2.205-.48-9-4.24-9-11a5 5 0 0 1 9-3a5 5 0 0 1 9 3c0 6.76-6.795 10.52-9 11"/></svg>                               
                             {{likes}}
                         
@@ -262,7 +263,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseFour" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -271,7 +272,7 @@
                                                                   <span>1m 19s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>What Is a Variable?</span>
@@ -280,7 +281,7 @@
                                                                   <span>2m 11s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Declaring Variables </span>
@@ -289,7 +290,7 @@
                                                                   <span>2m 30s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Using let to Declare Variables </span>
@@ -298,7 +299,7 @@
                                                                   <span>3m 28s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Naming Variables </span>
@@ -307,7 +308,7 @@
                                                                   <span>3m 14s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Common Errors Using Variables </span>
@@ -316,7 +317,7 @@
                                                                   <span>3m 30s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Changing Variable Values </span>
@@ -325,7 +326,7 @@
                                                                   <span>2m 4s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Constants </span>
@@ -334,7 +335,7 @@
                                                                   <span>3m 15s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>The var Keyword </span>
@@ -343,7 +344,7 @@
                                                                   <span>2m 20s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Summary</span>
@@ -372,7 +373,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseFive" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -381,7 +382,7 @@
                                                                   <span>1m 55s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Numbers </span>
@@ -390,7 +391,7 @@
                                                                   <span>6m 14s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Operator Precedence </span>
@@ -399,7 +400,7 @@
                                                                   <span>2m 58s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Number Precision</span>
@@ -408,7 +409,7 @@
                                                                   <span>1m 22s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Negative Numbers </span>
@@ -417,7 +418,7 @@
                                                                   <span>1m 35s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Strings </span>
@@ -426,7 +427,7 @@
                                                                   <span>4m 7s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Manipulating Strings </span>
@@ -435,7 +436,7 @@
                                                                   <span>5m 8s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Converting Strings and Numbers </span>
@@ -444,7 +445,7 @@
                                                                   <span>2m 55s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Boolean Variables </span>
@@ -473,7 +474,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseSix" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -482,7 +483,7 @@
                                                                   <span>1m 52s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Clip Watched </span>
@@ -491,7 +492,7 @@
                                                                   <span>4m 27s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Conditionals Using if() </span>
@@ -500,7 +501,7 @@
                                                                   <span>4m 25s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Truthy and Falsy</span>
@@ -509,7 +510,7 @@
                                                                   <span>3m 30s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>if ... else </span>
@@ -518,7 +519,7 @@
                                                                   <span>3m 30s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Comparing === and == </span>
@@ -527,7 +528,7 @@
                                                                   <span>1m 52s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>The Ternary Operator </span>
@@ -536,7 +537,7 @@
                                                                   <span>2m 47s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Block Scope Using let </span>
@@ -545,7 +546,7 @@
                                                                   <span>2m 21s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Looping with for() </span>
@@ -554,7 +555,7 @@
                                                                   <span>5m 30s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Looping with do ... while() </span>
@@ -563,7 +564,7 @@
                                                                   <span>1m 58s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Summary </span>
@@ -592,7 +593,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseSeven" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -601,7 +602,7 @@
                                                                   <span>1m 52s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Function Basics </span>
@@ -610,7 +611,7 @@
                                                                   <span>2m 46s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Function Expressions </span>
@@ -619,7 +620,7 @@
                                                                   <span>2m 32s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Passing Information to Functions</span>
@@ -628,7 +629,7 @@
                                                                   <span>3m 19s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Function Return Values </span>
@@ -637,7 +638,7 @@
                                                                   <span>3m 13s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Function Scope </span>
@@ -646,7 +647,7 @@
                                                                   <span>4m 20s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Using Functions to Modify Web Pages
@@ -656,7 +657,7 @@
                                                                   <span>3m 42s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-0 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Summary </span>
@@ -685,7 +686,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseEight" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -694,7 +695,7 @@
                                                                   <span>1m 48s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Object Properties </span>
@@ -703,7 +704,7 @@
                                                                   <span>4m 28s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Object Methods </span>
@@ -712,7 +713,7 @@
                                                                   <span>3m 3s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Passing Objects to Functions</span>
@@ -721,7 +722,7 @@
                                                                   <span>3m 27s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Standard Built-in Objects </span>
@@ -730,7 +731,7 @@
                                                                   <span>6m 55s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>The Document Object Model (DOM)
@@ -740,7 +741,7 @@
                                                                   <span>3m 29s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Styling DOM Elements </span>
@@ -749,7 +750,7 @@
                                                                   <span>2m 42s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Detecting Button Clicks </span>
@@ -758,7 +759,7 @@
                                                                   <span>2m 3s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Showing and Hiding DOM Elements
@@ -768,7 +769,7 @@
                                                                   <span>4m 37s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Summary </span>
@@ -797,7 +798,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseNine" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -806,7 +807,7 @@
                                                                   <span>1m 48s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Creating and Initializing Arrays
@@ -816,7 +817,7 @@
                                                                   <span>4m 7s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Accessing Array Items </span>
@@ -825,7 +826,7 @@
                                                                   <span>2m 4s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Manipulating Arrays </span>
@@ -834,7 +835,7 @@
                                                                   <span>4m 3s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>slice() and splice() </span>
@@ -843,7 +844,7 @@
                                                                   <span>5m 54s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Array Searching and Looping </span>
@@ -852,7 +853,7 @@
                                                                   <span>7m 32s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Arrays in the DOM </span>
@@ -861,7 +862,7 @@
                                                                   <span>4m 11s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Summary </span>
@@ -890,7 +891,7 @@
                                                   <!-- Collapse -->
                                                   <div class="collapse" id="courseTen" data-bs-parent="#courseAccordion">
                                                       <div class="pt-3 pb-2">
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Introduction</span>
@@ -899,7 +900,7 @@
                                                                   <span>1m 20s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Global Scope </span>
@@ -908,7 +909,7 @@
                                                                   <span>4m 7s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Clip Watched </span>
@@ -917,7 +918,7 @@
                                                                   <span>3m 14s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Function Scope </span>
@@ -926,7 +927,7 @@
                                                                   <span>3m 45s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Var and Hoisting </span>
@@ -935,7 +936,7 @@
                                                                   <span>2m 21s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Undeclared Variables and Strict Mode
@@ -945,7 +946,7 @@
                                                                   <span>2m 16s</span>
                                                               </div>
                                                           </a>
-                                                          <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
+                                                          <a  class="mb-2 d-flex justify-content-between align-items-center text-inherit text-decoration-none disableClick">
                                                               <div class="text-truncate">
                                                                   <span class="icon-shape bg-light text-secondary icon-sm rounded-circle me-2"><i class="fe fe-lock"></i></span>
                                                                   <span>Summary </span>
@@ -1118,8 +1119,8 @@
                                               <div class="d-md-flex align-items-center ">
                                               
                                                 
-                                                <a *ngIf="review.userId==Id" href="#" (click)="update(review.reviewId)" class="btn btn-xs btn-outline-secondary ms-1">Edit</a>
-                                                <a href="#" *ngIf="review.userId==Id"  (click)="delete(review.reviewId)" class="btn btn-xs btn-danger ms-md-3">Delete</a>
+                                                <a *ngIf="review.userId==Id"  (click)="update(review.reviewId)" class="btn btn-xs btn-outline-secondary ms-1">Edit</a>
+                                                <a  *ngIf="review.userId==Id"  (click)="delete(review.reviewId)" class="btn btn-xs btn-danger ms-md-3">Delete</a>
                                             </div>
                                           </div>
                                       </div>
@@ -1137,8 +1138,8 @@
                                             </p>
                                             <div class="d-md-flex align-items-center ">
                                                
-                                                <a href="#" (click)="update(newReview.reviewId)" class="btn btn-xs btn-outline-secondary ms-1">Edit</a>
-                                                <a href="#" (click)="delete(newReview.reviewId)" class="btn btn-xs btn-danger ms-md-3">Delete</a>
+                                                <a  (click)="update(newReview.reviewId)" class="btn btn-xs btn-outline-secondary ms-1">Edit</a>
+                                                <a  (click)="delete(newReview.reviewId)" class="btn btn-xs btn-danger ms-md-3">Delete</a>
                                             </div>
                                         </div>
 
@@ -1171,7 +1172,7 @@
                                       <div class="mb-4">
                                           <h4>
                                               Course Overview
-                                              <a href="#" class="text-primary ms-2 h4">[00:00:00]</a>
+                                              <a  class="text-primary ms-2 h4">[00:00:00]</a>
                                           </h4>
                                           <p class="mb-0">
                                               My name is John Deo and I work as human duct tape at
@@ -1184,7 +1185,7 @@
                                       <div class="mb-4">
                                           <h4>
                                               Introduction
-                                              <a href="#" class="text-primary ms-2 h4">[00:00:16]</a>
+                                              <a  class="text-primary ms-2 h4">[00:00:16]</a>
                                           </h4>
                                           <p>
                                               We'll dive into GraphQL, the fundamentals of GraphQL.
@@ -1198,7 +1199,7 @@
                                       <div class="mb-4">
                                           <h4>
                                               Why Take This Course?
-                                              <a href="#" class="text-primary ms-2 h4">[00:00:37]</a>
+                                              <a  class="text-primary ms-2 h4">[00:00:37]</a>
                                           </h4>
                                           <p>
                                               We'll dive into GraphQL, the fundamentals of GraphQL.
@@ -1212,7 +1213,7 @@
                                       <div class="mb-4">
                                           <h4>
                                               A Look at the Demo Application
-                                              <a href="#" class="text-primary ms-2 h4">[00:00:54]</a>
+                                              <a  class="text-primary ms-2 h4">[00:00:54]</a>
                                           </h4>
                                           <p>
                                               We'll dive into GraphQL, the fundamentals of GraphQL.
@@ -1234,7 +1235,7 @@
                                       <div class="mb-4">
                                           <h4>
                                               Summary
-                                              <a href="#" class="text-primary ms-2 h4">[00:01:31]</a>
+                                              <a  class="text-primary ms-2 h4">[00:01:31]</a>
                                           </h4>
                                           <p>
                                               We'll dive into GraphQL, the fundamentals of GraphQL.
@@ -1365,8 +1366,8 @@
                           <div class="d-flex align-items-center">
                               <div class="position-relative">
                                   <img src="../../../../assets/images/avatar/avatar-1.jpg" alt="avatar" class="rounded-circle avatar-xl">
-                                  <a href="#" class="position-absolute mt-2 ms-n3" data-bs-toggle="tooltip" data-placement="top" aria-label="Verifed" data-bs-original-title="Verifed">
-                                      <img src="../../../../assets/images/png/checked-mark.svg" alt="checked-mark" height="30" width="30">
+                                  <a  class="position-absolute mt-2 ms-n3" data-bs-toggle="tooltip" data-placement="top" aria-label="Verifed" data-bs-original-title="Verifed">
+                                      <img src="../../../../assets/images/svg/checked-mark.svg" alt="checked-mark" height="30" width="30">
                                   </a>
                               </div>
                               <div class="ms-4">
@@ -1459,7 +1460,7 @@
                                       <span>Morris Mccoy</span>
                                   </div>
                                   <div class="col-auto">
-                                      <a href="#" class="text-muted bookmark">
+                                      <a  class="text-muted bookmark">
                                           <i class="fe fe-bookmark"></i>
                                       </a>
                                   </div>
@@ -1513,7 +1514,7 @@
                                       <span>Ted Hawkins</span>
                                   </div>
                                   <div class="col-auto">
-                                      <a href="#" class="text-muted bookmark">
+                                      <a  class="text-muted bookmark">
                                           <i class="fe fe-bookmark"></i>
                                       </a>
                                   </div>
@@ -1567,7 +1568,7 @@
                                       <span>Juanita Bell</span>
                                   </div>
                                   <div class="col-auto">
-                                      <a href="#" class="text-muted bookmark">
+                                      <a  class="text-muted bookmark">
                                           <i class="fe fe-bookmark"></i>
                                       </a>
                                   </div>
@@ -1618,7 +1619,7 @@
                                       <span>Claire Robertson</span>
                                   </div>
                                   <div class="col-auto">
-                                      <a href="#" class="text-muted bookmark">
+                                      <a  class="text-muted bookmark">
                                           <i class="fe fe-bookmark"></i>
                                       </a>
                                   </div>
@@ -1659,3 +1660,4 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>

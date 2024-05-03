@@ -1,3 +1,5 @@
+
+<app-header></app-header>
 <main>
   <section class="py-4 py-lg-6 bg-primary">
     <div class="container">
@@ -7,6 +9,11 @@
             <h1 class="text-white mb-1 display-4">Connecting Minds Resources</h1>
             <p class="mb-0 text-white lead">6,979,934 students are learning from our resources.</p>
           </div>
+          <div>
+            <a [routerLink]="['/my-resources' , Id]" class="btn btn-white"> My Resources</a> &nbsp;
+          
+          </div>
+        
         </div>
       </div>
     </div>
@@ -64,7 +71,7 @@
                           <span>Morris Mccoy</span>
                         </div>
                         <div class="col-auto">
-                          <a href="#" class="text-muted bookmark">
+                          <a  class="text-muted bookmark">
                             <i class="fe fe-bookmark  "></i>
                           </a>
                         </div>
@@ -109,7 +116,7 @@
                           <span>Morris Mccoy</span>
                         </div>
                         <div class="col-auto">
-                          <a href="#" class="text-muted bookmark">
+                          <a  class="text-muted bookmark">
                             <i class="fe fe-bookmark  "></i>
                           </a>
                         </div>
@@ -258,13 +265,13 @@
         <div *ngFor="let item of categories" class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top">
+            <a  class="card-img-top">
               <img [src]="'http://127.0.0.1:8081/get-image/' + item.categoryId" alt="course" class="card-img-top rounded-top-md">
               
             </a>
             <!-- Card body -->
             <div class="card-body">
-              <h3 class="h4 mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">
+              <h3 class="h4 mb-2 text-truncate-line-2 "><a  class="text-inherit">
                 {{item.description}} <br>
             .</a></h3>
               <ul class="mb-3  list-inline">
@@ -298,7 +305,7 @@
                   <span>Claire Robertson</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -334,10 +341,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-react.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-react.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h3 class="h4 mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">How to easily
+              <h3 class="h4 mb-2 text-truncate-line-2 "><a  class="text-inherit">How to easily
                   create a website with React</a></h3>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>3h 56m
@@ -370,7 +377,7 @@
                   <span>Morris Mccoy</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -381,10 +388,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-graphql.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-graphql.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h3 class="h4 mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">GraphQL:
+              <h3 class="h4 mb-2 text-truncate-line-2 "><a  class="text-inherit">GraphQL:
                   introduction to graphQL for beginners</a></h3>
               <ul class="mb-3 list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>2h 46m
@@ -417,7 +424,7 @@
                   <span>Ted Hawkins</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -428,10 +435,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-angular.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-angular.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h3 class="h4 mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">Angular - the
+              <h3 class="h4 mb-2 text-truncate-line-2 "><a  class="text-inherit">Angular - the
                   complete guide for beginner</a></h3>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>1h 30m
@@ -464,7 +471,7 @@
                   <span>Juanita Bell</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -475,10 +482,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-python.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-python.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h3 class="h4 mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">The Python
+              <h3 class="h4 mb-2 text-truncate-line-2 "><a  class="text-inherit">The Python
                   Course: build web application</a></h3>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>2h 30m
@@ -511,7 +518,7 @@
                   <span>Claire Robertson</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -524,10 +531,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-gatsby.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-gatsby.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h4 class="mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">Gatsby JS: build
+              <h4 class="mb-2 text-truncate-line-2 "><a  class="text-inherit">Gatsby JS: build
                   blog with GraphQL and React</a></h4>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>3h 56m
@@ -560,7 +567,7 @@
                   <span>Morris Mccoy</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -571,10 +578,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-javascript.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-javascript.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h4 class="mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">JavaScript: modern
+              <h4 class="mb-2 text-truncate-line-2 "><a  class="text-inherit">JavaScript: modern
                   javaScript from the beginning</a></h4>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>2h 46m
@@ -607,7 +614,7 @@
                   <span>Ted Hawkins</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -618,10 +625,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-css.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-css.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h4 class="mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">CSS: ultimate CSS
+              <h4 class="mb-2 text-truncate-line-2 "><a  class="text-inherit">CSS: ultimate CSS
                   course from beginner to advanced</a></h4>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>1h 30m
@@ -654,7 +661,7 @@
                   <span>Juanita Bell</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -665,10 +672,10 @@
         <div class="col-lg-3 col-md-6 col-12">
           <!-- Card -->
           <div class="card  mb-4 card-hover">
-            <a href="#" class="card-img-top"><img src="../assets/images/course/course-wordpress.jpg" alt="course" class="card-img-top rounded-top-md"></a>
+            <a  class="card-img-top"><img src="../assets/images/course/course-wordpress.jpg" alt="course" class="card-img-top rounded-top-md"></a>
             <!-- Card body -->
             <div class="card-body">
-              <h4 class="mb-2 text-truncate-line-2 "><a href="#" class="text-inherit">Wordpress: complete
+              <h4 class="mb-2 text-truncate-line-2 "><a  class="text-inherit">Wordpress: complete
                   WordPress theme &amp; plugin development</a></h4>
               <ul class="mb-3  list-inline">
                 <li class="list-inline-item"><i class="mdi mdi-clock-time-four-outline text-muted me-1"></i>2h 30m
@@ -701,7 +708,7 @@
                   <span>Claire Robertson</span>
                 </div>
                 <div class="col-auto">
-                  <a href="#" class="text-muted bookmark">
+                  <a  class="text-muted bookmark">
                     <i class="fe fe-bookmark  "></i>
                   </a>
                 </div>
@@ -713,3 +720,4 @@
     </div>
   </section>
 </main>
+<app-footer></app-footer>
