@@ -19,6 +19,13 @@ export class RegisterService {
     return this.httpClient.post(`${this.baseUrl}`, user);
 }
 
+   /*
+   registerUser(user:User):Observable<Object>{
+    console.log(user)
 
+    return this.httpClient.post(`${this.baseUrl}`,user)
+
+   }
+   */
 
   }

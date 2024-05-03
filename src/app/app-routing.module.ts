@@ -8,10 +8,35 @@ import { ResetpassComponent } from "./components/usersmanagement/resetpass/reset
 import { ProfileComponent } from "./components/usersmanagement/profile/profile.component";
 import { ListUserComponent } from "./components/usersmanagement/list-user/list-user.component";
 import { Error404Component } from "./components/error404/error404.component";
-import { authGuard } from "./service/usermanagement/guard/auth.guard.ts.service";
-import { DashComponent } from "./pages/dash/dash.component";
+import {ListComponent} from "./components/forum/list/list.component";
+import {AjoutPostComponent} from "./components/forum/ajout-post/ajout-post.component";
+import {UpdateComponent} from "./components/forum/update/update.component";
+import {ListReponsesComponent} from "./components/forum/list-reponses/list-reponses.component";
+import {AddAnswerComponent} from "./components/forum/add-answer/add-answer.component";
+import {UpdateAnswerComponent} from "./components/forum/update-answer/update-answer.component";
+import {ChatbotComponent} from "./components/forum/chatbot/chatbot.component";
+import {ChatbotResponseComponent} from "./components/forum/chatbot-response/chatbot-response.component";
+import {AjoutPost2Component} from "./components/forum/ajout-post2/ajout-post2.component";
+import {RecherchePComponent} from "./components/forum/recherche-p/recherche-p.component";
+import {DashboardPostComponent} from "./components/dashboardP/dashboard-post/dashboard-post.component";
+import {DashAnswersComponent} from "./components/dashboardP/dash-answers/dash-answers.component";
 
 const routes: Routes = [
+  { path: 'rechercherP', component: RecherchePComponent},
+  { path: 'ajout2', component: AjoutPost2Component},
+  { path: 'chatbotR', component: ChatbotResponseComponent },
+  { path: 'chatbot', component: ChatbotComponent },
+  {path:'AddReponse/:id', component: AddAnswerComponent},
+  {path:'reponseParId/:id', component: ListReponsesComponent},
+  {path:'list', component: ListComponent},
+  {path:'ajout', component: AjoutPostComponent},
+  {path:'update/:id', component: UpdateComponent},
+  {path:'updateReponse/:id', component: UpdateAnswerComponent},
+  { path: 'DList', component: DashboardPostComponent},
+  { path: 'DAnswer/:id', component: DashAnswersComponent},
+
+
+
   {
     path: "",
     redirectTo: "/login",
@@ -24,8 +49,7 @@ const routes: Routes = [
     component: RegisterUserComponent,
     data: { title: "Sign-up" },
   },
-  { path: "home", component: HomeComponent, data: { title: "Home" } , canActivate: [authGuard] },
-  { path: "dashboard", component: DashComponent, data: { title: "Dashboard" } , canActivate: [authGuard] },
+  { path: "home", component: HomeComponent, data: { title: "Home" } },
   {
     path: "forgot-password",
     component: ForgottenComponent,
@@ -36,15 +60,19 @@ const routes: Routes = [
     component: ResetpassComponent,
     data: { title: "Reset Password" },
   },
-  { path: "profile", component: ProfileComponent, data: { title: "Profile" },canActivate: [authGuard] },
+  { path: "profile", component: ProfileComponent, data: { title: "Profile" } },
   {
     path: "listUser",
     component: ListUserComponent,
     data: { title: "User List" },
-    canActivate: [authGuard]
   },
-  { path: "**", component: Error404Component, data: { title: "Error" } }, // note : don't change the order of this line , this route needs to be always in the bottom
+  { path: "**", component: Error404Component, data: { title: "Error" } },
+  // note : don't change the order of this line , this route needs to be always in the bottom
+
+ // {path:'ajout', component: AjoutPostComponent},
+  //{path:'update/:id', component: UpdateComponent}
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
