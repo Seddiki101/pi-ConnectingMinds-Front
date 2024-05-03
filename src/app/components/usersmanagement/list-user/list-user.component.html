@@ -24,18 +24,19 @@
       <table *ngIf="users && users.length > 0" class="table mb-0 text-nowrap table-centered table-hover">
         <thead class="table-light">
           <tr>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Birthdate</th>
-            <th>Creation Date</th>
+            <th (click)="sortUsers('email')">Email</th>
+            <th (click)="sortUsers('firstName')">First Name</th>
+            <th (click)="sortUsers('lastName')">Last Name</th>
+            <th (click)="sortUsers('phone')">Phone</th>
+            <th (click)="sortUsers('address')">Address</th>
+            <th (click)="sortUsers('birthdate')">Birthdate</th>
+            <th (click)="sortUsers('createdAt')">Creation Date</th>
             <th>Enabled</th>
             <th>Locked</th>
             <th>Actions</th>
           </tr>
         </thead>
+        
         <tbody>
           <tr *ngFor="let user of users">
             <td>{{ user.email }}</td>

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { UserLoginComponent } from "./components/usersmanagement/login-user/user-login.component";
 import { RegisterUserComponent } from "./components/usersmanagement/register-user/register-user.component";
-import { HomeComponent } from "./pages/home/home.component";
+import { HomeComponent } from "./components/home/home.component";
 import { ForgottenComponent } from "./components/usersmanagement/forgotten/forgotten.component";
 import { ResetpassComponent } from "./components/usersmanagement/resetpass/resetpass.component";
 import { ProfileComponent } from "./components/usersmanagement/profile/profile.component";
@@ -14,6 +14,7 @@ import { RoleGuard } from "./service/usermanagement/guard/role.guard.ts.service"
 import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
 import { AccessComponent } from "./components/usersmanagement/access/access.component";
 import { DashComponent } from "./components/dash/dash.component";
+import { ProfileBackComponent } from "./components/usersmanagement/profile-back/profile-back.component";
 
 const routes: Routes = [
   { path: "chat", component: ChatAppComponent, canActivate: [authGuard], data: { title: "Chat" } },
@@ -40,7 +41,8 @@ const routes: Routes = [
     component: ResetpassComponent,
     data: { title: "Reset Password" },
   },
-  { path: "profile", component: ProfileComponent, canActivate: [authGuard], data: { title: "Profile" } },
+  { path: "profile", component: ProfileComponent, canActivate: [authGuard,RoleGuard], data: { title: "Profile" , role: "USER" } },
+  { path: "adminProfile", component: ProfileBackComponent, canActivate: [authGuard,RoleGuard], data: { title: "Profile" , role: "ADMIN" } },
   {
     path: "dashboard",
     component: DashComponent,

@@ -10,6 +10,8 @@ import { userAdvanced } from '../../../service/usermanagement/requestTypes/userA
 export class ListUserComponent implements OnInit {
   users: userAdvanced[] = [];
   error: string = '';
+  sortDirection: boolean = true;
+  currentSortingColumn: string = '';
 
   constructor(private listUserService: ListUserService) { }
 
@@ -65,4 +67,24 @@ export class ListUserComponent implements OnInit {
     console.error(err);
     this.error = message;
   }
+
+  sortUsers(column: keyof userAdvanced): void {
+    if (this.currentSortingColumn === column) {
+      this.sortDirection = !this.sortDirection; // toggle sorting direction
+    } else {
+      this.currentSortingColumn = column;
+      this.sortDirection = true; // default to ascending when changing columns
+    }
+    this.users.sort((a, b) => {
+      if (a[column] < b[column]) {
+        return this.sortDirection ? -1 : 1;
+      } else if (a[column] > b[column]) {
+        return this.sortDirection ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+  
+
+
 }

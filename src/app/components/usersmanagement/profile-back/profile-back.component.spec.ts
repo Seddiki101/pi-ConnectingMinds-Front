@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashComponent } from './dash.component';
+import { ProfileBackComponent } from './profile-back.component';
 
-describe('DashComponent', () => {
-  let component: DashComponent;
-  let fixture: ComponentFixture<DashComponent>;
+describe('ProfileBackComponent', () => {
+  let component: ProfileBackComponent;
+  let fixture: ComponentFixture<ProfileBackComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashComponent ]
+      declarations: [ ProfileBackComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DashComponent);
+    fixture = TestBed.createComponent(ProfileBackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

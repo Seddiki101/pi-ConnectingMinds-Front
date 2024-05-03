@@ -46,7 +46,9 @@ export class UserLoginComponent {
       (data: LoginResponse) => {
 
         this.tokenService.useLocalStorage = this.rememberMe;
+        console.log("remember me " + this.rememberMe ) ;
         this.tokenService.token = data.token; 
+         console.log("this is wiw "+data.token);
         alert('Login successful');
         
         if (this.tokenService.isTokenValid()) {

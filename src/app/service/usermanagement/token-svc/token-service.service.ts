@@ -9,6 +9,13 @@ export class TokenService {
 
   useLocalStorage: boolean = true; // Default to using localStorage
 
+
+  constructor() {
+    // Check if token exists in localStorage on service initialization
+    this.useLocalStorage = localStorage.getItem('token') !== null;
+  }
+
+
   set token(token: string) {
     if (this.useLocalStorage) {
       localStorage.setItem('token', token);
