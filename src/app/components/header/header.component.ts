@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
     this.username = this.tokenService.getName(); // Fetch the username on component initialization
     this.email =  this.tokenService.getEmail();
     this.userImage = this.tokenService.getPic();
-  //  this.updateUserImage();
   }
 
   logout() {

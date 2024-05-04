@@ -44,6 +44,13 @@ import { ListWComponent } from './components/dashboard-Workshop/list-w/list-w.co
 import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajout-w.component";
 import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
 import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
+
+
+
+import { ListResourcesComponent } from "./components/resources/list-resources/list-resources.component";
+import { AjoutResourceComponent } from "./components/resources/ajout-resource/ajout-resource.component";
+import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
+import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
 import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
 import { ListComponent } from './components/forum/list/list.component';
 import { AjoutPostComponent } from './components/forum/ajout-post/ajout-post.component';
@@ -57,15 +64,6 @@ import { AjoutPost2Component } from './components/forum/ajout-post2/ajout-post2.
 import { RecherchePComponent } from './components/forum/recherche-p/recherche-p.component';
 import { DashboardPostComponent } from './components/dashboardP/dashboard-post/dashboard-post.component';
 import { DashAnswersComponent } from './components/dashboardP/dash-answers/dash-answers.component';
-
-import { ListResourcesComponent } from './components/resources/list-resources/list-resources.component';
-import { AjoutResourceComponent } from './components/resources/ajout-resource/ajout-resource.component';
-import { ShowResourceComponent } from './components/resources/show-resource/show-resource.component';
-import { MyResourcesComponent } from './components/resources/my-resources/my-resources.component';
-import { NavMyResourcesComponent } from './components/resources/nav-my-resources/nav-my-resources.component';
-import { BannerMyResourcesComponent } from './components/resources/banner-my-resources/banner-my-resources.component';
-import { DashMyResourcesComponent } from './components/resources/dash-my-resources/dash-my-resources.component';
-import { ReviewsMyResourcesComponent } from './components/resources/reviews-my-resources/reviews-my-resources.component';
 
 
 
@@ -90,20 +88,51 @@ import { ReviewsMyResourcesComponent } from './components/resources/reviews-my-r
     ChatAppComponent,
     ChatSidebarComponent,
     MainChatComponent,
+    UserDetailsComponent,
+    AccessComponent,
     ProfileBackComponent,
-    AjoutWComponent,
+
+        AjoutWComponent,
     GetAllWComponent,
     UpdateWComponent,
     AddReservationComponent,
     ListReservationComponent,
     ReservationModalComponent,
     GetByIdWorkshopComponent,
-    ListWComponent,
+        ListWComponent,
     DAjoutWComponent,
     DUpdateWComponent,
     DGetByIdWComponent,
+
+    HomeComponent,
+    DashComponent,
+    ForgottenComponent,
+    ResetpassComponent,
+    ProfileComponent,
+    ListUserComponent,
+    Error404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    NavbarComponent,
     SendMessageModalComponent,
     UserDetailsComponent,
+    ListResourcesComponent,
+    AjoutResourceComponent,
+    ShowResourceComponent,
+    MyResourcesComponent,
+    AppComponent,
+    UserLoginComponent,
+    RegisterUserComponent,ListUserComponent,
+    Error404Component,
+    HeaderComponent,
+    FooterComponent,
+    SidenavComponent,
+    NavbarComponent,
+    ChatAppComponent,
+    ChatSidebarComponent,
+    MainChatComponent,
+    SendMessageModalComponent,
     ChatFooterComponent,
     ListComponent,
     AjoutPostComponent,
@@ -117,16 +146,6 @@ import { ReviewsMyResourcesComponent } from './components/resources/reviews-my-r
     RecherchePComponent,
     DashboardPostComponent,
     DashAnswersComponent,
-
-    
-    ListResourcesComponent,
-    AjoutResourceComponent,
-    ShowResourceComponent,
-    MyResourcesComponent,
-    NavMyResourcesComponent,
-    BannerMyResourcesComponent,
-    DashMyResourcesComponent,
-    ReviewsMyResourcesComponent,
 
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, 
