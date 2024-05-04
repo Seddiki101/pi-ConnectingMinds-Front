@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenService } from '../token-svc/token-service.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticService {
 
-  private apiUrl = 'http://localhost:8082'; // Base URL for API
+  private apiUrl = environment.userApiUrl; // Base URL for API
 
   constructor(
     private router: Router,
@@ -25,7 +26,7 @@ export class AuthenticService {
   }
 
   getId(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/back/user/getUserSpot`, { headers: this.tokenService.getHeaders() });
+    return this.http.get<number>(`${this.apiUrl}/back/getUserSpot`, { headers: this.tokenService.getHeaders() });
   }
 
 }
