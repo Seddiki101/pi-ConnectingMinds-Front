@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../service/usermanagement/profile-svc/profile.service'; 
 import { UserRegister } from '../../../service/usermanagement/requestTypes/userRegister'; 
 import { Router } from '@angular/router';
-import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
+import { AuthenticService } from 'src/app/service/usermanagement/authentic/authentic.service';
 
 @Component({
   selector: 'app-profile',

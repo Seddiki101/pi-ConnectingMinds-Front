@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
+import { AuthenticService } from 'src/app/service/usermanagement/authentic/authentic.service';
 import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 @Component({
