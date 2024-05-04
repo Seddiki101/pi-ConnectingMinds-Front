@@ -104,7 +104,7 @@ const routes: Routes = [
   { path: 'chatbot', component: ChatbotComponent },
   {path:'AddReponse/:id', component: AddAnswerComponent},
   {path:'reponseParId/:id', component: ListReponsesComponent},
-  {path:'list', component: ListComponent},
+  {path:'listP', component: ListComponent},
   {path:'ajout', component: AjoutPostComponent},
   {path:'update/:id', component: UpdateComponent},
   {path:'updateReponse/:id', component: UpdateAnswerComponent},
