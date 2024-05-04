@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Question} from "./question";
 import {catchError, Observable, tap, throwError} from 'rxjs';
 import {Reponse} from "./reponse";
-import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 
 @Injectable({
@@ -11,7 +10,7 @@ import { TokenService } from 'src/app/service/usermanagement/token-svc/token-ser
 })
 export class SharedService {
 
-  constructor(private http: HttpClient ,  private tokenservice: TokenService) { }
+  constructor(private http: HttpClient) { }
 
   private url = 'http://localhost:8090/';
   getAllPosts() {
@@ -64,7 +63,7 @@ export class SharedService {
         // formData.append('imageFile', imageFile);
 
         // Définir les en-têtes pour spécifier le type de contenu multipart
-        const headers = this.tokenservice.getHeaders() ;//new HttpHeaders();
+        const headers = new HttpHeaders();
         headers.set('Content-Type', 'multipart/form-data');
 
         // Faire la requête POST vers le backend
