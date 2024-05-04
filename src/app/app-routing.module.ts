@@ -25,15 +25,17 @@ import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajou
 import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
 import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
 import {ListComponent} from "./components/forum/list/list.component";
+//" "./components/forum/update-answer/update-answer.component";
 import {AjoutPostComponent} from "./components/forum/ajout-post/ajout-post.component";
 import {UpdateComponent} from "./components/forum/update/update.component";
 import {ListReponsesComponent} from "./components/forum/list-reponses/list-reponses.component";
 import {AddAnswerComponent} from "./components/forum/add-answer/add-answer.component";
-import {UpdateAnswerComponent} from "./components/forum/update-answer/update-answer.component";
-import {ChatbotComponent} from "./components/forum/chatbot/chatbot.component";
+import {UpdateAnswerComponent} from"./components/forum/update-answer/update-answer.component";
+import {ChatbotComponent} from"./components/forum/chatbot/chatbot.component";
 import {ChatbotResponseComponent} from "./components/forum/chatbot-response/chatbot-response.component";
 import {AjoutPost2Component} from "./components/forum/ajout-post2/ajout-post2.component";
 import {RecherchePComponent} from "./components/forum/recherche-p/recherche-p.component";
+// "./components/forum/recherche-p/recherche-p.component";
 import {DashboardPostComponent} from "./components/dashboardP/dashboard-post/dashboard-post.component";
 import {DashAnswersComponent} from "./components/dashboardP/dash-answers/dash-answers.component";
 
@@ -106,7 +108,7 @@ const routes: Routes = [
   {path:'reponseParId/:id', component: ListReponsesComponent},
   {path:'listP', component: ListComponent},
   {path:'ajout', component: AjoutPostComponent},
-  {path:'update/:id', component: UpdateComponent},
+  {path:'updateP/:id', component: UpdateComponent},
   {path:'updateReponse/:id', component: UpdateAnswerComponent},
   { path: 'DList', component: DashboardPostComponent},
   { path: 'DAnswer/:id', component: DashAnswersComponent},
