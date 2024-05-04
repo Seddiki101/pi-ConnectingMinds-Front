@@ -36,6 +36,12 @@ import {AjoutPost2Component} from "./components/forum/ajout-post2/ajout-post2.co
 import {RecherchePComponent} from "./components/forum/recherche-p/recherche-p.component";
 import {DashboardPostComponent} from "./components/dashboardP/dashboard-post/dashboard-post.component";
 import {DashAnswersComponent} from "./components/dashboardP/dash-answers/dash-answers.component";
+import { ListResourcesComponent } from './components/resources/list-resources/list-resources.component';
+import { ShowResourceComponent } from './components/resources/show-resource/show-resource.component';
+import { AjoutResourceComponent } from './components/resources/ajout-resource/ajout-resource.component';
+import { MyResourcesComponent } from './components/resources/my-resources/my-resources.component';
+import { ReviewsMyResourcesComponent } from "./components/resources/reviews-my-resources/reviews-my-resources.component";
+import { DashMyResourcesComponent } from "./components/resources/dash-my-resources/dash-my-resources.component";
 
 
 const routes: Routes = [
@@ -88,6 +94,14 @@ const routes: Routes = [
     canActivate: [authGuard,RoleGuard],
     data: { title: "User List" , role: "ADMIN" },
   },
+
+
+  { path: 'list-resources' , component: ListResourcesComponent },
+{ path: 'add-resource' , component: AjoutResourceComponent},
+{ path: 'my-resources/:id' , component: MyResourcesComponent},
+{ path: 'show-resource/:id' , component: ShowResourceComponent },
+{ path: 'reviews-resources' , component: ReviewsMyResourcesComponent },
+{ path: 'dash-resources' , component: DashMyResourcesComponent },
 
     {path: 'listRes', component: ListReservationComponent},
   {path: 'list', component: GetAllWComponent},
