@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="listP">All posts</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Mes posts</a></li>
+                        
                         <li class="breadcrumb-item active" aria-current="page">
                             Add New Post
                         </li>
@@ -116,13 +116,13 @@
                     <div class="mb-3 col-md-9">
                         <!-- Title -->
                         <label for="postTitle" class="form-label">Question</label>
-                        <input type="text" [(ngModel)]="post.contenu" class="form-control text-dark" placeholder="Contenu question">
+                        <input type="text" [(ngModel)]="post.contenu" class="form-control text-dark" placeholder="Content">
                     </div>
                     <form action="#" class="dropzone mt-4 border-dashed rounded-2 min-h-0 dz-clickable">
                         <div class="form-group">
-                            <label for="image">Image (optionnel)</label>
+                            <label for="image">Image </label>
                             <input (change)="onFileSelected($event)" type="file" accept="image/*" class="form-control" id="image" name="image" [(ngModel)]="post.imageFile">
-                            <label for="image">Cliquer pour ajouter une image</label>
+                            <label for="image">Click to add an image</label>
                         </div>
 
                         <div class="mt-4">
@@ -136,7 +136,7 @@
                                             <div class="mb-3 col-md-9">
                                                 <!-- Title -->
                                                 <label for="postTitle" class="form-label">Question</label>
-                                                <input type="text" [(ngModel)]="post.contenu" id="postTitle" class="form-control text-dark" placeholder="Contenu question">
+                                                <input type="text" [(ngModel)]="post.contenu" id="postTitle" class="form-control text-dark" placeholder="Content">
                                             </div>
                                             <input type="file" accept="image/*" class="form-control" name="image" [(ngModel)]="post.imageFile">
                                         </ng-container>
@@ -145,10 +145,10 @@
                                 <br>
                                 <div class="col-12 col-md-3  text-end d-grid">
                                     <!-- button -->
-                                    <button type="button" (click)="AjouterQuestion()" class="btn btn-primary rounded-pill">Publier Question</button>
+                                    <button  href="listP" type="button" (click)="AjouterQuestion()" class="btn btn-primary rounded-pill">Publish</button>
 
                                 </div>
-                                <a href="list"  (click)="AjouterQuestion()" class="add-question-btn">Publier Question</a>
+                              
                             </form>
                         </div>
 

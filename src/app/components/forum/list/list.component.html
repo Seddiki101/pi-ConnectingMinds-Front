@@ -15,7 +15,6 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="listP">All posts</a></li>
-                        <li class="breadcrumb-item"><a href="#">Mes posts</a></li>
                         <li class="breadcrumb-item"><a href="ajout">Add new post</a></li>
                     </ol>
                 </nav>
@@ -69,16 +68,21 @@
 <div *ngFor="let group of visibleGroups">
     <div *ngFor="let question of group" class="question">
       <h4>{{ question.contenu }}</h4>
+      
       <ng-container *ngIf="question.image">
         <img [src]="'http://localhost:8090/Questions/' + question.idQuestion + '/image'" alt="Image">
       </ng-container>
-      <p>Publié par {{ question.firstName }} {{ question.lastName }}, <br> le {{  question.createdAt | date  }}</p>
+      <p>Published by ,{{ question.firstName }} {{ question.lastName }}, <br> on {{  question.createdAt | date  }}</p>
+      <!-- Afficher le nombre de likes -->
+      <p *ngIf="question.like === null"></p>
+      <p *ngIf="question.like !== null">{{ question.like }} Likes</p>
       <footer class="post-footer">
         <ng-container *ngIf="question.idUser === currentuser">
           <li>
             <button [routerLink]="['/updateP', question.idQuestion]" class="update-question-btn">
               <i class="fas fa-pencil-alt"></i><!-- Espace insécable -->
             </button>
+            <button class="transparent-button" style="display: none;" ></button>
             <span class="delete-question-btn" (click)="delete(question.idQuestion)">
               <i class="fas fa-trash"></i>
             </span>
@@ -86,14 +90,24 @@
         </ng-container>
         <ul class="actions">
           <li>
-            <i class="fa fa-heart"></i> J'aime
-            <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', question.idQuestion]">Répondre</a>
+            <button (click)="addLike(question.idQuestion)" class="update-question-btn">
+              <i class="fa fa-heart"></i> <!-- Espace insécable -->
+            </button>
+            
+            <button (click)="removeLike(question.idQuestion)" class="update-question-btn">
+                <i class="fa fa-thumbs-down"></i> <!-- Espace insécable -->
+              </button>
+              
+              
+            <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', question.idQuestion]">Reply</a>
           </li>
-          <a [routerLink]="['/reponseParId', question.idQuestion]">Voir réponses</a>
+          <a [routerLink]="['/reponseParId', question.idQuestion]">View replies</a>
         </ul>
       </footer>
     </div>
   </div>
+  
+  
   
   
             </section>

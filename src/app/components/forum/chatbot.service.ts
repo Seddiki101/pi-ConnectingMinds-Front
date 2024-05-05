@@ -6,7 +6,7 @@ import {catchError, throwError} from "rxjs";
   providedIn: 'root'
 })
 export class ChatbotService {
-  apiUrl = 'http://localhost:8082/hitOpenAiApi';
+  apiUrl = 'http://localhost:8090/hitOpenAiApi';
 
   constructor(private http: HttpClient) { }
   sendMessage(message: string) {

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { SharedService } from "../shared.service";
 import { Question } from "../question";
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-ajout-post',
@@ -20,7 +23,11 @@ export class AjoutPostComponent {
     updatedAt: new Date(),
   };
 
-  constructor(public _shared: SharedService) {}
+  constructor(public _shared: SharedService , private route: ActivatedRoute , private router: Router) {
+    this.route.params.subscribe(params => {
+      this.post.idUser = params['id']; // Extracting idUser from route parameters
+    });
+  }
   selectimage(e :any){
     this.image = e.target.files[0];
     console.log(this.image);
@@ -57,6 +64,7 @@ export class AjoutPostComponent {
       // Si this.post.image n'est pas un Blob, affichez un message d'erreur ou effectuez une autre action appropriée
       console.error('L\'image sélectionnée n\'est pas valide.');
     }
+    this.router.navigate(['/listP']);
   }
 
 

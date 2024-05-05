@@ -4,6 +4,7 @@ import { SharedService } from "../shared.service";
 import { Reponse } from "../reponse";
 import { AuthenticService } from '../../../service/usermanagement/authentic/authentic.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -17,18 +18,19 @@ export class ListComponent {
   fp: any[];
   post: any;
   postss: any[];
-  currentuser: number = 0;
+  currentuser : number = 0  ;
   userIdSubscription: Subscription;
+  
   currentPage = 0;
   itemsPerPage = 2; // Nombre de questions par page
 
-  constructor(public _shared: SharedService, private authsvc: AuthenticService) { }
+  constructor(public _shared: SharedService , private route: ActivatedRoute,  private authsvc: AuthenticService) { }
 
   ngOnInit(): void {
     this.userIdSubscription = this.authsvc.getId().subscribe(userId => {
-      this.currentuser = userId;
-      console.log("id req1 " + userId);
-      this.getQuestions();
+        this.currentuser = userId;
+        console.log("id req1 "+userId)  
+        this.getQuestions();  
     });
   }
 
@@ -111,5 +113,31 @@ export class ListComponent {
 
   get totalPages(): number {
     return Math.ceil(this.posts.length / this.itemsPerPage);
+  }
+  addLike(idQuestion: number): void {
+    this._shared.addLikeToQuestion(idQuestion).subscribe(
+      () => {
+        console.log('Like ajouté avec succès');
+        // Mettez à jour votre logique ici si nécessaire, par exemple, rafraîchissez la liste des questions après avoir ajouté un like
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du like:', error);
+        console.error('Détails de l\'erreur:', error.error); 
+      }
+    );
+  }
+  
+
+  removeLike(idQuestion: number): void {
+    this._shared.removeLikeFromQuestion(idQuestion).subscribe(
+      () => {
+        console.log('Like supprimé avec succès');
+        // Mettez à jour votre logique ici si nécessaire
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du like:', error);
+        // Gérez l'erreur d'une manière appropriée
+      }
+    );
   }
 }

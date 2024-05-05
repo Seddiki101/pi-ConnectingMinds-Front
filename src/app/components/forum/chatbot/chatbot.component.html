@@ -1,6 +1,5 @@
 <app-header></app-header>
 <div class="container">
-
     <header>
         <br>
     </header>
@@ -12,9 +11,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="list">All posts</a>
+                            <a href="listP">All posts</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Mes posts</a></li>
+                       
                         <li class="breadcrumb-item active" aria-current="page">
                             Chatbot
                         </li>
@@ -22,43 +21,26 @@
                 </nav>
             </div>
         </div>
-            <div>
-                <a href="list" class="btn btn-outline-secondary">Back to all posts</a>
-            </div>
+        <div>
+            <a href="listP" class="btn btn-outline-secondary">Back to all posts</a>
         </div>
     </div>
-
-
-<div class="chatbot">
-    <ul class="chat-history">
-        <li *ngFor="let message of messages">
-            <div class="message-container">
-                <span class="message-sender">{{ message.role }}</span>:
-                <span class="message-content">{{ message.content }}</span>
-            </div>
-        </li>
-    </ul>
-
-    <div class="user-input">
-        <input type="text" [(ngModel)]="newMessage" name="message" placeholder="Enter your message..." class="large-input">
-        <button type="submit" class="send-button" (click)="sendMessage()">Send</button>
+    <div class="chatbot">
+        <ul class="chat-history">
+            <li *ngFor="let message of messages">
+                <div class="message-container">
+                    <span class="message-sender">{{ message.role }}</span>:
+                    <span class="message-content">{{ message.content }}</span>
+                </div>
+            </li>
+        </ul>
+        <div class="user-input">
+            <input type="text" [(ngModel)]="newMessage" name="message" placeholder="Enter your message..." class="large-input">
+            <button type="submit" class="send-button" (click)="sendMessage()">Send</button>
+        </div>
+        <div class="chatbot-response">
+            {{ selectedBotResponse }}
+        </div>
     </div>
-
-    <app-chatbot-response [botResponse]="selectedBotResponse"></app-chatbot-response>
-
-    <div class="chat-response-container"> </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-
 </div>
 <app-footer></app-footer>
