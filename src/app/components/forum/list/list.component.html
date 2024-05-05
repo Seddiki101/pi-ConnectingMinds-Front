@@ -64,50 +64,53 @@
         <form>
 
             <section class="posts">
-                <ng-container *ngFor="let post of posts">
-                    
-                    <article class="post">
-                        <h4>{{ post.contenu }}</h4>
-            
-                        <ng-container *ngIf="post.image">
-                            <img [src]="'http://localhost:8090/Questions/' + post.idQuestion + '/image'" alt="Image">
-                        </ng-container>
-                        <p>Publié par {{ post.firstName }} {{ post.lastName }}, <br> le {{  post.createdAt | date  }}</p>
-            
-
-
-                        <footer class="post-footer">
-                            <ng-container *ngIf="post.idUser === currentuser">
-
-                            
-
-
-                                <li>
-                                    <button [routerLink]="['/updateP', post.idQuestion]" class="update-question-btn">
-                                        <i class="fa fa-pencil-square-o"></i> Modifier
-                                    </button>
-                                    <span class="delete-question-btn" (click)="delete(post.idQuestion)">
-                                        <i class="fa fa-trash"></i> Supprimer
-                                    </span>
-                                </li>
-                            </ng-container>
-                            <ul class="actions">
-                                <li>
-                                    <i class="fa fa-heart"></i> J'aime
-                                    <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', post.idQuestion]">Répondre</a>
-                                </li>
-                                <a [routerLink]="['/reponseParId', post.idQuestion]">Voir réponses</a>
-                            </ul>
-                        </footer>
-                        
-                    </article>
-                
-                </ng-container>
+                <!-- Liste des questions -->
+<!-- Liste des questions -->
+<div *ngFor="let group of visibleGroups">
+    <div *ngFor="let question of group" class="question">
+      <h4>{{ question.contenu }}</h4>
+      <ng-container *ngIf="question.image">
+        <img [src]="'http://localhost:8090/Questions/' + question.idQuestion + '/image'" alt="Image">
+      </ng-container>
+      <p>Publié par {{ question.firstName }} {{ question.lastName }}, <br> le {{  question.createdAt | date  }}</p>
+      <footer class="post-footer">
+        <ng-container *ngIf="question.idUser === currentuser">
+          <li>
+            <button [routerLink]="['/updateP', question.idQuestion]" class="update-question-btn">
+              <i class="fas fa-pencil-alt"></i><!-- Espace insécable -->
+            </button>
+            <span class="delete-question-btn" (click)="delete(question.idQuestion)">
+              <i class="fas fa-trash"></i>
+            </span>
+          </li>
+        </ng-container>
+        <ul class="actions">
+          <li>
+            <i class="fa fa-heart"></i> J'aime
+            <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', question.idQuestion]">Répondre</a>
+          </li>
+          <a [routerLink]="['/reponseParId', question.idQuestion]">Voir réponses</a>
+        </ul>
+      </footer>
+    </div>
+  </div>
+  
+  
             </section>
             
         </form>
-
-
+        <div class="pagination">
+            <button class="btn btn-primary" (click)="previousPage()">Précédent</button>
+            <span>{{ currentPage + 1 }} / {{ totalPages }}</span>
+            <button class="btn btn-primary" (click)="nextPage()">Suivant</button>
+        </div>
+    
+        <!-- Liste des questions -->
+        <div *ngFor="let group of visibleGroups">
+            <div *ngFor="let question of group" class="question">
+                <!-- Affichage de la question -->
+            </div>
+        </div>
 
     </div>
 </div>
