@@ -22,7 +22,10 @@ export class AiAssistantService {
   getConversationById(id: number): Observable<Conversation> {
     return this.http.get<Conversation>(`${this.baseUrl}/${id}`);
   }
-
+  generateImage(message: string): Observable<string> {
+    const userMessage: UserMessage = { message };
+    return this.http.post<string>(`${this.baseUrl}/ai/generate/image`, userMessage);
+  }
   createOrUpdateConversation(
     message: string,
     userId?: number,

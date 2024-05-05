@@ -20,6 +20,7 @@ export class AiAssistantComponent implements OnInit {
   tokenDetails: any;
   ownerId: number;
   messageToSend: String = "";
+  processing :boolean = false;
 
   constructor(
     private conversationService: AiAssistantService,
@@ -32,7 +33,6 @@ export class AiAssistantComponent implements OnInit {
     this.authenticService.getId().subscribe((id) => {
       this.ownerId = id;
       this.tokenDetails = this.tokenService.getTokenDetails();
-      console.log(this.ownerId);
       if (this.ownerId) {
         this.loadRecentConversations(this.ownerId);
       }
@@ -170,17 +170,19 @@ export class AiAssistantComponent implements OnInit {
   }
 
   sendMessage(): void {
-    if (this.messageToSend.trim() !== "") {
+    const prompt =this.messageToSend.trim();
+    if ( prompt!== "") {
       if (
         !this.contentFilterService.containsInappropriateWords(
-          this.messageToSend.trim()
+          prompt
         )
       ) {
         if (this.selectedConversationId !== null && this.selectedConversation) {
+          this.processing = true;
           // Send message to the backend and update the conversation
           this.conversationService
             .createOrUpdateConversation(
-              this.messageToSend.trim(),
+              prompt,
               undefined,
               this.selectedConversationId
             )
@@ -197,13 +199,16 @@ export class AiAssistantComponent implements OnInit {
                       localStorage.setItem(
                         "selectedConversationId",
                         updatedConversation.id.toString()
-                      );
+                      );                   
+                      this.processing = false;
                       this.messageToSend = "";
                       this.scrollToBottom();
                     });
                 }
               },
               (error) => {
+                this.processing = false;
+                this.messageToSend = "";
                 this._coreService.openSnackBar(
                   "Error Sending Message!",
                   "error",
@@ -214,15 +219,15 @@ export class AiAssistantComponent implements OnInit {
         }
       } else {
         this._coreService.openSnackBar(
-          "You can't say in the chat please behave! ok ?",
-          "OK",
-          3000
+          "Oops! It looks like you've used inappropriate language. Let's keep the conversation respectful, okay?",
+          "Ok",
+          4000
         );
       }
     } else {
       this._coreService.openSnackBar(
         "Please type something first!",
-        "OK",
+        "Ok",
         3000
       );
     }
@@ -262,6 +267,6 @@ export class AiAssistantComponent implements OnInit {
       try {
         this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
       } catch(err) { }
-    }, 100); // Adjust the delay time as needed
+    }, 100); 
   }
 }

@@ -28,6 +28,7 @@ import { EventDetailsComponent } from "src/app/pages/kanban-management/event-det
 import { AddEditEventComponent } from "src/app/pages/kanban-management/add-edit-event/add-edit-event.component";
 import { FullCalendarModule } from "@fullcalendar/angular";
 import { AiAssistantComponent } from "src/app/pages/kanban-management/ai-assistant/ai-assistant.component";
+import { AiImageGenerateComponent } from "src/app/pages/kanban-management/ai-image-generate/ai-image-generate.component";
 
 const routes: Routes = [
   {
@@ -116,7 +117,11 @@ const routes: Routes = [
         path: "chatgpt4",
         component: AiAssistantComponent,
         data: { title: "Ai assistant" },
-      },
+      }, {
+        path: "dalle3",
+        component: AiImageGenerateComponent,
+        data: { title: "Ai image Generator" },
+      }
       // Add more child routes as needed
     ],
     data: { title: "Project Management" },
@@ -148,6 +153,7 @@ const routes: Routes = [
     AddEditEventComponent,
     EventDetailsComponent,
     AiAssistantComponent,
+    AiImageGenerateComponent,
   ],
   imports: [
     CommonModule,

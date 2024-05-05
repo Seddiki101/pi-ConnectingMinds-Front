@@ -232,10 +232,12 @@
                   id="message"
                   [(ngModel)]="messageToSend"
                   autocomplete="off"
+                  [disabled]="processing"
                 />
               </div>
               <div class="position-absolute end-0 mt-n7 me-4">
                 <button
+                    [disabled]="processing"
                   type="submit"
                   class="fs-3 btn text-primary btn-focus-none"
                 >
