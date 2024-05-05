@@ -1,0 +1,18 @@
+.rounded-image {
+  width: 512px;
+  height: 512px;
+  border-radius: 20px;
+}
+
+.chat-content {
+  height: 80vh; /* Ensure the container occupies full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+@media screen and (max-width: 768px) {
+  .rounded-image {
+    width: 100%; /* Set image width to 100% of container */
+    height: auto; /* Automatically adjust height to maintain aspect ratio */
+    border-radius: 20px;
+  }
+}

@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Conversation } from "src/app/models/conversation/conversation.model";
+import { GeneratedImage } from "src/app/models/generatedImage/generated-image.model";
 import { UserMessage } from "src/app/models/userMessage/user-message.model";
 import { environment } from "src/environments/environment";
 
@@ -22,9 +23,9 @@ export class AiAssistantService {
   getConversationById(id: number): Observable<Conversation> {
     return this.http.get<Conversation>(`${this.baseUrl}/${id}`);
   }
-  generateImage(message: string): Observable<string> {
+  generateImage(message: string): Observable<GeneratedImage> {
     const userMessage: UserMessage = { message };
-    return this.http.post<string>(`${this.baseUrl}/ai/generate/image`, userMessage);
+    return this.http.post<GeneratedImage>(`${this.baseUrl}/ai/generate/image`, userMessage);
   }
   createOrUpdateConversation(
     message: string,
