@@ -87,15 +87,4 @@ export class SendMessageModalComponent {
       });
     }
   }
-  // closeModal() {
-  //   const modalElement = document.getElementById('newchatModal');
-  //   if (modalElement) {
-  //     const modalInstance = bootstrap.Modal.getInstance(modalElement);  
-  //     if (modalInstance) {
-  //       modalInstance.hide();
-  //     }
-  //   }
-  //   this.selectedUser = null;
-  //   this.messageContent = '';
-  // }
 }
