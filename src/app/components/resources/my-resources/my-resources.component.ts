@@ -13,9 +13,7 @@ export class MyResourcesComponent {
   resources :any ;
   initialResources :any ;
   showUpdate=false ;
-  showDelete=false ;
   toUpdateResource:any ;
-  toRemoveResource:any ;
   UpdatedResource :any ={
     description:''
 
@@ -42,12 +40,6 @@ export class MyResourcesComponent {
     );
   
   
-  }
-  showDeletepopUp(id :any){
-    this.showDelete=true ;
-    this.toRemoveResource=id;
-
-
   }
   update (id :any){
 
@@ -91,20 +83,16 @@ export class MyResourcesComponent {
       }
     );
   }
-  close1(){
+  close (){
    
     this.showUpdate=false ;
 
-  }
-  close2(){
-   
-    this.showDelete=false ;
 
   }
-  delete(){
+  delete(id :any ){
   
 
-    this._service.DeleteResource(this.toRemoveResource).subscribe(
+    this._service.DeleteResource(id).subscribe(
       res=>{
         console.log(res);
        

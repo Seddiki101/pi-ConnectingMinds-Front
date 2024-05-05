@@ -51,10 +51,12 @@ import { ListResourcesComponent } from "./components/resources/list-resources/li
 import { AjoutResourceComponent } from "./components/resources/ajout-resource/ajout-resource.component";
 import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
 import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
+
 import { NavMyResourcesComponent } from './components/resources/nav-my-resources/nav-my-resources.component';
 import { BannerMyResourcesComponent } from './components/resources/banner-my-resources/banner-my-resources.component';
 import { DashMyResourcesComponent } from './components/resources/dash-my-resources/dash-my-resources.component';
 import { ReviewsMyResourcesComponent } from './components/resources/reviews-my-resources/reviews-my-resources.component';
+
 import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
 import { ListComponent } from './components/forum/list/list.component';
 import { AjoutPostComponent } from './components/forum/ajout-post/ajout-post.component';
@@ -125,10 +127,12 @@ import { DashAnswersComponent } from './components/dashboardP/dash-answers/dash-
     AjoutResourceComponent,
     ShowResourceComponent,
     MyResourcesComponent,
+
 	NavMyResourcesComponent,
     BannerMyResourcesComponent,
     DashMyResourcesComponent,
     ReviewsMyResourcesComponent,
+
     AppComponent,
     UserLoginComponent,
     RegisterUserComponent,ListUserComponent,

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpEventType, HttpHeaders, HttpResponse  } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TokenService } from '../usermanagement/token-svc/token-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourcesService {
 
-  constructor(private http:HttpClient, private  tokenService:TokenService ) { }
+  constructor(private http: HttpClient) { }
 
 
   private url = environment.resource;
@@ -35,7 +34,7 @@ export class ResourcesService {
   }
   createNewResource( content: File){
     const formData: FormData = new FormData();
-    formData.append('content', content );
+    formData.append('content', content);
    // formData.append('resource',resource);
 
  
@@ -44,11 +43,9 @@ export class ResourcesService {
     return this.http.post( this.url + 'addResource' ,formData );
  
    }
-  
-
    createNewResource2( resource : any ){
     const formData: FormData = new FormData();
-    formData.append('resource', resource );
+    formData.append('resource', resource);
    // formData.append('resource',resource);
 
  
@@ -94,7 +91,7 @@ export class ResourcesService {
  
 
    
-    return this.http.post( this.url + 'addReview' ,review, { headers: this.tokenService.getHeaders() });
+    return this.http.post( this.url + 'addReview' ,review);
  
    }
    getAllReviewsOfOneResource(id: any){
