@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import {Question} from "../question";
 import {SharedService} from "../shared.service";
 import {Reponse} from "../reponse";
-import { AuthenticService } from '../../../service/usermanagement/authentic/authentic.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -17,24 +15,12 @@ export class ListComponent {
     fp: any[];
     post :any;
     postss: any[];
-    currentuser : number = 0  ;
-    userIdSubscription: Subscription;
 
 
-    constructor(public _shared: SharedService , private authsvc: AuthenticService) {}
+    constructor(public _shared: SharedService) {}
 
     ngOnInit(): void {
-        this.userIdSubscription = this.authsvc.getId().subscribe(userId => {
-            this.currentuser = userId;
-            console.log("id req1 "+userId)  
-            this.getQuestions();  
-        });
-
-        //this.getQuestions();
-    }
-
-    ngOnDestroy(): void {
-        this.userIdSubscription.unsubscribe();
+        this.getQuestions();
     }
 
     getQuestions() {

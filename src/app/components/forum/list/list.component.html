@@ -14,7 +14,7 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="listP">All posts</a></li>
+                        <li class="breadcrumb-item"><a href="list">All posts</a></li>
                         <li class="breadcrumb-item"><a href="#">Mes posts</a></li>
                         <li class="breadcrumb-item"><a href="ajout">Add new post</a></li>
                     </ol>
@@ -65,46 +65,39 @@
 
             <section class="posts">
                 <ng-container *ngFor="let post of posts">
-                    
                     <article class="post">
                         <h4>{{ post.contenu }}</h4>
-            
+
                         <ng-container *ngIf="post.image">
-                            <img [src]="'http://localhost:8090/Questions/' + post.idQuestion + '/image'" alt="Image">
+                            <img [src]="'http://localhost:8082/Questions/' + post.idQuestion + '/image'" alt="Image">
                         </ng-container>
                         <p>Publié par {{ post.firstName }} {{ post.lastName }}, <br> le {{  post.createdAt | date  }}</p>
-            
 
 
                         <footer class="post-footer">
-                            <ng-container *ngIf="post.idUser === currentuser">
+                            <li>
+                                <button [routerLink]="['/update',post.idQuestion]" class="update-question-btn" >
+                                    <i class="fa fa-pencil-square-o"></i> </button>
 
-                            
-
-
-                                <li>
-                                    <button [routerLink]="['/updateP', post.idQuestion]" class="update-question-btn">
-                                        <i class="fa fa-pencil-square-o"></i> Modifier
-                                    </button>
-                                    <span class="delete-question-btn" (click)="delete(post.idQuestion)">
-                                        <i class="fa fa-trash"></i> Supprimer
-                                    </span>
-                                </li>
-                            </ng-container>
+                                <i class="aaa">aaa</i>
+                                <span class="delete-question-btn"(click)="delete(post.idQuestion)">
+               <i class="fa fa-trash"></i> </span>
+                            </li>
                             <ul class="actions">
                                 <li>
-                                    <i class="fa fa-heart"></i> J'aime
-                                    <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', post.idQuestion]">Répondre</a>
+                                    <i  class="fa fa-heart"></i> J'aime <i  class="fa fa-reply"></i>   <a [routerLink]="['/AddReponse', post.idQuestion]">Répondre</a>
+
+
+
+
                                 </li>
                                 <a [routerLink]="['/reponseParId', post.idQuestion]">Voir réponses</a>
+
                             </ul>
                         </footer>
-                        
                     </article>
-                
                 </ng-container>
             </section>
-            
         </form>
 
 

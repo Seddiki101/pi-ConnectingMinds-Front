@@ -3,8 +3,6 @@ import {SharedService} from "../shared.service";
 import {Question} from "../question";
 import {Reponse} from "../reponse";
 import {ActivatedRoute} from "@angular/router";
-import { Subscription } from 'rxjs';
-import { AuthenticService } from '../../../service/usermanagement/authentic/authentic.service';
 
 @Component({
   selector: 'app-list-reponses',
@@ -18,20 +16,9 @@ export class ListReponsesComponent {
     fp: any[];
     rep :any;
     reponsess: any[];
-    currentuser : number = 0  ;
-    userIdSubscription: Subscription;
 
-  constructor(public _shared: SharedService,  private route: ActivatedRoute,  private authsvc: AuthenticService) {}
+  constructor(public _shared: SharedService,  private route: ActivatedRoute) {}
     ngOnInit(): void {
-        this.userIdSubscription = this.authsvc.getId().subscribe(userId => {
-            this.currentuser = userId;
-            console.log("id req1 "+userId)  
-            this.getReponses();  
-        });
-        
-        
-    }
-    getReponses() {
         // Récupérer l'identifiant de la question depuis l'URL
         // @ts-ignore
         this.idQuestion = +this.route.snapshot.paramMap.get('id');
