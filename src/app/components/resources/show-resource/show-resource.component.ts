@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./show-resource.component.css']
 })
 export class ShowResourceComponent {
+  searchedReviews :any ;
+  initialReviews :any ;
   liked=false;
   resource :any ;
   toUpdateReview:any ;
@@ -63,6 +65,7 @@ export class ShowResourceComponent {
       console.log(res);
   
       this.reviews = res;
+      this.initialReviews = res;
       
     },
     err=>{
@@ -212,6 +215,21 @@ export class ShowResourceComponent {
 
 
   }
+  performSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value.trim(); // Cast and safely access the value
+    if (!value) {
+      this.searchedReviews = [];
+      this.reviews=this.initialReviews;
+      console.log("if");
+    } else {
+        this.searchedReviews = this.reviews.filter((r:any)=>
+            r.content.toLowerCase().includes(value.toLowerCase()) 
+        );
+        this.reviews=this.searchedReviews;
+        console.log(this.searchedReviews);
+        console.log("else");
+    }
+}
 
 
 

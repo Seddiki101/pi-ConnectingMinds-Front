@@ -54,7 +54,7 @@ export class ResourcesService {
  
 
    
-    return this.http.post( this.url + 'addResource2' ,resource);
+    return this.http.post( this.url + 'addResource2' ,resource, { headers: this.tokenService.getHeaders() });
  
    }
 

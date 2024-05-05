@@ -10,8 +10,8 @@ import { ResourcesService } from '../../../service/ressource-management-service/
 export class MyResourcesComponent {
   id : any ;
   searchedResources :any ;
-  resources :any ;
   initialResources :any ;
+  resources :any ;
   showUpdate=false ;
   showDelete=false ;
   toUpdateResource:any ;
