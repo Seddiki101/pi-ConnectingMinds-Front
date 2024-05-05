@@ -82,7 +82,7 @@ export class TaskComponent implements OnInit {
               this.teamService
                 .getTeamById(parseInt(selectedTeamId))
                 .subscribe((team) => {
-                  if (team.tasks) {
+                  if (team && team.tasks) {
                     this.tasks = team.tasks;
                     this.selectedTeam = team;
                     this.updateTaskLists();

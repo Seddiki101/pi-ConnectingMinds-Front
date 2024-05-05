@@ -21,11 +21,13 @@ import { TeamComponent } from "src/app/pages/kanban-management/team/team.compone
 import { AddEditTeamComponent } from "src/app/pages/kanban-management/add-edit-team/add-edit-team.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { TeamDetailsComponent } from "src/app/pages/kanban-management/team-details/team-details.component";
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule } from "@angular/cdk/drag-drop";
 import { AddEditTaskComponent } from "src/app/pages/kanban-management/add-edit-task/add-edit-task.component";
 import { TaskDetailsComponent } from "src/app/pages/kanban-management/task-details/task-details.component";
 import { EventDetailsComponent } from "src/app/pages/kanban-management/event-details/event-details.component";
 import { AddEditEventComponent } from "src/app/pages/kanban-management/add-edit-event/add-edit-event.component";
+import { FullCalendarModule } from "@fullcalendar/angular";
+import { AiAssistantComponent } from "src/app/pages/kanban-management/ai-assistant/ai-assistant.component";
 
 const routes: Routes = [
   {
@@ -95,10 +97,10 @@ const routes: Routes = [
         component: TeamComponent,
         data: { title: "Team" },
       },
-      { 
-        path:"team-details",
+      {
+        path: "team-details",
         component: TeamDetailsComponent,
-        data:{title:"Team Details"}
+        data: { title: "Team Details" },
       },
       {
         path: "event",
@@ -109,6 +111,11 @@ const routes: Routes = [
         path: "calendar",
         component: CalendarComponent,
         data: { title: "Calendar" },
+      },
+      {
+        path: "chatgpt4",
+        component: AiAssistantComponent,
+        data: { title: "Ai assistant" },
       },
       // Add more child routes as needed
     ],
@@ -140,6 +147,7 @@ const routes: Routes = [
     TaskDetailsComponent,
     AddEditEventComponent,
     EventDetailsComponent,
+    AiAssistantComponent,
   ],
   imports: [
     CommonModule,
@@ -147,7 +155,8 @@ const routes: Routes = [
     FormsModule,
     SharedModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    FullCalendarModule,
   ],
   providers: [DatePipe],
 })

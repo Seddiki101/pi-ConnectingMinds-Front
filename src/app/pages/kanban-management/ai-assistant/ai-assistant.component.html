@@ -1,0 +1,251 @@
+<!-- Container fluid -->
+<section class="container-fluid px-0">
+  <!-- row -->
+  <div class="row g-0">
+    <div class="col-xl-2 col-lg-8 col-md-8 col-8">
+      <div class="bg-white border-end border-top vh-110">
+        <!-- chat list -->
+        <div class="chat-window">
+          <div class="chat-sticky-header sticky-top bg-white">
+            <div class="px-4 pt-3 pb-4">
+              <!-- heading -->
+              <div class="d-flex align-items-center">
+                <span class="m-lg-1 fw-bold text-inherit">New Chat</span>
+                <!-- icon  -->
+                <a
+                  (click)="onClickCreateNewConversation()"
+                  class="btn btn-icon btn-white border border-2 rounded-circle btn-dashed ms-2"
+                >
+                  <i class="mdi mdi-plus dropdown-item-icon"></i>
+                </a>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h1 class="mb-0 fw-bold h4">History</h1>
+                </div>
+              </div>
+            </div>
+            <!-- nav tabs-->
+
+            <ul class="nav nav-line-bottom" id="tab" role="tablist">
+              <!-- nav item -->
+              <li class="nav-item">
+                <a
+                  class="nav-link active py-2"
+                  id="recent-tab"
+                  data-bs-toggle="pill"
+                  href="#recent"
+                  role="tab"
+                  id="recent"
+                  name="recent"
+                  >Recent</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div data-simplebar style="height: 100vh; overflow: auto">
+            <!-- tab content -->
+            <div class="tab-content" id="tabContent">
+              <!-- tab pane -->
+              <div
+                class="tab-pane fade show active"
+                id="recent"
+                role="tabpanel"
+                aria-labelledby="recent-tab"
+                *ngFor="let conversation of conversations"
+              >
+                <!-- contact list -->
+                <ul class="list-unstyled contacts-list">
+                  <!-- chat item -->
+                  <li class="bg-light py-3 px-4 chat-item contacts-item">
+                    <div
+                      class="d-flex justify-content-lg-start align-items-center"
+                    >
+                      <a
+                        (click)="onClickConversationHistory(conversation.id)"
+                        class="text-link contacts-link"
+                        style="cursor: pointer"
+                      >
+                        <!-- media -->
+                        <div class="d-flex">
+                          <div class="avatar avatar-md avatar-indicators">
+                            <i
+                              class="mdi mdi-chat-question"
+                              [ngClass]="{
+                                'text-primary':
+                                  conversation.id === selectedConversationId
+                              }"
+                            ></i>
+                          </div>
+                          <!-- media body -->
+                          <div class="ms-2">
+                            <h5
+                              class="mb-0"
+                              [ngClass]="{
+                                'text-primary':
+                                  conversation.id === selectedConversationId
+                              }"
+                            >
+                              Chat-[{{ conversation.id }}]
+                            </h5>
+                            <p
+                              class="mb-0 text-muted"
+                              *ngIf="
+                                conversation.messages[3] &&
+                                conversation.messages[3].content
+                              "
+                            >
+                              {{
+                                conversation.messages[3].content.slice(0, 20) +
+                                  "..."
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                      <div>
+                        <small class="text-muted">{{
+                          conversation.timestamp | date : "short"
+                        }}</small>
+                      </div>
+                    </div>
+                    <!-- chat actions -->
+                    <div class="chat-actions">
+                      <!-- dropdown -->
+                      <div class="dropdown dropstart">
+                        <a
+                          href="#"
+                          class="btn btn-white btn-icon btn-sm rounded-circle primary-hover"
+                          id="dropdownMenuButton3"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="fe fe-more-horizontal fs-3"></i>
+                        </a>
+                        <!-- dropdown menu -->
+                        <div
+                          class="dropdown-menu"
+                          aria-labelledby="dropdownMenuButton3"
+                        >
+                          <a
+                            class="dropdown-item"
+                            (click)="onClickDeleteConversation(conversation.id)"
+                            ><i
+                              class="mdi mdi-delete-empty-outline dropdown-item-icon"
+                            ></i
+                            >Delete</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-10 col-lg-12 col-md-12 col-12">
+      <!-- chat list -->
+      <div class="chat-body w-100 vh-100">
+        <div
+          *ngIf="selectedConversation"
+          class="px-4 py-4 vh-100 overflow-hidden"
+        >
+          <div
+            #chatContainer
+            name="chatContainer"
+            id="chatContainer"
+            style="
+              max-height: calc(100vh - 50px);
+              overflow-y: auto;
+              padding-bottom: 15px;
+            "
+          >
+            <ng-container
+              *ngFor="
+                let message of selectedConversation.messages.slice(2);
+                let last = last
+              "
+            >
+              <!-- Assistant Message -->
+              <div
+                *ngIf="message.role === 'assistant'"
+                class="d-flex w-lg-60 mb-4"
+              >
+                <img
+                  src="../../assets/chat/chatbot.jpg"
+                  alt="botChat"
+                  class="rounded-circle avatar-md"
+                />
+                <div class="ms-3">
+                  <div class="d-flex">
+                    <div class="card mt-2 rounded-top-md-left-0">
+                      <div class="card-body p-3">
+                        <p class="mb-0 text-dark">{{ message.content }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- User Message -->
+              <div
+                *ngIf="message.role === 'user'"
+                class="d-flex justify-content-end mb-4"
+              >
+                <div class="d-flex w-lg-60">
+                  <div class="me-3 text-end">
+                    <div class="d-flex">
+                      <div
+                        class="card mt-2 rounded-top-md-end-0 bg-primary text-white"
+                      >
+                        <div class="card-body text-start p-3">
+                          <p class="mb-0">{{ message.content }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    src="../../assets/chat/userChat.jpg"
+                    alt="userChat"
+                    class="rounded-circle avatar-md"
+                  />
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <!-- chart footer -->
+        <div class="bg-light px-4 py-3 chat-footer mt-auto">
+          <div class="bg-white p-2 rounded-3 shadow-sm">
+            <form (ngSubmit)="sendMessage()">
+              <div class="position-relative">
+                <input
+                  class="form-control border-0 form-control-simple no-resize"
+                  placeholder="Type a New Message"
+                  type="text"
+                  rows="1"
+                  name="message"
+                  id="message"
+                  [(ngModel)]="messageToSend"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="position-absolute end-0 mt-n7 me-4">
+                <button
+                  type="submit"
+                  class="fs-3 btn text-primary btn-focus-none"
+                >
+                  <i class="fe fe-send"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

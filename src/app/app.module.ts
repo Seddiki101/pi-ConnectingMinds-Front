@@ -36,7 +36,6 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     Error404Component,
     HeaderComponent,
     FooterComponent,
-
    
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,SharedModule, BrowserAnimationsModule,   MatSnackBarModule,],
