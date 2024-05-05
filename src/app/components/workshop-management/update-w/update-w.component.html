@@ -72,15 +72,16 @@
                                                 <input type="text" class="form-control" id="localisation" name="localisation" [(ngModel)]="workshops.localisation" #localisation="ngModel" required>
                                                 <small>Ecrivez la localisation de votre atelier</small>
                                             </div>
+                                    
                                             <div class="mb-3">
-                                                <label for="dateDeb" class="form-label" >Date de début de l'atelier</label>
-                                                <input type="date" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" #dateDeb="ngModel" required>
-                                                <small>Ecrivez la date de début de votre atelier</small>
+                                                <label for="dateDeb" class="form-label">Date et heure de début de l'atelier</label>
+                                                <input type="datetime-local" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" #dateDeb="ngModel" required aria-describedby="dateDebHelp">
+                                                <small id="dateDebHelp" class="form-text text-muted">Choisissez la date et l'heure de début de votre atelier</small>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="dateFin" class="form-label">Date de fin de l'atelier</label>
-                                                <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" #dateFin="ngModel" required>
-                                                <small>Ecrivez la date de fin de votre atelier</small>
+                                                <label for="dateFin" class="form-label">Date et heure de fin de l'atelier</label>
+                                                <input type="datetime-local" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" #dateFin="ngModel" required aria-describedby="dateFinHelp">
+                                                <small id="dateFinHelp" class="form-text text-muted">Choisissez la date et l'heure de fin de votre atelier</small>
                                             </div>
 
                                         </div>

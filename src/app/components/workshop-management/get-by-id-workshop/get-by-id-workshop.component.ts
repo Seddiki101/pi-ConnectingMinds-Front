@@ -5,6 +5,9 @@ import {ReservationModalComponent} from "../reservation-modal/reservation-modal.
 import {DomSanitizer} from "@angular/platform-browser";
 import {MatDialog} from "@angular/material/dialog";
 import {ToastrService} from "ngx-toastr";
+import { userLogin } from 'src/app/service/usermanagement/requestTypes/userLogin';
+import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-get-by-id-workshop',
@@ -15,13 +18,26 @@ export class GetByIdWorkshopComponent {
   workshops: any;
   id: any;
   availableCapacity: number;
-    constructor(private act: ActivatedRoute,private shared: SharedWService, private sanitizer: DomSanitizer, public dialog: MatDialog, private toaster: ToastrService, private router: Router) {
+  currentuser : number = 0  ;
+  userIdSubscription: Subscription;
+  
+  
+  constructor(private act: ActivatedRoute,private shared: SharedWService, private sanitizer: DomSanitizer, public dialog: MatDialog, private toaster: ToastrService, private router: Router,  private authsvc: AuthenticService) {
   }
 
   ngOnInit(): void {
-    this.getWorkshopById();
+
+    this.userIdSubscription = this.authsvc.getId().subscribe(userId => {
+            this.currentuser = userId;
+             this.getWorkshopById();  
+        });
 
   }
+
+  ngOnDestroy(): void {
+        this.userIdSubscription.unsubscribe();
+    }
+
   getWorkshopById() {
       this.id=this.act.snapshot.paramMap.get('id');
     this.shared.getWorkshopById(this.id).subscribe(
@@ -80,5 +96,7 @@ export class GetByIdWorkshopComponent {
             }
         );
     }
+
+ 
 
 }

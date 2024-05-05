@@ -24,6 +24,7 @@ import { ListWComponent } from './components/dashboard-Workshop/list-w/list-w.co
 import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajout-w.component";
 import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
 import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
+import { DlistReservationComponent } from "./components/dashboard-reservations/dlist-reservation/dlist-reservation.component";
 
 
 const routes: Routes = [
@@ -86,6 +87,7 @@ const routes: Routes = [
   { path: 'DAjoutW', component: DAjoutWComponent},
   { path: 'DUpdate/:id', component: DUpdateWComponent},
   { path: 'Dlist/:id', component: DGetByIdWComponent},
+  { path: 'DlistRes', component: DlistReservationComponent  },
     { path: "error", component: Error404Component, data: { title: "Error" } },
   { path: "**", component: Error404Component, data: { title: "Error" } }, //this needs to be last component
 ];

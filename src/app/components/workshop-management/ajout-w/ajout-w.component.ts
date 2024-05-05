@@ -26,41 +26,32 @@ export class AjoutWComponent implements OnInit{
   }
 
   add() {
-    const formData = new FormData();
-    formData.append('title', this.workshops.title);
-    formData.append('description', this.workshops.description);
-    formData.append('dateDeb', this.workshops.dateDeb);
-    formData.append('dateFin', this.workshops.dateFin);
-    formData.append('prix', this.workshops.prix.toString());
-    formData.append('maxCapacity', this.workshops.maxCapacity.toString());
-    formData.append('localisation', this.workshops.localisation);
-    if (this.image) {
-      formData.append('file', this.image, this.image.name);
-    }
-
-    this.Shared.addWorkshop(formData)
-        .subscribe(
-            res => {
-              const formattedDeb = formatDate(this.workshops.dateDeb, 'yyyy-MM-dd', 'en-US');
-              const formattedFin = formatDate(this.workshops.dateFin, 'yyyy-MM-dd', 'en-US');
-              this.workshops = {
-                title: '',
-                description: '',
-                dateDeb: formattedDeb,
-                dateFin: formattedFin,
-                prix: 0.0,
-                maxCapacity: 0,
-                localisation: ''
-              };
-              this.router.navigate(['/list']);
-              this.toastr.success("Votre workshop est ajouté avec succès")
-            },
-            err => {
-              console.log(err);
-              this.toastr.error("Erreur lors de l'ajout de workshop")
-            }
-        );
+  const datetimeDeb = new Date(this.workshops.dateDeb).toISOString();
+  const datetimeFin = new Date(this.workshops.dateFin).toISOString();
+  
+  const formData = new FormData();
+  formData.append('title', this.workshops.title);
+  formData.append('description', this.workshops.description);
+  formData.append('dateDeb', datetimeDeb); // Envoyer avec le temps inclus
+  formData.append('dateFin', datetimeFin); // Envoyer avec le temps inclus
+  formData.append('prix', this.workshops.prix.toString());
+  formData.append('maxCapacity', this.workshops.maxCapacity.toString());
+  formData.append('localisation', this.workshops.localisation);
+  if (this.image) {
+    formData.append('file', this.image, this.image.name);
   }
+    this.Shared.addWorkshop(formData)
+    .subscribe(
+      res => {
+        this.toastr.success("Votre workshop est ajouté avec succès");
+        this.router.navigate(['/list']);
+      },
+      err => {
+        console.error(err);
+        this.toastr.error("Erreur lors de l'ajout de workshop");
+      }
+    );
+}
 
   onSubmit() {
     this.add();

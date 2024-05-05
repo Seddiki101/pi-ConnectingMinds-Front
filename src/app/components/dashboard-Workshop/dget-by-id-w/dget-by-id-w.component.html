@@ -241,8 +241,7 @@
             <div class="d-lg-flex
                 align-items-center justify-content-between">
               <div class="mb-2 mb-lg-0">
-                <h1 class="mb-0 h2 fw-bold">Geeks
-                  UI - Design &amp; Development
+                <h1 class="mb-0 h2 fw-bold"> {{workshops.title}}
                 </h1>
               </div>
               <div class="d-flex align-items-center">
@@ -303,27 +302,17 @@
             <!-- nav  -->
             <ul class="nav nav-lb-tab">
               <li class="nav-item ms-0 me-3">
-                <a class="nav-link active" href="project-overview.html">Overview</a>
+                <a class="nav-link active" href="project-overview.html">Aperçu</a>
               </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link " href="project-task.html">Task</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="project-budget.html">Budget</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="project-files.html">Files</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="project-team.html">Team</a>
-              </li>
-              <li class="nav-item mx-3">
-                <a class="nav-link" href="project-summary.html">Summary</a>
-              </li>
+         
             </ul>
           </div>
         </div>
         <div class="row">
+
+
+
+
 
           <div class="col-md-12 col-xl-8 col-12">
             <div class="row">
@@ -333,22 +322,19 @@
                     <div class="d-flex justify-content-between
                     align-items-center">
                       <div>
-                        <h4 class="mb-0">Project Summary</h4>
+                        <h4 class="mb-0">Resumé de l'atelier</h4>
                       </div>
                       <!-- dropdown  -->
                       <div>
                         <span class="dropdown dropstart">
-                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" href="#" role="button" id="DropdownTen" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <a class="btn-icon btn btn-ghost btn-sm rounded-circle" role="button" id="DropdownTen" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fe fe-more-vertical"></i>
                           </a>
                           <span class="dropdown-menu" aria-labelledby="DropdownTen">
                             <span class="dropdown-header">Settings</span>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another
-                              action</a>
-                            <a class="dropdown-item" href="#">Something
-                              else
-                              here</a>
+                            <a [routerLink]="['/DUpdate', workshops.idWorkshop]"class="dropdown-item" >Modifier</a>
+                            <a (click)="onDeleteWorkshop(workshops.idWorkshop)"  class="dropdown-item" >Supprimer</a>
+                    
                           </span>
                         </span>
                       </div>
@@ -357,12 +343,8 @@
 
                   </div>
                   <div class="card-body">
-                    <p>Give a high-level overview of the product / project you re working on, its goals, etc..Elaborate
-                      on the target
-                      audience of your project/product, link out to additional resources. Vivamus pretium laoreet massa
-                      eu euismod. Nunc accumsan id odio sed luctus. Suspendisse a lacus sed ex
-                      consequat interdum quis non eros. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Debitis labore nam fuga sapiente vel iste animiicta ab at placeat sint. </p>
+                    <p>
+                      {{ workshops.description }} </p>
 
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item px-0">
@@ -378,13 +360,13 @@
                                   1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"></path>
                             </svg>
                             <div class="ms-2">
-                              <h5 class="mb-0 text-body">Start Date</h5>
+                              <h5 class="mb-0 text-body">Date de début</h5>
                             </div>
                           </div>
                           <div>
                             <div>
                               <p class="text-dark mb-0
-                                    fw-semibold">01 Jan, 2021</p>
+                                    fw-semibold">{{ workshops.dateDeb | date:'dd/MM/yyyy HH:mm' }}</p>
                             </div>
                           </div>
                         </div>
@@ -404,45 +386,18 @@
                                   1 0 0 0 1-1V5z"></path>
                             </svg>
                             <div class="ms-2">
-                              <h5 class="mb-0 text-body">End Date</h5>
+                              <h5 class="mb-0 text-body">Date de fin</h5>
                             </div>
                           </div>
                           <div>
                             <div>
                               <p class="text-dark mb-0
-                                    fw-semibold">30 Dec, 2021</p>
+                                    fw-semibold"> {{ workshops.dateFin | date:'dd/MM/yyyy HH:mm' }} </p>
                             </div>
                           </div>
                         </div>
                       </li>
-                      <li class="list-group-item  px-0">
-                        <div class="d-flex justify-content-between
-                        align-items-center">
-                          <div class="d-flex align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clock
-                             text-primary" viewBox="0 0 16
-                            16">
-                              <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5
-                              0 0 0 .252.434l3.5 2a.5.5 0 0 0
-                              .496-.868L8 8.71V3.5z"></path>
-                              <path d="M8 16A8 8 0 1 0 8 0a8 8 0
-                                0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7
-                                0 0 1 14 0z"></path>
-                            </svg>
-                            <div class="ms-2">
-                              <h5 class="mb-0 text-body">Estimate
-                                Time</h5>
-                            </div>
-                          </div>
-                          <div>
-                            <div>
-                              <p class="text-dark mb-0
-                                  fw-semibold">30
-                                Days</p>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
+                     
                       <li class="list-group-item px-0 pb-0">
                         <div class="d-flex
                           justify-content-between
@@ -470,13 +425,13 @@
                                 1.939V8.73l.348.086z"></path>
                             </svg>
                             <div class="ms-2">
-                              <h5 class="mb-0 text-body">Cost</h5>
+                              <h5 class="mb-0 text-body">Prix</h5>
                             </div>
                           </div>
                           <div>
                             <div>
                               <p class="text-dark mb-0
-                                  fw-semibold">$18,000</p>
+                                  fw-semibold"> {{workshops.prix}} $ </p>
                             </div>
                           </div>
                         </div>
@@ -491,7 +446,7 @@
                 <!-- card -->
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="mb-0">Budget </h4>
+                    <h4 class="mb-0">Plus de details </h4>
 
                   </div>
                   <!-- card body -->
@@ -503,8 +458,8 @@
                     <div class="col-lg-4 col-md-12 col-12">
                       <div class="d-flex align-items-center justify-content-between p-4">
                         <div>
-                          <h2 class="h1 fw-bold mb-0">$52,000</h2>
-                          <p class="mb-0">Total Budget</p>
+                          <h2 class="h1 fw-bold mb-0">{{workshops.maxCapacity}}</h2>
+                          <p class="mb-0">Capacité maximum</p>
 
                         </div>
                         <div class="ms-3">
@@ -519,8 +474,8 @@
                     <div class="col-lg-4 col-md-12 col-12 border-start-md">
                       <div class="d-flex align-items-center justify-content-between p-4">
                         <div>
-                          <h2 class="h1 fw-bold mb-0">$43,230</h2>
-                          <p class="mb-0">Total Spent</p>
+                          <h2 class="h1 fw-bold mb-0">{{ workshops.availableCapacity }}</h2>
+                          <p class="mb-0">Nombre de place encore disponibles</p>
 
                         </div>
                         <div class="ms-3">
@@ -536,9 +491,9 @@
                     <div class="col-lg-4 col-md-12 col-12 border-start-md">
                       <div class="d-flex align-items-center justify-content-between p-4">
                         <div>
-                          <h2 class="h1 fw-bold mb-0">$8,770
+                          <h2 class="h1 fw-bold mb-0">{{ workshops.reservationCount }}
                           </h2>
-                          <p class="mb-0">Remaining</p>
+                          <p class="mb-0">Nombre de reservations</p>
 
                         </div>
                         <div class="ms-3">
@@ -560,178 +515,61 @@
                   <!-- card body -->
 
                   <div class="card-header">
-                    <h4 class="mb-0">Upcoming Deadlines
+                    <h4 class="mb-0">Liste des reservations
                     </h4>
 
                   </div>
+
+
+
+
+
+
                   <!-- table -->
                   <div class="table-responsive overflow-y-hidden">
                     <table class="table mb-0 text-nowrap table-hover table-centered">
                       <thead class="table-light">
                         <tr>
-                          <th scope="col">member</th>
-                          <th scope="col">Task</th>
-                          <th scope="col">Deadline </th>
-                          <th scope="col">Workload</th>
+                          <th scope="col">Nom</th>
+                          <th scope="col">Prenom</th>
+                          <th scope="col">Date de reservation </th>
+                          <th scope="col">Action</th>
 
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <div class="avatar avatar-sm">
-                                <img src="../../assets/images/avatar/avatar-2.jpg" alt="" class="rounded-circle">
-                              </div>
-                              <div class="ms-2">
-                                <h5 class="mb-0">Eleanor Pena </h5>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Design a Geeks UI Figma
-                          </td>
-                          <td>
-                            30 Aug, 2021
-                          </td>
-                          <td>
-                            <div class="d-flex align-items-center">
+                         <tr *ngFor="let reservation of reservations">
 
-                              <div class="progress flex-auto" style="height: 6px;">
-                                <div class="progress-bar bg-success " role="progressbar" style="width: 62%;" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
-
-                                </div>
-                              </div>
-                              <div class="ms-2"> <span>62%</span></div>
-                            </div>
+                          
+                          <td>
+                            {{ reservation.nomParticipant }}
                           </td>
-
+                          <td>
+                            {{ reservation.prenomParticipant }}
+                          </td>
+                          <td>
+                            {{ reservation.date }}
+                          </td>
+                         <td>
+  <button  type="button" class="btn btn-primary rounded-pill" (click)="onDeleteRes(reservation.idReservation)">
+    Supprimer
+  </button>
+</td>
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <div class="avatar avatar-sm">
-                                <img src="../../assets/images/avatar/avatar-3.jpg" alt="" class="rounded-circle">
-                              </div>
-                              <div class="ms-2">
-                                <h5 class="mb-0">Marvin McKinney</h5>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Geeks UI Webpack Workflow
-                          </td>
-                          <td>
-                            24 Sept, 2022
-                          </td>
-                          <td>
-                            <div class="d-flex align-items-center">
-
-                              <div class="progress flex-auto" style="height: 6px;">
-                                <div class="progress-bar bg-success " role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
-
-                                </div>
-                              </div>
-                              <div class="ms-2"> <span>45%</span></div>
-                            </div>
-                          </td>
-
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <div class="avatar avatar-sm">
-                                <img src="../../assets/images/avatar/avatar-4.jpg" alt="" class="rounded-circle">
-                              </div>
-                              <div class="ms-2">
-                                <h5 class="mb-0">Wade Warren</h5>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Geeks UI React version
-                          </td>
-                          <td>
-                            30 Sept, 2022
-                          </td>
-                          <td>
-                            <div class="d-flex align-items-center">
-
-                              <div class="progress flex-auto" style="height: 6px;">
-                                <div class="progress-bar bg-success " role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-
-                                </div>
-                              </div>
-                              <div class="ms-2"> <span>80%</span></div>
-                            </div>
-                          </td>
-
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <div class="avatar avatar-sm">
-                                <img src="../../assets/images/avatar/avatar-5.jpg" alt="" class="rounded-circle">
-                              </div>
-                              <div class="ms-2">
-                                <h5 class="mb-0">Courtney Henry</h5>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Geeks UI Documents Improve
-                          </td>
-                          <td>
-                            20 Dec, 2021
-                          </td>
-                          <td>
-                            <div class="d-flex align-items-center">
-
-                              <div class="progress flex-auto" style="height: 6px;">
-                                <div class="progress-bar bg-success " role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-
-                                </div>
-                              </div>
-                              <div class="ms-2"> <span>10%</span></div>
-                            </div>
-                          </td>
-
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <div class="avatar avatar-sm">
-                                <img src="../../assets/images/avatar/avatar-6.jpg" alt="" class="rounded-circle">
-                              </div>
-                              <div class="ms-2">
-                                <h5 class="mb-0">Brooklyn Simmons</h5>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Ecommerce Design Geeks UI
-                          </td>
-                          <td>
-                            25 Jan, 2022
-                          </td>
-                          <td>
-                            <div class="d-flex align-items-center">
-
-                              <div class="progress flex-auto" style="height: 6px;">
-                                <div class="progress-bar bg-success " role="progressbar" style="width: 8%;" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100">
-
-                                </div>
-                              </div>
-                              <div class="ms-2"> <span>8%</span></div>
-                            </div>
-                          </td>
-
-                        </tr>
+                
 
 
                       </tbody>
                     </table>
                   </div>
+
+
+
+
+
+
+
+
 
 
                 </div>

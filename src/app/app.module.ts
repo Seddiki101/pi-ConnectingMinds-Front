@@ -43,8 +43,8 @@ import { ListWComponent } from './components/dashboard-Workshop/list-w/list-w.co
 import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajout-w.component";
 import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
 import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
-
-
+import { DlistReservationComponent } from './components/dashboard-reservations/dlist-reservation/dlist-reservation.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -72,7 +72,7 @@ import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w
     UserDetailsComponent,
     AccessComponent,
     ProfileBackComponent,
-        AjoutWComponent,
+    AjoutWComponent,
     GetAllWComponent,
     UpdateWComponent,
     AddReservationComponent,
@@ -83,9 +83,10 @@ import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w
     DAjoutWComponent,
     DUpdateWComponent,
     DGetByIdWComponent,
+    DlistReservationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, 
-    MatInputModule,ToastrModule.forRoot()],
+    MatInputModule,ToastrModule.forRoot(), NgxPaginationModule],
   providers: [StompService],
   bootstrap: [AppComponent],
 })
