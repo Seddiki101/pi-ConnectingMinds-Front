@@ -98,13 +98,24 @@
 
 
                     </div>
+
+                    <div>
+    <label for="minPrice">Prix minimum:</label>
+    <input type="number" id="minPrice" [(ngModel)]="minPrice" (input)="filterByPrice()">
+
+    <label for="maxPrice">Prix maximum:</label>
+    <input type="number" id="maxPrice" [(ngModel)]="maxPrice" (input)="filterByPrice()">
+</div>
+
+
+
                     <!-- row -->
 
                         <a [routerLink]="['/add']" class="icon-button" title="ajouter Workshop">
                             <img src="assets/images/workshop/plus.png" alt="ajouter workshop">
                         </a>
 
-                    <div class="card card-bordered mb-4 card-hover cursor-pointer" *ngFor="let workshop of filteredWorkshops" >
+                    <div class="card card-bordered mb-4 card-hover cursor-pointer" *ngFor="let workshop of filteredWorkshops | paginate: { itemsPerPage: 3, currentPage: p }">
                         <!-- card body -->
                         <div class="card-body">
 
@@ -163,7 +174,7 @@
                                             </div>
                                             <!-- time -->
                                             <div>
-                                                <i class="fe fe-clock text-muted"></i> <span>21 hours ago</span>
+                                                <i class="fe fe-clock text-muted"></i> <span>{{ hoursSinceCreation }}21 hours ago</span>
                                             </div>
                                         </div>
 
@@ -173,10 +184,10 @@
                             </div>
                         </div>
                     </div>
-
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     <!-- button -->
                     <div class="mt-6 text-center">
-                        <a href="#!" class="btn btn-outline-primary">Browse All Jobs Postings</a>
+                        <a href="/listRes" class="btn btn-outline-primary">Voir mes reservtions</a>
                     </div>
                 </div>
             </div>

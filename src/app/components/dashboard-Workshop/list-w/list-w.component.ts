@@ -15,6 +15,8 @@ export class ListWComponent {
     filteredWorkshops: any[];
     availableCapacity: number;
     workshop:any;
+    p: number = 1;
+
 
     constructor(private shared: SharedWService, private router: Router, private sanitizer: DomSanitizer, public dialog: MatDialog, private toaster : ToastrService) { }
 

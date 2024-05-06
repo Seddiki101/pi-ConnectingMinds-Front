@@ -8,7 +8,7 @@ import { TokenService } from '../../usermanagement/token-svc/token-service.servi
 })
 export class UserServiceService {
 
-  private apiUrl = 'http://localhost:8082/back/user'; // URL to your backend endpoint
+  private apiUrl = 'http://localhost:8082/api/v2/user/back'; // URL to your backend endpoint
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 

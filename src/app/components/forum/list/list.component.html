@@ -14,8 +14,7 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="list">All posts</a></li>
-                        <li class="breadcrumb-item"><a href="#">Mes posts</a></li>
+                        <li class="breadcrumb-item"><a href="listP">All posts</a></li>
                         <li class="breadcrumb-item"><a href="ajout">Add new post</a></li>
                     </ol>
                 </nav>
@@ -64,43 +63,68 @@
         <form>
 
             <section class="posts">
-                <ng-container *ngFor="let post of posts">
-                    <article class="post">
-                        <h4>{{ post.contenu }}</h4>
-
-                        <ng-container *ngIf="post.image">
-                            <img [src]="'http://localhost:8082/Questions/' + post.idQuestion + '/image'" alt="Image">
-                        </ng-container>
-                        <p>Publié par {{ post.firstName }} {{ post.lastName }}, <br> le {{  post.createdAt | date  }}</p>
-
-
-                        <footer class="post-footer">
-                            <li>
-                                <button [routerLink]="['/update',post.idQuestion]" class="update-question-btn" >
-                                    <i class="fa fa-pencil-square-o"></i> </button>
-
-                                <i class="aaa">aaa</i>
-                                <span class="delete-question-btn"(click)="delete(post.idQuestion)">
-               <i class="fa fa-trash"></i> </span>
-                            </li>
-                            <ul class="actions">
-                                <li>
-                                    <i  class="fa fa-heart"></i> J'aime <i  class="fa fa-reply"></i>   <a [routerLink]="['/AddReponse', post.idQuestion]">Répondre</a>
-
-
-
-
-                                </li>
-                                <a [routerLink]="['/reponseParId', post.idQuestion]">Voir réponses</a>
-
-                            </ul>
-                        </footer>
-                    </article>
-                </ng-container>
+                <!-- Liste des questions -->
+<!-- Liste des questions -->
+<div *ngFor="let group of visibleGroups">
+    <div *ngFor="let question of group" class="question">
+      <h4>{{ question.contenu }}</h4>
+      
+      <ng-container *ngIf="question.image">
+        <img [src]="'http://localhost:8090/Questions/' + question.idQuestion + '/image'" alt="Image">
+      </ng-container>
+      <p>Published by ,{{ question.firstName }} {{ question.lastName }}, <br> on {{  question.createdAt | date  }}</p>
+      <!-- Afficher le nombre de likes -->
+      <p *ngIf="question.like === null"></p>
+      <p *ngIf="question.like !== null">{{ question.like }} Likes</p>
+      <footer class="post-footer">
+        <ng-container *ngIf="question.idUser === currentuser">
+          <li>
+            <button [routerLink]="['/updateP', question.idQuestion]" class="update-question-btn">
+              <i class="fas fa-pencil-alt"></i><!-- Espace insécable -->
+            </button>
+            <button class="transparent-button" style="display: none;" ></button>
+            <span class="delete-question-btn" (click)="delete(question.idQuestion)">
+              <i class="fas fa-trash"></i>
+            </span>
+          </li>
+        </ng-container>
+        <ul class="actions">
+          <li>
+            <button (click)="addLike(question.idQuestion)" class="update-question-btn">
+              <i class="fa fa-heart"></i> <!-- Espace insécable -->
+            </button>
+            
+            <button (click)="removeLike(question.idQuestion)" class="update-question-btn">
+                <i class="fa fa-thumbs-down"></i> <!-- Espace insécable -->
+              </button>
+              
+              
+            <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', question.idQuestion]">Reply</a>
+          </li>
+          <a [routerLink]="['/reponseParId', question.idQuestion]">View replies</a>
+        </ul>
+      </footer>
+    </div>
+  </div>
+  
+  
+  
+  
             </section>
+            
         </form>
-
-
+        <div class="pagination">
+            <button class="btn btn-primary" (click)="previousPage()">Précédent</button>
+            <span>{{ currentPage + 1 }} / {{ totalPages }}</span>
+            <button class="btn btn-primary" (click)="nextPage()">Suivant</button>
+        </div>
+    
+        <!-- Liste des questions -->
+        <div *ngFor="let group of visibleGroups">
+            <div *ngFor="let question of group" class="question">
+                <!-- Affichage de la question -->
+            </div>
+        </div>
 
     </div>
 </div>

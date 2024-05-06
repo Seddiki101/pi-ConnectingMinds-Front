@@ -4,6 +4,16 @@
     padding: 20px;
 }
 /* ... existing styles ... */
+.space-between-icons {
+    margin-right: 50px; /* Vous pouvez ajuster la valeur de la marge selon vos besoins */
+}
+.transparent-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  
+
 
 .add-question-btn {
     background-color: #2ecc71; /* Green color */

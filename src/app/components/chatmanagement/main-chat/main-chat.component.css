@@ -1,0 +1,60 @@
+.chat-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+}
+
+.app-user-details,
+.app-chat-footer {
+  flex-shrink: 0; /* Prevents shrinking */
+  position: sticky;
+  z-index: 1000; /* High z-index to keep it on top/bottom */
+  top: 0; /* User details at top */
+  bottom: 0; /* Footer at bottom */
+}
+
+.chat-content {
+  flex-grow: 1; /* Fills available space */
+  overflow-y: auto; /* Scrollable */
+  padding: 0 1rem;
+}
+
+.user-message,
+.other-user-message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align right for user, start for others */
+  margin: 0 10px 4px; /* Uniform margin */
+}
+
+.user-message .dropdown,
+.other-user-message .dropdown {
+  flex-shrink: 0; /* Keeps dropdown from resizing */
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+  max-width: 80%; /* Restricts width */
+}
+
+.message-content img {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px; /* Spacing around image */
+}
+
+.message-content.other-user-message > .card {
+  flex-grow: 1; /* Card fills space */
+}
+
+.left-image-spacer,
+.right-image-spacer {
+  width: 50px;
+  height: 50px; /* Placeholder for spacing when no image */
+}
+
+/* Fixing flex-start alignment */
+.other-user-message {
+  justify-content: flex-start; /* Corrects content start from left */
+}

@@ -1,12 +1,10 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { UserLoginComponent } from "./components/usersmanagement/login-user/user-login.component";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-
 import { RegisterUserComponent } from "./components/usersmanagement/register-user/register-user.component";
 import { HomeComponent } from "./components/home/home.component";
 import { DashComponent } from "./components/dash/dash.component";
@@ -28,7 +26,6 @@ import { StompService } from "./service/chatmanagement/stomp-service/stomp-servi
 import { AccessComponent } from './components/usersmanagement/access/access.component';
 import { ListUser2Component } from "./components/usersmanagement/list-user2/list-user2.component";
 import { ProfileBackComponent } from './components/usersmanagement/profile-back/profile-back.component';
-
 import {AjoutWComponent} from "./components/workshop-management/ajout-w/ajout-w.component";
 import {UpdateWComponent} from "./components/workshop-management/update-w/update-w.component";
 import {GetAllWComponent} from "./components/workshop-management/get-all-w/get-all-w.component";
@@ -44,19 +41,14 @@ import { ListWComponent } from './components/dashboard-Workshop/list-w/list-w.co
 import { DAjoutWComponent } from "./components/dashboard-Workshop/dajout-w/dajout-w.component";
 import { DUpdateWComponent } from "./components/dashboard-Workshop/dupdate-w/dupdate-w.component";
 import { DGetByIdWComponent } from './components/dashboard-Workshop/dget-by-id-w/dget-by-id-w.component';
-
-
-
 import { ListResourcesComponent } from "./components/resources/list-resources/list-resources.component";
 import { AjoutResourceComponent } from "./components/resources/ajout-resource/ajout-resource.component";
 import { ShowResourceComponent } from "./components/resources/show-resource/show-resource.component";
 import { MyResourcesComponent } from "./components/resources/my-resources/my-resources.component";
-
 import { NavMyResourcesComponent } from './components/resources/nav-my-resources/nav-my-resources.component';
 import { BannerMyResourcesComponent } from './components/resources/banner-my-resources/banner-my-resources.component';
 import { DashMyResourcesComponent } from './components/resources/dash-my-resources/dash-my-resources.component';
 import { ReviewsMyResourcesComponent } from './components/resources/reviews-my-resources/reviews-my-resources.component';
-
 import { ChatFooterComponent } from "./components/chatmanagement/chat-footer/chat-footer.component";
 import { ListComponent } from './components/forum/list/list.component';
 import { AjoutPostComponent } from './components/forum/ajout-post/ajout-post.component';
@@ -70,99 +62,70 @@ import { AjoutPost2Component } from './components/forum/ajout-post2/ajout-post2.
 import { RecherchePComponent } from './components/forum/recherche-p/recherche-p.component';
 import { DashboardPostComponent } from './components/dashboardP/dashboard-post/dashboard-post.component';
 import { DashAnswersComponent } from './components/dashboardP/dash-answers/dash-answers.component';
-
-
-
+import { DlistReservationComponent } from './components/dashboard-reservations/dlist-reservation/dlist-reservation.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserLoginComponent,
-    RegisterUserComponent,
-    HomeComponent,
-    DashComponent,
-    ForgottenComponent,
-    ResetpassComponent,
-    ProfileComponent,
-    ListUserComponent,
-    ListUser2Component,
-    AccessComponent,
-    Error404Component,
-    HeaderComponent,
-    FooterComponent,
-    SidenavComponent,
-    NavbarComponent,
-    ChatAppComponent,
-    ChatSidebarComponent,
-    MainChatComponent,
-    UserDetailsComponent,
-    AccessComponent,
-    ProfileBackComponent,
-
-        AjoutWComponent,
-    GetAllWComponent,
-    UpdateWComponent,
-    AddReservationComponent,
-    ListReservationComponent,
-    ReservationModalComponent,
-    GetByIdWorkshopComponent,
-        ListWComponent,
-    DAjoutWComponent,
-    DUpdateWComponent,
-    DGetByIdWComponent,
-
-    HomeComponent,
-    DashComponent,
-    ForgottenComponent,
-    ResetpassComponent,
-    ProfileComponent,
-    ListUserComponent,
-    Error404Component,
-    HeaderComponent,
-    FooterComponent,
-    SidenavComponent,
-    NavbarComponent,
-    SendMessageModalComponent,
-    UserDetailsComponent,
-    ListResourcesComponent,
-    AjoutResourceComponent,
-    ShowResourceComponent,
-    MyResourcesComponent,
-
-	NavMyResourcesComponent,
-    BannerMyResourcesComponent,
-    DashMyResourcesComponent,
-    ReviewsMyResourcesComponent,
-
-    AppComponent,
-    UserLoginComponent,
-    RegisterUserComponent,ListUserComponent,
-    Error404Component,
-    HeaderComponent,
-    FooterComponent,
-    SidenavComponent,
-    NavbarComponent,
-    ChatAppComponent,
-    ChatSidebarComponent,
-    MainChatComponent,
-    SendMessageModalComponent,
-    ChatFooterComponent,
-    ListComponent,
-    AjoutPostComponent,
-    UpdateComponent,
-    ListReponsesComponent,
-    AddAnswerComponent,
-    UpdateAnswerComponent,
-    ChatbotComponent,
-    ChatbotResponseComponent,
-    AjoutPost2Component,
-    RecherchePComponent,
-    DashboardPostComponent,
-    DashAnswersComponent,
-
-  ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, 
-    MatInputModule,ToastrModule.forRoot()],
-  providers: [StompService],
-  bootstrap: [AppComponent],
+declarations: [
+AppComponent,
+UserLoginComponent,
+RegisterUserComponent,
+HomeComponent,
+DashComponent,
+ForgottenComponent,
+ResetpassComponent,
+ProfileComponent,
+ListUserComponent,
+ListUser2Component,
+AccessComponent,
+Error404Component,
+HeaderComponent,
+FooterComponent,
+SidenavComponent,
+NavbarComponent,
+ChatAppComponent,
+ChatSidebarComponent,
+MainChatComponent,
+UserDetailsComponent,
+ProfileBackComponent,
+AjoutWComponent,
+GetAllWComponent,
+UpdateWComponent,
+AddReservationComponent,
+ListReservationComponent,
+ReservationModalComponent,
+GetByIdWorkshopComponent,
+ListWComponent,
+DAjoutWComponent,
+DUpdateWComponent,
+DGetByIdWComponent,
+SendMessageModalComponent,
+ListResourcesComponent,
+AjoutResourceComponent,
+ShowResourceComponent,
+MyResourcesComponent,
+NavMyResourcesComponent,
+BannerMyResourcesComponent,
+DashMyResourcesComponent,
+ReviewsMyResourcesComponent,
+RegisterUserComponent,ListUserComponent,
+ChatFooterComponent,
+ListComponent,
+AjoutPostComponent,
+UpdateComponent,
+ListReponsesComponent,
+AddAnswerComponent,
+UpdateAnswerComponent,
+ChatbotComponent,
+ChatbotResponseComponent,
+AjoutPost2Component,
+RecherchePComponent,
+DashboardPostComponent,
+DashAnswersComponent,
+DlistReservationComponent
+],
+imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, NgxPaginationModule ,
+MatInputModule,ToastrModule.forRoot()],
+providers: [StompService],
+bootstrap: [AppComponent],
 })
 export class AppModule {}

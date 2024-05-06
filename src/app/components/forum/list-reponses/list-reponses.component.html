@@ -78,14 +78,17 @@
                         <h4>{{ reponse.contenu }}</h4>
                         <p>Publié par {{ reponse.firstName }} {{ reponse.lastName }}, <br> le {{  reponse.createdAt | date  }}</p>
                        <footer class="post-footer">
+                        <ng-container *ngIf="reponse.idUser === currentuser">
                             <li>
-                                <button  class="update-question-btn" [routerLink]="['/updateReponse',reponse.idReponse]" >
-                                    <i class="fa fa-pencil-square-o"></i> </button>
-
-                                <i class="aaa">aaa</i>
-                                <span class="delete-question-btn" (click)=" deleteAnswer(reponse.idReponse)">
-               <i class="fa fa-trash"></i> </span>
+                                <button [routerLink]="['/updateReponse', reponse.idReponse]" class="update-question-btn">
+                                    <i class="fas fa-pencil-alt"></i><!-- Espace insécable --> 
+                                    </button>
+                                    <span class="delete-question-btn" (click)="deleteAnswer(reponse.idReponse)">
+                                     <i class="fas fa-trash"></i>
+                                     </span>
+                                
                             </li>
+                        </ng-container>
 
                         </footer>
                     </article>

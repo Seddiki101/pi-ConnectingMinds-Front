@@ -7,7 +7,7 @@
                 <!-- Page header -->
                 <div class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
                     <div class="mb-2 mb-lg-0">
-                        <h1 class="mb-0 h2 fw-bold">Ateliers </h1>
+                        <h1 class="mb-0 h2 fw-bold">Reservations </h1>
                         <!-- Breadcrumb -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -15,7 +15,7 @@
                                     <a href="admin-dashboard.html">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#">Atelier</a>
+                                    <a href="#">Reservation</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
                                     List
@@ -26,11 +26,7 @@
 
                     </div>
                     <!-- button -->
-                    <div>
-                        <a [routerLink]="['/DAjoutW']" class="btn btn-primary me-2" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasRight">Créer un atelier</a>
-
-                    </div>
+                    
                 </div>
 
             </div>
@@ -41,7 +37,7 @@
             <div class="col-xl-2 col-lg-4 col-md-6 col-12">
                 <!-- search -->
                 <div class="mb-lg-4 mb-2">
-                    <input type="search" class="form-control" placeholder="Recherche d'un atelier" (input)="performSearch($event)">
+                    <input type="search" class="form-control" placeholder="Search by project name">
                 </div>
             </div>
 
@@ -61,55 +57,43 @@
                         <table class="table mb-0 text-nowrap table-hover table-centered" >
                             <thead>
                                 <tr >
-                                    <th scope="col">Titre de l'atelier</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Dates</th>
-                                    <th scope="col">Prix</th>                                   
+                                    <th scope="col">Nom de Participant</th>
+                                    <th scope="col">Prenom de Participant</th>
+                                    <th scope="col">Date de reservation</th>                                  
                                     <th scope="col">Action</th>                         
                             </thead>
                             <tbody>
-                                <tr *ngFor="let workshop of filteredWorkshops | paginate: { itemsPerPage: 3, currentPage: p }">
+                                <tr *ngFor="let reservation of reservations">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="icon-shape icon-lg rounded-3 border p-4">
                                                 <i class="fe fe-layout fs-3 text-muted"></i>
                                             </div>
                                             <div class="ms-3">
-                                                <h4 class="mb-0"><a [routerLink]="['/Dlist', workshop.idWorkshop]" class="text-inherit">{{ workshop.title }}</a></h4>
+                                                <h4 class="mb-0"><a class="text-inherit">{{ reservation.nomParticipant }}</a></h4>
                                             </div>
                                         </div>
                                     <td>
-                                        {{workshop.description}}
+                                        {{reservation.prenomParticipant}}
                                     </td>
                                    
                                     <td>
-                                        {{ workshop.dateDeb | date:'dd/MM/yyyy HH:mm' }}
+                                        {{reservation.date}}
                                     </td>
-                                    <td>
-                                        {{workshop.prix}}
-                                    </td>
+                                 
                                    <td>
-                                    <button type="button" class="btn btn-primary rounded-pill" (click)="onDeleteWorkshop(workshop.idWorkshop)">Supprimer</button>
+                                    <button type="button" class="btn btn-primary rounded-pill" (click)="onDeleteWorkshop(reservation.idReservation)">Supprimer</button>
                                    </td>
-                                   <td>
-                                    <button type="button" class="btn btn-primary rounded-pill" [routerLink]="['/DUpdate', workshop.idWorkshop]">Modifier</button>
+                               
 
-                                   </td>
-
-
+         
 
                             </tbody>
                         </table>
-
                     </div>
-                    
-
                 </div>
             </div>
-            
         </div>
-        </section>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    
+    </section>
 </main>
 <app-sidenav></app-sidenav>

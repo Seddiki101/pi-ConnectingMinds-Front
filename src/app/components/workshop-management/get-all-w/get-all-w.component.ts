@@ -16,11 +16,16 @@ export class GetAllWComponent {
     filteredWorkshops: any[];
     availableCapacity: number;
     workshop:any;
+    hoursSinceCreation: number;
+    minPrice: number ;
+    maxPrice: number ;
+    p: number = 1;
 
     constructor(private shared: SharedWService, private router: Router, private sanitizer: DomSanitizer, public dialog: MatDialog, private toaster : ToastrService) { }
 
     ngOnInit(): void {
         this.getAllWorkshops();
+        
     }
    getAllWorkshops() {
         this.shared.getAllworkshops().subscribe(
@@ -92,6 +97,23 @@ export class GetAllWComponent {
         );
     }
 
+
+    fetchHoursSinceCreation(workshop: any): void {
+    this.shared.getHoursSinceCreation(workshop.idWorkshop).subscribe(
+      (hours: number) => {
+        this.hoursSinceCreation = hours;
+      },
+      error => {
+        console.error('Error fetching hours since creation', error);
+      }
+    );
+  }
+
+  filterByPrice(): void {
+    this.filteredWorkshops = this.workshops.filter(workshop =>
+      workshop.prix >= this.minPrice && workshop.prix <= this.maxPrice
+    );
+}
 
 
 
