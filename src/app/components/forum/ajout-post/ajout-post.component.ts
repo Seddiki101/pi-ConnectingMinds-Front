@@ -3,6 +3,7 @@ import { SharedService } from "../shared.service";
 import { Question } from "../question";
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class AjoutPostComponent {
     updatedAt: new Date(),
   };
 
-  constructor(public _shared: SharedService , private route: ActivatedRoute , private router: Router) {
+  constructor(public _shared: SharedService , private route: ActivatedRoute , private router: Router,private tokenService:TokenService) {
     this.route.params.subscribe(params => {
       this.post.idUser = params['id']; // Extracting idUser from route parameters
     });
@@ -38,21 +39,29 @@ export class AjoutPostComponent {
 
     const formData = new FormData();
     formData.append('contenu', this.post.contenu);
+    const lastName = this.tokenService.getLastName() || '';
+    const firstName = this.tokenService.getName() || '';
 
     // Vérifiez d'abord si this.post.image est un Blob
     if (this.post.image instanceof Blob) {
       // Si c'est un Blob, ajoutez-le à FormData avec le nom de clé attendu par votre backend
       formData.append('imageFile', this.post.image, this.post.image.name);
+      formData.append('firstName',firstName);
+      formData.append('lastName',lastName);
 
       // Ensuite, envoyez les données avec votre service
       this._shared.CreateNewPost(formData)
           .subscribe(
               res => {
                 console.log(res);
+                console.log("sssssssssss");
+                console.log(this.tokenService.getName());
                 // Réinitialisez le contenu du post après la soumission réussie
                 this.post = {
                   idQuestion: 0,
                   contenu: '',
+                  firstName:firstName,
+                  lastName:lastName,
                   image: null
                 };
               },
