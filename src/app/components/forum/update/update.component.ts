@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Question} from "../question";
 import {ActivatedRoute} from "@angular/router";
 import {SharedService} from "../shared.service";
-
+//"../shared.service"
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',

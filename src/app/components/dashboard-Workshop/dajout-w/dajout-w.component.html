@@ -301,17 +301,20 @@
                   <input type="text" class="form-control" id="localisation" name="localisation" [(ngModel)]="workshops.localisation"  #localisation="ngModel" placeholder="Enterer la localisation de l'atelier.." rows="3">
                 </div>
                 <!-- form group -->
-                 <div class="form-group" class="mb-3 col-12" >
-                <label  for="dateDeb" class="form-label">Date de début <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" #dateDeb="ngModel" required>
-                
-            </div>
+            
+                <div class="mb-3">
+                <label for="dateDeb" class="form-label">Date et heure de début de l'atelier <span class="text-danger">*</span></label>
+                <input type="datetime-local" class="form-control" id="dateDeb" name="dateDeb" [(ngModel)]="workshops.dateDeb" #dateDeb="ngModel" required aria-describedby="dateDebHelp">
+                <small id="dateDebHelp" class="form-text text-muted">Choisissez la date et l'heure de début de votre atelier</small>
+                </div>
+
+                <div class="mb-3">
+                <label for="dateFin" class="form-label">Date et heure de fin de l'atelier <span class="text-danger">*</span></label>
+                <input type="datetime-local" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" #dateFin="ngModel" required aria-describedby="dateFinHelp">
+                <small id="dateFinHelp" class="form-text text-muted">Choisissez la date et l'heure de fin de votre atelier</small>
+                </div>
               <!-- form group -->
-            <div class="form-group" class="mb-3 col-12">
-                <label for="dateFin" class="form-label">Date de fin <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="dateFin" name="dateFin" [(ngModel)]="workshops.dateFin" #dateFin="ngModel" required>
-                
-            </div>
+    
             
                 <div class="col-md-3 col-12 mb-4">
                   <div >

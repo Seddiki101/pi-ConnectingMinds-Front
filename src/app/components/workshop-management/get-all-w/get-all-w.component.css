@@ -76,5 +76,33 @@
 }
 
 
+.pagination-previous a,
+.pagination-next a,
+.pagination-page a {
+  color: var(--primary-color);
+  border-color: var(--border-color);
+}
 
+.pagination-page.active a {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--text-on-primary);
+}
+
+/* Variables de couleur typiques dans le :root de votre CSS */
+:root {
+  --primary-color: #007bff;
+  --border-color: #dee2e6;
+  --text-on-primary: #fff;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  /* Centre horizontalement les éléments à l'intérieur du conteneur */
+  padding: 20px;
+  /* Ajoute un peu d'espace autour des contrôles */
+  width: 100%;
+  /* S'assure que le conteneur prend toute la largeur */
+}
 

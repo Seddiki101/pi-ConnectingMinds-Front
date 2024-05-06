@@ -27,5 +27,8 @@ export class ResServiceService {
     return this.http.delete(this.url + 'delete/' + id);
   }
 
+   getReservationsForWorkshop(idWorkshop: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.url}workshops/${idWorkshop}`);
+  }
 
 }

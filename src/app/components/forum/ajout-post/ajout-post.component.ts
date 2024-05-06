@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { SharedService } from "../shared.service";
 import { Question } from "../question";
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
+
 
 @Component({
   selector: 'app-ajout-post',
@@ -20,7 +24,11 @@ export class AjoutPostComponent {
     updatedAt: new Date(),
   };
 
-  constructor(public _shared: SharedService) {}
+  constructor(public _shared: SharedService , private route: ActivatedRoute , private router: Router,private tokenService:TokenService) {
+    this.route.params.subscribe(params => {
+      this.post.idUser = params['id']; // Extracting idUser from route parameters
+    });
+  }
   selectimage(e :any){
     this.image = e.target.files[0];
     console.log(this.image);
@@ -31,21 +39,29 @@ export class AjoutPostComponent {
 
     const formData = new FormData();
     formData.append('contenu', this.post.contenu);
+    const lastName = this.tokenService.getLastName() || '';
+    const firstName = this.tokenService.getName() || '';
 
     // Vérifiez d'abord si this.post.image est un Blob
     if (this.post.image instanceof Blob) {
       // Si c'est un Blob, ajoutez-le à FormData avec le nom de clé attendu par votre backend
       formData.append('imageFile', this.post.image, this.post.image.name);
+      formData.append('firstName',firstName);
+      formData.append('lastName',lastName);
 
       // Ensuite, envoyez les données avec votre service
       this._shared.CreateNewPost(formData)
           .subscribe(
               res => {
                 console.log(res);
+                console.log("sssssssssss");
+                console.log(this.tokenService.getName());
                 // Réinitialisez le contenu du post après la soumission réussie
                 this.post = {
                   idQuestion: 0,
                   contenu: '',
+                  firstName:firstName,
+                  lastName:lastName,
                   image: null
                 };
               },
@@ -57,6 +73,7 @@ export class AjoutPostComponent {
       // Si this.post.image n'est pas un Blob, affichez un message d'erreur ou effectuez une autre action appropriée
       console.error('L\'image sélectionnée n\'est pas valide.');
     }
+    this.router.navigate(['/listP']);
   }
 
 

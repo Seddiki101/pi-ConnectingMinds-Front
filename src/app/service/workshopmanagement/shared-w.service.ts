@@ -26,6 +26,12 @@ export class SharedWService {
   getAvailableCapacity(id: number): Observable<number> {
     return this.http.get<number>(this.url + id + '/availableCapacity');
   }
+  
+  getReservationCount(id: number): Observable<number> {
+       // return this.http.get<number>(`${this.url}/${workshopId}/reservations/count`);
+       return this.http.get<number>(this.url + id + '/reservations/count' );
+
+  }
 
   addWorkshop(workshops: any){
     return this.http.post(this.url + 'add', workshops, { headers: this.tokenService.getHeaders() });
@@ -39,5 +45,17 @@ export class SharedWService {
 
     return this.http.put(this.url + 'update/' + id, workshops);
   }
+
+  isCurrentUserOwnerOfWorkshop(userId: number, workshopId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.url}/${workshopId}/isOwner`, {
+      headers: this.tokenService.getHeaders()
+    });
+  }
+
+  getHoursSinceCreation(workshopId: number): Observable<number> {
+    return this.http.get<number>(`${this.url}/${workshopId}/hoursSinceCreation`);
+  }
+  
+
 
 }

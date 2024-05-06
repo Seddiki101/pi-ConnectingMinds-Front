@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Question} from "./question";
 import {catchError, Observable, tap, throwError} from 'rxjs';
 import {Reponse} from "./reponse";
+import { TokenService } from '../../service/usermanagement/token-svc/token-service.service';
 
 
 @Injectable({
@@ -10,9 +11,17 @@ import {Reponse} from "./reponse";
 })
 export class SharedService {
 
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient ,  private tokenservice: TokenService) { }
 
   private url = 'http://localhost:8090/';
+
+  addLikeToQuestion(questionId: number): Observable<any> {
+    return this.http.post(`${this.url}${questionId}/like`, null);
+  }
+
+  removeLikeFromQuestion(questionId: number): Observable<any> {
+    return this.http.delete(`${this.url}${questionId}/like`);
+  }
   getAllPosts() {
     return this.http.get<Question[]>(this.url + 'Questions');
   }
@@ -28,16 +37,21 @@ export class SharedService {
         );
   }
 
-    CreateNewPost(formData: FormData): Observable<any> { // Change the argument type to FormData
-        return this.http.post<any>(this.url + 'AjouterQuestion', formData)
-            .pipe(
-                tap(savedQuestion => console.log('Created question:', savedQuestion)), // Log success
-                catchError(error => {
-                    console.error('Error creating post:', error);
-                    return throwError(error);
-                })
-            );
-    }
+  CreateNewPost(formData: FormData): Observable<any> {
+    // Récupérer les en-têtes avec le token service
+    const headers = this.tokenservice.getHeaders();
+
+    // Faire la requête POST vers le backend avec les en-têtes récupérés
+    return this.http.post<any>(this.url + 'AjouterQuestion', formData, { headers: headers })
+        .pipe(
+            tap(savedQuestion => console.log('Created question:', savedQuestion)), // Log success
+            catchError(error => {
+                console.error('Error creating post:', error);
+                return throwError(error);
+            })
+        );
+}
+
     getPostById(id:any){
         return this.http.get(this.url+'getQuestionById/'+id);
     }
@@ -63,7 +77,7 @@ export class SharedService {
         // formData.append('imageFile', imageFile);
 
         // Définir les en-têtes pour spécifier le type de contenu multipart
-        const headers = new HttpHeaders();
+        const headers = this.tokenservice.getHeaders() ;//new HttpHeaders();
         headers.set('Content-Type', 'multipart/form-data');
 
         // Faire la requête POST vers le backend
@@ -105,4 +119,6 @@ export class SharedService {
     searchPosts(contenu: string): Observable<Question[]> {
         return this.http.get<Question[]>(`${this.url}search?contenu=${contenu}`);
     }
+
+    
 }
