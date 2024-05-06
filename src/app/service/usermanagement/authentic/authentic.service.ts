@@ -26,7 +26,7 @@ export class AuthenticService {
   }
 
   getId(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/back/user/getUserSpot`, { headers: this.tokenService.getHeaders() });
+    return this.http.get<number>(`${this.apiUrl}/back/getUserSpot`, { headers: this.tokenService.getHeaders() });
   }
 
 }
