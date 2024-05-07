@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AuthenticService {
 
   private apiUrl = environment.userApiUrl; // Base URL for API
+  private logoutUrl = "http://localhost:8082";
 
   constructor(
     private router: Router,
@@ -22,7 +23,7 @@ export class AuthenticService {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
-    this.http.post(`${this.apiUrl}/logout`, {}, { headers: this.tokenService.getHeaders() }).subscribe();
+    this.http.post(`${this.logoutUrl}/logout`, {}, { headers: this.tokenService.getHeaders() }).subscribe();
   }
 
   getId(): Observable<number> {
