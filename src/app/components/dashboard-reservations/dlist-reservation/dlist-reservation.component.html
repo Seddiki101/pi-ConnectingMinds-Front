@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<main id="page-content">
+    <!-- Container fluid -->
+    <section class="container-fluid p-4">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <!-- Page header -->
+                <div class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
+                    <div class="mb-2 mb-lg-0">
+                        <h1 class="mb-0 h2 fw-bold">Reservations </h1>
+                        <!-- Breadcrumb -->
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="admin-dashboard.html">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Reservation</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    List
+                                </li>
+                            </ol>
+                        </nav>
+
+
+                    </div>
+                    <!-- button -->
+                    
+                </div>
+
+            </div>
+        </div>
+        <!-- row -->
+        <div class="row justify-content-md-between mb-4 mb-xl-0 gx-3">
+            <!-- col -->
+            <div class="col-xl-2 col-lg-4 col-md-6 col-12">
+                <!-- search -->
+                <div class="mb-lg-4 mb-2">
+                    <input type="search" class="form-control" placeholder="Search by project name">
+                </div>
+            </div>
+
+            <!-- Custom select -->
+
+
+            </div>
+      
+        <!-- row -->
+        <div class="row">
+            <!-- col -->
+            <div class="col-12">
+                <!-- card -->
+                <div class="card">
+                    <!-- table -->
+                    <div class="table-responsive overflow-y-hidden" >
+                        <table class="table mb-0 text-nowrap table-hover table-centered" >
+                            <thead>
+                                <tr >
+                                    <th scope="col">Nom de Participant</th>
+                                    <th scope="col">Prenom de Participant</th>
+                                    <th scope="col">Date de reservation</th>                                  
+                                    <th scope="col">Action</th>                         
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let reservation of reservations">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-shape icon-lg rounded-3 border p-4">
+                                                <i class="fe fe-layout fs-3 text-muted"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h4 class="mb-0"><a class="text-inherit">{{ reservation.nomParticipant }}</a></h4>
+                                            </div>
+                                        </div>
+                                    <td>
+                                        {{reservation.prenomParticipant}}
+                                    </td>
+                                   
+                                    <td>
+                                        {{reservation.date}}
+                                    </td>
+                                 
+                                   <td>
+                                    <button type="button" class="btn btn-primary rounded-pill" (click)="onDeleteWorkshop(reservation.idReservation)">Supprimer</button>
+                                   </td>
+                               
+
+         
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<app-sidenav></app-sidenav>

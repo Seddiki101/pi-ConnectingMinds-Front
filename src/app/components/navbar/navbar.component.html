@@ -1,7 +1,7 @@
-<div id="db-wrapper">
+<div id="db-wrapper" class="overflow-hidden" >
   <app-sidenav></app-sidenav>
-  <main id="page-content">
-    <div class="header">
+  <main id="page-content" class="overflow-hidden" >
+    <div class="header" >
       <nav class="navbar-default navbar navbar-expand-lg">
         <a id="nav-toggle" href="#">
           <i class="fe fe-menu"></i>
@@ -76,7 +76,7 @@
                           <a class="text-body" href="#">
                             <div class="d-flex">
                               <img
-                                src="../../assets/images/avatar/avatar-1.jpg"
+                              [src]="userImage"
                                 alt=""
                                 class="avatar-md rounded-circle"
                               />
@@ -270,7 +270,7 @@
                 <div class="avatar avatar-md avatar-indicators avatar-online">
                   <img
                     alt="avatar"
-                    src="../../assets/images/avatar/avatar-1.jpg"
+                    [src]="userImage"
                     class="rounded-circle"
                   />
                 </div>
@@ -286,13 +286,13 @@
                     >
                       <img
                         alt="avatar"
-                        src="../../assets/images/avatar/avatar-1.jpg"
+                        [src]="userImage"
                         class="rounded-circle"
                       />
                     </div>
                     <div class="ms-3 lh-1">
-                      <h5 class="mb-1">Annette Black</h5>
-                      <p class="mb-0 text-muted">annette@geeksui.com</p>
+                      <h5 class="mb-1">  {{ username }}</h5>
+                      <p class="mb-0 text-muted"> {{ email }} </p>
                     </div>
                   </div>
                 </div>
@@ -330,7 +330,7 @@
                     </ul>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/profile">
+                    <a class="dropdown-item" href="/adminProfile">
                       <i class="fe fe-user me-2"></i> Profile
                     </a>
                   </li>

@@ -12,6 +12,7 @@ import { TokenService } from 'src/app/service/usermanagement/token-svc/token-ser
 })
 export class UserLoginComponent {
   user: userLogin = new userLogin();
+  rememberMe: boolean = false;
 
   constructor(
     private loginuserservice: LoginuserService,
@@ -19,31 +20,54 @@ export class UserLoginComponent {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    if (this.tokenService.isTokenValid()) {
+      console.log("token valid  "+this.tokenService.getUserRole());
+
+      
+      if(this.tokenService.getUserRole() == "USER" ){
+        this.router.navigate(['/home']);
+      }
+      else if(this.tokenService.getUserRole() == "ADMIN" ){
+            this.router.navigate(['/dashboard']);
+      }
+            
+      else this.router.navigate(['error']);
+    }
+    else console.log("token not valid");
+
+  }
+
 
   userLogin() {
-    console.log(this.user);
+    //console.log(this.user);
     this.loginuserservice.loginUser(this.user).subscribe(
-      ( data: LoginResponse ) => {
+      (data: LoginResponse) => {
+
+        this.tokenService.useLocalStorage = this.rememberMe;
+        console.log("remember me " + this.rememberMe ) ;
+        this.tokenService.token = data.token; 
+         console.log("this is wiw "+data.token);
+        alert('Login successful');
+        
+        if (this.tokenService.isTokenValid()) {
+          if(this.tokenService.getUserRole() == "USER" ){
+            this.router.navigate(['/home']);
+          }
+          else if(this.tokenService.getUserRole() == "ADMIN" ){
+                this.router.navigate(['/dashboard']);
+          }
+                
+          else this.router.navigate(['error']);
+        }
 
 
-        //console.log(data);
-        console.log("token \n");
-        console.log(data.token);  
-        console.log("\n");
-        this.tokenService.token = data.token as string;
-        //localStorage.setItem('auth_token', data.token);
 
-        //console.log("\n");
-        //console.log("uzer  \n");
-        //console.log(data.message1 );
-       
-
-
-        alert('login successful');
-        this.router.navigate(['/home']);
       },
-      (error) => alert('invalid credentials')
+      (error) => alert('Invalid credentials')
     );
   }
+
+
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 //import { User } from '../requestTypes/userLogin';
 import { Observable } from 'rxjs';
 import { UserRegister } from '../requestTypes/userRegister';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { UserRegister } from '../requestTypes/userRegister';
 export class RegisterService {
 
   user:UserRegister= new UserRegister();
-  private baseUrl="http://localhost:8082/register";
+  private baseUrl= environment.userApiUrl+"/auth/register";
   constructor(private httpClient:HttpClient) {
     
    }

@@ -1,0 +1,131 @@
+<!-- list.component.html -->
+<app-header></app-header>
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <header>
+        <br>
+    </header>
+
+
+
+    <div class="col-lg-12 col-md-12 col-12">
+        <div class="border-bottom pb-3 mb-3 d-md-flex align-items-center justify-content-between">
+            <div class="mb-3 mb-md-0">
+                <h1 class="mb-1 h2 fw-bold">Liste des posts</h1>
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="listP">All posts</a></li>
+                        <li class="breadcrumb-item"><a href="ajout">Add new post</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <div>
+                <a href="chatbot" class="btn btn-outline-secondary">Chatbot</a>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white rounded-md-pill shadow rounded-3 mb-4">
+        <!-- card body -->
+        <div class="p-md-2 p-4">
+            <!-- form -->
+            <form class="row g-1">
+                <div class="col-12 col-md-5">
+
+                    <!-- input -->
+                    <div class="input-group mb-2 mb-md-0 border-md-0 border rounded-pill">
+                        <!-- input group -->
+                        <span class="input-group-text bg-transparent border-0 pe-0 ps-md-3 ps-md-0" id="searchJob"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search text-muted" viewBox="0 0 16 16">
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+                        </svg></span>
+                        <!-- search -->
+                        <input type="search" class="form-control  rounded-pill border-0 ps-3 form-focus-none" placeholder="Question" aria-label="Job Title" aria-describedby="searchJob" (input)="performSearch($event)">
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-4">
+                    <!-- inpt group -->
+                    <div class="input-group mb-3 mb-md-0 border-md-0 border rounded-pill">
+
+                        <!-- search -->
+
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3  text-end d-grid">
+                    <!-- button -->
+                    <button type="submit" class="btn btn-primary rounded-pill">Search</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div>
+        <form>
+
+            <section class="posts">
+                <!-- Liste des questions -->
+<!-- Liste des questions -->
+<div *ngFor="let group of visibleGroups">
+    <div *ngFor="let question of group" class="question">
+      <h4>{{ question.contenu }}</h4>
+      
+      <ng-container *ngIf="question.image">
+        <img [src]="'http://localhost:8090/Questions/' + question.idQuestion + '/image'" alt="Image">
+      </ng-container>
+      <p>Published by ,{{ question.firstName }} {{ question.lastName }}, <br> on {{  question.createdAt | date  }}</p>
+      <!-- Afficher le nombre de likes -->
+      <p *ngIf="question.like === null"></p>
+      <p *ngIf="question.like !== null">{{ question.like }} Likes</p>
+      <footer class="post-footer">
+        <ng-container *ngIf="question.idUser === currentuser">
+          <li>
+            <button [routerLink]="['/updateP', question.idQuestion]" class="update-question-btn">
+              <i class="fas fa-pencil-alt"></i><!-- Espace insécable -->
+            </button>
+            <button class="transparent-button" style="display: none;" ></button>
+            <span class="delete-question-btn" (click)="delete(question.idQuestion)">
+              <i class="fas fa-trash"></i>
+            </span>
+          </li>
+        </ng-container>
+        <ul class="actions">
+          <li>
+            <button (click)="addLike(question.idQuestion)" class="update-question-btn">
+              <i class="fa fa-heart"></i> <!-- Espace insécable -->
+            </button>
+            
+            <button (click)="removeLike(question.idQuestion)" class="update-question-btn">
+                <i class="fa fa-thumbs-down"></i> <!-- Espace insécable -->
+              </button>
+              
+              
+            <i class="fa fa-reply"></i> <a [routerLink]="['/AddReponse', question.idQuestion]">Reply</a>
+          </li>
+          <a [routerLink]="['/reponseParId', question.idQuestion]">View replies</a>
+        </ul>
+      </footer>
+    </div>
+  </div>
+  
+  
+  
+  
+            </section>
+            
+        </form>
+        <div class="pagination">
+            <button class="btn btn-primary" (click)="previousPage()">Précédent</button>
+            <span>{{ currentPage + 1 }} / {{ totalPages }}</span>
+            <button class="btn btn-primary" (click)="nextPage()">Suivant</button>
+        </div>
+    
+        <!-- Liste des questions -->
+        <div *ngFor="let group of visibleGroups">
+            <div *ngFor="let question of group" class="question">
+                <!-- Affichage de la question -->
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-footer></app-footer>

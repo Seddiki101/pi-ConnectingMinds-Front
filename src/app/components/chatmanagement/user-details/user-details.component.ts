@@ -36,7 +36,6 @@ export class UserDetailsComponent implements OnInit {
             this.lastname = data.lastName;
             const firstLetter = data.firstName[0].toUpperCase(); 
           this.pic = `assets/profl/${firstLetter}.png`;
-          console.log("pictuuuuure");
           },
           error: (error) => console.error('Error retrieving profile:', error)
         });

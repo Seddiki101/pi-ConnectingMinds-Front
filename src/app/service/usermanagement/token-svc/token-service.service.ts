@@ -7,56 +7,85 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class TokenService {
 
+  useLocalStorage: boolean = true; // Default to using localStorage
+
+
+  constructor() {
+    // Check if token exists in localStorage on service initialization
+    this.useLocalStorage = localStorage.getItem('token') !== null;
+  }
+
+
   set token(token: string) {
-    localStorage.setItem('token', token);
+    if (this.useLocalStorage) {
+      localStorage.setItem('token', token);
+    } else {
+      sessionStorage.setItem('token', token);
+    }
   }
 
   get token() {
-    return localStorage.getItem('token') as string;
+    // Try to get from sessionStorage first if localStorage is not used
+    let token = this.useLocalStorage ? localStorage.getItem('token') : sessionStorage.getItem('token');
+    return token as string;
   }
 
-  isTokenValid() {
+  clearToken() {
+    if (this.useLocalStorage) {
+      localStorage.removeItem('token');
+    } else {
+      sessionStorage.removeItem('token');
+    }
+  }
+
+  isTokenValid(): boolean {
     const token = this.token;
     if (!token) {
       return false;
     }
-    // decode the token
     const jwtHelper = new JwtHelperService();
-    // check expiry date
     const isTokenExpired = jwtHelper.isTokenExpired(token);
     if (isTokenExpired) {
-      localStorage.clear();
+      this.clearToken();
       return false;
     }
     return true;
   }
 
+
+
   isTokenNotValid() {
     return !this.isTokenValid();
   }
 
-  get userRoles(): string[] {
+  getUserRoles(): string | null {
     const token = this.token;
     if (token) {
       const jwtHelper = new JwtHelperService();
       const decodedToken = jwtHelper.decodeToken(token);
-      const roles = decodedToken.roles as string[]; // Ensure this key matches your token's claim for roles
-      return roles || [];
+      const roles = decodedToken.guise ; 
+      return roles || null ;
     }
-    return [];
+    return null;
   }
-  /*
-  get userRoles(): string[] {
+  
+
+  getUserRole(): string | null {
     const token = this.token;
     if (token) {
       const jwtHelper = new JwtHelperService();
       const decodedToken = jwtHelper.decodeToken(token);
-      console.log(decodedToken.authorities);
-      return decodedToken.authorities;
+      const roles = decodedToken.guise ;
+      var userRole:string = "" ;
+      if (roles=="69") userRole = "ADMIN";
+      else if (roles=="420") userRole = "USER";
+      
+
+      return userRole || null ;
     }
-    return [];
+    return null;
   }
-*/
+
 
 getTokenDetails() {
   const token = this.token;
@@ -82,6 +111,15 @@ getName(): string | null {
   return null;
 }
 
+getLastName(): string | null {
+  const token = this.token;
+  if (token) {
+    const jwtHelper = new JwtHelperService();
+    const decodedToken = jwtHelper.decodeToken(token);
+    return decodedToken.lastname; 
+  }
+  return null;
+}
 
 getEmail(): string | null {
   const token = this.token;
@@ -107,7 +145,7 @@ return null;
 }
 
 
-public getHeaders(): HttpHeaders {
+ getHeaders(): HttpHeaders {
   const token = this.token;
   return new HttpHeaders().set('Authorization', `Bearer ${token}`);
 }

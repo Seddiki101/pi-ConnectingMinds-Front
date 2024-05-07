@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
+import { AuthenticService } from 'src/app/service/usermanagement/authentic/authentic.service';
 import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 
 @Component({
@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
     this.username = this.tokenService.getName(); // Fetch the username on component initialization
     this.email =  this.tokenService.getEmail();
     this.userImage = this.tokenService.getPic();
-  //  this.updateUserImage();
   }
 
   logout() {

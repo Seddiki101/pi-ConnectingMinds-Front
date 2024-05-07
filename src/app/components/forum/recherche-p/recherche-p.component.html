@@ -1,0 +1,21 @@
+<!-- search.component.html -->
+<app-header></app-header>
+<div class="search-container">
+    <input type="text" [(ngModel)]="contenu" placeholder="Entrez votre recherche...">
+    <button>Rechercher</button>
+</div>
+
+<div *ngIf="questions && questions.length > 0" class="search-results">
+    <h2>Résultats de la recherche :</h2>
+    <ul>
+        <li *ngFor="let question of questions">
+            <h3>{{ question.firstName }} {{ question.lastName }}</h3>
+            <p>{{ question.contenu }}</p>
+            <!-- Affichez d'autres informations de question si nécessaire -->
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="questions && questions.length === 0" class="no-results">
+    <p>Aucun résultat trouvé pour "{{ contenu }}"</p>
+</div>

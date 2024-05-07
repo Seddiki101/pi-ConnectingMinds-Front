@@ -1,0 +1,41 @@
+/* reservation-modal.component.css */
+.mat-dialog-container {
+    border-radius: 8px; /* Arrondir les coins */
+    padding: 20px; /* Ajouter de l'espace autour du contenu intérieur */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Ajouter une ombre pour un effet élévé */
+    background-color: #8da2bf; /* Définir une couleur de fond spécifique */
+}
+
+.mat-typography {
+    font-family: 'Roboto', sans-serif; /* Utiliser une police spécifique */
+}
+
+.mat-form-field {
+    width: 100%; /* Utiliser toute la largeur disponible */
+    margin-bottom: 16px; /* Ajouter de l'espace entre les champs */
+}
+
+input.mat-input-element {
+    padding: 10px; /* Ajuster le padding pour les inputs pour un meilleur visuel */
+}
+
+button.mat-button {
+    margin-right: 8px; /* Espacer les boutons */
+    background-color: #007BFF; /* Couleur de fond pour le bouton */
+    color: white; /* Couleur du texte pour le bouton */
+}
+
+button.mat-button:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+.mat-dialog-container {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transform: scale(0.7);
+    opacity: 0;
+}
+
+.mat-dialog-container.mat-dialog-open {
+    transform: scale(1);
+    opacity: 1;
+}
+

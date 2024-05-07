@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../../service/usermanagement/profile-svc/profile.service'; 
 import { UserRegister } from '../../../service/usermanagement/requestTypes/userRegister'; 
 import { Router } from '@angular/router';
-import { AuthenticService } from 'src/app/service/usermanagement/guard/authentic.service';
+import { AuthenticService } from 'src/app/service/usermanagement/authentic/authentic.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile().subscribe({
       next: (data) => {
         this.user = data;
+        this.user.password="";
         this.originalEmail = data.email;  // Store original email
       },
       error: (err) => {
@@ -46,6 +47,9 @@ export class ProfileComponent implements OnInit {
       alert('Please enter a valid email address');
       return;
     }
+
+    console.log("Password Length: ", this.user.password.length);
+    if( (this.user.password.length < 7 ) ){alert('Password needs to be 8 characters'); return; }
 
     if (!this.isAdult(this.user.birthdate)) {
       alert('You must be over the age of 17 to update your profile.');

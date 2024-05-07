@@ -1,0 +1,209 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* ... existing styles ... */
+.space-between-icons {
+    margin-right: 50px; /* Vous pouvez ajuster la valeur de la marge selon vos besoins */
+}
+.transparent-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  
+
+
+.add-question-btn {
+    background-color: #2ecc71; /* Green color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically (optional) */
+    margin-top: auto; /* Push the button to the bottom */
+}
+
+
+header {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.categories {
+    margin-bottom: 20px;
+}
+
+.update-question-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.update-question-btn i {
+    color: #4caf50; /* Adjust color as needed */
+    font-size: 20px; /* Adjust size as needed */
+    vertical-align: middle;
+}
+.delete-question-btn {
+    display: inline-block; /* Make it behave like a block element */
+    width: 24px; /* Adjust width as needed */
+    height: 24px; /* Adjust height as needed */
+    background-color: #fff; /* Adjust background color as needed */
+    border: 1px solid #ccc; /* Adjust border as needed */
+    border-radius: 50%; /* Make it circular */
+    cursor: pointer;
+    padding: 5px; /* Add some padding inside the icon */
+    transition: background-color 0.2s ease; /* Add hover effect */
+}
+.delete-question-btn:hover {
+    background-color: #f44336; /* Change background color on hover */
+}
+
+.delete-question-btn i {
+    color: #f44336; /* Adjust icon color as needed */
+    font-size: 18px; /* Adjust icon size as needed */
+    vertical-align: middle;
+}
+.categories ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.post-footer {
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Align items vertically */
+}
+.post-footer span {
+    display: inline-flex; /* Wrap spans in flex containers */
+    align-items: center; /* Align text vertically */
+    margin-right: 5px; /* Add spacing between spans */
+    font-size: 12px;
+    color: #666;
+}
+
+.categories li {
+    margin-bottom: 5px;
+}
+
+.categories a {
+    text-decoration: none;
+    color: #333;
+}
+
+.posts {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.posts h2 {
+    margin-bottom: 20px;
+}
+
+.posts article {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.posts h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.posts p {
+    margin-bottom: 10px;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ajout-question-btn {
+    background-color: #2ecc71; /* Green color */
+    /* ... other styles ... */
+}
+
+
+
+.actions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.forum-component .fa-trash {
+    color: white; /* Set the icon color to red */
+    font-size: 20px; /* Increase the icon size to 20px */
+}
+.aaa {
+    color: white;
+}
+.actions li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #20c997;}
+/* search.component.css */
+
+.search-container {
+    float: right;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-container button {
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-results {
+    margin-top: 20px;
+}
+
+.search-results h2 {
+    margin-bottom: 10px;
+}
+
+.search-results ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.search-results li {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.no-results {
+    margin-top: 20px;
+    color: #ff0000;
+}

@@ -1,0 +1,229 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* ... existing styles ... */
+/* Style for the "Ajouter Question" button */
+/* Style for the "Ajouter Question" button */
+.add-question-btn {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Adjust font size as needed */
+    transition: background-color 0.2s ease; /* Add hover effect */
+}
+
+.add-question-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+/* Style for the input field containing post content */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Style for the "content" placeholder text */
+.form-group input[type="text"]::placeholder {
+    color: #999;
+}
+
+/* Style for the label above the image input field */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style for the image input field  */
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Hide the default file input button styles (for a cleaner look) */
+.form-group input[type="file"] {
+    opacity: 0;
+}
+
+
+/* Style a custom "Browse" button (optional) */
+.form-group .custom-file-button {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f1f1f1; /* Set background color */
+    color: #333; /* Set button text color */
+    font-size: 16px; /* Set button text size */
+    transition: background-color 0.2s ease; /* Add hover effect */
+}
+
+.form-group .custom-file-button:hover {
+    background-color: #ddd; /* Change background color on hover */
+}
+
+/* Style the text displayed next to the selected file (optional) */
+.form-group .custom-file-label {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #eee; /* Set background color */
+    color: #333; /* Set text color */
+    font-size: 16px; /* Set text size */
+    border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+
+
+    header {
+        background-color: #f0f0f0;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .categories {
+        margin-bottom: 20px;
+    }
+
+    .update-question-btn {
+        background-color: #2ecc71;
+        color: white;
+        padding: 5px 10px; /* Reduced padding */
+        font-size: 14px; /* Smaller font size */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .delete-question-btn {
+        display: inline-block; /* Make it behave like a block element */
+        width: 24px; /* Adjust width as needed */
+        height: 24px; /* Adjust height as needed */
+        background-color: #fff; /* Adjust background color as needed */
+        border: 1px solid #ccc; /* Adjust border as needed */
+        border-radius: 50%; /* Make it circular */
+        cursor: pointer;
+        padding: 5px; /* Add some padding inside the icon */
+        transition: background-color 0.2s ease; /* Add hover effect */
+    }
+
+    .delete-question-btn:hover {
+        background-color: #f44336; /* Change background color on hover */
+    }
+
+    .delete-question-btn i {
+        color: #f44336; /* Adjust icon color as needed */
+        font-size: 18px; /* Adjust icon size as needed */
+        vertical-align: middle;
+    }
+
+
+
+
+
+    .categories ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .post-footer {
+        display: flex; /* Enable flexbox layout */
+        align-items: center; /* Align items vertically */
+    }
+
+    .post-footer span {
+        display: inline-flex; /* Wrap spans in flex containers */
+        align-items: center; /* Align text vertically */
+        margin-right: 5px; /* Add spacing between spans */
+        font-size: 12px;
+        color: #666;
+    }
+
+    .categories li {
+        margin-bottom: 5px;
+    }
+
+    .categories a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .posts {
+        border: 1px solid #ccc;
+        padding: 20px;
+    }
+
+    .posts h2 {
+        margin-bottom: 20px;
+    }
+
+    .posts article {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+    }
+
+    .posts h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .posts p {
+        margin-bottom: 10px;
+    }
+
+    .post-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+
+    .actions {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .forum-component .fa-trash {
+        color: white; /* Set the icon color to red */
+        font-size: 20px; /* Increase the icon size to 20px */
+    }
+    .aaa {
+        color: white;
+
+
+    }
+
+
+
+    .actions li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .actions a {
+        text-decoration: none;
+        color: #20c997;}}

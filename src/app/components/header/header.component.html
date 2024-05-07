@@ -276,35 +276,11 @@
             </div>
             <div class="dropdown-divider"></div>
             <ul class="list-unstyled">
-              <li class="dropdown-submenu dropstart-lg">
-                <a
-                  class="dropdown-item dropdown-list-group-item dropdown-toggle"
-                  href="#"
-                >
-                  <i class="fe fe-circle me-2"></i>Status
+
+              <li>
+                <a class="dropdown-item" href="/chat" >
+                  <i class="fe fe-circle me-2"></i> Messaging
                 </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-success me-2"></span>Online
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-secondary me-2"></span>Offline
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-warning me-2"></span>Away
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-danger me-2"></span>Busy
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li>
                 <a class="dropdown-item" href="/profile">
@@ -514,6 +490,9 @@
             </li>
           </ul>
         </li>
+
+
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -523,66 +502,74 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Landings
+            Workshop
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarLanding">
             <li>
-              <h4 class="dropdown-header">Landings</h4>
+              <h4 class="dropdown-header">Workshop</h4>
             </li>
 
             <li>
               <a
-                href="pages/landings/landing-education.html"
+                href="/list"
                 class="dropdown-item d-flex justify-content-between"
               >
-                Education <span class="badge bg-primary ms-1">New</span>
+                Workshops <span class="badge bg-primary ms-1">New</span>
               </a>
             </li>
             <li>
               <a
-                href="pages/landings/home-academy.html"
+                href="/listRes"
                 class="dropdown-item d-flex justify-content-between"
               >
-                Home Academy
-              </a>
-            </li>
-            <li>
-              <a
-                href="pages/landings/landing-courses.html"
-                class="dropdown-item"
-              >
-                Courses
-              </a>
-            </li>
-            <li>
-              <a href="pages/landings/course-lead.html" class="dropdown-item">
-                Lead Course
-              </a>
-            </li>
-            <li>
-              <a
-                href="pages/landings/request-access.html"
-                class="dropdown-item"
-              >
-                Request Access
-              </a>
-            </li>
-            <li>
-              <a href="pages/landings/landing-sass.html" class="dropdown-item">
-                SaaS
+                My Reservations
               </a>
             </li>
 
-            <li>
-              <a
-                href="pages/landings/landing-job.html"
-                class="dropdown-item d-flex justify-content-between"
-              >
-                Job Listing
-              </a>
-            </li>
           </ul>
         </li>
+
+
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarLanding"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Forum
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarLanding">
+            <li>
+              <h4 class="dropdown-header">Forum</h4>
+            </li>
+
+            <li>
+              <a
+                href="/listP"
+                class="dropdown-item d-flex justify-content-between"
+              >
+                Posts <span class="badge bg-primary ms-1">New</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/chatbot"
+                class="dropdown-item d-flex justify-content-between"
+              >
+                Chatbot
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -607,8 +594,8 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="pages/course-single.html">
-                    Course Single
+                  <a class="dropdown-item" [routerLink]="['/list-resources']">
+                    Ressources
                   </a>
                 </li>
                 <li>

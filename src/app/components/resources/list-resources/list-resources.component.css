@@ -1,0 +1,26 @@
+.search-container {
+    text-align: center;
+    position: relative;
+}
+
+.search-input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding-right: 30px; /* Pour laisser de la place pour l'icône de recherche */
+    outline: none; /* Supprime la bordure lorsqu'il est en focus */
+}
+
+.search-icon {
+    position: relative;
+    right: 25px;
+    top: 20%;
+    transform: translateY(-10%);
+    color: #555;
+}
+
+.search-line {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    margin-top: 5px; /* Espace entre l'input et la ligne */
+}
