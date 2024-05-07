@@ -24,10 +24,10 @@ export class SendMessageModalComponent {
     private userService: UserServiceService,
     private tokenService: TokenService,
     private messageService: MessageService,
-    
+
   ) {
     this.loadAllUsers();
-    this.loggedInUserEmail = this.tokenService.getEmail(); // Get logged in user's email
+    this.loggedInUserEmail = this.tokenService.getEmail();
   }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class SendMessageModalComponent {
     this.userService.getAllUsers().subscribe(
       (users: any[]) => {
         this.users = users;
-        this.filterUsers();  // Call filter users to initially filter out the logged in user
+        this.filterUsers();
       },
       (error) => {
         console.error('Error loading users:', error);
@@ -60,26 +60,25 @@ export class SendMessageModalComponent {
   searchUsers(searchTerm: string) {
     this.filteredUsers = this.users.filter(user =>
       (user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      user.email !== this.loggedInUserEmail // Filter out the logged in user from the search results as well
+        user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      user.email !== this.loggedInUserEmail
     );
   }
 
   selectUser(user: any, event: MouseEvent) {
-    event.preventDefault(); // Prevents the default link behavior
+    event.preventDefault();
     this.selectedUser = user;
   }
 
   backToList() {
-    this.selectedUser = null; // Deselects any selected user and shows the list again
+    this.selectedUser = null;
   }
 
   sendMessage() {
     if (this.selectedUser && this.messageContent && this.user?.userId) {
       this.messageService.newMessage(this.messageContent, this.user?.userId, this.selectedUser.id).subscribe({
         next: (response) => {
-          console.log('Message sent successfully', response);
         },
         error: (error) => {
           console.error('Failed to send message', error);

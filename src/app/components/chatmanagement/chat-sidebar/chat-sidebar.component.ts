@@ -28,13 +28,13 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
     private chatListService: ChatListService,
     private chatStateService: ChatStateService,
     private stompService: StompService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userSubscription = this.userService.getUserProfile().subscribe({
       next: (userData: IUser) => {
         if (userData && userData.userId) {
-          
+
           this.user = userData;
           if (this.user && this.user.userId) {
             this.fetchInitialChatList(this.user.userId);
@@ -58,11 +58,11 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
   }
 
   private fetchInitialChatList(userId: number): void {
-    if (userId != null) { 
+    if (userId != null) {
       this.chatListService.getChatsForUser(userId).subscribe({
         next: (chats) => {
           this.chats = chats;
-          
+
         },
         error: (error) => {
           console.error('Error fetching chats:', error);
@@ -72,7 +72,7 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToChatUpdates(userId: number): void {
-    if (userId != null) {  
+    if (userId != null) {
       const topic = `/topic/user${userId}`;
       this.chatUpdatesSubscription = this.stompService.subscribe(topic, (message) => {
         console.log("Update notification received, refetching chats.");
@@ -82,30 +82,29 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
   }
 
   filteredChats(): IChatPreview[] {
-    return this.chats.filter(chat => 
-      chat.name.toLowerCase().includes(this.searchTerm.toLowerCase()) 
+    return this.chats.filter(chat =>
+      chat.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
   selectChat(chatId: number, otherUserId: number): void {
     this.chatStateService.changeChatId(chatId);
     this.chatStateService.changeOtherUserId(otherUserId);
   }
-  
+
 
   trackByChatId(index: number, chat: IChatPreview): number {
-    return chat.chatId; 
+    return chat.chatId;
   }
 
   deleteChat(chatId: number): void {
     this.chatService.deleteChat(chatId).subscribe({
       next: response => {
-        console.log('Chat deleted successfully');
-        this.chats = this.chats.filter(chat => chat.chatId !== chatId); 
+        this.chats = this.chats.filter(chat => chat.chatId !== chatId);
       },
       error: error => console.error('Error deleting chat', error)
     });
   }
-  
+
   calculateTimeAgo = (dateStr: Date): string => {
     const dateCreated = new Date(dateStr);
     const dateNow = new Date();
@@ -120,10 +119,10 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
 
     if (timeDiff < millisecondsInMinute) {
       return `a few seconds ago`;
-    }else if (timeDiff < millisecondsInHour) {
+    } else if (timeDiff < millisecondsInHour) {
       const diffInMinutes = Math.floor(timeDiff / millisecondsInMinute);
       return `${diffInMinutes} minute${diffInMinutes === 1 ? "" : "s"} ago`;
-    }else if (timeDiff < millisecondsInDay) {
+    } else if (timeDiff < millisecondsInDay) {
       const diffInHours = Math.floor(timeDiff / millisecondsInHour);
       return `${diffInHours} hour${diffInHours === 1 ? "" : "s"} ago`;
     } else if (timeDiff < millisecondsInWeek) {

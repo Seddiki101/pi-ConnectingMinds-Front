@@ -7,7 +7,7 @@ import { IMessage, IUser } from 'src/app/shared/interfaces';
 import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
 import { MessageService } from 'src/app/service/chatmanagement/message-service/message.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
-import { IMessage as StompMessage } from '@stomp/stompjs'; // Rename the import to avoid conflict
+import { IMessage as StompMessage } from '@stomp/stompjs';
 import { ChatFooterComponent } from '../chat-footer/chat-footer.component';
 
 
@@ -33,8 +33,8 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     private chatStateService: ChatStateService,
     private stompService: StompService,
     private messageService: MessageService,
-    private userService: UserServiceService 
-  ) {}
+    private userService: UserServiceService
+  ) { }
 
   ngAfterViewChecked(): void {
     this.scrollToBottom();
@@ -71,9 +71,9 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatService.getChat(chatId).subscribe({
       next: (data) => {
         this.chatData = data;
-        
-        
-        this.scrollToBottom(); // Scroll after data is loaded
+
+
+        this.scrollToBottom();
       },
       error: (error) => {
         console.error('Error fetching chat data:', error);
@@ -84,10 +84,9 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   private subscribeToChatUpdates(chatId: number): void {
     const topic = `/topic/chat${chatId}`;
     if (this.currentSubscription) {
-      this.currentSubscription.unsubscribe(); // Ensure no duplicates by unsubscribing to any existing subscription
+      this.currentSubscription.unsubscribe();
     }
     this.currentSubscription = this.stompService.subscribe(topic, (stompResponse: StompMessage) => {
-      console.log("Received WebSocket message:", stompResponse.body);
       const message: IMessage = JSON.parse(stompResponse.body);
       this.processReceivedMessage(message);
     });
@@ -96,39 +95,36 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   private processReceivedMessage(message: IMessage): void {
     if (!message.content) {
       console.error("Received empty or malformed message:", message);
-      return; // Ignore messages that don't meet the criteria
+      return;
     }
-  
+
     const existingMessageIndex = this.chatData.messages.findIndex((m: IMessage) => m.messageId === message.messageId);
     if (existingMessageIndex === -1) {
-      this.chatData.messages.push(message); // Add new if it doesn't exist
+      this.chatData.messages.push(message);
     } else {
-      this.chatData.messages[existingMessageIndex] = message; // Update if already exists
+      this.chatData.messages[existingMessageIndex] = message;
     }
-    
-    this.forceUpdate(); // Trigger Angular change detection manually
+
+    this.forceUpdate();
   }
-  
-  
+
+
 
   sendMessage(): void {
     if (this.newMessage.trim() !== '' && this.user && this.user.userId) {
-      // Prepare the message payload as per the backend expectations
       const messagePayload = {
         content: this.newMessage,
         chatId: this.chatData.chatId,
         userId: this.user.userId
       };
-  
-      // Call the sendMessage service method
+
       this.messageService.sendMessage(messagePayload.content, messagePayload.chatId, messagePayload.userId)
         .subscribe({
           next: (fullMessage: IMessage) => {
-            // Use the complete message object returned from the server
+
             this.chatData.messages.push(fullMessage);
-            this.newMessage = ''; // Clear the input field
-            this.scrollToBottom(); // Scroll to the bottom of the chat
-            console.log('Message sent successfully', fullMessage);
+            this.newMessage = '';
+            this.scrollToBottom();
           },
           error: (error) => {
             console.error('Error sending message', error);
@@ -136,17 +132,17 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         });
     }
   }
-  
+
 
   deleteMessage(message: IMessage): void {
     this.messageService.deleteMessage(message.messageId).subscribe({
       next: () => {
         const index = this.chatData.messages.findIndex((m: IMessage) => m.messageId === message.messageId);
         if (index !== -1) {
-          this.chatData.messages[index].deleted = true; // Mark as deleted
-          this.chatData.messages[index].content = "This message was deleted"; // Update content
-          this.chatData.messages[index].seen = true; // Optionally mark as seen
-          // Ensure Angular updates the view
+          this.chatData.messages[index].deleted = true;
+          this.chatData.messages[index].content = "This message was deleted";
+          this.chatData.messages[index].seen = true;
+
           this.forceUpdate();
         }
       },
@@ -163,11 +159,11 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       console.error('ChatFooterComponent is not available.');
     }
   }
-  
+
   private forceUpdate() {
-    this.chatData = {...this.chatData};  // Creating a new object for change detection
+    this.chatData = { ...this.chatData };
   }
-  
+
 
   private scrollToBottom(): void {
     try {
@@ -181,7 +177,7 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     return message.id;
   }
   isLastMessageFromUser(index: number): boolean {
-    if (index + 1 === this.chatData.messages.length) return true; // Last message in array
+    if (index + 1 === this.chatData.messages.length) return true;
     return this.chatData.messages[index].userId === this.chatData.messages[index + 1].userId ? false : true;
   }
 }

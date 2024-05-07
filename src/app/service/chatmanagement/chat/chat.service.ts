@@ -9,7 +9,7 @@ export class ChatService {
 
   private baseUrl: string = 'http://localhost:8083/chats';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   deleteChat(chatId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${chatId}`, { responseType: 'text' });

@@ -9,7 +9,7 @@ export class FetchChatService {
 
   private baseUrl: string = 'http://localhost:8083/chats';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getChat(chatId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${chatId}`);
