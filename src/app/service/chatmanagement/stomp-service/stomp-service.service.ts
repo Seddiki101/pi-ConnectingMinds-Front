@@ -23,7 +23,6 @@ export class StompService {
 
     this.stompClient.connect({}, (frame: any) => {
       this.connected = true;
-      console.log('Connected: ' + frame);
       this.reconnectAllSubscriptions();
     }, this.onError);
   }
@@ -33,7 +32,7 @@ export class StompService {
     this.connected = false;
     setTimeout(() => {
       this.initializeWebSocketConnection();
-    }, 5000);  // Attempt to reconnect every 5 seconds
+    }, 5000);
   };
 
   private reconnectAllSubscriptions(): void {
@@ -44,40 +43,27 @@ export class StompService {
   }
 
   public subscribe(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
-    if (!this.connected) {
-      console.log('Attempted to subscribe without a connection; retrying...');
-      setTimeout(() => this.subscribe(topic, callback), 1000);
-      return;
+    if (this.subscriptions[topic]) {
+      this.unsubscribe(topic);
     }
 
-    if (this.subscriptions[topic]) {
-      console.log(`Already subscribed to ${topic}`);
-      return this.subscriptions[topic].subscription;
+    if (!this.connected) {
+      setTimeout(() => this.subscribe(topic, callback), 1000);
+      return;
     }
 
     const subscription = this.stompClient.subscribe(topic, (message: IMessage) => {
       callback(message);
     });
     this.subscriptions[topic] = { subscription, callback };
-    console.log(`Subscribed to ${topic}`);
     return subscription;
   }
+
 
   public unsubscribe(topic: string): void {
     if (this.subscriptions[topic]) {
       this.subscriptions[topic].subscription.unsubscribe();
-      console.log(`Unsubscribed from ${topic}`);
       delete this.subscriptions[topic];
     }
   }
-  public sendTypingStatus(topic: string, userId: number, isTyping: boolean): void {
-    if (this.connected) {
-        this.stompClient.send(`/app/${topic}`, {}, JSON.stringify({ userId, isTyping }));
-        console.log("TypingSTatus===========================")
-        console.log(JSON.stringify({ userId, isTyping }))
-    } else {
-        console.error("Cannot send typing status: WebSocket connection is not established.");
-    }
-}
-
 }

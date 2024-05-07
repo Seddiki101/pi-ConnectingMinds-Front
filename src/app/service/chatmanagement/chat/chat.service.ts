@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FetchChatService {
+export class ChatService {
 
   private baseUrl: string = 'http://localhost:8083/chats';
 
   constructor(private http: HttpClient) { }
 
-  getChat(chatId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${chatId}`);
+  deleteChat(chatId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${chatId}`, { responseType: 'text' });
   }
 }
