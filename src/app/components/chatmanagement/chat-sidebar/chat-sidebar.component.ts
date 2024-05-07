@@ -8,6 +8,7 @@ import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
 import { IChatPreview, IUser } from 'src/app/shared/interfaces';
+import { ChatService } from 'src/app/service/chatmanagement/chat/chat.service';
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -17,23 +18,23 @@ import { IChatPreview, IUser } from 'src/app/shared/interfaces';
 export class ChatSidebarComponent implements OnInit, OnDestroy {
   user: IUser | null = null;
   chats: IChatPreview[] = [];
+  searchTerm: string = '';
   private chatUpdatesSubscription: StompSubscription | undefined;
   private userSubscription: Subscription | undefined;
 
   constructor(
+    private chatService: ChatService,
     private userService: UserServiceService,
     private chatListService: ChatListService,
     private chatStateService: ChatStateService,
     private stompService: StompService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userSubscription = this.userService.getUserProfile().subscribe({
       next: (userData: IUser) => {
         if (userData && userData.userId) {
-          console.log("userData ================================");
-          console.log(userData);
-          
+
           this.user = userData;
           if (this.user && this.user.userId) {
             this.fetchInitialChatList(this.user.userId);
@@ -57,14 +58,11 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
   }
 
   private fetchInitialChatList(userId: number): void {
-    if (userId != null) {  // Checking null before calling the service
+    if (userId != null) {
       this.chatListService.getChatsForUser(userId).subscribe({
         next: (chats) => {
           this.chats = chats;
-          console.log("chaaaaaaaaaaaaaaaaaaats");
-          
-          console.log(chats);
-          
+
         },
         error: (error) => {
           console.error('Error fetching chats:', error);
@@ -74,7 +72,7 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToChatUpdates(userId: number): void {
-    if (userId != null) {  // Checking null before subscribing
+    if (userId != null) {
       const topic = `/topic/user${userId}`;
       this.chatUpdatesSubscription = this.stompService.subscribe(topic, (message) => {
         console.log("Update notification received, refetching chats.");
@@ -83,15 +81,28 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
     }
   }
 
+  filteredChats(): IChatPreview[] {
+    return this.chats.filter(chat =>
+      chat.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
   selectChat(chatId: number, otherUserId: number): void {
-    console.log(`Selecting chat - Chat ID: ${chatId}, Other User ID: ${otherUserId}`);
     this.chatStateService.changeChatId(chatId);
     this.chatStateService.changeOtherUserId(otherUserId);
   }
-  
+
 
   trackByChatId(index: number, chat: IChatPreview): number {
-    return chat.chatId; // Use chatId for unique identification
+    return chat.chatId;
+  }
+
+  deleteChat(chatId: number): void {
+    this.chatService.deleteChat(chatId).subscribe({
+      next: response => {
+        this.chats = this.chats.filter(chat => chat.chatId !== chatId);
+      },
+      error: error => console.error('Error deleting chat', error)
+    });
   }
 
   calculateTimeAgo = (dateStr: Date): string => {
@@ -108,10 +119,10 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
 
     if (timeDiff < millisecondsInMinute) {
       return `a few seconds ago`;
-    }else if (timeDiff < millisecondsInHour) {
+    } else if (timeDiff < millisecondsInHour) {
       const diffInMinutes = Math.floor(timeDiff / millisecondsInMinute);
       return `${diffInMinutes} minute${diffInMinutes === 1 ? "" : "s"} ago`;
-    }else if (timeDiff < millisecondsInDay) {
+    } else if (timeDiff < millisecondsInDay) {
       const diffInHours = Math.floor(timeDiff / millisecondsInHour);
       return `${diffInHours} hour${diffInHours === 1 ? "" : "s"} ago`;
     } else if (timeDiff < millisecondsInWeek) {

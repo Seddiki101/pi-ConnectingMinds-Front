@@ -21,15 +21,16 @@ export interface IUser {
   pic: string;
 }
 
-// export interface IMessage {
-//   messageId: number;
-//   content: string;
-//   timestamp: Date;
-//   lastSeen: boolean;
-//   deleted: boolean;
-//   user: IUser;
-//   chat: IChat | null;
-// }
+export interface IMessage {
+  messageId: number;
+  chatId: number;
+  content: string;
+  userId: number;
+  timestamp?: string;
+  seen?: boolean;
+  deleted?: boolean;
+}
+
 
 export interface IMessageCreate {
   content: string;
