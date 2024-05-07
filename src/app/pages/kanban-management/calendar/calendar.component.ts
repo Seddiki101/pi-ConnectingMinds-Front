@@ -60,43 +60,42 @@ export class CalendarComponent implements OnInit {
     this.authenticService.getId().subscribe((id) => {
       this.ownerId = id;
       this.tokenDetails = this.tokenService.getTokenDetails();
+      this.projects = [];
       this.tasks = [];
       this.events = [];
       this.calendarOptions.events = [];
       this.loadProjects();
     });
   }
+
   loadProjects(): void {
-    // Clear tasks and events arrays before loading new projects
-    this.tasks = [];
-    this.events = [];
     this.projectService.getProjectsByUserId(this.ownerId).subscribe(
       (projects: Project[]) => {
         this.projects = projects;
-        if (this.projects) {
-          projects.forEach((project) => {
-            if (project.teams) {
-              project.teams.forEach((team) => {
-                if (team.tasks) {
-                  this.tasks.push(...team.tasks);
-                }
-                if (team.events) {
-                  this.events.push(...team.events);
-                }
-              });
-            }
-          });
-        }
-        this.loadValues(this.tasks, this.events);
+        this.loadTasksAndEvents();
       },
       (error) => {
-        this._coreService.openSnackBar(
-          "Error loading Events & Tasks!",
-          "error",
-          2000
-        );
+        this._coreService.openSnackBar("Error loading...!", "cancel", 3000);
       }
     );
+  }
+
+  loadTasksAndEvents(): void {
+    this.tasks = [];
+    this.events = [];
+    this.projects.forEach((project) => {
+      if (project.teams) {
+        project.teams.forEach((team) => {
+          if (team.tasks && team.tasks.length > 0) {
+            this.tasks.push(...team.tasks);
+          }
+          if (team.events && team.events.length > 0) {
+            this.events.push(...team.events);
+          }
+        });
+      }
+    });
+    this.loadValues(this.tasks, this.events);
   }
 
   loadValues(tasks: Task[], events: Event[]) {
