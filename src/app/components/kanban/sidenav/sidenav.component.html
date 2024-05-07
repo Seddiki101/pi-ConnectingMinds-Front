@@ -1,0 +1,92 @@
+<nav class="navbar-vertical navbar">
+  <div class="vh-100" data-simplebar>
+    <!-- Brand logo -->
+    <a class="navbar-brand" routerLink="/home">
+      <img src="../../assets/images/brand/logo/logo.png" alt="" />
+    </a>
+    <!-- Navbar nav -->
+    <ul class="navbar-nav flex-column" id="sideNavbar">
+      <!-- Nav item -->
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-bs-toggle="collapse"
+          data-bs-target="#navProject"
+          aria-expanded="false"
+          aria-controls="navProject"
+          routerLinkActive="active"
+        >
+          <i class="nav-icon fe fe-file me-2"></i> Project
+        </a>
+        <div id="navProject" class="collapse" data-bs-parent="#sideNavbar">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="project-grid"
+                routerLinkActive="active"
+              >
+                Grid
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="project-list"
+                routerLinkActive="active"
+              >
+                List
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- Nav item -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="team" routerLinkActive="active">
+          <i class="nav-icon mdi mdi-account-multiple me-2"></i>
+          Team
+        </a>
+      </li>
+      <!-- Nav item -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="task" routerLinkActive="active">
+          <i class="nav-icon mdi mdi-trello me-2"></i>
+          Task
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="event" routerLinkActive="active">
+          <i class="nav-icon mdi mdi-flag-variant me-2"></i>
+          Event
+        </a>
+      </li>
+      <!-- Nav item -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="calendar" routerLinkActive="active">
+          <i class="nav-icon mdi mdi-calendar me-2"></i>
+          Calendar
+        </a>
+      </li>
+      <!-- Nav item -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="chatgpt4" routerLinkActive="active">
+          <i class="nav-icon mdi mdi-robot-happy me-2"></i>
+          Ai assistant
+        </a>
+      </li>
+      <!-- Nav item -->
+      <li class="nav-item">
+        <a class="nav-link" routerLink="dalle3" routerLinkActive="active">
+          <i class="nav-icon mdi mdi-image-auto-adjust me-2"></i>
+          Dalle-3
+        </a>
+      </li>
+    </ul>
+    <!-- Card -->
+    <div class=" shadow-none text-center mx-4 my-23">
+          <a routerLink="/home" class="btn btn-white btn-sm">Back Home</a> 
+    </div>
+  </div>
+</nav>

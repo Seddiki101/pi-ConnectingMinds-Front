@@ -1,0 +1,117 @@
+<div class="modal fade show modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="taskModalLabel">
+        {{ data.task ? "Task Details" : "Error occurs reading this task" }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        [mat-dialog-close]="false"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="mb-2 col-12">
+          <label for="taskTitle" class="form-label">Title </label>
+          <input
+            *ngIf="task"
+            type="text"
+            class="form-control"
+            id="taskTitle"
+            name="taskTitle"
+            [value]="task.name"
+            readonly
+          />
+        </div>
+        <div class="col-6">
+          <label for="priority" class="form-label">Priority </label>
+          <input
+            *ngIf="task && task.priority"
+            type="text"
+            class="form-control"
+            id="priority"
+            name="taskPriority"
+            [value]="getPriorityLabel(task.priority)"
+            readonly
+          />
+        </div>
+
+        <div class="mb-2 col-6">
+          <label for="date" class="form-label">Due Date </label>
+          <input
+            class="form-control"
+            type="date"
+            id="dueDate"
+            name="dueDate"
+            [value]="deadLineString"
+            readonly
+          />
+        </div>
+        <div class="mb-2 col-12">
+          <label for="descriptions" class="form-label">Descriptions </label>
+          <textarea
+            *ngIf="task"
+            class="form-control"
+            id="descriptions"
+            rows="3"
+            name="descriptions"
+            [value]="task.description"
+            readonly
+          ></textarea>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="assignTo" class="form-label">Assign To </label>
+          <input
+            *ngIf="task && scrumMaster && task.memberId === scrumMaster.id"
+            type="text"
+            class="form-control"
+            id="assignTo"
+            name="assignTo"
+            [value]="scrumMaster.firstName + ' ' + scrumMaster.lastName"
+            readonly
+          />
+          <input
+            *ngIf="
+              task &&
+              scrumMaster &&
+              task.memberId &&
+              task.memberId !== scrumMaster.id &&
+              team.members?.includes(task.memberId)
+            "
+            type="text"
+            class="form-control"
+            id="assignTo"
+            name="assignTo"
+            [value]="getUserFullNameById(task.memberId)"
+            readonly
+          />
+        </div>
+        <div class="mb-2 col-12">
+          <label for="taskTitle" class="form-label">Created At </label>
+          <input
+            *ngIf="task"
+            type="text"
+            class="form-control"
+            id="creationDate"
+            name="creationDate"
+            [value]="task.createdAt | date"
+            readonly
+          />
+        </div>
+        <div mat-dialog-actions class="action">
+          <div class="col-12 d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-secondary me-2"
+              [mat-dialog-close]="false"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

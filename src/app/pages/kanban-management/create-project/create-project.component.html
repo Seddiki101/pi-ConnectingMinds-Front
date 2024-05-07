@@ -1,0 +1,218 @@
+<!-- Container fluid -->
+<section class="container-fluid p-4">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-12">
+      <!-- Page header -->
+      <div
+        class="border-bottom pb-3 d-md-flex align-items-center justify-content-between mb-3"
+      >
+        <div class="mb-2 mb-lg-0">
+          <h1 class="mb-0 h2 fw-bold">Create New Project</h1>
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a style="cursor: pointer" (click)="navigateBack()"
+                  >Project-Management
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                <a style="cursor: pointer" (click)="navigateBack()">Project</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Create Project
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <!-- button -->
+        <div>
+          <a (click)="navigateBack()" class="btn btn-primary me-2"
+            >Back to Project</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-6">
+    <!-- row -->
+    <div class="row">
+      <div class="offset-xl-3 col-xl-6 col-md-12 col-12">
+        <!-- card -->
+        <div class="card">
+          <!-- card body -->
+          <div class="card-body p-lg-6">
+            <!-- form -->
+            <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+              <div class="row gx-3">
+                <!-- form group -->
+                <div class="mb-3 col-12">
+                  <label class="form-label"
+                    >Name <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter project title"
+                    id="name"
+                    name="name"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="project.name"
+                    required
+                  />
+                </div>
+                <!-- form group -->
+                <div class="mb-3 col-12">
+                  <label class="form-label"
+                    >Scope <span class="text-danger">*</span></label
+                  >
+                  <textarea
+                    class="form-control"
+                    placeholder="Enter a brief Scope about your project..."
+                    rows="3"
+                    id="scope"
+                    name="scope"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="project.scope"
+                    required
+                  ></textarea>
+                </div>
+                <div class="mb-3 col-12">
+                  <label class="form-label"
+                    >Resources<span class="text-danger">*</span></label
+                  >
+                  <textarea
+                    class="form-control"
+                    placeholder="Enter a brief Description about your project resources..."
+                    rows="3"
+                    id="resources"
+                    name="resources"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="project.resources"
+                    required
+                  ></textarea>
+                </div>
+                <!-- form group -->
+                <div class="mb-3 col-md-6 col-12">
+                  <label class="form-label"
+                    >Start Date <span class="text-danger">*</span></label
+                  >
+                  <div class="input-group me-3">
+                    <input
+                      class="form-control"
+                      type="date"
+                      [ngModelOptions]="{ standalone: true }"
+                      id="startDate"
+                      name="startDate"
+                      [(ngModel)]="project.startDate"
+                      required
+                    />
+                  </div>
+                </div>
+                <!-- form group -->
+                <div class="mb-3 col-md-6 col-12">
+                  <label class="form-label"
+                    >End Date <span class="text-danger">*</span></label
+                  >
+                  <div class="input-group me-3">
+                    <input
+                      class="form-control"
+                      type="date"
+                      [ngModelOptions]="{ standalone: true }"
+                      id="endDate"
+                      name="endDate"
+                      [(ngModel)]="project.endDate"
+                      required
+                    />
+                  </div>
+                </div>
+                <!-- form group -->
+                <div class="mb-3 col-md-6 col-12">
+                  <label class="form-label">Status : </label>
+                  <select
+                    class="selectpicker btn btn-light"
+                    data-width="100%"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="project.projectStatus"
+                    name="projectStatus"
+                    required
+                  >
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="INPROGRESS">In-Progress</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="FINISHED">Finished</option>
+                    <option value="CANCEL">Cancel</option>
+                  </select>
+                </div>
+
+                <div class="col-md-8 col-12 mb-4">
+                  <div>
+                    <!-- logo -->
+                    <h5 class="mb-3">Upload Cover Image</h5>
+                    <div
+                      class="icon-shape icon-xxl border rounded position-relative"
+                    >
+                      <span class="position-absolute">
+                        <i class="bi bi-image fs-3 text-muted"></i
+                      ></span>
+                      <input
+                        #fileInput
+                        class="form-control border-0 opacity-0"
+                        type="file"
+                        accept="image/*"
+                        (change)="onFileSelected($event)"
+                      />
+                    </div>
+                  </div>
+                  <!-- Preview Image -->
+                  <div *ngIf="imageSrc" class="mt-3">
+                    <img
+                      [src]="imageSrc"
+                      class="img-fluid rounded-image"
+                      alt="Selected Image"
+                    />
+                  </div>
+                  <!-- Error Message -->
+                  <div *ngIf="!imageSrc && fileError" class="text-danger mt-2">
+                    {{ fileError }}
+                  </div>
+                </div>
+
+                <div class="col-md-8">
+                  <p *ngIf="fieldsError" class="text-danger">
+                    {{ fieldsError }}
+                  </p>
+                  <p *ngIf="nameError" class="text-danger">
+                    {{ nameError }}
+                  </p>
+                  <p *ngIf="scopeError" class="text-danger">
+                    {{ scopeError }}
+                  </p>
+                  <p *ngIf="resourcesError" class="text-danger">
+                    {{ resourcesError }}
+                  </p>
+                  <p *ngIf="endDateError" class="text-danger">
+                    {{ endDateError }}
+                  </p>
+                </div>
+                <!-- button -->
+                <div class="col-12">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary ms-2"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                    (click)="navigateBack()"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

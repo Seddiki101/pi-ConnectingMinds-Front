@@ -139,6 +139,10 @@ const routes: Routes = [
   { path: 'Dlist/:id', component: DGetByIdWComponent},
   { path: 'DlistRes', component: DlistReservationComponent  },
 
+  {
+    path: "project-management",
+    loadChildren: () => import('./modules/kanban-management/kanban-management.module').then(m => m.KanbanManagementModule)
+  },
 
   { path: "error", component: Error404Component, data: { title: "Error" } },
   { path: "**", component: Error404Component, data: { title: "Error" } }, //this needs to be last component

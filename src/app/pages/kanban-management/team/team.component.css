@@ -1,0 +1,22 @@
+.team-image-container {
+  height: 130px; /* Adjust as needed */
+  overflow: hidden;
+}
+
+.team-image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.team-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-primary {
+  position: relative;
+  bottom: 20px; /* Adjust as needed */
+}

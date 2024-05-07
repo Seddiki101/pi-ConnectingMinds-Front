@@ -1,0 +1,23 @@
+.rounded-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+.scrollable-dialog-content {
+  max-height: 450px; /* Adjust the max-height as needed */
+  overflow-y: auto;
+}
+.mat-dialog-title {
+  position: relative;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.card {
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}

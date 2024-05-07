@@ -4,6 +4,10 @@ export const environment = {
 
         workshop:"http://localhost:8089",
 
-    resource:"http://localhost:8081/"
+    resource:"http://localhost:8081/",
+
+    kanban: "http://localhost:8085" ,
+
+    forum:"http://localhost:8090"
 
 };

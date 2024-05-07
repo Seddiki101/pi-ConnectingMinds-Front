@@ -1,0 +1,263 @@
+<div class="row">
+  <div class="col-md-12 col-xl-8 col-12">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="mb-0">{{ project?.name }}</h4>
+              </div>
+              <!-- dropdown  -->
+              <div>
+                <span class="dropdown dropstart">
+                  <a
+                    class="btn-icon btn btn-ghost btn-sm rounded-circle"
+                    href="#"
+                    role="button"
+                    id="DropdownTen"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="fe fe-more-vertical"></i>
+                  </a>
+                  <span class="dropdown-menu" aria-labelledby="DropdownTen">
+                    <span class="dropdown-header">Settings</span>
+                    <a
+                      *ngIf="project?.ownerId === ownerId"
+                      class="dropdown-item"
+                      [routerLink]="[
+                        '/project-management/edit-project',
+                        project?.projectId
+                      ]"
+                      >Edit Details</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      *ngIf="project?.ownerId !== ownerId"
+                    >
+                      Only owner</a
+                    >
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-calendar4 text-primary"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5
+                            0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0
+                            1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1
+                            2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0
+                            0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1
+                            1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"
+                      />
+                    </svg>
+                    <div class="ms-2">
+                      <h5 class="mb-0 text-body">Start Date</h5>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p class="text-dark mb-0 fw-semibold">
+                        {{ project?.startDate | date }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-calendar4 text-primary"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M3.5 0a.5.5 0 0 1
+                            .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0
+                            1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0
+                            1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1
+                            .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0
+                            0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1
+                            1 0 0 0 1-1V5z"
+                      />
+                    </svg>
+                    <div class="ms-2">
+                      <h5 class="mb-0 text-body">End Date</h5>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p class="text-dark mb-0 fw-semibold">
+                        {{ project?.endDate | date }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      class="bi bi-clock text-primary"
+                      viewBox="0 0 16
+                      16"
+                    >
+                      <path
+                        d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5
+                        0 0 0 .252.434l3.5 2a.5.5 0 0 0
+                        .496-.868L8 8.71V3.5z"
+                      />
+                      <path
+                        d="M8 16A8 8 0 1 0 8 0a8 8 0
+                          0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7
+                          0 0 1 14 0z"
+                      />
+                    </svg>
+                    <div class="ms-2">
+                      <h5 class="mb-0 text-body">Estimate Time</h5>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p class="text-dark mb-0 fw-semibold">
+                        {{ estimatedTime }} Days
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item px-0 pb-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <i
+                      width="18"
+                      height="18"
+                      fill="currentColor"
+                      class="bi bi-person text-primary"
+                    >
+                    </i>
+                    <div class="ms-2">
+                      <h5 class="mb-0 text-body">Owner</h5>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <p class="text-dark mb-0 fw-semibold">
+                        {{ project?.owner }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-12 mb-4 mb-xl-5 mb-5">
+          <!-- card  -->
+          <div class="card">
+            <!-- card body  -->
+            <div class="card-body">
+              <div class="mb-4">
+                <h4 class="mb-2">Project Scope</h4>
+                <p>{{ project?.scope }}</p>
+              </div>
+              <div class="mb-4">
+                <h4 class="mb-2">Project Resources</h4>
+                <p>{{ project?.resources }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-4">
+        <!-- card -->
+        <div class="card">
+          <!-- card body -->
+
+          <div class="card-header">
+            <h4 class="mb-0">Upcoming Deadlines</h4>
+          </div>
+          <!-- table -->
+          <div class="table-responsive overflow-y-hidden">
+            <table class="table mb-0 text-nowrap table-hover table-centered">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">member</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Deadline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of upcomingTasks.slice(0, 7)">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-sm">
+                        <img
+                          src="../../assets/images/avatar/avatar-2.jpg"
+                          alt=""
+                          class="rounded-circle"
+                        />
+                      </div>
+                      <div class="ms-2">
+                        <h5 class="mb-0">{{ task.memberName }}</h5>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.deadline | date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 col-xl-4 col-12">
+    <!-- card  -->
+    <div class="card mb-4 bg-primary border-primary">
+      <!-- card body  -->
+      <div class="card-body">
+        <h4 class="card-title text-white">Launch Date</h4>
+
+        <!-- dropdown  -->
+        <div class="d-flex justify-content-between align-items-center mt-8">
+          <div>
+            <h1 class="display-4 text-white mb-1">
+              {{ calculateDaysUntilLaunch() }}
+            </h1>
+            <p class="mb-0 text-white">{{ project?.endDate | date }}</p>
+          </div>
+          <div>
+            <i class="fe fe-flag fs-1 text-light-primary"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

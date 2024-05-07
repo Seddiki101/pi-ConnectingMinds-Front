@@ -66,6 +66,7 @@ import { DlistReservationComponent } from './components/dashboard-reservations/d
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TokenService } from "./service/usermanagement/token-svc/token-service.service";
 import { HttpTokenInterceptor } from "./service/usermanagement/interceptor/http-token.interceptor";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 @NgModule({
 declarations: [
 AppComponent,
@@ -126,7 +127,7 @@ DashAnswersComponent,
 DlistReservationComponent
 ],
 imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, NgxPaginationModule ,
-MatInputModule,ToastrModule.forRoot()],
+MatInputModule ,MatSnackBarModule,ToastrModule.forRoot()],
 
 
 providers: [
