@@ -32,12 +32,12 @@ export class MessageService {
   }
 
   editMessage(messageId: number, newContent: string): Observable<any> {
-    const updateBody = {
-      messageId: messageId,
-      content: newContent
-    };
-    return this.http.put(`${this.apiUrl}/edit`, updateBody);
-  }
+  const updateBody = {
+    messageId: messageId,
+    content: newContent
+  };
+  return this.http.put(`${this.apiUrl}/edit`, updateBody);
+}
   
 
   deleteMessage(messageId: number): Observable<any> {

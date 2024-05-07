@@ -8,6 +8,7 @@ import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp
 import { MessageService } from 'src/app/service/chatmanagement/message-service/message.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { IMessage as StompMessage } from '@stomp/stompjs'; // Rename the import to avoid conflict
+import { ChatFooterComponent } from '../chat-footer/chat-footer.component';
 
 
 
@@ -18,6 +19,8 @@ import { IMessage as StompMessage } from '@stomp/stompjs'; // Rename the import 
 })
 export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild(ChatFooterComponent) private chatFooterComponent: ChatFooterComponent;
+
   chatData: any;
   user: IUser | null = null;
   otherUser: IUser | null = null;
@@ -153,6 +156,14 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         console.error('Error deleting message:', error);
       }
     });
+  }
+
+  editMessage(message: IMessage): void {
+    if (this.chatFooterComponent) {
+      this.chatFooterComponent.setEditingMessage(message);
+    } else {
+      console.error('ChatFooterComponent is not available.');
+    }
   }
   
   private forceUpdate() {
