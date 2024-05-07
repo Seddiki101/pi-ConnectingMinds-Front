@@ -48,8 +48,9 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    console.log("Password Length: ", this.user.password.length);
-    if( (this.user.password.length < 7 ) ){alert('Password needs to be 8 characters'); return; }
+    //console.log("Password Length: ", this.user.password.length);
+    if (this.user.password.length !== 0 && this.user.password.length < 8) 
+      {alert('Password needs to be 8 characters'); return; }
 
     if (!this.isAdult(this.user.birthdate)) {
       alert('You must be over the age of 17 to update your profile.');
