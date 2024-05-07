@@ -42,18 +42,6 @@ export class RegisterUserComponent {
     }
 
 
-    if (this.confirmp === this.user.password && this.user.password.length >= 8) {
-      this.registerService.registerUser(this.user).subscribe(
-        data => {
-          alert('Registration successful');
-          this.router.navigate(['/login']);
-        },
-        error => alert('User already exist')
-      );
-    } else {
-      alert("Passwords don't match or are too short");
-    }
- 
 
     if (!phoneRegex.test(this.user.phone)) {
       alert('Phone number must be numeric');
@@ -74,8 +62,18 @@ export class RegisterUserComponent {
 
 
 
-
-
+    if (this.confirmp === this.user.password && this.user.password.length >= 8) {
+      this.registerService.registerUser(this.user).subscribe(
+        data => {
+          alert('Registration successful');
+          this.router.navigate(['/login']);
+        },
+        error => alert('User already exist')
+      );
+    } else {
+      alert("Passwords don't match or are too short");
+    }
+ 
   }
 
   isAdult(birthDate: Date): boolean {
