@@ -4,7 +4,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { UserLoginComponent } from "./components/usersmanagement/login-user/user-login.component";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { RegisterUserComponent } from "./components/usersmanagement/register-user/register-user.component";
 import { HomeComponent } from "./components/home/home.component";
 import { DashComponent } from "./components/dash/dash.component";
@@ -64,6 +64,8 @@ import { DashboardPostComponent } from './components/dashboardP/dashboard-post/d
 import { DashAnswersComponent } from './components/dashboardP/dash-answers/dash-answers.component';
 import { DlistReservationComponent } from './components/dashboard-reservations/dlist-reservation/dlist-reservation.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TokenService } from "./service/usermanagement/token-svc/token-service.service";
+import { HttpTokenInterceptor } from "./service/usermanagement/interceptor/http-token.interceptor";
 @NgModule({
 declarations: [
 AppComponent,
@@ -125,7 +127,20 @@ DlistReservationComponent
 ],
 imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatDialogModule, NgxPaginationModule ,
 MatInputModule,ToastrModule.forRoot()],
-providers: [StompService],
+
+
+providers: [
+    StompService,
+    // Include TokenService if it's used by HttpTokenInterceptor
+    TokenService,
+    // HttpClient should typically not be provided in app.module.ts as HttpClientModule already configures it
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpTokenInterceptor,
+      multi: true
+    }
+  ],
+
 bootstrap: [AppComponent],
 })
 export class AppModule {}

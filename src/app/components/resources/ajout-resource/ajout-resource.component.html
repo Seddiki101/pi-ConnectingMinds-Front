@@ -43,6 +43,7 @@
                       <div class="card-header border-bottom px-4 py-3">
                         <h4 class="mb-0">Resource Information</h4>
                       </div>
+                     
                       <!-- Card body -->
                       <div class="card-body">
                         <div class="mb-3">
@@ -59,22 +60,30 @@
                             <i class="fe fe-link me-1"></i>
                             Link
                           </button> <br><br>
+                          <div class="card-header border-bottom px-4 py-3">
+                            <div class="mb-3" style="width: 100%;">
+                              <label class="form-label">Resources category</label>
+                              <br>
+                              <small>___ Help people find your resources by choosing
+                                categories that represent your resource.</small> <br><br>
+                              <select (change)="onCategoryChange($event)" >
+                                 <option [ngValue]="null">--Select--</option> <!-- Default item to show -->
+                                 <option  *ngFor="let opts of categories" [value]="opts.categoryId">
+                                 {{opts.name}}
+                                 </option>
+                              </select> &nbsp; <br><br>
+                              <small>___ Or  <a (click)="SowAddCat()" style="color: blue;">Add</a> new category for your resource</small> <br>
+                             
+                          
+                        </div>
+                          </div> <br>
+
                           <label for="courseTitle" class="form-label">Resource Title</label>
                           <input id="courseTitle" [(ngModel)]="resource.name" name="name" class="form-control" type="text" placeholder="Resource Title">
                           <small>Write a 60 character resource title.</small>
                         </div>
-                        <div class="mb-3" style="width: 100%;">
-                          <label class="form-label">Resources category</label>
-                          <br>
-                          <select >
-                             <option [ngValue]="null">--Select--</option> <!-- Default item to show -->
-                             <option  *ngFor="let opts of categories" [value]="opts">
-                             {{opts.name}}
-                             </option>
-                          </select> &nbsp;
-                          <small>Help people find your resources by choosing
-                            categories that represent your resource.</small>
-                    </div>
+                        
+                      
                         <div class="mb-3">
                             <label class="form-label">Resource Description</label>
                             <textarea  [(ngModel)]="resource.description" name="description"  class="form-control" rows="5" cols="60">Write description here</textarea>
@@ -427,4 +436,39 @@
       </div>
     </section>
   </main>
+  <div *ngIf="showAddCategory" class="modal fade show" id="newCatgory" tabindex="-1" aria-labelledby="newCatgoryLabel" style="display: block;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+         
+            <div class="modal-body">
+             
+                  
+                  
+                    <div class="mb-3 mb-3">
+                      <label for="courseTitle" class="form-label">Category Name</label>
+                      <input id="courseTitle" [(ngModel)]="category.name" name="name" class="form-control" type="text" placeholder="Category Name">
+                      <small>Write a 60 character category name.</small>
+                        <label class="form-label">Write Description of the category  </label>
+                        <textarea  class="form-control"  [(ngModel)]="category.description"  rows="3" [placeholder]="category.description" placeholder="Category description"></textarea>
+                       <br>
+                       
+                        <label class="input-container">
+
+                          <input type="file" (change)="onFileSelectedCategory($event)"  type="file">
+
+                        </label>
+
+
+                   </div>
+               
+                    <div>
+                        <a (click)="ajoutCategory()"  type="submit" class="btn btn-primary">Save</a> &nbsp;
+                        <button (click)="close()" type="submit" class="btn btn-danger">Close</button>
+                        
+                    </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
   <app-footer></app-footer>
