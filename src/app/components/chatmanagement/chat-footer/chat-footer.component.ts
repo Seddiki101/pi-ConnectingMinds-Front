@@ -99,7 +99,4 @@ clearEditingState(): void {
   this.editingMessageId = null;
   this.originalMessageContent = '';
 }
-
-
-  
 }

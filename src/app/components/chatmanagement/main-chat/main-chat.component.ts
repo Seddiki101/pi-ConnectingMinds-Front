@@ -71,8 +71,6 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatService.getChat(chatId).subscribe({
       next: (data) => {
         this.chatData = data;
-        console.log("data: =================");
-        console.log(data);
         
         
         this.scrollToBottom(); // Scroll after data is loaded

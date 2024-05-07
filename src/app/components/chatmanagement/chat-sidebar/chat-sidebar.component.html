@@ -19,21 +19,11 @@
                 <span>New Chat</span>
               </div>
             </a>
-            <span class="dropdown">
-              <a href="#" class="btn btn-light btn-icon rounded-circle" id="settingLink" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fe fe-settings"></i></a>
-              <span class="dropdown-menu" aria-labelledby="settingLink">
-                <a class="dropdown-item" href="#">Setting</a>
-                <a class="dropdown-item" href="#">Help and
-                  Feedback</a>
-              </span>
-            </span>
           </div>
         </div>
         <!-- search -->
         <div class="mt-4 mb-4">
-          <input type="search" class="form-control form-control-sm" placeholder="Search people, group and messages" />
+          <input type="search" class="form-control form-control-sm" [(ngModel)]="searchTerm" placeholder="Search people, group and messages" />
         </div>
         <!-- User chat -->
 
@@ -60,37 +50,7 @@
             <a href="#" class="text-link" id="userSetting" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false"><i class="fe fe-more-horizontal fs-3"></i></a>
             <ul class="dropdown-menu" aria-labelledby="userSetting">
-              <li class="dropdown-animation dropdown-submenu dropdown-toggle-none">
-                <a class="dropdown-item dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false"
-                  data-bs-toggle="dropdown">
-                  <i class="fe fe-circle dropdown-item-icon"></i>Status
-                </a>
-                <ul class="dropdown-menu dropdown-menu-xs">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-success me-2"></span>Online
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-secondary me-2"></span>Offline
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-warning me-2"></span>Away
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="badge-dot bg-danger me-2"></span>Busy
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="fe fe-settings dropdown-item-icon"></i>Setting</a>
-              </li>
+              
               <li>
                 <a class="dropdown-item" href="#"><i class="fe fe-user dropdown-item-icon"></i>Profile</a>
               </li>
@@ -112,10 +72,8 @@
         <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
           <!-- contact list -->
           <ul class="list-unstyled contacts-list">
-
-
-            <!-- chat item -->
-            <li *ngFor="let chat of chats; trackBy: trackByChatId" class="py-3 px-4 chat-item contacts-item" (click)="user && selectChat(chat.chatId, chat.otherMember.userId)">
+            <li *ngFor="let chat of filteredChats(); trackBy: trackByChatId" class="py-3 px-4 chat-item contacts-item" (click)="user && selectChat(chat.chatId, chat.otherMember.userId)">
+             
 
               <div class="d-flex justify-content-between align-items-center">
                 <a href="" class="text-link contacts-link" (click)="$event.preventDefault()">
@@ -149,11 +107,9 @@
                     <i class="fe fe-more-horizontal fs-3"></i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton11">
-                    <a class="dropdown-item" href="#"><i class="bi-pin-angle dropdown-item-icon"></i>Pin</a>
-                    <a class="dropdown-item" href="#"><i class="bi-person-x dropdown-item-icon"></i>Mute</a>
-                    <a class="dropdown-item" href="#"><i class="bi-eye-slash dropdown-item-icon"></i>Hide</a>
-                    <a class="dropdown-item" href="#"><i class="bi-person-plus dropdown-item-icon"></i>Add to
-                      Favorite</a>
+                    <a class="dropdown-item" href="#" (click)="deleteChat(chat.chatId); $event.preventDefault()">
+                      <i class="bi-pin-angle dropdown-item-icon"></i>Delete
+                    </a>
                   </div>
                 </div>
               </div>
