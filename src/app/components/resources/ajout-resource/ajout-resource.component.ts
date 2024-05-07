@@ -20,19 +20,31 @@ export class AjoutResourceComponent {
     name:'',
     description:'',
     url:'',
-    userId :this.Id 
+    userId :this.Id ,
+    categoryId:0
 
    
    
 
 
   };
+ 
+  
+  category:any={
+    name:'',
+    description:''
+  }
+  selectedCategoryNewImage :any;
+  selectedCategoryNewImageUrl: string | null = null;
+
+
   selectedFile : any;
   selectedFileUrl: string | null = null;
   showLinkInput = false;
   showVideoInput = false;
   showFileInput = false;
   showPhotoInput = false;
+  showAddCategory=false;
 
   
   uploadProgress: number=0;
@@ -47,6 +59,17 @@ export class AjoutResourceComponent {
     if (fileList && fileList.length > 0) {
       this.selectedFile = fileList[0];
       this.selectedFileUrl = URL.createObjectURL(this.selectedFile);
+
+    }else{
+      this.selectedFile=null;
+      this.selectedFileUrl = URL.createObjectURL(this.selectedFile);
+    }
+  }
+  onFileSelectedCategory(event: any): void {
+    const fileList: FileList = event.target.files;
+    if (fileList && fileList.length > 0) {
+      this.selectedCategoryNewImage = fileList[0];
+      this.selectedCategoryNewImageUrl = URL.createObjectURL(this.selectedCategoryNewImage);
     }
   }
   
@@ -91,7 +114,8 @@ export class AjoutResourceComponent {
 
   ajout(){
 
-    this._service.createNewResource(this.selectedFile)
+
+    this._service.createNewResource(this.selectedFile,this.resource)
       .subscribe(
         res=>{
           console.log(res);
@@ -101,31 +125,45 @@ export class AjoutResourceComponent {
         },
         err=>{
           console.log(err);
+          console.log(this.resource);
+          console.log(this.selectedFile);
+          
           
         }
       );
-      this._service.createNewResource2(this.resource)
+
+
+
+
+
+
+
+    
+  }
+
+  ajoutCategory(){
+
+    
+    this._service.createNewCategory(this.selectedCategoryNewImage,this.category)
       .subscribe(
         res=>{
           console.log(res);
-          console.log(this.resource.userId);
-          console.log(this.Id);
-          this.resource ={ 
-          name:'',
-          description:'',
-          url:'',
-          userId :this.Id
-         }
+          location.reload();
+        
      
           
         },
         err=>{
           console.log(err);
-          console.log(this.resource.userId);
-          console.log(this.Id);
           
         }
       );
+
+
+      
+
+
+
 
     
   }
@@ -155,6 +193,19 @@ export class AjoutResourceComponent {
     this.showLinkInput =false ;
     this.showPhotoInput =false ;
   }
+  onCategoryChange(event: any) {
+    this.selectedCategory = event.target.value; // Update the selectedCategory property
+    this.resource.categoryId=  this.selectedCategory; 
+    
+}
+close(){
+   
+  this.showAddCategory=false ;
+
+}
+SowAddCat(){
+  this.showAddCategory=true ;
+}
 
 
 }

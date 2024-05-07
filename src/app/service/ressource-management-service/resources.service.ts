@@ -33,30 +33,31 @@ export class ResourcesService {
     return this.http.get( this.url + 'all-categories' );
 
   }
-  createNewResource( content: File){
+
+   createNewResource( content: File ,resource:any){
+    
+
     const formData: FormData = new FormData();
-    formData.append('content', content );
+    if (content) {
+      formData.append('content', content);
+    }else {formData.append('content', "null");}
+   
+    formData.append('name', resource.name );
+    formData.append('description', resource.description );
+    formData.append('url', resource.url);
+    formData.append('categoryId', resource.categoryId);
    // formData.append('resource',resource);
+   console.log("from service"+formData);
 
  
 
    
-    return this.http.post( this.url + 'addResource' ,formData );
+    return this.http.post( this.url + 'addResource' ,formData , { headers: this.tokenService.getHeaders() });
  
    }
   
 
-   createNewResource2( resource : any ){
-    const formData: FormData = new FormData();
-    formData.append('resource', resource );
-   // formData.append('resource',resource);
 
- 
-
-   
-    return this.http.post( this.url + 'addResource2' ,resource, { headers: this.tokenService.getHeaders() });
- 
-   }
 
    getResourceById(id: any){
     return this.http.get(this.url + 'getResourceById/' + id);
@@ -118,4 +119,20 @@ export class ResourcesService {
 
     return this.http.delete(this.url+'deleteReview/'+id);
   }
+
+  ///////////////////////Catgory///////////////////////////////
+  createNewCategory( image: File,category:any){
+    const formData: FormData = new FormData();
+    formData.append('image', image );
+    formData.append('name', category.name );
+    formData.append('description', category.description );
+
+   // formData.append('resource',resource);
+
+ 
+
+   
+    return this.http.post( this.url + 'addCategory' ,formData);
+ 
+   }
 }

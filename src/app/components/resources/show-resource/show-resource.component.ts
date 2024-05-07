@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ResourcesService } from '../../../service/ressource-management-service/resources.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-show-resource',
@@ -8,6 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./show-resource.component.css']
 })
 export class ShowResourceComponent {
+  safeVideoUrl: SafeResourceUrl;
+  pdfName: string;
+  safePdfUrl: SafeResourceUrl;
   searchedReviews :any ;
   initialReviews :any ;
   liked=false;
@@ -40,7 +45,7 @@ export class ShowResourceComponent {
 
   }
  
-  constructor( public _service : ResourcesService ,private act: ActivatedRoute) { }
+  constructor( public _service : ResourcesService ,private act: ActivatedRoute,private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
    this.id = this.act.snapshot.paramMap.get('id')
@@ -51,6 +56,12 @@ export class ShowResourceComponent {
       this.resource = res;
       this.likes=this.resource.likes;
       this.review.resource=this.resource;
+      this.safeVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.resource.url);
+
+     // this.safePdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.resource.content);
+     // this.pdfName = this.extractPdfName(this.resource.content); // Extraire le nom du PDF
+
+
       
       
     },
@@ -231,6 +242,14 @@ export class ShowResourceComponent {
     }
 }
 
+downloadPdf(name:any): void {
+  const contentUrl = this.resource.content;
+  const pdfName = name;
+  const link = document.createElement('a');
+  link.href = contentUrl;
+  link.download = pdfName;
+  link.click();
+}
 
 
 }
