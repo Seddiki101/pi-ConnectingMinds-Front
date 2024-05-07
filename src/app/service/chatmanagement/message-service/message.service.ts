@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SendMessageService {
+export class MessageService {
 
   private apiUrl = 'http://localhost:8083/messages';
 
@@ -30,4 +30,18 @@ export class SendMessageService {
     const url = `${this.apiUrl}/new`
     return this.http.post(url, messageBody);
   }
+
+  editMessage(messageId: number, newContent: string): Observable<any> {
+    const updateBody = {
+      messageId: messageId,
+      content: newContent
+    };
+    return this.http.put(`${this.apiUrl}/edit`, updateBody);
+  }
+  
+
+  deleteMessage(messageId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${messageId}`);
+  }
+  
 }

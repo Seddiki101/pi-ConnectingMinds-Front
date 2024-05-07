@@ -1,12 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FetchChatService } from 'src/app/service/chatmanagement/fetch-chat/fetch-chat.service';
 import { ChatStateService } from 'src/app/shared/chat-state.service';
-import { IMessageCreate, IUser } from 'src/app/shared/interfaces';
+import { IMessage, IUser } from 'src/app/shared/interfaces';
 import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp-service.service';
-import { SendMessageService } from 'src/app/service/chatmanagement/send-message/send-message.service';
+import { MessageService } from 'src/app/service/chatmanagement/message-service/message.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
+import { IMessage as StompMessage } from '@stomp/stompjs'; // Rename the import to avoid conflict
+import { StompSubscription } from '@stomp/stompjs';
+
+
 
 @Component({
   selector: 'app-main-chat',
@@ -20,14 +24,13 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   otherUser: IUser | null = null;
   newMessage: string = '';
   currentSubscription: any;
-  private userSubscription: Subscription | undefined;
   private destroy$ = new Subject<void>();
 
   constructor(
     private chatService: FetchChatService,
     private chatStateService: ChatStateService,
     private stompService: StompService,
-    private sendMessageService: SendMessageService,
+    private messageService: MessageService,
     private userService: UserServiceService 
   ) {}
 
@@ -66,6 +69,10 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.chatService.getChat(chatId).subscribe({
       next: (data) => {
         this.chatData = data;
+        console.log("data: =================");
+        console.log(data);
+        
+        
         this.scrollToBottom(); // Scroll after data is loaded
       },
       error: (error) => {
@@ -75,38 +82,45 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private subscribeToChatUpdates(chatId: number): void {
-    if (this.currentSubscription) {
-      this.stompService.unsubscribe(this.currentSubscription);
-      this.currentSubscription = null;
-    }
     const topic = `/topic/chat${chatId}`;
-    this.currentSubscription = this.stompService.subscribe(topic, (message: any) => {
-      const newMessage = JSON.parse(message.body);
-      if (newMessage.content) {
-        this.chatData.messages.push(newMessage);
-        this.scrollToBottom(); // Scroll after message is received
-      } else {
-        console.warn("Received empty message:", message);
-      }
-    });
+    if (!this.currentSubscription) {
+      this.currentSubscription = this.stompService.subscribe(topic, (stompResponse: StompMessage) => {
+        console.log("Received WebSocket message:", stompResponse.body);
+        const message: IMessage = JSON.parse(stompResponse.body);
+        if (message && message.content) { // Ensure content is present
+          const existingMessageIndex = this.chatData.messages.findIndex((m: IMessage) => m.messageId === message.messageId);
+          if (existingMessageIndex > -1) {
+            this.chatData.messages[existingMessageIndex] = message;
+          } else {
+            this.chatData.messages.push(message);
+          }
+          this.scrollToBottom(); // Scroll after message update is received
+        } else {
+          console.error("Received empty or malformed message:", message);
+        }
+      });
+    }
   }
+  
 
   sendMessage(): void {
     if (this.newMessage.trim() !== '' && this.user && this.user.userId) {
-      const message: IMessageCreate = {
+      // Prepare the message payload as per the backend expectations
+      const messagePayload = {
         content: this.newMessage,
         chatId: this.chatData.chatId,
-        userId: this.user.userId,
-        timestamp: new Date()  // Set the current date and time as the timestamp
+        userId: this.user.userId
       };
-
-      this.sendMessageService.sendMessage(message.content, message.chatId, message.userId)
+  
+      // Call the sendMessage service method
+      this.messageService.sendMessage(messagePayload.content, messagePayload.chatId, messagePayload.userId)
         .subscribe({
-          next: (response) => {
-            this.chatData.messages.push(message); // Add the message to chat data
-            this.newMessage = ''; // Clear input field
-            this.scrollToBottom(); // Scroll after message sent
-            console.log('Message sent successfully', response);
+          next: (fullMessage: IMessage) => {
+            // Use the complete message object returned from the server
+            this.chatData.messages.push(fullMessage);
+            this.newMessage = ''; // Clear the input field
+            this.scrollToBottom(); // Scroll to the bottom of the chat
+            console.log('Message sent successfully', fullMessage);
           },
           error: (error) => {
             console.error('Error sending message', error);
@@ -114,6 +128,30 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         });
     }
   }
+  
+
+  deleteMessage(message: IMessage): void {
+    this.messageService.deleteMessage(message.messageId).subscribe({
+      next: () => {
+        const index = this.chatData.messages.findIndex((m: IMessage) => m.messageId === message.messageId);
+        if (index !== -1) {
+          this.chatData.messages[index].deleted = true; // Mark as deleted
+          this.chatData.messages[index].content = "This message was deleted"; // Update content
+          this.chatData.messages[index].seen = true; // Optionally mark as seen
+          // Ensure Angular updates the view
+          this.forceUpdate();
+        }
+      },
+      error: (error) => {
+        console.error('Error deleting message:', error);
+      }
+    });
+  }
+  
+  private forceUpdate() {
+    this.chatData = {...this.chatData};
+  }
+  
 
   private scrollToBottom(): void {
     try {

@@ -58,3 +58,8 @@
 .other-user-message {
   justify-content: flex-start; /* Corrects content start from left */
 }
+
+.deleted-message {
+  background-color: #e0e0e0; /* Light grey background */
+  color: #9e9e9e; /* Grey text */
+}

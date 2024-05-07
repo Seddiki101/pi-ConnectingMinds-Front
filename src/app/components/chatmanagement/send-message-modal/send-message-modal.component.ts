@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SendMessageService } from 'src/app/service/chatmanagement/send-message/send-message.service';
+import { MessageService } from 'src/app/service/chatmanagement/message-service/message.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { TokenService } from 'src/app/service/usermanagement/token-svc/token-service.service';
 import { IUser } from 'src/app/shared/interfaces';
@@ -23,7 +23,7 @@ export class SendMessageModalComponent {
   constructor(
     private userService: UserServiceService,
     private tokenService: TokenService,
-    private sendMessageService: SendMessageService,
+    private messageService: MessageService,
     
   ) {
     this.loadAllUsers();
@@ -77,7 +77,7 @@ export class SendMessageModalComponent {
 
   sendMessage() {
     if (this.selectedUser && this.messageContent && this.user?.userId) {
-      this.sendMessageService.newMessage(this.messageContent, this.user?.userId, this.selectedUser.id).subscribe({
+      this.messageService.newMessage(this.messageContent, this.user?.userId, this.selectedUser.id).subscribe({
         next: (response) => {
           console.log('Message sent successfully', response);
         },
