@@ -8,7 +8,6 @@ import { StompService } from 'src/app/service/chatmanagement/stomp-service/stomp
 import { MessageService } from 'src/app/service/chatmanagement/message-service/message.service';
 import { UserServiceService } from 'src/app/service/chatmanagement/user-service/user-service.service';
 import { IMessage as StompMessage } from '@stomp/stompjs'; // Rename the import to avoid conflict
-import { StompSubscription } from '@stomp/stompjs';
 
 
 
@@ -83,24 +82,32 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   private subscribeToChatUpdates(chatId: number): void {
     const topic = `/topic/chat${chatId}`;
-    if (!this.currentSubscription) {
-      this.currentSubscription = this.stompService.subscribe(topic, (stompResponse: StompMessage) => {
-        console.log("Received WebSocket message:", stompResponse.body);
-        const message: IMessage = JSON.parse(stompResponse.body);
-        if (message && message.content) { // Ensure content is present
-          const existingMessageIndex = this.chatData.messages.findIndex((m: IMessage) => m.messageId === message.messageId);
-          if (existingMessageIndex > -1) {
-            this.chatData.messages[existingMessageIndex] = message;
-          } else {
-            this.chatData.messages.push(message);
-          }
-          this.scrollToBottom(); // Scroll after message update is received
-        } else {
-          console.error("Received empty or malformed message:", message);
-        }
-      });
+    if (this.currentSubscription) {
+      this.currentSubscription.unsubscribe(); // Ensure no duplicates by unsubscribing to any existing subscription
     }
+    this.currentSubscription = this.stompService.subscribe(topic, (stompResponse: StompMessage) => {
+      console.log("Received WebSocket message:", stompResponse.body);
+      const message: IMessage = JSON.parse(stompResponse.body);
+      this.processReceivedMessage(message);
+    });
   }
+
+  private processReceivedMessage(message: IMessage): void {
+    if (!message.content) {
+      console.error("Received empty or malformed message:", message);
+      return; // Ignore messages that don't meet the criteria
+    }
+  
+    const existingMessageIndex = this.chatData.messages.findIndex((m: IMessage) => m.messageId === message.messageId);
+    if (existingMessageIndex === -1) {
+      this.chatData.messages.push(message); // Add new if it doesn't exist
+    } else {
+      this.chatData.messages[existingMessageIndex] = message; // Update if already exists
+    }
+    
+    this.forceUpdate(); // Trigger Angular change detection manually
+  }
+  
   
 
   sendMessage(): void {
@@ -149,7 +156,7 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
   
   private forceUpdate() {
-    this.chatData = {...this.chatData};
+    this.chatData = {...this.chatData};  // Creating a new object for change detection
   }
   
 
@@ -164,9 +171,8 @@ export class MainChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   trackByMessageId(index: number, message: any): number {
     return message.id;
   }
-  isLastMessageFromUser(index: number, userId: number): boolean {
+  isLastMessageFromUser(index: number): boolean {
     if (index + 1 === this.chatData.messages.length) return true; // Last message in array
     return this.chatData.messages[index].userId === this.chatData.messages[index + 1].userId ? false : true;
   }
-  
 }

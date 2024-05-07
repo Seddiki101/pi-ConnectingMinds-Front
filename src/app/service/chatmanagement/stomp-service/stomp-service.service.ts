@@ -44,24 +44,26 @@ export class StompService {
   }
 
   public subscribe(topic: string, callback: (message: IMessage) => void): StompSubscription | undefined {
-    if (!this.connected) {
-      console.log('Attempted to subscribe without a connection; retrying...');
-      setTimeout(() => this.subscribe(topic, callback), 1000);
-      return;
+    // Explicit check to clean up any lingering subscriptions that might not have been cleaned up properly
+    if (this.subscriptions[topic]) {
+        console.warn(`Cleaning up existing subscription to ${topic}`);
+        this.unsubscribe(topic);
     }
 
-    if (this.subscriptions[topic]) {
-      console.log(`Already subscribed to ${topic}`);
-      return this.subscriptions[topic].subscription;
+    if (!this.connected) {
+        console.log('Attempted to subscribe without a connection; retrying...');
+        setTimeout(() => this.subscribe(topic, callback), 1000);
+        return;
     }
 
     const subscription = this.stompClient.subscribe(topic, (message: IMessage) => {
-      callback(message);
+        callback(message);
     });
     this.subscriptions[topic] = { subscription, callback };
     console.log(`Subscribed to ${topic}`);
     return subscription;
-  }
+}
+
 
   public unsubscribe(topic: string): void {
     if (this.subscriptions[topic]) {

@@ -31,8 +31,6 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
     this.userSubscription = this.userService.getUserProfile().subscribe({
       next: (userData: IUser) => {
         if (userData && userData.userId) {
-          console.log("userData ================================");
-          console.log(userData);
           
           this.user = userData;
           if (this.user && this.user.userId) {
@@ -61,9 +59,6 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
       this.chatListService.getChatsForUser(userId).subscribe({
         next: (chats) => {
           this.chats = chats;
-          console.log("chaaaaaaaaaaaaaaaaaaats");
-          
-          console.log(chats);
           
         },
         error: (error) => {
@@ -84,7 +79,6 @@ export class ChatSidebarComponent implements OnInit, OnDestroy {
   }
 
   selectChat(chatId: number, otherUserId: number): void {
-    console.log(`Selecting chat - Chat ID: ${chatId}, Other User ID: ${otherUserId}`);
     this.chatStateService.changeChatId(chatId);
     this.chatStateService.changeOtherUserId(otherUserId);
   }
