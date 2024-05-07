@@ -1,5 +1,4 @@
 import { Event } from "../event/event.model";
-import { Notification } from "../notification/notification.model";
 import { Task } from "../task/task.model";
 
 export class Team {
@@ -9,7 +8,6 @@ export class Team {
   scrumMaster?: number;
   members?: number[];
   projectId?: number;
-  notifications?: Notification[];
   events?: Event[];
   tasks?: Task[];
   imageUrl?: string;

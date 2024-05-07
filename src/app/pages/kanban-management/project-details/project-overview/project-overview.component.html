@@ -45,10 +45,6 @@
             </div>
           </div>
           <div class="card-body">
-            <p style="max-height: 8em; overflow: hidden">
-              {{ project?.scope }}
-            </p>
-
             <ul class="list-group list-group-flush">
               <li class="list-group-item px-0">
                 <div class="d-flex justify-content-between align-items-center">
@@ -180,7 +176,24 @@
           </div>
         </div>
       </div>
-
+      <div class="row">
+        <div class="col-xl-6 col-12 mb-4 mb-xl-5 mb-5">
+          <!-- card  -->
+          <div class="card">
+            <!-- card body  -->
+            <div class="card-body">
+              <div class="mb-4">
+                <h4 class="mb-2">Project Scope</h4>
+                <p>{{ project?.scope }}</p>
+              </div>
+              <div class="mb-4">
+                <h4 class="mb-2">Project Resources</h4>
+                <p>{{ project?.resources }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-md-12 mb-4">
         <!-- card -->
         <div class="card">

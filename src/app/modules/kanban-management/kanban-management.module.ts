@@ -56,21 +56,6 @@ const routes: Routes = [
             component: ProjectOverviewComponent,
             data: { title: "Project | Overview" },
           },
-          {
-            path: "project-summary",
-            component: ProjectSummaryComponent,
-            data: { title: "Project | Summary" },
-          },
-          {
-            path: "project-task",
-            component: ProjectTaskComponent,
-            data: { title: "Project | Task" },
-          },
-          {
-            path: "project-team",
-            component: ProjectTeamComponent,
-            data: { title: "Project | Team" },
-          },
         ],
         data: { title: "Project Overview" },
       },
@@ -118,11 +103,13 @@ const routes: Routes = [
         path: "chatgpt4",
         component: AiAssistantComponent,
         data: { title: "Ai-assistant" },
-      }, {
+      },
+      {
         path: "dalle3",
         component: AiImageGenerateComponent,
         data: { title: "Image Generator" },
-      }
+      },
+
       // Add more child routes as needed
     ],
     data: { title: "Project Management" },

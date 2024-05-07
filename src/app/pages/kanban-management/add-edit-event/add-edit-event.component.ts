@@ -21,7 +21,6 @@ export class AddEditEventComponent implements OnInit {
     private _coreService: CoreService,
     private _dialogRef: MatDialogRef<AddEditEventComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private teamService: TeamService,
     private eventService: EventService,
     private datePipe: DatePipe
   ) {}

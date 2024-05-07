@@ -66,14 +66,22 @@
           <input
             type="search"
             class="form-control"
-            placeholder="Search events..."
+            [(ngModel)]="searchTeam"
+            (ngModelChange)="applyFilter()"
+            placeholder="Search events by team..."
           />
         </div>
-        <button class="btn btn-xs btn-secondary">Clear Filter</button>
+        <button
+          type="button"
+          (click)="(clearFilter())"
+          class="btn btn-xs btn-secondary"
+        >
+          Clear Filter
+        </button>
       </div>
     </div>
     <h3 class="mb-0 fw-bold">Teams :</h3>
-    <div class="row" *ngFor="let team of selectedProject.teams">
+    <div class="row" *ngFor="let team of filteredTeams">
       <h2 class="text-inherit fw-bold">
         <i class="mdi mdi-cube-outline me-2"> </i> {{ team.name }}
       </h2>

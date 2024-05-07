@@ -1,7 +1,7 @@
 <nav class="navbar-vertical navbar">
   <div class="vh-100" data-simplebar>
     <!-- Brand logo -->
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="/home">
       <img src="../../assets/images/brand/logo/logo-inverse.svg" alt="" />
     </a>
     <!-- Navbar nav -->
@@ -76,13 +76,17 @@
           Ai assistant
         </a>
       </li>
-       <!-- Nav item -->
-       <li class="nav-item">
+      <!-- Nav item -->
+      <li class="nav-item">
         <a class="nav-link" routerLink="dalle3" routerLinkActive="active">
           <i class="nav-icon mdi mdi-image-auto-adjust me-2"></i>
           Dalle-3
         </a>
       </li>
     </ul>
+    <!-- Card -->
+    <div class=" shadow-none text-center mx-4 my-23">
+          <a routerLink="/home" class="btn btn-white btn-sm">Back Home</a> 
+    </div>
   </div>
 </nav>

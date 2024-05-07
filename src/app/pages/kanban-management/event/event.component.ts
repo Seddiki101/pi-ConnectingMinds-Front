@@ -3,13 +3,12 @@ import { MatDialog } from "@angular/material/dialog";
 import { Project } from "src/app/models/project/project.model";
 import { EventService } from "src/app/service/kanban-management/event/event.service";
 import { ProjectService } from "src/app/service/kanban-management/project/project.service";
-import { TeamService } from "src/app/service/kanban-management/team/team.service";
 import { CoreService } from "src/app/service/notificationDialog/core.service";
 import { AuthenticService } from "src/app/service/usermanagement/guard/authentic.service";
-import { SharedUserService } from "src/app/service/usermanagement/shared/shared-user.service";
 import { AddEditEventComponent } from "../add-edit-event/add-edit-event.component";
 import { Event } from "src/app/models/event/event.model";
 import { EventDetailsComponent } from "../event-details/event-details.component";
+import { Team } from "src/app/models/team/team.model";
 
 @Component({
   selector: "app-event",
@@ -19,12 +18,12 @@ import { EventDetailsComponent } from "../event-details/event-details.component"
 export class EventComponent implements OnInit {
   showEvents: boolean = false;
   projects: Project[] = [];
+  filteredTeams: Team[] | undefined;
   selectedProject: Project | undefined;
   ownerId: number;
+  searchTeam: string = "";
   constructor(
     private projectService: ProjectService,
-    private teamService: TeamService,
-    private sharedUser: SharedUserService,
     private _coreService: CoreService,
     private dialog: MatDialog,
     private eventService: EventService,
@@ -36,7 +35,21 @@ export class EventComponent implements OnInit {
       this.loadProjects();
     });
   }
-
+  applyFilter() {
+    this.filteredTeams = this.selectedProject?.teams?.filter((team) =>
+      this.matchesSearchCriteria(team)
+    );
+  }
+  matchesSearchCriteria(team: Team): boolean {
+    const searchTerms = this.searchTeam.trim().toLowerCase().split(/\s+/);
+    return searchTerms.some((keyword) =>
+      team.name?.toLowerCase().includes(keyword)
+    );
+  }
+  clearFilter(): void {
+    this.searchTeam = "";
+    this.applyFilter();
+  }
   loadProjects(): void {
     if (this.ownerId) {
       this.projectService.getProjectsByUserId(this.ownerId).subscribe(
@@ -47,9 +60,11 @@ export class EventComponent implements OnInit {
             this.selectedProject = this.projects.find(
               (project) => project.projectId === parseInt(selectedProjectId)
             );
+            this.applyFilter();
           }
           if (this.selectedProject) {
             this.showEvents = true;
+            this.applyFilter();
           } else {
             this.showEvents = false;
           }
@@ -76,18 +91,16 @@ export class EventComponent implements OnInit {
     }
   }
   openAddEditEventForm(event?: Event, teamId?: number): void {
-    if (this.selectedProject?.ownerId == this.ownerId) {
+    if (this.selectedProject?.ownerId === this.ownerId) {
       const project = this.selectedProject;
       if (event) {
         //edit
         const dialogRef = this.dialog.open(AddEditEventComponent, {
-          data: { event, project }, // Pass the team data if editing
+          data: { event, project },
         });
 
         dialogRef.afterClosed().subscribe((result) => {
           if (result) {
-            // Handle any necessary actions after the modal closes
-            // Example: Refresh the task list
             this.loadProjects();
           } else {
             this.loadProjects();
@@ -96,13 +109,11 @@ export class EventComponent implements OnInit {
       } else {
         //create
         const dialogRef = this.dialog.open(AddEditEventComponent, {
-          data: { teamId, project }, // Pass the team data if editing
+          data: { teamId, project },
         });
 
         dialogRef.afterClosed().subscribe((result) => {
           if (result) {
-            // Handle any necessary actions after the modal closes
-            // Example: Refresh the task list
             this.loadProjects();
           } else {
             this.loadProjects();
