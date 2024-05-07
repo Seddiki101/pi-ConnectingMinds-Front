@@ -9,7 +9,7 @@ import { TokenService } from 'src/app/service/usermanagement/token-svc/token-ser
   styleUrls: ['./list-resources.component.css']
 })
 export class ListResourcesComponent {
-  Id=1; // id du user connecté 
+  Id=2; // id du user connecté 
   searchedResources :any ;
   initialResources :any ;
   resources: any;
