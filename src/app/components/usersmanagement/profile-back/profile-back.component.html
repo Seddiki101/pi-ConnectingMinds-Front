@@ -37,6 +37,11 @@
                                 <input class="form-control" type="date" id="birthdate" [(ngModel)]="user.birthdate" name="birthdate">
                             </div>
   
+
+                            <div class="mb-3 col-12 col-md-6">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" class="form-control" [(ngModel)]="user.password" name="password">
+                            </div>
       
   
                             <div class="col-12" *ngIf="error">
